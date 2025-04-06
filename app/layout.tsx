@@ -67,11 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${space_grotesk.variable} scroll-smooth`}
       suppressHydrationWarning
     >
-      <link
-        rel="apple76"
-        sizes="76x76"
-        href={`${basePath}/static/favicons/apple76.png`}
-      />
+      <link rel="apple76" sizes="76x76" href={`${basePath}/static/favicons/apple76.png`} />
       <link
         rel="icon"
         type="image/png"
@@ -85,11 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         href={`${basePath}/static/favicons/favicon16.png`}
       />
       <link rel="manifest" href={`${basePath}/static/favicons/site.webmanifest`} />
-      <link
-        rel="mask-icon"
-        href={`${basePath}/static/favicons/safari.svg`}
-        color="#0F172A"
-      />
+      <link rel="mask-icon" href={`${basePath}/static/favicons/safari.svg`} color="#0F172A" />
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />

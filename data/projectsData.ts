@@ -18,7 +18,7 @@ const projectsData: Project[] = [
     description: `An open-world action-adventure game set in the fictional kingdom of Hyrule.`,
     imgSrc: '/static/images/zelda-botw.jpg',
     href: '/blog/zelda-botw',
-  }
+  },
 ]
 
 export default projectsData

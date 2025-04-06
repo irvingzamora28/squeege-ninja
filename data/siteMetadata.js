@@ -3,7 +3,8 @@ const siteMetadata = {
   title: 'Next.js Starter Blog',
   author: 'imzodev',
   headerTitle: 'ALLSET Template',
-  description: 'AI-powered Next.js landing page generator for compelling content and SEO-optimized blog posts.',
+  description:
+    'AI-powered Next.js landing page generator for compelling content and SEO-optimized blog posts.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',

@@ -5,6 +5,7 @@ A Next.js-based landing page generator that uses AI to create compelling content
 ## Features
 
 ### Landing Page Generation
+
 - 2-3 pre-designed, professional templates
 - AI-powered content generation based on your business description
 - Customizable color schemes and font presets
@@ -12,19 +13,23 @@ A Next.js-based landing page generator that uses AI to create compelling content
 - Mobile-responsive designs
 
 ### Blog Generation
+
 - AI-generated SEO-optimized blog posts
 - Basic CMS functionality (draft/publish, delete)
 - MDX file format for manual editing
 - Automated meta tags for SEO
 
 ### Admin Panel
+
 - User-friendly interface for content generation
 - Template selection and customization
 - Blog post management
 - Analytics integration
 
 ### AI Integration
+
 Supported LLM Providers:
+
 - OpenAI (and compatible: Deepseek, Ollama)
 - Google Gemini
 
@@ -48,11 +53,13 @@ Supported LLM Providers:
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/yourusername/project-name.git
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
@@ -62,11 +69,13 @@ bun install
 ```
 
 3. Copy the example environment file:
+
 ```bash
 cp .env.example .env.local
 ```
 
 4. Configure your environment variables:
+
 ```env
 # OpenAI and Compatible Providers
 OPENAI_API_KEY=your_key_here
@@ -81,6 +90,7 @@ NEXT_PUBLIC_SITE_URL=your_site_url
 ```
 
 5. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -104,6 +114,7 @@ Configure your preferred LLM provider in `.env.local`. The system supports:
 #### Analytics
 
 Analytics configuration can be modified in `data/siteMetadata.js`. Supported providers:
+
 - Umami Analytics
 - Plausible
 - Simple Analytics
@@ -139,6 +150,7 @@ of a commercial license. Unauthorized copying, modification, distribution, or us
 of this software is strictly prohibited.
 
 ### License Terms
+
 - One license per production website
 - 12 months of updates and support
 - Documentation access
