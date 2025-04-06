@@ -38,6 +38,8 @@ jobs:
           EXPORT: 1
           UNOPTIMIZED: 1
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+      # Create .nojekyll file
+      - run: touch ./out/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
