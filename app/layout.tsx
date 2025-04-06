@@ -10,9 +10,8 @@ import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata'
-import { ThemeProviders } from './theme-providers'
+import { DarkThemeProvider } from './theme-providers'
 import { ThemeProvider } from './contexts/ThemeContext'
-import ThemeManager from './components/ThemeManager'
 import AdminLayoutWrapper from './admin-layout-wrapper'
 import { getThemeSettings } from './lib/get-theme'
 
@@ -56,9 +55,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
-        <ThemeProvider initialColor={initialColor}>
-          <ThemeManager />
-          <ThemeProviders>
+        <DarkThemeProvider>
+          <ThemeProvider initialColor={initialColor}>
             <AdminLayoutWrapper
               regularContent={
                 <>
@@ -75,8 +73,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             >
               {children}
             </AdminLayoutWrapper>
-          </ThemeProviders>
-        </ThemeProvider>
+          </ThemeProvider>
+        </DarkThemeProvider>
       </body>
     </html>
   )
