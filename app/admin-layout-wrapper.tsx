@@ -9,8 +9,11 @@ const space_grotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
 })
 
-export default function AdminLayoutWrapper({ children, regularContent }: {
-  children: React.ReactNode,
+export default function AdminLayoutWrapper({
+  children,
+  regularContent,
+}: {
+  children: React.ReactNode
   regularContent: React.ReactNode
 }) {
   const pathname = usePathname()
