@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     // Check if credentials match
     if (username === adminUsername && password === adminPassword) {
       // Set a secure cookie for authentication
-      const cookieStore = cookies()
+      const cookieStore = await cookies()
       cookieStore.set('allset_auth', 'true', {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
