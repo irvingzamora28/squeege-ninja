@@ -39,8 +39,10 @@ export default function Home({ posts }) {
           <div className="relative">
             <div className="w-full overflow-hidden rounded-lg shadow-xl">
               <Image
-                src="/static/images/landing-demo.png"
+                src="/static/images/landing-demo.jpeg"
                 alt="AI Landing Page Generator Demo"
+                width={1024}
+                height={576}
                 className="h-auto w-full"
               />
             </div>
