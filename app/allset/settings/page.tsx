@@ -1,11 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { useTheme } from '../../contexts/ThemeContext'
-import ColorPicker from '../components/ColorPicker'
 
 export default function SettingsPage() {
-  const { primaryColor, setPrimaryColor, saveTheme, isSaving: isSavingTheme } = useTheme()
 
   const [generalSettings, setGeneralSettings] = useState({
     siteName: 'AllSet Template',
@@ -15,7 +12,7 @@ export default function SettingsPage() {
 
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
-  const [themeMessage, setThemeMessage] = useState('')
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -40,17 +37,6 @@ export default function SettingsPage() {
       ...prev,
       [name]: value,
     }))
-  }
-
-  const handleSaveTheme = async () => {
-    setThemeMessage('')
-    await saveTheme()
-    setThemeMessage('Theme settings saved successfully!')
-
-    // Clear success message after 3 seconds
-    setTimeout(() => {
-      setThemeMessage('')
-    }, 3000)
   }
 
   return (
@@ -120,35 +106,30 @@ export default function SettingsPage() {
             <h2 className="mb-4 text-xl font-semibold">Theme Settings</h2>
 
             <div className="mb-4">
-              <ColorPicker
-                color={primaryColor}
-                onChange={setPrimaryColor}
-                label="Primary Color"
-              />
-              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                Choose a primary color for the entire website. Changes will be applied immediately to both admin and normal pages, but you need to save to make them permanent.
+              <h3 className="mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Theme Color</h3>
+              
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Use the Theme Color Manager below to change the primary color for the entire website.
               </p>
-            </div>
 
-            {themeMessage && (
-              <div className="mb-4 rounded-md bg-green-50 p-4 dark:bg-green-900/30">
-                <div className="flex">
-                  <div className="text-sm font-medium text-green-800 dark:text-green-400">
-                    {themeMessage}
-                  </div>
+              <div className="mt-6 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+                <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">Theme Color Manager</h3>
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                  Use our dedicated theme color manager to easily set and preview theme colors for the entire site.
+                </p>
+                <div className="mt-3">
+                  <a
+                    href="/theme-setter.html"
+                    target="_blank"
+                    className="inline-flex items-center rounded-md bg-primary-500 px-4 py-2 text-sm font-medium text-white hover:bg-primary-600 shadow-sm"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83"/>
+                    </svg>
+                    Open Theme Color Manager
+                  </a>
                 </div>
               </div>
-            )}
-
-            <div className="flex justify-end">
-              <button
-                type="button"
-                onClick={handleSaveTheme}
-                disabled={isSavingTheme}
-                className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 rounded-md px-4 py-2 text-sm font-medium text-white focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:opacity-70"
-              >
-                {isSavingTheme ? 'Saving...' : 'Save Theme Settings'}
-              </button>
             </div>
           </div>
 
