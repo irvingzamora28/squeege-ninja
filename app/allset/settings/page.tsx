@@ -1,8 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import { useTheme } from '../../contexts/ThemeContext'
+import ColorPicker from '../components/ColorPicker'
 
 export default function SettingsPage() {
+  const { primaryColor, setPrimaryColor, saveTheme, isSaving: isSavingTheme } = useTheme()
+
   const [generalSettings, setGeneralSettings] = useState({
     siteName: 'AllSet Template',
     siteDescription: 'A modern template for Next.js applications',
@@ -11,6 +15,7 @@ export default function SettingsPage() {
 
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
+  const [themeMessage, setThemeMessage] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -35,6 +40,17 @@ export default function SettingsPage() {
       ...prev,
       [name]: value,
     }))
+  }
+
+  const handleSaveTheme = async () => {
+    setThemeMessage('')
+    await saveTheme()
+    setThemeMessage('Theme settings saved successfully!')
+
+    // Clear success message after 3 seconds
+    setTimeout(() => {
+      setThemeMessage('')
+    }, 3000)
   }
 
   return (
@@ -97,6 +113,42 @@ export default function SettingsPage() {
                 className="focus:border-primary-500 focus:ring-primary-500 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                 required
               />
+            </div>
+          </div>
+
+          <div className="mb-6">
+            <h2 className="mb-4 text-xl font-semibold">Theme Settings</h2>
+
+            <div className="mb-4">
+              <ColorPicker
+                color={primaryColor}
+                onChange={setPrimaryColor}
+                label="Primary Color"
+              />
+              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                Choose a primary color for the entire website. Changes will be applied immediately to both admin and normal pages, but you need to save to make them permanent.
+              </p>
+            </div>
+
+            {themeMessage && (
+              <div className="mb-4 rounded-md bg-green-50 p-4 dark:bg-green-900/30">
+                <div className="flex">
+                  <div className="text-sm font-medium text-green-800 dark:text-green-400">
+                    {themeMessage}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={handleSaveTheme}
+                disabled={isSavingTheme}
+                className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 rounded-md px-4 py-2 text-sm font-medium text-white focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:opacity-70"
+              >
+                {isSavingTheme ? 'Saving...' : 'Save Theme Settings'}
+              </button>
             </div>
           </div>
 
