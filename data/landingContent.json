@@ -1,0 +1,58 @@
+{
+  "hero": {
+    "title": "AI-Powered Landing Pages <span class=\"text-primary-500\">in Minutes</span>",
+    "description": "Generate compelling content and SEO-optimized landing pages with minimal effort. Powered by advanced AI to help you stand out.",
+    "primaryCta": {
+      "text": "Try Demo",
+      "link": "/demo"
+    },
+    "secondaryCta": {
+      "text": "Documentation",
+      "link": "/docs"
+    }
+  },
+  "features": [
+    {
+      "title": "AI Content Generation",
+      "description": "Generate compelling copy and content tailored to your business with advanced AI.",
+      "icon": "HiLightningBolt"
+    },
+    {
+      "title": "SEO Optimization",
+      "description": "Automatically optimize your content for search engines to improve visibility.",
+      "icon": "HiMagnifyingGlass"
+    },
+    {
+      "title": "Responsive Design",
+      "description": "Beautiful, mobile-first designs that look great on any device.",
+      "icon": "HiDevicePhoneMobile"
+    },
+    {
+      "title": "Custom Templates",
+      "description": "Choose from professionally designed templates or create your own.",
+      "icon": "HiSquares2X2"
+    },
+    {
+      "title": "Analytics Integration",
+      "description": "Track performance with built-in analytics and optimization tools.",
+      "icon": "HiChartBar"
+    },
+    {
+      "title": "Fast Deployment",
+      "description": "Deploy your landing page instantly with our cloud infrastructure.",
+      "icon": "HiRocket"
+    }
+  ],
+  "cta": {
+    "title": "Ready to Create Your Landing Page?",
+    "description": "Join thousands of businesses using our AI-powered platform to create compelling content.",
+    "button": {
+      "text": "Get Started Free",
+      "link": "/signup"
+    }
+  },
+  "newsletter": {
+    "title": "Subscribe to Our Newsletter",
+    "description": "Get the latest updates and tips for creating better landing pages."
+  }
+}
