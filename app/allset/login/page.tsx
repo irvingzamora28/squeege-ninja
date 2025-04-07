@@ -45,7 +45,7 @@ export default function AdminLogin() {
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8 dark:bg-gray-900">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h2 className="mt-6 text-3xl font-bold tracking-tight text-slate-800 dark:text-white">
             AllSet Admin Panel
           </h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
@@ -63,7 +63,7 @@ export default function AdminLogin() {
                 name="username"
                 type="text"
                 required
-                className="focus:ring-primary-600 relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-gray-700"
+                className="focus:ring-primary-600 relative block w-full rounded-t-md border-0 py-1.5 text-slate-800 ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-gray-700"
                 placeholder="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -80,7 +80,7 @@ export default function AdminLogin() {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="focus:ring-primary-600 relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-gray-700"
+                className="focus:ring-primary-600 relative block w-full rounded-b-md border-0 py-1.5 text-slate-800 ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-gray-700"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

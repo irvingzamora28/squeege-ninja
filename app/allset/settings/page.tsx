@@ -41,7 +41,7 @@ export default function SettingsPage() {
     <>
       <h1 className="mb-6 text-2xl font-bold">Settings</h1>
 
-      <div className="rounded-lg bg-white p-6 shadow-md dark:bg-gray-800">
+      <div className="rounded-lg bg-slate-100 p-6 shadow-md dark:bg-gray-800">
         <form onSubmit={handleSubmit}>
           <div className="mb-6">
             <h2 className="mb-4 text-xl font-semibold">General Settings</h2>
@@ -114,7 +114,7 @@ export default function SettingsPage() {
               </p>
 
               <div className="mt-6 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
-                <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                <h3 className="text-sm font-medium text-slate-800 dark:text-gray-100">
                   Theme Color Manager
                 </h3>
                 <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">

@@ -3,7 +3,7 @@ export default function PostsPage() {
     <>
       <h1 className="mb-6 text-2xl font-bold">Posts</h1>
 
-      <div className="rounded-lg bg-white p-6 shadow-md dark:bg-gray-800">
+      <div className="rounded-lg bg-slate-100 p-6 shadow-md dark:bg-gray-800">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-xl font-semibold">All Posts</h2>
           <button className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 rounded-md px-4 py-2 text-sm font-medium text-white focus:ring-2 focus:ring-offset-2 focus:outline-none">
@@ -47,11 +47,11 @@ export default function PostsPage() {
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
+            <tbody className="divide-y divide-gray-200 bg-slate-100 dark:divide-gray-700 dark:bg-gray-800">
               {samplePosts.map((post) => (
                 <tr key={post.id}>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900 dark:text-white">
+                    <div className="text-sm font-medium text-slate-800 dark:text-white">
                       {post.title}
                     </div>
                   </td>

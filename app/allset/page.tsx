@@ -24,7 +24,7 @@ export default function AdminDashboard() {
         />
       </div>
 
-      <div className="mt-8 rounded-lg bg-white p-6 shadow-md dark:bg-gray-800">
+      <div className="mt-8 rounded-lg bg-slate-100 p-6 shadow-md dark:bg-gray-800">
         <h2 className="mb-4 text-xl font-semibold">Recent Activity</h2>
         <p className="text-gray-600 dark:text-gray-400">
           This is a placeholder for recent activity. You can add your admin functionality here.
@@ -47,12 +47,12 @@ function DashboardCard({
   icon: React.ReactNode
 }) {
   return (
-    <div className="rounded-lg bg-white p-6 shadow-md dark:bg-gray-800">
+    <div className="rounded-lg bg-slate-100 p-6 shadow-md dark:bg-gray-800">
       <div className="flex items-center">
         <div className="bg-primary-100 dark:bg-primary-900 mr-4 rounded-full p-3">{icon}</div>
         <div>
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white">{title}</h3>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white">{value}</p>
+          <h3 className="text-lg font-medium text-slate-800 dark:text-white">{title}</h3>
+          <p className="text-3xl font-bold text-slate-800 dark:text-white">{value}</p>
           <p className="text-sm text-gray-500 dark:text-gray-400">{description}</p>
         </div>
       </div>

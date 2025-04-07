@@ -8,7 +8,8 @@ import SearchButton from './SearchButton'
 import Image from 'next/image'
 
 const Header = () => {
-  let headerClass = 'flex items-center w-full bg-white dark:bg-gray-950 justify-between py-10'
+  let headerClass =
+    'flex items-center w-full bg-slate-100 dark:bg-slate-900 dark:text-slate-200 justify-between py-10'
   if (siteMetadata.stickyNav) {
     headerClass += ' sticky top-0 z-50'
   }
@@ -37,7 +38,7 @@ const Header = () => {
               <Link
                 key={link.title}
                 href={link.href}
-                className="hover:text-primary-500 dark:hover:text-primary-400 m-1 font-medium text-gray-900 dark:text-gray-100"
+                className="hover:text-primary-500 dark:hover:text-primary-400 m-1 font-medium text-slate-800 dark:text-gray-100"
               >
                 {link.title}
               </Link>

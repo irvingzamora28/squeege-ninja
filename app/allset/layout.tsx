@@ -31,7 +31,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="flex min-h-screen flex-col bg-gray-50 dark:bg-gray-900">
       {/* Admin Header */}
-      <header className="bg-white shadow-sm dark:bg-gray-800">
+      <header className="bg-slate-100 shadow-sm dark:bg-gray-800">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
@@ -64,7 +64,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </header>
 
       {/* Mobile Navigation */}
-      <div className="border-b border-gray-200 bg-white py-2 md:hidden dark:border-gray-700 dark:bg-gray-800">
+      <div className="border-b border-gray-200 bg-slate-100 py-2 md:hidden dark:border-gray-700 dark:bg-gray-800">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between space-x-2 overflow-x-auto">
             <NavLink href="/allset" exact className="whitespace-nowrap">
@@ -86,7 +86,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </main>
 
       {/* Admin Footer */}
-      <footer className="mt-auto bg-white py-4 dark:bg-gray-800">
+      <footer className="mt-auto bg-slate-100 py-4 dark:bg-gray-800">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <p className="text-center text-sm text-gray-500 dark:text-gray-400">
             &copy; {new Date().getFullYear()} AllSet Admin Panel
@@ -115,7 +115,7 @@ function NavLink({
   const baseClasses = 'px-3 py-2 rounded-md text-sm font-medium'
   const activeClasses = 'bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300'
   const inactiveClasses =
-    'text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+    'text-gray-600 hover:bg-gray-100 hover:text-slate-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
 
   return (
     <Link

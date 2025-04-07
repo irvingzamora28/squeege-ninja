@@ -4,6 +4,7 @@ import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
 import Image from 'next/image'
+import landingDemoImage from '../public/static/images/landing-demo.jpeg'
 
 const MAX_DISPLAY = 3
 
@@ -13,7 +14,7 @@ export default function Home({ posts }) {
       {/* Hero Section */}
       <div className="flex flex-col-reverse items-center justify-between py-16 md:py-24 lg:flex-row">
         <div className="space-y-6 lg:w-1/2">
-          <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 md:text-6xl dark:text-white">
+          <h1 className="text-4xl font-extrabold tracking-tight text-slate-800 md:text-6xl dark:text-slate-200">
             AI-Powered Landing Pages <span className="text-primary-500">in Minutes</span>
           </h1>
           <p className="text-lg text-gray-600 md:text-xl dark:text-gray-400">
@@ -39,7 +40,7 @@ export default function Home({ posts }) {
           <div className="relative">
             <div className="w-full overflow-hidden rounded-lg shadow-xl">
               <Image
-                src="/static/images/landing-demo.jpeg"
+                src={landingDemoImage}
                 alt="AI Landing Page Generator Demo"
                 width={1024}
                 height={576}
@@ -92,7 +93,7 @@ export default function Home({ posts }) {
                   <h2 className="mb-2 text-xl font-bold">
                     <Link
                       href={`/blog/${slug}`}
-                      className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-900 dark:text-gray-100"
+                      className="hover:text-primary-500 dark:hover:text-primary-400 text-slate-800 dark:text-gray-100"
                     >
                       {title}
                     </Link>
