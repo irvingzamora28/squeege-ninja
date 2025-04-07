@@ -36,7 +36,7 @@ async function loadThemeSettings() {
 // Define theme type
 interface ThemeSettings {
   primaryColor: string
-  [key: string]: any // Allow for future theme properties
+  [key: string]: unknown // Using unknown instead of any for better type safety
 }
 
 // Helper function to adjust color brightness
@@ -117,9 +117,9 @@ async function saveThemeSettings(theme: ThemeSettings) {
 .border-primary-950, .border-primary-950 * { border-color: ${adjustColor(theme.primaryColor, 0.05)} !important; }
 
 /* Hover variants */
-.hover\:bg-primary-500:hover, .hover\:bg-primary-500:hover * { background-color: ${theme.primaryColor} !important; }
-.hover\:text-primary-500:hover, .hover\:text-primary-500:hover * { color: ${theme.primaryColor} !important; }
-.hover\:border-primary-500:hover, .hover\:border-primary-500:hover * { border-color: ${theme.primaryColor} !important; }
+.hover${String.fromCharCode(92)}:bg-primary-500:hover, .hover${String.fromCharCode(92)}:bg-primary-500:hover * { background-color: ${theme.primaryColor} !important; }
+.hover${String.fromCharCode(92)}:text-primary-500:hover, .hover${String.fromCharCode(92)}:text-primary-500:hover * { color: ${theme.primaryColor} !important; }
+.hover${String.fromCharCode(92)}:border-primary-500:hover, .hover${String.fromCharCode(92)}:border-primary-500:hover * { border-color: ${theme.primaryColor} !important; }
 `
 
     // Save to CSS file
