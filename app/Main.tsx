@@ -39,7 +39,7 @@ export default function Home({ posts }) {
   const { hero, features, cta, newsletter } = landingContent
 
   return (
-    <>
+    <div className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-10/12 xl:px-0">
       {/* Hero Section */}
       <div className="flex flex-col-reverse items-center justify-between py-16 md:py-24 lg:flex-row">
         <div className="space-y-6 lg:w-1/2">
@@ -176,7 +176,7 @@ export default function Home({ posts }) {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
 

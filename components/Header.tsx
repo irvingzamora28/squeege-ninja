@@ -9,7 +9,7 @@ import Image from 'next/image'
 
 const Header = () => {
   let headerClass =
-    'flex items-center w-full bg-slate-100 dark:bg-slate-900 dark:text-slate-200 justify-between py-10'
+    'flex items-center w-full bg-slate-100 dark:bg-slate-900 dark:text-slate-200 justify-between py-10 mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-10/12 xl:px-0'
   if (siteMetadata.stickyNav) {
     headerClass += ' sticky top-0 z-50'
   }

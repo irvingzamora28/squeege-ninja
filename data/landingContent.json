@@ -11,6 +11,23 @@
       "link": "/docs"
     }
   },
+  "mainFeatures": [
+    {
+      "title": "AI-Powered Content Generation",
+      "description": "Our AI generates high-quality content tailored to your business needs.",
+      "icon": "HiLightningBolt"
+    },
+    {
+      "title": "SEO Optimization",
+      "description": "Automatically optimize your content for search engines to improve visibility.",
+      "icon": "HiMagnifyingGlass"
+    },
+    {
+      "title": "Responsive Design",
+      "description": "Beautiful, mobile-first designs that look great on any device.",
+      "icon": "HiDevicePhoneMobile"
+    }
+  ],
   "features": [
     {
       "title": "AI Content Generation",

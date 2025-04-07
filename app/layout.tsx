@@ -7,7 +7,6 @@ import { Space_Grotesk } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
 import Header from '@/components/Header'
-import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata'
 import { DarkThemeProvider } from './theme-providers'
@@ -94,20 +93,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
-      <body className="bg-slate-100 pl-[calc(100vw-100%)] text-slate-800 antialiased dark:bg-slate-900 dark:text-slate-200">
+      <body className="bg-slate-100 text-slate-800 antialiased dark:bg-slate-900 dark:text-slate-200">
         <DarkThemeProvider>
           <ThemeProvider initialColor={initialColor}>
             <AdminLayoutWrapper
               regularContent={
                 <>
                   <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-                  <SectionContainer>
-                    <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
-                      <Header />
-                      <main className="mb-auto">{children}</main>
-                    </SearchProvider>
-                    <Footer />
-                  </SectionContainer>
+                  <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+                    <Header />
+                    <main className="mb-auto">{children}</main>
+                  </SearchProvider>
+                  <Footer />
                 </>
               }
             >
