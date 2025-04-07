@@ -19,7 +19,7 @@ export async function getThemeSettings() {
       // Directory doesn't exist, create it
       await fs.mkdir(dataDir, { recursive: true })
     }
-    
+
     try {
       const fileData = await fs.readFile(themeFilePath, 'utf-8')
       return JSON.parse(fileData)

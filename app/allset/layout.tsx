@@ -81,7 +81,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </div>
 
       {/* Main Content */}
-      <main className="flex-grow mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">{children}</main>
+      <main className="mx-auto w-full max-w-7xl flex-grow px-4 py-6 sm:px-6 lg:px-8">
+        {children}
+      </main>
 
       {/* Admin Footer */}
       <footer className="mt-auto bg-white py-4 dark:bg-gray-800">

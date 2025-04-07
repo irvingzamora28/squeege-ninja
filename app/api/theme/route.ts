@@ -35,8 +35,8 @@ async function loadThemeSettings() {
 
 // Define theme type
 interface ThemeSettings {
-  primaryColor: string;
-  [key: string]: any; // Allow for future theme properties
+  primaryColor: string
+  [key: string]: any // Allow for future theme properties
 }
 
 // Helper function to adjust color brightness
@@ -148,10 +148,7 @@ export async function POST(request: NextRequest) {
     // Validate the theme data
     if (!themeData.primaryColor || typeof themeData.primaryColor !== 'string') {
       console.log('POST /api/theme - Invalid theme data')
-      return NextResponse.json(
-        { success: false, message: 'Invalid theme data' },
-        { status: 400 }
-      )
+      return NextResponse.json({ success: false, message: 'Invalid theme data' }, { status: 400 })
     }
 
     // Save the theme data to a file

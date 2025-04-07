@@ -3,7 +3,6 @@
 import { useState } from 'react'
 
 export default function SettingsPage() {
-
   const [generalSettings, setGeneralSettings] = useState({
     siteName: 'AllSet Template',
     siteDescription: 'A modern template for Next.js applications',
@@ -12,7 +11,6 @@ export default function SettingsPage() {
 
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -106,25 +104,40 @@ export default function SettingsPage() {
             <h2 className="mb-4 text-xl font-semibold">Theme Settings</h2>
 
             <div className="mb-4">
-              <h3 className="mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Theme Color</h3>
-              
+              <h3 className="mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                Theme Color
+              </h3>
+
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Use the Theme Color Manager below to change the primary color for the entire website.
+                Use the Theme Color Manager below to change the primary color for the entire
+                website.
               </p>
 
-              <div className="mt-6 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-                <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">Theme Color Manager</h3>
+              <div className="mt-6 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
+                <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                  Theme Color Manager
+                </h3>
                 <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                  Use our dedicated theme color manager to easily set and preview theme colors for the entire site.
+                  Use our dedicated theme color manager to easily set and preview theme colors for
+                  the entire site.
                 </p>
                 <div className="mt-3">
                   <a
                     href="/theme-setter.html"
                     target="_blank"
-                    className="inline-flex items-center rounded-md bg-primary-500 px-4 py-2 text-sm font-medium text-white hover:bg-primary-600 shadow-sm"
+                    className="bg-primary-500 hover:bg-primary-600 inline-flex items-center rounded-md px-4 py-2 text-sm font-medium text-white shadow-sm"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83"/>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="mr-2 h-4 w-4"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83" />
                     </svg>
                     Open Theme Color Manager
                   </a>
