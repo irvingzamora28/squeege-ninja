@@ -13,6 +13,7 @@ import {
   HiOutlineSquares2X2,
   HiOutlineChartBar,
   HiOutlineRocketLaunch,
+  HiCheckCircle,
 } from 'react-icons/hi2'
 
 const MAX_DISPLAY = 3
@@ -36,7 +37,7 @@ const FeatureIcon = ({ icon }) => {
 }
 
 export default function Home({ posts }) {
-  const { hero, features, cta, newsletter } = landingContent
+  const { hero, mainFeatures, features, cta, pricing } = landingContent
 
   return (
     <div className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-10/12 xl:px-0">
@@ -80,6 +81,22 @@ export default function Home({ posts }) {
         </div>
       </div>
 
+      {/* Main Features Section */}
+      <div className="py-16">
+        <h2 className="mb-12 text-center text-3xl font-bold">Main Features</h2>
+        <div className="grid gap-8 md:grid-cols-3">
+          {mainFeatures.map((feature) => (
+            <div
+              key={feature.id}
+              className="rounded-lg border border-gray-200 p-6 transition-shadow hover:shadow-lg dark:border-gray-700"
+            >
+              <h3 className="mb-2 text-xl font-semibold">{feature.title}</h3>
+              <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Features Grid */}
       <div className="py-16">
         <h2 className="mb-12 text-center text-3xl font-bold">Everything You Need to Launch Fast</h2>
@@ -96,6 +113,62 @@ export default function Home({ posts }) {
               <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Pricing Section */}
+      <div className="py-16">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold">{pricing.title}</h2>
+          <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">{pricing.description}</p>
+        </div>
+        <div className="mt-12 grid gap-8 lg:grid-cols-3">
+          {pricing.plans.map((plan) => (
+            <div
+              key={plan.name}
+              className={`rounded-lg border ${
+                plan.highlighted
+                  ? 'border-primary-500 shadow-lg'
+                  : 'border-gray-200 dark:border-gray-700'
+              } p-8`}
+            >
+              <h3 className="text-2xl font-bold">{plan.name}</h3>
+              <p className="mt-4 text-gray-600 dark:text-gray-400">{plan.description}</p>
+              <div className="mt-4 text-4xl font-bold">{plan.price}</div>
+              <ul className="mt-8 space-y-4">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex items-center">
+                    <HiCheckCircle className="text-primary-500 h-5 w-5" />
+                    <span className="ml-3">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href={plan.cta.link}
+                className={`mt-8 block w-full rounded-lg px-6 py-3 text-center font-medium ${
+                  plan.highlighted
+                    ? 'bg-primary-500 hover:bg-primary-600 text-white'
+                    : 'bg-gray-100 text-gray-900 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700'
+                }`}
+              >
+                {plan.cta.text}
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="bg-primary-50 rounded-2xl px-4 py-16 sm:px-6 lg:px-8 dark:bg-gray-800/50">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="mb-4 text-3xl font-bold">{cta.title}</h2>
+          <p className="mb-8 text-lg text-gray-600 dark:text-gray-400">{cta.description}</p>
+          <Link
+            href={cta.button.link}
+            className="bg-primary-500 hover:bg-primary-600 inline-flex items-center justify-center rounded-md border border-transparent px-8 py-4 text-base font-medium text-white"
+          >
+            {cta.button.text}
+          </Link>
         </div>
       </div>
 
@@ -145,37 +218,6 @@ export default function Home({ posts }) {
           </div>
         )}
       </div>
-
-      {/* CTA Section */}
-      <div className="bg-primary-50 rounded-2xl px-4 py-16 sm:px-6 lg:px-8 dark:bg-gray-800/50">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="mb-4 text-3xl font-bold">{cta.title}</h2>
-          <p className="mb-8 text-lg text-gray-600 dark:text-gray-400">{cta.description}</p>
-          <Link
-            href={cta.button.link}
-            className="bg-primary-500 hover:bg-primary-600 inline-flex items-center justify-center rounded-md border border-transparent px-8 py-4 text-base font-medium text-white"
-          >
-            {cta.button.text}
-          </Link>
-        </div>
-      </div>
-
-      {/* Newsletter Section */}
-      {siteMetadata.newsletter?.provider && (
-        <div className="py-16">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="mb-4 text-3xl font-bold">{newsletter.title}</h2>
-            <p className="mb-8 text-lg text-gray-600 dark:text-gray-400">
-              {newsletter.description}
-            </p>
-            <div className="flex justify-center">
-              <div className="w-full max-w-md">
-                <NewsletterForm />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
