@@ -12,7 +12,7 @@ export default function AuthorLayout({ children, content }: Props) {
   const { name, avatar, occupation, company, email, twitter, bluesky, linkedin, github } = content
 
   return (
-    <>
+    <div className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-10/12 xl:px-0">
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
           <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-slate-800 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
@@ -46,6 +46,6 @@ export default function AuthorLayout({ children, content }: Props) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
