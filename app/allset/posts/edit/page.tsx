@@ -135,7 +135,7 @@ function EditPostContent() {
 
         <div className="flex justify-end space-x-4">
           <Link
-            href={`/blog/${encodeURIComponent(post.slug)}`}
+            href={`/blog/${encodeURIComponent(post.slug || '')}`}
             target="_blank"
             className="rounded-md bg-slate-600 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700 focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:outline-none"
           >

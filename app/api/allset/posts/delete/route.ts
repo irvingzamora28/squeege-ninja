@@ -37,7 +37,9 @@ export async function POST(request: NextRequest) {
           content.includes(`slug: "${decodedSlug}"`) ||
           content.includes(`slug: '${decodedSlug}'`) ||
           file === `${decodedSlug}.mdx` ||
-          file === `${decodedSlug}.md`
+          file === `${decodedSlug}.md` ||
+          file === `${decodedSlug.replace(/ /g, '-')}.mdx` ||
+          file === `${decodedSlug.replace(/ /g, '-')}.md`
         ) {
           postFilePath = filePath
           break

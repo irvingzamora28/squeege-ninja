@@ -177,14 +177,14 @@ export default function PostsPage() {
                     </td>
                     <td className="px-6 py-4 text-right text-sm font-medium whitespace-nowrap">
                       <Link
-                        href={`/allset/posts/edit?slug=${encodeURIComponent(post.slug)}`}
+                        href={`/allset/posts/edit?slug=${encodeURIComponent(post.slug || '')}`}
                         className="text-primary-600 hover:text-primary-900 dark:text-primary-400 dark:hover:text-primary-300"
                       >
                         Edit
                       </Link>
                       <span className="mx-2 text-gray-300 dark:text-gray-600">|</span>
                       <Link
-                        href={`/blog/${encodeURIComponent(post.slug)}`}
+                        href={`/blog/${encodeURIComponent(post.slug || '')}`}
                         target="_blank"
                         className="text-primary-600 hover:text-primary-900 dark:text-primary-400 dark:hover:text-primary-300"
                       >
@@ -192,7 +192,7 @@ export default function PostsPage() {
                       </Link>
                       <span className="mx-2 text-gray-300 dark:text-gray-600">|</span>
                       <button
-                        onClick={() => setPostToDelete(post.slug)}
+                        onClick={() => setPostToDelete(post.slug || '')}
                         className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
                       >
                         Delete

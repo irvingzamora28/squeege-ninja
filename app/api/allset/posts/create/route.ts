@@ -28,9 +28,10 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Create the file path
+    // Create the file path with hyphenated filename
     const blogDir = path.join(process.cwd(), 'data', 'blog')
-    const filePath = path.join(blogDir, `${postData.slug}.mdx`)
+    const hyphenatedSlug = postData.slug.replace(/ /g, '-')
+    const filePath = path.join(blogDir, `${hyphenatedSlug}.mdx`)
 
     // Check if file already exists
     try {
@@ -46,9 +47,9 @@ export async function POST(request: NextRequest) {
     // Format the frontmatter
     const frontmatter = [
       '---',
-      `title: ${postData.title}`,
-      `date: ${postData.date}`,
-      `slug: ${postData.slug}`,
+      `title: '${postData.title}'`,
+      `date: '${postData.date}'`,
+      `slug: '${postData.slug}'`,
       postData.tags && postData.tags.length > 0
         ? `tags: [${postData.tags.map((tag) => `'${tag.trim()}'`).join(', ')}]`
         : null,

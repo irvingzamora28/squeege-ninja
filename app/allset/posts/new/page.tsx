@@ -41,16 +41,18 @@ export default function NewPostPage() {
       .replace(/[^\w\s-]/g, '') // Remove special characters
       .replace(/\s+/g, '-') // Replace spaces with hyphens
       .replace(/--+/g, '-') // Replace multiple hyphens with single hyphen
+      .replace(/-+$/, '') // Remove trailing hyphens
       .trim()
   }
 
   // Auto-generate slug when title changes
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value
+    const hyphenatedSlug = generateSlug(title)
     setFormData((prev) => ({
       ...prev,
       title,
-      slug: generateSlug(title),
+      slug: hyphenatedSlug,
     }))
   }
 
@@ -96,7 +98,7 @@ export default function NewPostPage() {
 
       // Redirect to the edit page after a short delay
       setTimeout(() => {
-        router.push(`/allset/posts/edit/${data.slug}`)
+        router.push(`/allset/posts/edit?slug=${encodeURIComponent(data.slug)}`)
       }, 1500)
     } catch (error) {
       console.error('Error creating post:', error)
