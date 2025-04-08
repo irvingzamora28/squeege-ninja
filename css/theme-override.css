@@ -1,164 +1,164 @@
 /* Override the primary color variables with our theme color */
 :root {
-  --color-primary-50: #f3fcf9 !important;
-  --color-primary-100: #e7f8f2 !important;
-  --color-primary-200: #cff1e6 !important;
-  --color-primary-300: #b7ead9 !important;
-  --color-primary-400: #9fe3cd !important;
-  --color-primary-500: #10b981 !important;
-  --color-primary-600: #70d5b3 !important;
-  --color-primary-700: #58cea7 !important;
-  --color-primary-800: #40c79a !important;
-  --color-primary-900: #28c08e !important;
-  --color-primary-950: #1cbd87 !important;
+  --color-primary-50: #76a8f9 !important;
+  --color-primary-100: #629bf8 !important;
+  --color-primary-200: #4f8ff7 !important;
+  --color-primary-300: #4588f6 !important;
+  --color-primary-400: #3f85f6 !important;
+  --color-primary-500: #3b82f6 !important;
+  --color-primary-600: #3575dd !important;
+  --color-primary-700: #2f68c5 !important;
+  --color-primary-800: #295bac !important;
+  --color-primary-900: #234e94 !important;
+  --color-primary-950: #1e417b !important;
 }
 
 /* Direct overrides for utility classes */
 .bg-primary-50,
 .bg-primary-50 * {
-  background-color: #f3fcf9 !important;
+  background-color: #76a8f9 !important;
 }
 .bg-primary-100,
 .bg-primary-100 * {
-  background-color: #e7f8f2 !important;
+  background-color: #629bf8 !important;
 }
 .bg-primary-200,
 .bg-primary-200 * {
-  background-color: #cff1e6 !important;
+  background-color: #4f8ff7 !important;
 }
 .bg-primary-300,
 .bg-primary-300 * {
-  background-color: #b7ead9 !important;
+  background-color: #4588f6 !important;
 }
 .bg-primary-400,
 .bg-primary-400 * {
-  background-color: #9fe3cd !important;
+  background-color: #3f85f6 !important;
 }
 .bg-primary-500,
 .bg-primary-500 * {
-  background-color: #10b981 !important;
+  background-color: #3b82f6 !important;
 }
 .bg-primary-600,
 .bg-primary-600 * {
-  background-color: #70d5b3 !important;
+  background-color: #3575dd !important;
 }
 .bg-primary-700,
 .bg-primary-700 * {
-  background-color: #58cea7 !important;
+  background-color: #2f68c5 !important;
 }
 .bg-primary-800,
 .bg-primary-800 * {
-  background-color: #40c79a !important;
+  background-color: #295bac !important;
 }
 .bg-primary-900,
 .bg-primary-900 * {
-  background-color: #28c08e !important;
+  background-color: #234e94 !important;
 }
 .bg-primary-950,
 .bg-primary-950 * {
-  background-color: #1cbd87 !important;
+  background-color: #1e417b !important;
 }
 
 .text-primary-50,
 .text-primary-50 * {
-  color: #f3fcf9 !important;
+  color: #76a8f9 !important;
 }
 .text-primary-100,
 .text-primary-100 * {
-  color: #e7f8f2 !important;
+  color: #629bf8 !important;
 }
 .text-primary-200,
 .text-primary-200 * {
-  color: #cff1e6 !important;
+  color: #4f8ff7 !important;
 }
 .text-primary-300,
 .text-primary-300 * {
-  color: #b7ead9 !important;
+  color: #4588f6 !important;
 }
 .text-primary-400,
 .text-primary-400 * {
-  color: #9fe3cd !important;
+  color: #3f85f6 !important;
 }
 .text-primary-500,
 .text-primary-500 * {
-  color: #10b981 !important;
+  color: #3b82f6 !important;
 }
 .text-primary-600,
 .text-primary-600 * {
-  color: #70d5b3 !important;
+  color: #3575dd !important;
 }
 .text-primary-700,
 .text-primary-700 * {
-  color: #58cea7 !important;
+  color: #2f68c5 !important;
 }
 .text-primary-800,
 .text-primary-800 * {
-  color: #40c79a !important;
+  color: #295bac !important;
 }
 .text-primary-900,
 .text-primary-900 * {
-  color: #28c08e !important;
+  color: #234e94 !important;
 }
 .text-primary-950,
 .text-primary-950 * {
-  color: #1cbd87 !important;
+  color: #1e417b !important;
 }
 
 .border-primary-50,
 .border-primary-50 * {
-  border-color: #f3fcf9 !important;
+  border-color: #76a8f9 !important;
 }
 .border-primary-100,
 .border-primary-100 * {
-  border-color: #e7f8f2 !important;
+  border-color: #629bf8 !important;
 }
 .border-primary-200,
 .border-primary-200 * {
-  border-color: #cff1e6 !important;
+  border-color: #4f8ff7 !important;
 }
 .border-primary-300,
 .border-primary-300 * {
-  border-color: #b7ead9 !important;
+  border-color: #4588f6 !important;
 }
 .border-primary-400,
 .border-primary-400 * {
-  border-color: #9fe3cd !important;
+  border-color: #3f85f6 !important;
 }
 .border-primary-500,
 .border-primary-500 * {
-  border-color: #10b981 !important;
+  border-color: #3b82f6 !important;
 }
 .border-primary-600,
 .border-primary-600 * {
-  border-color: #70d5b3 !important;
+  border-color: #3575dd !important;
 }
 .border-primary-700,
 .border-primary-700 * {
-  border-color: #58cea7 !important;
+  border-color: #2f68c5 !important;
 }
 .border-primary-800,
 .border-primary-800 * {
-  border-color: #40c79a !important;
+  border-color: #295bac !important;
 }
 .border-primary-900,
 .border-primary-900 * {
-  border-color: #28c08e !important;
+  border-color: #234e94 !important;
 }
 .border-primary-950,
 .border-primary-950 * {
-  border-color: #1cbd87 !important;
+  border-color: #1e417b !important;
 }
 
 /* Hover variants */
 .hover\:bg-primary-500:hover,
 .hover\:bg-primary-500:hover * {
-  background-color: #10b981 !important;
+  background-color: #3b82f6 !important;
 }
 .hover\:text-primary-500:hover,
 .hover\:text-primary-500:hover * {
-  color: #10b981 !important;
+  color: #3b82f6 !important;
 }
 .hover\:border-primary-500:hover,
 .hover\:border-primary-500:hover * {
-  border-color: #10b981 !important;
+  border-color: #3b82f6 !important;
 }
