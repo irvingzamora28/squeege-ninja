@@ -190,9 +190,9 @@ export class LLMService {
   constructor() {
     // Initialize the provider based on environment variables
     const providerType = process.env.LLM_API_PROVIDER || 'openai'
-    const apiKey = process.env.LLM_API_KEY
+    const apiKey = process.env.LLM_API_KEY || ''
     const model = process.env.LLM_MODEL || 'gpt-3.5-turbo'
-    const apiUrl = process.env.LLM_API_URL
+    const apiUrl = process.env.LLM_API_URL || 'http://localhost:11434/v1'
 
     if (!apiKey) {
       throw new Error('LLM_API_KEY is required')
