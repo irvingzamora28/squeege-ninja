@@ -2,6 +2,8 @@
 
 Here's an example on how to create a donut chart from Chart.js (assuming you already have the dependencies installed) and use it in MDX posts. First, create a new `DonutChart.tsx` component in `components`:
 
+{% raw %}
+
 ```tsx
 'use client'
 
@@ -17,9 +19,13 @@ const DonutChart = ({ data }) => {
 export default Doughnut
 ```
 
+{% endraw %}
+
 Since the underlying `Doughnut` component uses React hooks, we add the `'use client'` directive to specify that it is a client side component. Also, there is an existing issue which prevents named components from being used, so we need to export the component as the default export.
 
 Next, add the component to `MDXComponents.tsx`:
+
+{% raw %}
 
 ```diff
 ...
@@ -35,7 +41,11 @@ export const components: MDXComponents = {
 }
 ```
 
+{% endraw %}
+
 You can now use the component in `.mdx` files:
+
+{% raw %}
 
 ```mdx
 ## Example Donut Chart
@@ -59,3 +69,5 @@ export const data = {
 
 <DonutChart data={data} />
 ```
+
+{% endraw %}

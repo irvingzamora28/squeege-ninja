@@ -6,6 +6,8 @@ The `defaultActions` parameter defines the initial set of actions available.
 
 The `onSearchDocumentsLoad` function is triggered when the documents defined by `searchDocumentsPath` are retrieved. To deactivate the dynamic search feature, set `searchDocumentsPath` to `false`.
 
+{% raw %}
+
 ```tsx
 'use client'
 
@@ -56,7 +58,11 @@ export const SearchProvider = ({ children }) => {
 }
 ```
 
+{% endraw %}
+
 For a more comprehensive search experience, you can enable full-text search across all blog content. However, this will result in a larger search index file. To implement this, modify the `createSearchIndex` function in `contentlayer.config.ts` as follows:
+
+{% raw %}
 
 ```tsx
 function createSearchIndex(allBlogs) {
@@ -73,9 +79,13 @@ function createSearchIndex(allBlogs) {
 }
 ```
 
+{% endraw %}
+
 This change replaces `JSON.stringify(allCoreContent(sortPosts(allBlogs)))` with `JSON.stringify((sortPosts(allBlogs)))`.
 
 Additionally, update the `SearchProvider` to include the full content in the `keywords` field of the `onSearchDocumentsLoad` prop:
+
+{% raw %}
 
 ```tsx
 onSearchDocumentsLoad(json) {
@@ -89,3 +99,5 @@ onSearchDocumentsLoad(json) {
   }))
 }
 ```
+
+{% endraw %}
