@@ -1,6 +1,6 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Next.js Starter Blog',
+  title: 'ALLSET Template',
   author: 'imzodev',
   headerTitle: 'ALLSET Template',
   description:
