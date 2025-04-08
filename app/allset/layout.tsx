@@ -54,7 +54,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <button
                 onClick={handleLogout}
                 disabled={isLoggingOut}
-                className="rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none disabled:opacity-70"
+                className="rounded-md bg-slate-600 px-3 py-2 text-sm font-medium text-white hover:bg-slate-700 focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:outline-none disabled:opacity-70"
               >
                 {isLoggingOut ? 'Logging out...' : 'Logout'}
               </button>

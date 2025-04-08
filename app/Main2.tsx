@@ -12,6 +12,7 @@ import {
   FiBarChart2,
 } from 'react-icons/fi'
 import landingDemoImage from '../public/static/images/landing-demo.jpeg'
+import dashboardDemoImage from '../public/static/images/dashboard-demo.jpg'
 import Image from 'next/image'
 import landingContent from '@/data/landingContent.json'
 import Link from 'next/link'
@@ -25,6 +26,11 @@ const iconMap = {
   FiList: FiList,
   FiClock: FiClock,
   FiBarChart2: FiBarChart2,
+}
+
+const imageMap = {
+  landingDemoImage: landingDemoImage,
+  dashboardDemoImage: dashboardDemoImage,
 }
 
 const FeaturesSection = () => {
@@ -73,7 +79,7 @@ const FeaturesSection = () => {
           <div className="relative col-span-8 aspect-[16/9]">
             <div className="absolute inset-0 overflow-hidden rounded-2xl">
               <Image
-                src={landingDemoImage}
+                src={imageMap[selectedFeature.image]}
                 alt={selectedFeature.title}
                 fill
                 className="object-cover transition-all duration-700 ease-in-out"
