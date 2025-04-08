@@ -12,6 +12,9 @@ import {
   FiBarChart2,
   FiSearch,
   FiTag,
+  FiCompass,
+  FiPercent,
+  FiMapPin,
 } from 'react-icons/fi'
 import landingDemoImage from '../public/static/images/landing-demo.jpeg'
 import dashboardDemoImage from '../public/static/images/dashboard-demo.jpg'
@@ -30,6 +33,9 @@ const iconMap = {
   FiBarChart2: FiBarChart2,
   FiSearch,
   FiTag,
+  FiCompass,
+  FiPercent,
+  FiMapPin,
 }
 
 const imageMap = {
