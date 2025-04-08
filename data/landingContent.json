@@ -1,149 +1,151 @@
 {
   "hero": {
-    "title": "AI-Powered Landing Pages <span class=\"text-primary-500\">in Minutes</span>",
-    "description": "Generate compelling content and SEO-optimized landing pages with minimal effort. Powered by advanced AI to help you stand out.",
+    "title": "LeBrand: Encuentra Ofertas de Marcas de Prestigio con IA",
+    "description": "Descubre descuentos exclusivos y ofertas personalizadas de tus marcas favoritas, impulsadas por la inteligencia artificial de LeBrand.",
     "primaryCta": {
-      "text": "Try Demo",
-      "link": "/demo"
+      "text": "Pruébalo Gratis",
+      "link": "#"
     },
     "secondaryCta": {
-      "text": "Documentation",
-      "link": "/docs"
+      "text": "Ver Demo",
+      "link": "#"
     }
   },
   "mainFeatures": [
     {
       "id": 1,
-      "icon": "FiUsers",
-      "title": "AI Content Generation",
-      "description": "Our AI generates high-quality, customized content based on your business description. Get compelling copy that resonates with your audience.",
+      "icon": "FiSearch",
+      "title": "Búsqueda Inteligente de Ofertas",
+      "description": "Nuestra IA analiza miles de ofertas para encontrar los mejores descuentos en las marcas que te encantan.",
       "image": "landingDemoImage"
     },
     {
       "id": 2,
-      "icon": "FiSmartphone",
-      "title": "Responsive Templates",
-      "description": "Choose from professionally designed, mobile-responsive templates that adapt perfectly to any screen size. Customize colors and fonts with ease.",
+      "icon": "FiTag",
+      "title": "Alertas Personalizadas",
+      "description": "Recibe notificaciones instantáneas sobre ofertas exclusivas y descuentos especiales en tus productos favoritos.",
       "image": "dashboardDemoImage"
     },
     {
       "id": 3,
-      "icon": "FiLock",
-      "title": "SEO Optimization",
-      "description": "Every landing page comes with built-in SEO optimization, ensuring your content ranks well in search engines and reaches your target audience.",
+      "icon": "FiTrendingUp",
+      "title": "Tendencias y Novedades",
+      "description": "Mantente al día con las últimas tendencias y lanzamientos de tus marcas preferidas, todo en un solo lugar.",
       "image": "landingDemoImage"
     }
   ],
-  "featureTitle": "Features for building a portfolio",
-  "featureDescription": "Whether you're a small business owner or a large corporation, our landing page generator has everything you need to create a compelling online presence.",
+  "featureTitle": "Características Principales",
+  "featureDescription": "Descubre cómo LeBrand te ayuda a ahorrar tiempo y dinero en tus compras de marcas de prestigio.",
   "features": [
     {
-      "title": "Multiple LLM Providers",
-      "description": "Support for OpenAI, Google Gemini, and other LLM providers gives you flexibility in choosing your AI backend.",
-      "icon": "FiTrendingUp"
+      "title": "Motor de Búsqueda Avanzado",
+      "description": "Encuentra rápidamente las ofertas que buscas con filtros y opciones de búsqueda personalizables.",
+      "icon": "FiCheckCircle"
     },
     {
-      "title": "Blog Generation",
-      "description": "Generate SEO-optimized blog posts automatically with our AI. Includes basic CMS functionality for easy management.",
-      "icon": "FiList"
+      "title": "Recomendaciones Personalizadas",
+      "description": "Nuestro algoritmo aprende de tus preferencias para ofrecerte ofertas relevantes y a tu medida.",
+      "icon": "FiCheckCircle"
     },
     {
-      "title": "Analytics Integration",
-      "description": "Built-in support for multiple analytics providers including Umami, Plausible, and Google Analytics.",
-      "icon": "FiClock"
+      "title": "Comparación de Precios",
+      "description": "Compara precios de diferentes tiendas y vendedores para asegurarte de obtener la mejor oferta posible.",
+      "icon": "FiCheckCircle"
     },
     {
-      "title": "Custom Templates",
-      "description": "Create and save your own templates or modify existing ones to match your brand perfectly.",
-      "icon": "FiUsers"
+      "title": "Historial de Ofertas",
+      "description": "Realiza un seguimiento de las ofertas que has visto y guarda tus favoritas para comprarlas más tarde.",
+      "icon": "FiCheckCircle"
     },
     {
-      "title": "Version Control",
-      "description": "Keep track of all your landing page versions and roll back changes when needed.",
-      "icon": "FiLock"
+      "title": "Integración con Redes Sociales",
+      "description": "Comparte ofertas con tus amigos y familiares en tus redes sociales favoritas.",
+      "icon": "FiCheckCircle"
     },
     {
-      "title": "Fast Deployment",
-      "description": "Deploy your landing pages instantly with integrated hosting and CDN support.",
-      "icon": "FiBarChart2"
+      "title": "Soporte al Cliente 24/7",
+      "description": "Obtén ayuda y soporte técnico cuando lo necesites a través de nuestro equipo de atención al cliente.",
+      "icon": "FiCheckCircle"
     }
   ],
   "cta": {
-    "title": "Start Creating Today",
-    "description": "Generate your first AI-powered landing page in under 5 minutes. Choose a template, describe your business, and let our AI do the rest.",
+    "title": "Comienza a Ahorrar Hoy Mismo",
+    "description": "Únete a LeBrand y descubre un mundo de ofertas exclusivas y descuentos increíbles.",
     "button": {
-      "text": "Try Demo",
-      "link": "/demo"
+      "text": "Regístrate Gratis",
+      "link": "#"
     }
   },
   "faqs": {
-    "title": "Frequently asked questions",
-    "description": "If you have anything else you want to ask, <a href=\"mailto:info@example.com\" class=\"text-slate-900 underline dark:text-slate-200\">reach out to us</a>.",
+    "title": "Preguntas Frecuentes",
+    "description": "Respuestas a las preguntas más comunes sobre LeBrand.",
     "questions": [
       {
-        "question": "How does the AI content generation work?",
-        "answer": "Simply describe your business or product, and our AI will generate compelling, context-aware content for your landing page. You can then edit and refine the content as needed."
+        "question": "¿Cómo funciona LeBrand?",
+        "answer": "LeBrand utiliza inteligencia artificial para encontrar y mostrarte las mejores ofertas de marcas de prestigio en internet."
+      },
+      {
+        "question": "¿Es LeBrand gratuito?",
+        "answer": "Ofrecemos un plan gratuito con funcionalidades limitadas. También tenemos planes de pago con características adicionales y acceso a más ofertas."
+      },
+      {
+        "question": "¿Cómo puedo personalizar las ofertas que veo?",
+        "answer": "Puedes configurar tus preferencias y marcas favoritas en tu perfil para recibir ofertas personalizadas."
+      },
+      {
+        "question": "¿Qué marcas están disponibles en LeBrand?",
+        "answer": "Trabajamos con una amplia variedad de marcas de prestigio en diferentes categorías, desde moda y belleza hasta electrónica y hogar."
+      },
+      {
+        "question": "¿Cómo puedo cancelar mi suscripción?",
+        "answer": "Puedes cancelar tu suscripción en cualquier momento desde la configuración de tu cuenta."
       }
     ]
   },
   "pricing": {
-    "title": "Simple pricing for any business",
-    "description": "Choose the plan that best fits your needs. All plans include core AI generation features and updates.",
+    "title": "Planes y Precios",
+    "description": "Elige el plan que mejor se adapte a tus necesidades de ahorro.",
     "plans": [
       {
-        "name": "Basic",
-        "price": "$29",
-        "description": "Perfect for small businesses and startups looking to establish their online presence.",
-        "features": [
-          "1 landing page per month",
-          "Basic AI content generation",
-          "2 pre-designed templates",
-          "Basic SEO optimization",
-          "Email support"
-        ],
+        "name": "Gratis",
+        "price": "$0/mes",
+        "description": "Perfecto para empezar a explorar LeBrand.",
+        "features": ["Búsqueda básica de ofertas", "Alertas limitadas", "Soporte comunitario"],
         "cta": {
-          "text": "Start with Basic",
-          "link": "/register"
+          "text": "Comenzar Gratis",
+          "link": "#"
         }
       },
       {
-        "name": "Pro",
-        "price": "$79",
-        "description": "For growing businesses that need more content and customization options.",
+        "name": "Premium",
+        "price": "$9.99/mes",
+        "description": "Ideal para ahorrar en grande.",
         "features": [
-          "5 landing pages per month",
-          "Advanced AI content generation",
-          "All templates included",
-          "Advanced SEO optimization",
-          "Blog post generation",
-          "Priority support",
-          "Custom CSS options"
+          "Búsqueda avanzada de ofertas",
+          "Alertas personalizadas ilimitadas",
+          "Acceso a ofertas exclusivas",
+          "Soporte prioritario"
         ],
         "cta": {
-          "text": "Subscribe to Pro",
-          "link": "/register"
-        }
-      },
-      {
-        "name": "Enterprise",
-        "price": "$199",
-        "description": "For companies requiring unlimited generations and white-label options.",
-        "features": [
-          "Unlimited landing pages",
-          "Premium AI content generation",
-          "Custom template creation",
-          "Advanced SEO with keyword research",
-          "Unlimited blog posts",
-          "White-label options",
-          "24/7 priority support",
-          "API access",
-          "Custom integrations"
-        ],
-        "cta": {
-          "text": "Contact Sales",
-          "link": "/contact"
+          "text": "Suscribirse",
+          "link": "#"
         },
         "highlighted": true
+      },
+      {
+        "name": "Profesional",
+        "price": "$19.99/mes",
+        "description": "Para los cazadores de ofertas más exigentes.",
+        "features": [
+          "Todas las características de Premium",
+          "Acceso anticipado a nuevas ofertas",
+          "Descuentos especiales en marcas selectas",
+          "Soporte VIP"
+        ],
+        "cta": {
+          "text": "Suscribirse",
+          "link": "#"
+        }
       }
     ]
   }

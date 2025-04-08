@@ -10,6 +10,8 @@ import {
   FiList,
   FiClock,
   FiBarChart2,
+  FiSearch,
+  FiTag,
 } from 'react-icons/fi'
 import landingDemoImage from '../public/static/images/landing-demo.jpeg'
 import dashboardDemoImage from '../public/static/images/dashboard-demo.jpg'
@@ -26,6 +28,8 @@ const iconMap = {
   FiList: FiList,
   FiClock: FiClock,
   FiBarChart2: FiBarChart2,
+  FiSearch,
+  FiTag,
 }
 
 const imageMap = {

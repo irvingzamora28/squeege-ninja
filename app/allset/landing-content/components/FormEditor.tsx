@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { LandingContent } from '../types'
+import { LandingContent } from '@/lib/llm/types'
 
 interface FormEditorProps {
   content: LandingContent
