@@ -357,79 +357,79 @@ const Main2 = () => {
         </section>
 
         {/* Pricing Section */}
-        <div className="py-16">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold">{pricing.title}</h2>
-            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">{pricing.description}</p>
+        <section id="pricing" aria-label="Pricing plans" className="py-20 sm:py-32">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold">{pricing.title}</h2>
+              <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">{pricing.description}</p>
+            </div>
+            <div className="mt-12 grid gap-8 lg:grid-cols-3">
+              {pricing.plans.map((plan, index) => (
+                <div key={plan.name}>
+                  {!plan.highlighted ? (
+                    // First style for first two plans
+                    <section className="flex flex-col overflow-hidden rounded-3xl bg-slate-50 p-6 shadow-lg shadow-gray-900/5 dark:bg-slate-800">
+                      <h3 className="flex items-center text-lg font-semibold text-slate-900 md:text-2xl dark:text-slate-200">
+                        <span className="ml-4">{plan.name}</span>
+                      </h3>
+                      <p className="relative mt-5 flex text-3xl tracking-tight text-slate-900 dark:text-slate-200">
+                        {plan.price}
+                      </p>
+                      <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
+                        {plan.description}
+                      </p>
+                      <div className="order-last mt-6">
+                        <ul className="-my-2 divide-y divide-gray-200 text-sm text-slate-700 dark:text-slate-300">
+                          {plan.features.map((feature) => (
+                            <li key={feature} className="flex py-2">
+                              <HiCheckCircle className="text-primary-500 h-6 w-6 flex-none" />
+                              <span className="ml-4">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <Link
+                        href={plan.cta.link}
+                        className="mt-6 inline-flex justify-center rounded-lg bg-gray-800 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-900 active:bg-gray-800 active:text-white/80"
+                      >
+                        {plan.cta.text}
+                      </Link>
+                    </section>
+                  ) : (
+                    // Second style for remaining plans
+                    <section className="order-first flex flex-col overflow-hidden rounded-3xl bg-gray-900 p-6 shadow-lg shadow-gray-900/5 lg:order-none">
+                      <h3 className="flex items-center text-lg font-semibold text-white md:text-2xl">
+                        <span className="ml-4">{plan.name}</span>
+                      </h3>
+                      <p className="relative mt-5 flex text-3xl tracking-tight text-white">
+                        <span aria-hidden="false" className="transition duration-300">
+                          {plan.price}
+                        </span>
+                      </p>
+                      <p className="mt-3 text-sm text-gray-300">{plan.description}</p>
+                      <div className="order-last mt-6">
+                        <ul className="-my-2 divide-y divide-gray-800 text-sm text-gray-300">
+                          {plan.features.map((feature) => (
+                            <li key={feature} className="flex py-2">
+                              <HiCheckCircle className="h-6 w-6 flex-none text-white" />
+                              <span className="ml-4">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <a
+                        className="bg-primary-500 relative mt-6 inline-flex justify-center overflow-hidden rounded-lg px-3 py-2 text-sm font-semibold text-white transition-colors before:absolute before:inset-0 before:transition-colors hover:before:bg-white/10 active:bg-cyan-600 active:text-white/80 active:before:bg-transparent"
+                        href={plan.cta.link}
+                      >
+                        {plan.cta.text}
+                      </a>
+                    </section>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="mt-12 grid gap-8 lg:grid-cols-3">
-            {pricing.plans.map((plan, index) => (
-              <div key={plan.name}>
-                {index < 2 ? (
-                  // First style for first two plans
-                  <section className="flex flex-col overflow-hidden rounded-3xl bg-slate-50 p-6 shadow-lg shadow-gray-900/5 dark:bg-slate-800">
-                    <h3 className="flex items-center text-lg font-semibold text-slate-900 md:text-2xl dark:text-slate-200">
-                      <span className="ml-4">{plan.name}</span>
-                    </h3>
-                    <p className="relative mt-5 flex text-3xl tracking-tight text-slate-900 dark:text-slate-200">
-                      {plan.price}
-                    </p>
-                    <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
-                      {plan.description}
-                    </p>
-                    <div className="order-last mt-6">
-                      <ul className="-my-2 divide-y divide-gray-200 text-sm text-slate-700 dark:text-slate-300">
-                        {plan.features.map((feature) => (
-                          <li key={feature} className="flex py-2">
-                            <HiCheckCircle className="text-primary-500 h-6 w-6 flex-none" />
-                            <span className="ml-4">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <Link
-                      href={plan.cta.link}
-                      className="mt-6 inline-flex justify-center rounded-lg bg-gray-800 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-900 active:bg-gray-800 active:text-white/80"
-                    >
-                      {plan.cta.text}
-                    </Link>
-                  </section>
-                ) : (
-                  // Second style for remaining plans
-                  <div
-                    className={`rounded-lg border ${
-                      plan.highlighted
-                        ? 'border-primary-500 shadow-lg'
-                        : 'border-gray-200 dark:border-gray-700'
-                    } p-8`}
-                  >
-                    <h3 className="text-2xl font-bold">{plan.name}</h3>
-                    <p className="mt-4 text-gray-600 dark:text-gray-400">{plan.description}</p>
-                    <div className="mt-4 text-4xl font-bold">{plan.price}</div>
-                    <ul className="mt-8 space-y-4">
-                      {plan.features.map((feature) => (
-                        <li key={feature} className="flex items-center">
-                          <HiCheckCircle className="text-primary-500 h-5 w-5" />
-                          <span className="ml-3">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <Link
-                      href={plan.cta.link}
-                      className={`mt-8 block w-full rounded-lg px-6 py-3 text-center font-medium ${
-                        plan.highlighted
-                          ? 'bg-primary-500 hover:bg-primary-600 text-white'
-                          : 'bg-gray-100 text-gray-900 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700'
-                      }`}
-                    >
-                      {plan.cta.text}
-                    </Link>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
+        </section>
 
         {/* FAQs Section */}
         <section
