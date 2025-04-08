@@ -4,6 +4,9 @@ import path from 'path'
 import { llmService } from '@/lib/llm'
 import { LandingContent } from '@/lib/llm/types'
 
+// Set dynamic to force-dynamic to ensure this route is not statically generated
+export const dynamic = 'force-dynamic'
+
 // Path to the landing content file
 const landingContentFilePath = path.join(process.cwd(), 'data', 'landingContent.json')
 
