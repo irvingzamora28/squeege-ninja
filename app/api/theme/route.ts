@@ -42,17 +42,65 @@ interface ThemeSettings {
   [key: string]: unknown // Using unknown instead of any for better type safety
 }
 
-// Helper function to adjust color brightness
+// Helper function to adjust color based on Tailwind's color scale
 function adjustColor(hex: string, factor: number): string {
   // Convert hex to RGB
   let r = parseInt(hex.slice(1, 3), 16)
   let g = parseInt(hex.slice(3, 5), 16)
   let b = parseInt(hex.slice(5, 7), 16)
 
-  // Adjust brightness
-  r = Math.round(r + (255 - r) * factor)
-  g = Math.round(g + (255 - g) * factor)
-  b = Math.round(b + (255 - b) * factor)
+  // Map factor to appropriate brightness based on Tailwind's scale
+  let brightness = 1.0
+
+  // Based on Tailwind's color scale pattern
+  if (factor === 0.95) {
+    // 50
+    brightness = 1.3 // Much lighter
+  } else if (factor === 0.9) {
+    // 100
+    brightness = 1.2 // Lighter
+  } else if (factor === 0.8) {
+    // 200
+    brightness = 1.1 // Slightly lighter
+  } else if (factor === 0.7) {
+    // 300
+    brightness = 1.05 // Very slightly lighter
+  } else if (factor === 0.6) {
+    // 400
+    brightness = 1.02 // Almost base color but slightly lighter
+  } else if (factor === 0.5) {
+    // 500 - Base color
+    brightness = 1.0
+  } else if (factor === 0.4) {
+    // 600
+    brightness = 0.9 // Slightly darker
+  } else if (factor === 0.3) {
+    // 700
+    brightness = 0.8 // Darker
+  } else if (factor === 0.2) {
+    // 800
+    brightness = 0.7 // Much darker
+  } else if (factor === 0.1) {
+    // 900
+    brightness = 0.6 // Very dark
+  } else if (factor === 0.05) {
+    // 950
+    brightness = 0.5 // Extremely dark
+  }
+
+  // Apply brightness adjustment
+  if (brightness > 1) {
+    // Lighten
+    const lightFactor = brightness - 1
+    r = Math.min(255, Math.round(r + (255 - r) * lightFactor))
+    g = Math.min(255, Math.round(g + (255 - g) * lightFactor))
+    b = Math.min(255, Math.round(b + (255 - b) * lightFactor))
+  } else if (brightness < 1) {
+    // Darken
+    r = Math.round(r * brightness)
+    g = Math.round(g * brightness)
+    b = Math.round(b * brightness)
+  }
 
   // Convert back to hex
   return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`

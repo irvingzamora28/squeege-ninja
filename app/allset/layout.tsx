@@ -46,6 +46,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     Dashboard
                   </NavLink>
                   <NavLink href="/allset/posts">Posts</NavLink>
+                  <NavLink href="/allset/landing-content">Landing Content</NavLink>
                   <NavLink href="/allset/settings">Settings</NavLink>
                 </div>
               </nav>
@@ -72,6 +73,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </NavLink>
             <NavLink href="/allset/posts" className="whitespace-nowrap">
               Posts
+            </NavLink>
+            <NavLink href="/allset/landing-content" className="whitespace-nowrap">
+              Landing Content
             </NavLink>
             <NavLink href="/allset/settings" className="whitespace-nowrap">
               Settings
@@ -113,7 +117,7 @@ function NavLink({
   const isActive = exact ? pathname === href : pathname?.startsWith(href)
 
   const baseClasses = 'px-3 py-2 rounded-md text-sm font-medium'
-  const activeClasses = 'bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300'
+  const activeClasses = 'bg-primary-100 text-slate-50 dark:bg-primary-900 dark:text-primary-300'
   const inactiveClasses =
     'text-gray-600 hover:bg-gray-100 hover:text-slate-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
 

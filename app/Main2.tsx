@@ -175,7 +175,7 @@ const Main2 = () => {
                   </Link>
                   <Link
                     href={hero.secondaryCta.link}
-                    className="text-primary-600 bg-primary-100 hover:bg-primary-200 dark:text-primary-300 inline-flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium md:px-8 md:py-4 md:text-lg dark:bg-gray-800 dark:hover:bg-gray-700"
+                    className="bg-primary-100 hover:bg-primary-200 dark:text-primary-50 inline-flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-white md:px-8 md:py-4 md:text-lg dark:bg-slate-800 dark:hover:bg-gray-100"
                   >
                     {hero.secondaryCta.text}
                   </Link>
@@ -287,7 +287,7 @@ const Main2 = () => {
                 const Icon = iconMap[feature.icon]
                 return (
                   <li key={feature.title} className="rounded-2xl border border-gray-200 p-8">
-                    {Icon && <Icon className="text-primary-700 h-8 w-8" />}
+                    {Icon && <Icon className="text-primary-500 h-8 w-8" />}
                     <h3 className="mt-6 text-lg font-semibold text-slate-900 md:text-2xl dark:text-slate-200">
                       {feature.title}
                     </h3>
@@ -390,28 +390,30 @@ const Main2 = () => {
                       </div>
                       <Link
                         href={plan.cta.link}
-                        className="mt-6 inline-flex justify-center rounded-lg bg-gray-800 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-900 active:bg-gray-800 active:text-white/80"
+                        className="mt-6 inline-flex justify-center rounded-lg bg-slate-800 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-slate-900 active:bg-slate-800 active:text-white/80 dark:bg-slate-600"
                       >
                         {plan.cta.text}
                       </Link>
                     </section>
                   ) : (
                     // Second style for remaining plans
-                    <section className="order-first flex flex-col overflow-hidden rounded-3xl bg-gray-900 p-6 shadow-lg shadow-gray-900/5 lg:order-none">
-                      <h3 className="flex items-center text-lg font-semibold text-white md:text-2xl">
+                    <section className="order-first flex flex-col overflow-hidden rounded-3xl bg-slate-900 p-6 shadow-lg shadow-gray-900/5 lg:order-none dark:bg-slate-300">
+                      <h3 className="flex items-center text-lg font-semibold text-white md:text-2xl dark:text-slate-800">
                         <span className="ml-4">{plan.name}</span>
                       </h3>
-                      <p className="relative mt-5 flex text-3xl tracking-tight text-white">
+                      <p className="relative mt-5 flex text-3xl tracking-tight text-white dark:text-slate-800">
                         <span aria-hidden="false" className="transition duration-300">
                           {plan.price}
                         </span>
                       </p>
-                      <p className="mt-3 text-sm text-gray-300">{plan.description}</p>
+                      <p className="mt-3 text-sm text-gray-300 dark:text-slate-800">
+                        {plan.description}
+                      </p>
                       <div className="order-last mt-6">
-                        <ul className="-my-2 divide-y divide-gray-800 text-sm text-gray-300">
+                        <ul className="-my-2 divide-y divide-gray-800 text-sm text-gray-300 dark:text-slate-600">
                           {plan.features.map((feature) => (
                             <li key={feature} className="flex py-2">
-                              <HiCheckCircle className="h-6 w-6 flex-none text-white" />
+                              <HiCheckCircle className="h-6 w-6 flex-none text-white dark:text-slate-800" />
                               <span className="ml-4">{feature}</span>
                             </li>
                           ))}
