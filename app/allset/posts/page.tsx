@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { allBlogs, Blog } from 'contentlayer/generated'
 import Link from 'next/link'
+import BlogTitleGenerator from './components/BlogTitleGenerator'
 // Using a simple date formatter function instead of date-fns to avoid dependency issues
 function formatDate(date: string): string {
   return new Date(date).toLocaleDateString('en-US', {
@@ -86,6 +87,9 @@ export default function PostsPage() {
           </div>
         </div>
       )}
+
+      {/* Blog Title Generator */}
+      <BlogTitleGenerator />
 
       <div className="rounded-lg bg-slate-100 p-6 shadow-md dark:bg-gray-800">
         <div className="mb-4 flex items-center justify-between">

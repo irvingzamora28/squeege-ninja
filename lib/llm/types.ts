@@ -16,6 +16,11 @@ export interface LLMProvider {
   generateContent(prompt: string): Promise<LLMResponse>
 }
 
+export interface BlogTitleSuggestion {
+  title: string
+  description: string
+}
+
 export interface LandingContent {
   hero: {
     title: string

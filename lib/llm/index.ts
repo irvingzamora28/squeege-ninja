@@ -7,7 +7,7 @@ import { GoogleGenAIProvider } from './providers/google-genai'
 import { LLMProvider, LLMResponse } from './types'
 
 // Default prompt for generating landing content
-const DEFAULT_PROMPT = `
+const LANDING_CONTENT_PROMPT = `
 You are a professional landing page content creator. Your task is to create content for a landing page based on the user's description of their business or SaaS product.
 
 Generate a complete JSON object that follows this structure:
@@ -181,6 +181,29 @@ Return ONLY the JSON object without any additional text or explanation.
 User's business description:
 `
 
+// Prompt for generating SEO blog titles
+const BLOG_TITLES_PROMPT = `
+You are an expert SEO content strategist. Your task is to generate 5 blog post titles that would attract traffic to a website based on the provided landing page content.
+
+The titles should:
+1. Be SEO-optimized with relevant keywords
+2. Be compelling and clickable
+3. Address pain points or interests of the target audience
+4. Be relevant to the business/product described in the landing page
+5. Include a mix of how-to guides, listicles, and problem-solving content
+
+Return the results as a JSON array with the following structure:
+[
+  {
+    "title": "Blog Post Title 1",
+    "description": "Brief 1-2 sentence description of what this blog post would cover"
+  },
+  {...}
+]
+
+Landing page content:
+`
+
 /**
  * LLM service that provides a unified interface for different LLM providers
  */
@@ -217,7 +240,17 @@ export class LLMService {
    * @returns Generated landing content as JSON
    */
   async generateLandingContent(businessDescription: string): Promise<LLMResponse> {
-    const prompt = DEFAULT_PROMPT + businessDescription
+    const prompt = LANDING_CONTENT_PROMPT + businessDescription
+    return this.provider.generateContent(prompt)
+  }
+
+  /**
+   * Generate SEO blog titles based on landing page content
+   * @param landingContent The landing page content JSON
+   * @returns Generated blog titles as JSON array
+   */
+  async generateBlogTitles(landingContent: string): Promise<LLMResponse> {
+    const prompt = BLOG_TITLES_PROMPT + landingContent
     return this.provider.generateContent(prompt)
   }
 }

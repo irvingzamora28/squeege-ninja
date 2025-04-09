@@ -1,11 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
-export default function NewPostPage() {
+// Component that uses useSearchParams
+function NewPostContent() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [formData, setFormData] = useState({
     title: '',
     slug: '',
@@ -16,6 +18,22 @@ export default function NewPostPage() {
     summary: '',
     content: '',
   })
+
+  // Initialize form data from query parameters if available
+  useEffect(() => {
+    const title = searchParams.get('title')
+    const summary = searchParams.get('summary')
+
+    if (title) {
+      const slug = generateSlug(title)
+      setFormData((prev) => ({
+        ...prev,
+        title,
+        slug,
+        summary: summary || prev.summary,
+      }))
+    }
+  }, [searchParams])
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -299,5 +317,20 @@ export default function NewPostPage() {
         </form>
       </div>
     </>
+  )
+}
+
+// Main page component with Suspense boundary
+export default function NewPostPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex h-48 items-center justify-center">
+          <div className="border-t-primary-500 h-8 w-8 animate-spin rounded-full border-4 border-slate-300"></div>
+        </div>
+      }
+    >
+      <NewPostContent />
+    </Suspense>
   )
 }
