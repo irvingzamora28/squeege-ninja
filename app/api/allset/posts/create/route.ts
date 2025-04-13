@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs/promises'
 import path from 'path'
+import { generateFrontmatter } from '@/lib/utils/frontmatter'
 
 // For static export, we need to handle this differently
 export const dynamic = 'force-dynamic'
@@ -44,26 +45,15 @@ export async function POST(request: NextRequest) {
       // File doesn't exist, which is what we want
     }
 
-    // Format the frontmatter
+    // Generate frontmatter using our utility function
+    const frontmatterContent = generateFrontmatter(postData)
+
+    // Combine frontmatter with content
     const frontmatter = [
-      '---',
-      `title: '${postData.title}'`,
-      `date: '${postData.date}'`,
-      `slug: '${postData.slug}'`,
-      postData.tags && postData.tags.length > 0
-        ? `tags: [${postData.tags.map((tag) => `'${tag.trim()}'`).join(', ')}]`
-        : null,
-      postData.authors && postData.authors.length > 0
-        ? `authors: [${postData.authors.map((author) => `'${author.trim()}'`).join(', ')}]`
-        : null,
-      postData.draft ? 'draft: true' : null,
-      `summary: ${postData.summary}`,
-      '---',
+      frontmatterContent,
       '',
       postData.content || '# New Post\n\nStart writing your post here.',
-    ]
-      .filter(Boolean)
-      .join('\\n')
+    ].join('\\n')
 
     // Write the file
     await fs.writeFile(filePath, frontmatter.replace(/\\n/g, '\n'))
