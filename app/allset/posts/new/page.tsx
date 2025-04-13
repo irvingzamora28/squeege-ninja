@@ -29,6 +29,7 @@ function NewPostContent() {
     const summary = searchParams.get('summary')
     const hasContent = searchParams.get('hasContent')
     const directContent = searchParams.get('content') // For small content passed directly
+    const tags = searchParams.get('tags') // Get tags as comma-separated string
 
     if (!title) return
 
@@ -38,6 +39,7 @@ function NewPostContent() {
     console.log('Initializing form with:', {
       title,
       summary,
+      tags: tags || 'none',
       hasContent: hasContent === 'true',
       directContent: directContent ? 'yes, length: ' + directContent.length : 'no',
     })
@@ -45,12 +47,13 @@ function NewPostContent() {
     // Generate slug from title
     const slug = generateSlug(title)
 
-    // Initialize with title and summary
+    // Initialize with title, summary, and tags
     const newFormData = {
       ...formData,
       title,
       slug,
       summary: summary || formData.summary,
+      tags: tags || formData.tags, // Add tags from URL parameters
     }
 
     // If content is passed directly in URL, use it

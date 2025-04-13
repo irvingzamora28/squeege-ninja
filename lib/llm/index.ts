@@ -192,11 +192,14 @@ The titles should:
 4. Be relevant to the business/product described in the landing page
 5. Include a mix of how-to guides, listicles, and problem-solving content
 
+For each blog post, also generate 3-5 relevant tags that would help with SEO and content organization. Tags should be single words or short phrases that accurately categorize the content.
+
 Return the results as a JSON array with the following structure:
 [
   {
     "title": "Blog Post Title 1",
-    "description": "Brief 1-2 sentence description of what this blog post would cover"
+    "description": "Brief 1-2 sentence description of what this blog post would cover",
+    "tags": ["tag1", "tag2", "tag3", "tag4"]
   },
   {...}
 ]

@@ -56,20 +56,21 @@ export default function BlogTitleGenerator({ onTitleSelected }: BlogTitleGenerat
   const [isGeneratingContent, setIsGeneratingContent] = useState(false)
   const [selectedTitle, setSelectedTitle] = useState('')
 
-  const handleTitleSelect = (title: string, description: string) => {
+  const handleTitleSelect = (title: string, description: string, tags: string[]) => {
     if (onTitleSelected) {
       onTitleSelected(title, description)
     } else {
-      // Navigate to new post page with title and description as query params
+      // Navigate to new post page with title, description, and tags as query params
       const params = new URLSearchParams({
         title,
         summary: description,
+        tags: tags.join(','), // Convert tags array to comma-separated string
       })
       router.push(`/allset/posts/new?${params.toString()}`)
     }
   }
 
-  const handleGenerateContent = async (title: string, description: string) => {
+  const handleGenerateContent = async (title: string, description: string, tags: string[]) => {
     setSelectedTitle(title)
     setIsGeneratingContent(true)
     setError('')
@@ -118,6 +119,7 @@ export default function BlogTitleGenerator({ onTitleSelected }: BlogTitleGenerat
           const params = new URLSearchParams({
             title: title,
             summary: description,
+            tags: tags.join(','), // Include tags
             content: content, // Pass small content directly
           })
           router.push(`/allset/posts/new?${params.toString()}`)
@@ -149,6 +151,7 @@ export default function BlogTitleGenerator({ onTitleSelected }: BlogTitleGenerat
             const params = new URLSearchParams({
               title: title,
               summary: description,
+              tags: tags.join(','), // Include tags
               hasContent: 'true', // Flag to indicate content is available in storage
             })
 
@@ -229,18 +232,41 @@ export default function BlogTitleGenerator({ onTitleSelected }: BlogTitleGenerat
                 className="rounded-md border border-gray-200 p-4 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-700/50"
               >
                 <h4 className="mb-1 text-base font-medium">{suggestion.title}</h4>
-                <p className="mb-3 text-sm text-gray-600 dark:text-gray-400">
+                <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
                   {suggestion.description}
                 </p>
+                <div className="mb-3 flex flex-wrap gap-1">
+                  {suggestion.tags &&
+                    suggestion.tags.map((tag, tagIndex) => (
+                      <span
+                        key={tagIndex}
+                        className="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                </div>
                 <div className="flex justify-end space-x-2">
                   <button
-                    onClick={() => handleTitleSelect(suggestion.title, suggestion.description)}
+                    onClick={() =>
+                      handleTitleSelect(
+                        suggestion.title,
+                        suggestion.description,
+                        suggestion.tags || []
+                      )
+                    }
                     className="text-primary-600 hover:text-primary-700 focus:ring-primary-500 rounded-md px-3 py-1 text-sm font-medium focus:ring-2 focus:ring-offset-2 focus:outline-none"
                   >
                     Use Title Only
                   </button>
                   <button
-                    onClick={() => handleGenerateContent(suggestion.title, suggestion.description)}
+                    onClick={() =>
+                      handleGenerateContent(
+                        suggestion.title,
+                        suggestion.description,
+                        suggestion.tags || []
+                      )
+                    }
                     disabled={isGeneratingContent && selectedTitle === suggestion.title}
                     className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 rounded-md px-3 py-1 text-sm font-medium text-white focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:opacity-70"
                   >

@@ -19,6 +19,7 @@ export interface LLMProvider {
 export interface BlogTitleSuggestion {
   title: string
   description: string
+  tags: string[] // Array of tags for the blog post
 }
 
 export interface LandingContent {
