@@ -1,11 +1,14 @@
+'use client'
+
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
-import NewsletterForm from 'pliny/ui/NewsletterForm'
 import Image from 'next/image'
 import landingDemoImage from '../public/static/images/landing-demo.jpeg'
 import landingContent from '@/data/landingContent.json'
+import { sortPosts, allCoreContent } from 'pliny/utils/contentlayer'
+import { allBlogs } from 'contentlayer/generated'
 import {
   HiOutlineBolt,
   HiOutlineMagnifyingGlass,
@@ -15,6 +18,20 @@ import {
   HiOutlineRocketLaunch,
   HiCheckCircle,
 } from 'react-icons/hi2'
+import {
+  FiUsers,
+  FiSmartphone,
+  FiLock,
+  FiTrendingUp,
+  FiList,
+  FiClock,
+  FiBarChart2,
+  FiSearch,
+  FiTag,
+  FiCompass,
+  FiPercent,
+  FiMapPin,
+} from 'react-icons/fi'
 
 const MAX_DISPLAY = 3
 
@@ -25,6 +42,18 @@ const iconMap = {
   HiSquares2X2: HiOutlineSquares2X2,
   HiChartBar: HiOutlineChartBar,
   HiRocket: HiOutlineRocketLaunch,
+  FiUsers: FiUsers,
+  FiSmartphone: FiSmartphone,
+  FiLock: FiLock,
+  FiTrendingUp: FiTrendingUp,
+  FiList: FiList,
+  FiClock: FiClock,
+  FiBarChart2: FiBarChart2,
+  FiSearch,
+  FiTag,
+  FiCompass,
+  FiPercent,
+  FiMapPin,
 }
 
 const FeatureIcon = ({ icon }) => {
@@ -36,7 +65,9 @@ const FeatureIcon = ({ icon }) => {
   return <IconComponent className="text-primary-500 h-6 w-6" />
 }
 
-export default function Home({ posts }) {
+export default function Home() {
+  const sortedPosts = sortPosts(allBlogs)
+  const posts = allCoreContent(sortedPosts)
   const { hero, mainFeatures, features, cta, pricing } = landingContent
 
   return (
@@ -221,36 +252,3 @@ export default function Home({ posts }) {
     </div>
   )
 }
-
-const features = [
-  {
-    title: 'AI Content Generation',
-    description: 'Generate compelling copy and content tailored to your business with advanced AI.',
-    icon: 'HiLightningBolt',
-  },
-  {
-    title: 'SEO Optimization',
-    description: 'Automatically optimize your content for search engines to improve visibility.',
-    icon: 'HiMagnifyingGlass',
-  },
-  {
-    title: 'Responsive Design',
-    description: 'Beautiful, mobile-first designs that look great on any device.',
-    icon: 'HiDevicePhoneMobile',
-  },
-  {
-    title: 'Custom Templates',
-    description: 'Choose from professionally designed templates or create your own.',
-    icon: 'HiSquares2X2',
-  },
-  {
-    title: 'Analytics Integration',
-    description: 'Track performance with built-in analytics and optimization tools.',
-    icon: 'HiChartBar',
-  },
-  {
-    title: 'Fast Deployment',
-    description: 'Deploy your landing page instantly with our cloud infrastructure.',
-    icon: 'HiRocket',
-  },
-]
