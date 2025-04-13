@@ -111,13 +111,58 @@ export default function BlogTitleGenerator({ onTitleSelected }: BlogTitleGenerat
 
   const handleUseGeneratedContent = () => {
     if (selectedTitle && selectedDescription && generatedContent) {
-      // Navigate to new post page with title, description, and content
-      const params = new URLSearchParams({
-        title: selectedTitle,
-        summary: selectedDescription,
-        content: generatedContent,
-      })
-      router.push(`/allset/posts/new?${params.toString()}`)
+      // For small content (< 2000 chars), pass directly in URL to avoid storage issues
+      if (generatedContent.length < 2000) {
+        console.log('Content is small, passing directly in URL')
+        const params = new URLSearchParams({
+          title: selectedTitle,
+          summary: selectedDescription,
+          content: generatedContent, // Pass small content directly
+        })
+        router.push(`/allset/posts/new?${params.toString()}`)
+        return
+      }
+
+      // For larger content, use storage methods
+      try {
+        // Try to store in sessionStorage first, then localStorage as fallback
+        let storageSuccessful = false
+
+        try {
+          console.log('Storing content in sessionStorage, length:', generatedContent.length)
+          sessionStorage.setItem('generatedBlogContent', generatedContent)
+          storageSuccessful = true
+        } catch (storageError) {
+          console.log('SessionStorage failed, trying localStorage')
+          try {
+            localStorage.setItem('generatedBlogContent', generatedContent)
+            storageSuccessful = true
+          } catch (localStorageError) {
+            console.error('Both storage methods failed:', localStorageError)
+            throw new Error('Could not store content in browser storage')
+          }
+        }
+
+        if (storageSuccessful) {
+          // Only pass the title and summary in URL parameters
+          const params = new URLSearchParams({
+            title: selectedTitle,
+            summary: selectedDescription,
+            hasContent: 'true', // Flag to indicate content is available in storage
+          })
+
+          // Add a small delay to ensure storage is complete before navigation
+          setTimeout(() => {
+            router.push(`/allset/posts/new?${params.toString()}`)
+          }, 100)
+        }
+      } catch (error) {
+        // Handle storage errors (e.g., quota exceeded)
+        console.error('Failed to store content:', error)
+        setError(
+          'The generated content is too large to transfer. Please use the Copy to Clipboard button and paste it manually.'
+        )
+      }
     }
   }
 
@@ -211,12 +256,28 @@ export default function BlogTitleGenerator({ onTitleSelected }: BlogTitleGenerat
             <h3 className="text-lg font-semibold text-green-800 dark:text-green-400">
               Generated Content for: {selectedTitle}
             </h3>
-            <button
-              onClick={handleUseGeneratedContent}
-              className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none"
-            >
-              Use This Content
-            </button>
+            <div className="flex space-x-2">
+              <button
+                onClick={() => {
+                  navigator.clipboard
+                    .writeText(generatedContent)
+                    .then(() => {
+                      setGenerationMessage('Content copied to clipboard!')
+                      setTimeout(() => setGenerationMessage(''), 3000)
+                    })
+                    .catch((err) => setError('Failed to copy content: ' + err.message))
+                }}
+                className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+              >
+                Copy to Clipboard
+              </button>
+              <button
+                onClick={handleUseGeneratedContent}
+                className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none"
+              >
+                Use This Content
+              </button>
+            </div>
           </div>
           <div className="max-h-96 overflow-y-auto rounded-md bg-white p-4 dark:bg-gray-800">
             <pre className="text-sm whitespace-pre-wrap">{generatedContent}</pre>

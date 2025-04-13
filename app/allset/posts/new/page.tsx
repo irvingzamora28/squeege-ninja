@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect, Suspense, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 
@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 function NewPostContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const initializedRef = useRef(false)
   const [formData, setFormData] = useState({
     title: '',
     slug: '',
@@ -19,22 +20,87 @@ function NewPostContent() {
     content: '',
   })
 
-  // Initialize form data from query parameters if available
+  // Initialize form data from query parameters and sessionStorage if available
   useEffect(() => {
+    // Prevent re-initialization if already done
+    if (initializedRef.current) return
+
     const title = searchParams.get('title')
     const summary = searchParams.get('summary')
-    const content = searchParams.get('content')
+    const hasContent = searchParams.get('hasContent')
+    const directContent = searchParams.get('content') // For small content passed directly
 
-    if (title) {
-      const slug = generateSlug(title)
-      setFormData((prev) => ({
-        ...prev,
-        title,
-        slug,
-        summary: summary || prev.summary,
-        content: content || prev.content,
-      }))
+    if (!title) return
+
+    // Mark as initialized to prevent re-runs
+    initializedRef.current = true
+
+    console.log('Initializing form with:', {
+      title,
+      summary,
+      hasContent: hasContent === 'true',
+      directContent: directContent ? 'yes, length: ' + directContent.length : 'no',
+    })
+
+    // Generate slug from title
+    const slug = generateSlug(title)
+
+    // Initialize with title and summary
+    const newFormData = {
+      ...formData,
+      title,
+      slug,
+      summary: summary || formData.summary,
+      // If content is passed directly in URL, use it
+      content: directContent || formData.content,
     }
+
+    // Always set the basic form data first (title, slug, summary)
+    setFormData(newFormData)
+
+    // Log the form data after setting it
+    console.log('Form data set to:', newFormData)
+
+    // If hasContent flag is set, try to get content from storage
+    if (hasContent === 'true') {
+      try {
+        // Add a small delay to ensure storage is available after navigation
+        setTimeout(() => {
+          try {
+            // Try to get content from sessionStorage first
+            let storedContent = sessionStorage.getItem('generatedBlogContent')
+
+            // If not in sessionStorage, try localStorage
+            if (!storedContent) {
+              console.log('Content not found in sessionStorage, trying localStorage')
+              storedContent = localStorage.getItem('generatedBlogContent')
+            }
+
+            console.log(
+              'Retrieved content:',
+              storedContent ? 'yes, length: ' + storedContent.length : 'no'
+            )
+
+            if (storedContent) {
+              // Update only the content field, preserving other fields
+              setFormData((prevData) => ({
+                ...prevData, // Keep existing data (title, slug, summary, etc.)
+                content: storedContent,
+              }))
+
+              // Clear the stored content after retrieving it
+              sessionStorage.removeItem('generatedBlogContent')
+              localStorage.removeItem('generatedBlogContent')
+            }
+          } catch (innerError) {
+            console.error('Failed to retrieve content from storage:', innerError)
+          }
+        }, 200)
+      } catch (error) {
+        console.error('Failed to access storage:', error)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams])
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
