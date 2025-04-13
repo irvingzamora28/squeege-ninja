@@ -1,0 +1,15 @@
+{
+  "activeTemplate": "Main",
+  "availableTemplates": [
+    {
+      "id": "Main",
+      "name": "Default Template",
+      "description": "The default layout with standard spacing and container widths"
+    },
+    {
+      "id": "Main2",
+      "name": "Alternative Template",
+      "description": "An alternative layout with different spacing and container widths"
+    }
+  ]
+}

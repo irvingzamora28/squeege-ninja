@@ -47,6 +47,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   </NavLink>
                   <NavLink href="/allset/posts">Posts</NavLink>
                   <NavLink href="/allset/landing-content">Landing Content</NavLink>
+                  <NavLink href="/allset/templates">Templates</NavLink>
                   <NavLink href="/allset/settings">Settings</NavLink>
                 </div>
               </nav>
@@ -76,6 +77,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </NavLink>
             <NavLink href="/allset/landing-content" className="whitespace-nowrap">
               Landing Content
+            </NavLink>
+            <NavLink href="/allset/templates" className="whitespace-nowrap">
+              Templates
             </NavLink>
             <NavLink href="/allset/settings" className="whitespace-nowrap">
               Settings
