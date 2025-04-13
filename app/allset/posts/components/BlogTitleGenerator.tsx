@@ -52,10 +52,9 @@ export default function BlogTitleGenerator({ onTitleSelected }: BlogTitleGenerat
     }
   }
 
+  // Track which title is currently being generated
   const [isGeneratingContent, setIsGeneratingContent] = useState(false)
   const [selectedTitle, setSelectedTitle] = useState('')
-  const [selectedDescription, setSelectedDescription] = useState('')
-  const [generatedContent, setGeneratedContent] = useState('')
 
   const handleTitleSelect = (title: string, description: string) => {
     if (onTitleSelected) {
@@ -72,12 +71,13 @@ export default function BlogTitleGenerator({ onTitleSelected }: BlogTitleGenerat
 
   const handleGenerateContent = async (title: string, description: string) => {
     setSelectedTitle(title)
-    setSelectedDescription(description)
     setIsGeneratingContent(true)
     setError('')
-    setGeneratedContent('')
 
     try {
+      // Show generating message
+      setGenerationMessage('Creating blog post with AI content...')
+
       const response = await fetch('/api/allset/generate-blog-content', {
         method: 'POST',
         headers: {
@@ -94,8 +94,59 @@ export default function BlogTitleGenerator({ onTitleSelected }: BlogTitleGenerat
       const data = await response.json()
 
       if (data.success) {
-        setGeneratedContent(data.content)
-        setGenerationMessage('Blog content generated successfully!')
+        // Store the content and navigate directly to the new post page
+        const content = data.content
+
+        // For small content (< 2000 chars), pass directly in URL to avoid storage issues
+        if (content.length < 2000) {
+          console.log('Content is small, passing directly in URL')
+          const params = new URLSearchParams({
+            title: title,
+            summary: description,
+            content: content, // Pass small content directly
+          })
+          router.push(`/allset/posts/new?${params.toString()}`)
+          return
+        }
+
+        // For larger content, use storage methods
+        try {
+          // Try to store in sessionStorage first, then localStorage as fallback
+          let storageSuccessful = false
+
+          try {
+            console.log('Storing content in sessionStorage, length:', content.length)
+            sessionStorage.setItem('generatedBlogContent', content)
+            storageSuccessful = true
+          } catch (storageError) {
+            console.log('SessionStorage failed, trying localStorage')
+            try {
+              localStorage.setItem('generatedBlogContent', content)
+              storageSuccessful = true
+            } catch (localStorageError) {
+              console.error('Both storage methods failed:', localStorageError)
+              throw new Error('Could not store content in browser storage')
+            }
+          }
+
+          if (storageSuccessful) {
+            // Only pass the title and summary in URL parameters
+            const params = new URLSearchParams({
+              title: title,
+              summary: description,
+              hasContent: 'true', // Flag to indicate content is available in storage
+            })
+
+            // Navigate to the new post page
+            router.push(`/allset/posts/new?${params.toString()}`)
+          }
+        } catch (storageError) {
+          // Handle storage errors
+          console.error('Failed to store content:', storageError)
+          throw new Error(
+            'The generated content is too large to transfer. Please try again with a shorter title.'
+          )
+        }
       } else {
         throw new Error(data.message || 'Failed to generate blog content')
       }
@@ -104,67 +155,11 @@ export default function BlogTitleGenerator({ onTitleSelected }: BlogTitleGenerat
       setError(
         err instanceof Error ? err.message : 'An error occurred while generating blog content'
       )
-    } finally {
-      setIsGeneratingContent(false)
+      setIsGeneratingContent(false) // Only reset if there's an error
     }
   }
 
-  const handleUseGeneratedContent = () => {
-    if (selectedTitle && selectedDescription && generatedContent) {
-      // For small content (< 2000 chars), pass directly in URL to avoid storage issues
-      if (generatedContent.length < 2000) {
-        console.log('Content is small, passing directly in URL')
-        const params = new URLSearchParams({
-          title: selectedTitle,
-          summary: selectedDescription,
-          content: generatedContent, // Pass small content directly
-        })
-        router.push(`/allset/posts/new?${params.toString()}`)
-        return
-      }
-
-      // For larger content, use storage methods
-      try {
-        // Try to store in sessionStorage first, then localStorage as fallback
-        let storageSuccessful = false
-
-        try {
-          console.log('Storing content in sessionStorage, length:', generatedContent.length)
-          sessionStorage.setItem('generatedBlogContent', generatedContent)
-          storageSuccessful = true
-        } catch (storageError) {
-          console.log('SessionStorage failed, trying localStorage')
-          try {
-            localStorage.setItem('generatedBlogContent', generatedContent)
-            storageSuccessful = true
-          } catch (localStorageError) {
-            console.error('Both storage methods failed:', localStorageError)
-            throw new Error('Could not store content in browser storage')
-          }
-        }
-
-        if (storageSuccessful) {
-          // Only pass the title and summary in URL parameters
-          const params = new URLSearchParams({
-            title: selectedTitle,
-            summary: selectedDescription,
-            hasContent: 'true', // Flag to indicate content is available in storage
-          })
-
-          // Add a small delay to ensure storage is complete before navigation
-          setTimeout(() => {
-            router.push(`/allset/posts/new?${params.toString()}`)
-          }, 100)
-        }
-      } catch (error) {
-        // Handle storage errors (e.g., quota exceeded)
-        console.error('Failed to store content:', error)
-        setError(
-          'The generated content is too large to transfer. Please use the Copy to Clipboard button and paste it manually.'
-        )
-      }
-    }
-  }
+  // No longer needed as we navigate directly from handleGenerateContent
 
   return (
     <div className="mb-6 rounded-lg bg-slate-100 p-6 shadow-md dark:bg-gray-800">
@@ -237,51 +232,16 @@ export default function BlogTitleGenerator({ onTitleSelected }: BlogTitleGenerat
                     {isGeneratingContent && selectedTitle === suggestion.title ? (
                       <>
                         <span className="mr-1 inline-block h-3 w-3 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
-                        Generating...
+                        Creating Post...
                       </>
                     ) : (
-                      'Generate Content'
+                      'Create Post with AI'
                     )}
                   </button>
                 </div>
               </li>
             ))}
           </ul>
-        </div>
-      )}
-
-      {generatedContent && (
-        <div className="mt-6 rounded-md border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-900/30">
-          <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-green-800 dark:text-green-400">
-              Generated Content for: {selectedTitle}
-            </h3>
-            <div className="flex space-x-2">
-              <button
-                onClick={() => {
-                  navigator.clipboard
-                    .writeText(generatedContent)
-                    .then(() => {
-                      setGenerationMessage('Content copied to clipboard!')
-                      setTimeout(() => setGenerationMessage(''), 3000)
-                    })
-                    .catch((err) => setError('Failed to copy content: ' + err.message))
-                }}
-                className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
-              >
-                Copy to Clipboard
-              </button>
-              <button
-                onClick={handleUseGeneratedContent}
-                className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none"
-              >
-                Use This Content
-              </button>
-            </div>
-          </div>
-          <div className="max-h-96 overflow-y-auto rounded-md bg-white p-4 dark:bg-gray-800">
-            <pre className="text-sm whitespace-pre-wrap">{generatedContent}</pre>
-          </div>
         </div>
       )}
     </div>
