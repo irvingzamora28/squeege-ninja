@@ -224,7 +224,7 @@ The blog post should:
 Existing blog posts for internal linking:
 {{existingPosts}}
 
-Please generate the complete blog post content in Markdown format, ready to be used in an MDX file.
+IMPORTANT: Return ONLY the Markdown content directly, not wrapped in JSON or any other format. The content should be ready to be used in an MDX file without any additional processing.
 
 Title: {{title}}
 Description: {{description}}
