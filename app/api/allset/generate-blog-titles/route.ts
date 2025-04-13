@@ -5,7 +5,7 @@ import { llmService } from '@/lib/llm'
 import { BlogTitleSuggestion } from '@/lib/llm/types'
 
 // For static export, we need to handle this differently
-export const dynamic = 'force-dynamic'
+export const dynamic = 'error'
 
 // Path to the landing content file
 const landingContentFilePath = path.join(process.cwd(), 'data', 'landingContent.json')
