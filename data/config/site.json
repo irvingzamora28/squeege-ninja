@@ -1,15 +1,33 @@
 {
-  "activeTemplate": "Main",
+  "activeTemplate": "Main2",
   "availableTemplates": [
     {
       "id": "Main",
-      "name": "Default Template",
-      "description": "The default layout with standard spacing and container widths"
+      "name": "Classic Business Template",
+      "description": "A professional layout with centered hero section, feature cards, and a clean blog display. Perfect for corporate sites and service businesses.",
+      "image": "/static/images/templates/template-main.jpg",
+      "elements": [
+        "Centered hero section with CTA buttons",
+        "Feature cards with icons",
+        "Product demo section with image",
+        "Recent blog posts in list format",
+        "Newsletter signup"
+      ],
+      "colors": "Primary color with white background"
     },
     {
       "id": "Main2",
-      "name": "Alternative Template",
-      "description": "An alternative layout with different spacing and container widths"
+      "name": "Modern Dashboard Template",
+      "description": "A contemporary layout with a full-width hero image, grid-based features, and card-style blog posts. Ideal for startups and tech companies.",
+      "image": "/static/images/templates/template-main2.jpg",
+      "elements": [
+        "Full-width hero with side image",
+        "Grid-based feature cards",
+        "Card-style blog posts",
+        "Prominent CTA section",
+        "Colorful icon set"
+      ],
+      "colors": "Gradient accents with light/dark sections"
     }
   ]
 }

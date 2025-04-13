@@ -1,12 +1,16 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 // Define Template interface here to avoid server component imports in client component
 interface Template {
   id: string
   name: string
   description: string
+  image?: string
+  elements?: string[]
+  colors?: string
 }
 
 export default function TemplateSelector() {
@@ -148,9 +152,58 @@ export default function TemplateSelector() {
                     </span>
                   )}
                 </div>
-                <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+
+                {/* Template image */}
+                {template.image && (
+                  <div className="relative mt-3 h-40 w-full overflow-hidden rounded-md border border-gray-200 dark:border-gray-700">
+                    <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800">
+                      <div className="flex h-full w-full items-center justify-center text-sm text-gray-400">
+                        <Image
+                          src={template.image}
+                          alt={`${template.name} preview`}
+                          width={400}
+                          height={200}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
                   {template.description}
                 </p>
+
+                {/* Template elements */}
+                {template.elements && template.elements.length > 0 && (
+                  <div className="mt-3">
+                    <h4 className="text-xs font-medium text-gray-500 uppercase dark:text-gray-400">
+                      Features
+                    </h4>
+                    <ul className="mt-2 space-y-1">
+                      {template.elements.map((element, index) => (
+                        <li key={index} className="flex items-start text-xs">
+                          <span className="text-primary-500 dark:text-primary-400 mt-0.5 mr-1.5">
+                            •
+                          </span>
+                          <span className="text-gray-600 dark:text-gray-300">{element}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Template colors */}
+                {template.colors && (
+                  <div className="mt-3">
+                    <h4 className="text-xs font-medium text-gray-500 uppercase dark:text-gray-400">
+                      Color Scheme
+                    </h4>
+                    <p className="mt-1 text-xs text-gray-600 dark:text-gray-300">
+                      {template.colors}
+                    </p>
+                  </div>
+                )}
               </button>
             ))}
           </div>
