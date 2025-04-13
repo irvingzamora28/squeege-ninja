@@ -4,7 +4,7 @@ import path from 'path'
 import { generateFrontmatter } from '@/lib/utils/frontmatter'
 
 // For static export, we need to handle this differently
-export const dynamic = 'force-dynamic'
+export const dynamic = 'error'
 
 interface PostData {
   title: string

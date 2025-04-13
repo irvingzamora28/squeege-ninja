@@ -3,7 +3,7 @@ import { allBlogs } from 'contentlayer/generated'
 import { llmService } from '@/lib/llm'
 
 // For static export, we need to handle this differently
-export const dynamic = 'force-dynamic'
+export const dynamic = 'error'
 
 export async function POST(request: NextRequest) {
   try {
