@@ -52,6 +52,11 @@ export default function BlogTitleGenerator({ onTitleSelected }: BlogTitleGenerat
     }
   }
 
+  const [isGeneratingContent, setIsGeneratingContent] = useState(false)
+  const [selectedTitle, setSelectedTitle] = useState('')
+  const [selectedDescription, setSelectedDescription] = useState('')
+  const [generatedContent, setGeneratedContent] = useState('')
+
   const handleTitleSelect = (title: string, description: string) => {
     if (onTitleSelected) {
       onTitleSelected(title, description)
@@ -60,6 +65,57 @@ export default function BlogTitleGenerator({ onTitleSelected }: BlogTitleGenerat
       const params = new URLSearchParams({
         title,
         summary: description,
+      })
+      router.push(`/allset/posts/new?${params.toString()}`)
+    }
+  }
+
+  const handleGenerateContent = async (title: string, description: string) => {
+    setSelectedTitle(title)
+    setSelectedDescription(description)
+    setIsGeneratingContent(true)
+    setError('')
+    setGeneratedContent('')
+
+    try {
+      const response = await fetch('/api/allset/generate-blog-content', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title, description }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.message || 'Failed to generate blog content')
+      }
+
+      const data = await response.json()
+
+      if (data.success) {
+        setGeneratedContent(data.content)
+        setGenerationMessage('Blog content generated successfully!')
+      } else {
+        throw new Error(data.message || 'Failed to generate blog content')
+      }
+    } catch (err: unknown) {
+      console.error('Error generating blog content:', err)
+      setError(
+        err instanceof Error ? err.message : 'An error occurred while generating blog content'
+      )
+    } finally {
+      setIsGeneratingContent(false)
+    }
+  }
+
+  const handleUseGeneratedContent = () => {
+    if (selectedTitle && selectedDescription && generatedContent) {
+      // Navigate to new post page with title, description, and content
+      const params = new URLSearchParams({
+        title: selectedTitle,
+        summary: selectedDescription,
+        content: generatedContent,
       })
       router.push(`/allset/posts/new?${params.toString()}`)
     }
@@ -121,17 +177,50 @@ export default function BlogTitleGenerator({ onTitleSelected }: BlogTitleGenerat
                 <p className="mb-3 text-sm text-gray-600 dark:text-gray-400">
                   {suggestion.description}
                 </p>
-                <div className="flex justify-end">
+                <div className="flex justify-end space-x-2">
                   <button
                     onClick={() => handleTitleSelect(suggestion.title, suggestion.description)}
                     className="text-primary-600 hover:text-primary-700 focus:ring-primary-500 rounded-md px-3 py-1 text-sm font-medium focus:ring-2 focus:ring-offset-2 focus:outline-none"
                   >
-                    Use This Title
+                    Use Title Only
+                  </button>
+                  <button
+                    onClick={() => handleGenerateContent(suggestion.title, suggestion.description)}
+                    disabled={isGeneratingContent && selectedTitle === suggestion.title}
+                    className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 rounded-md px-3 py-1 text-sm font-medium text-white focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:opacity-70"
+                  >
+                    {isGeneratingContent && selectedTitle === suggestion.title ? (
+                      <>
+                        <span className="mr-1 inline-block h-3 w-3 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+                        Generating...
+                      </>
+                    ) : (
+                      'Generate Content'
+                    )}
                   </button>
                 </div>
               </li>
             ))}
           </ul>
+        </div>
+      )}
+
+      {generatedContent && (
+        <div className="mt-6 rounded-md border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-900/30">
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-lg font-semibold text-green-800 dark:text-green-400">
+              Generated Content for: {selectedTitle}
+            </h3>
+            <button
+              onClick={handleUseGeneratedContent}
+              className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none"
+            >
+              Use This Content
+            </button>
+          </div>
+          <div className="max-h-96 overflow-y-auto rounded-md bg-white p-4 dark:bg-gray-800">
+            <pre className="text-sm whitespace-pre-wrap">{generatedContent}</pre>
+          </div>
         </div>
       )}
     </div>

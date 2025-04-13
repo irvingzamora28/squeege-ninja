@@ -23,6 +23,7 @@ function NewPostContent() {
   useEffect(() => {
     const title = searchParams.get('title')
     const summary = searchParams.get('summary')
+    const content = searchParams.get('content')
 
     if (title) {
       const slug = generateSlug(title)
@@ -31,6 +32,7 @@ function NewPostContent() {
         title,
         slug,
         summary: summary || prev.summary,
+        content: content || prev.content,
       }))
     }
   }, [searchParams])

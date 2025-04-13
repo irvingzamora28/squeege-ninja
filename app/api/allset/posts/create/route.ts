@@ -3,7 +3,7 @@ import fs from 'fs/promises'
 import path from 'path'
 
 // For static export, we need to handle this differently
-export const dynamic = 'error'
+export const dynamic = 'force-dynamic'
 
 interface PostData {
   title: string

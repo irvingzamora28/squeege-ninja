@@ -17,21 +17,21 @@
       "icon": "FiMapPin",
       "title": "AI-Powered Trail Recommendations",
       "description": "Our intelligent algorithm analyzes your preferences and experience level to suggest the perfect hiking trails for you.",
-      "image": "/placeholder.jpg"
+      "image": "landingDemoImage"
     },
     {
       "id": 2,
       "icon": "FiPercent",
       "title": "Exclusive Deals & Discounts",
       "description": "Get access to special offers on gear, accommodations, and guided tours from our trusted partners.",
-      "image": "/placeholder.jpg"
+      "image": "dashboardDemoImage"
     },
     {
       "id": 3,
       "icon": "FiCompass",
       "title": "Detailed Trail Information",
       "description": "Explore comprehensive trail maps, elevation profiles, user reviews, and real-time conditions to plan your hike with confidence.",
-      "image": "/placeholder.jpg"
+      "image": "landingDemoImage"
     }
   ],
   "featureTitle": "Dinamount Features",

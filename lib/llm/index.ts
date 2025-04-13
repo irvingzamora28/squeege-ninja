@@ -204,6 +204,32 @@ Return the results as a JSON array with the following structure:
 Landing page content:
 `
 
+// Prompt for generating full blog post content
+const BLOG_CONTENT_PROMPT = `
+You are an expert SEO content writer. Your task is to create a comprehensive, engaging, and SEO-optimized blog post based on the provided title and description.
+
+The blog post should:
+1. Be well-structured with clear headings and subheadings (using Markdown # for h1, ## for h2, ### for h3)
+2. Include an engaging introduction that hooks the reader
+3. Provide valuable, actionable information throughout the content
+4. Use a mix of paragraphs, bullet points, and numbered lists for better readability
+5. Include at least one table where appropriate (using Markdown table syntax)
+6. Reference at least 2-3 other blog posts from the site for internal linking (I'll provide some existing posts)
+7. Include suggestions for 2-3 external resources or references
+8. Have a clear conclusion with a call to action
+9. Be optimized for SEO with appropriate keyword usage
+10. Be between 1000-1500 words in length
+11. Use a conversational yet professional tone
+
+Existing blog posts for internal linking:
+{{existingPosts}}
+
+Please generate the complete blog post content in Markdown format, ready to be used in an MDX file.
+
+Title: {{title}}
+Description: {{description}}
+`
+
 /**
  * LLM service that provides a unified interface for different LLM providers
  */
@@ -251,6 +277,25 @@ export class LLMService {
    */
   async generateBlogTitles(landingContent: string): Promise<LLMResponse> {
     const prompt = BLOG_TITLES_PROMPT + landingContent
+    return this.provider.generateContent(prompt)
+  }
+
+  /**
+   * Generate full blog post content based on title and description
+   * @param title The blog post title
+   * @param description Brief description of the blog post
+   * @param existingPosts Information about existing blog posts for internal linking
+   * @returns Generated blog post content in Markdown format
+   */
+  async generateBlogContent(
+    title: string,
+    description: string,
+    existingPosts: string
+  ): Promise<LLMResponse> {
+    const prompt = BLOG_CONTENT_PROMPT.replace('{{title}}', title)
+      .replace('{{description}}', description)
+      .replace('{{existingPosts}}', existingPosts)
+
     return this.provider.generateContent(prompt)
   }
 }
