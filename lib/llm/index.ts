@@ -227,7 +227,21 @@ The blog post should:
 Existing blog posts for internal linking:
 {{existingPosts}}
 
-IMPORTANT: Return ONLY the Markdown content directly, not wrapped in JSON or any other format. The content should be ready to be used in an MDX file without any additional processing.
+IMPORTANT: Return ONLY the Markdown content directly, not wrapped in JSON or any other format. DO NOT return a JSON object with a blog_post field. The content should be pure Markdown text ready to be used in an MDX file without any additional processing.
+
+Example of INCORRECT format (DO NOT DO THIS):
+
+{
+  "blog_post": "# Blog Title\n\nContent here..."
+}
+
+
+Example of CORRECT format (DO THIS):
+
+# Blog Title
+
+Content here...
+
 
 Title: {{title}}
 Description: {{description}}

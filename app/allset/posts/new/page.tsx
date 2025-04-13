@@ -58,22 +58,8 @@ function NewPostContent() {
 
     // If content is passed directly in URL, use it
     if (directContent) {
-      try {
-        // Check if the content is in JSON format and extract if needed
-        if (directContent.trim().startsWith('{') && directContent.includes('blog_post')) {
-          const parsedContent = JSON.parse(directContent)
-          if (parsedContent.blog_post) {
-            newFormData.content = parsedContent.blog_post
-            console.log('Extracted blog content from JSON in URL parameters')
-          }
-        } else {
-          // Use content as is
-          newFormData.content = directContent
-        }
-      } catch (parseError) {
-        console.log('Content is not in JSON format, using as is')
-        newFormData.content = directContent
-      }
+      // No need to clean JSON here - it's already cleaned in the API endpoint
+      newFormData.content = directContent
     }
 
     // Always set the basic form data first (title, slug, summary)
@@ -103,19 +89,7 @@ function NewPostContent() {
             )
 
             if (storedContent) {
-              // Check if the content is in JSON format and extract if needed
-              try {
-                if (storedContent.trim().startsWith('{') && storedContent.includes('blog_post')) {
-                  const parsedContent = JSON.parse(storedContent)
-                  if (parsedContent.blog_post) {
-                    storedContent = parsedContent.blog_post
-                    console.log('Extracted blog content from JSON structure in new post page')
-                  }
-                }
-              } catch (parseError) {
-                console.log('Content is not in JSON format, using as is')
-                // If parsing fails, use the content as is
-              }
+              // No need to clean JSON here - it's already cleaned in the API endpoint
 
               // Update only the content field, preserving other fields
               setFormData((prevData) => ({

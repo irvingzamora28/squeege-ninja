@@ -96,22 +96,9 @@ export default function BlogTitleGenerator({ onTitleSelected }: BlogTitleGenerat
 
       if (data.success) {
         // Parse the content if it's in JSON format
-        let content = data.content
+        const content = data.content
 
-        try {
-          // Check if the content is a JSON string
-          if (content.trim().startsWith('{') && content.includes('blog_post')) {
-            const parsedContent = JSON.parse(content)
-            // Extract just the blog_post content if it exists
-            if (parsedContent.blog_post) {
-              content = parsedContent.blog_post
-              console.log('Extracted blog content from JSON structure')
-            }
-          }
-        } catch (parseError) {
-          console.log('Content is not in JSON format, using as is')
-          // If parsing fails, use the content as is
-        }
+        // No need to clean JSON here - it's already cleaned in the API endpoint
 
         // For small content (< 2000 chars), pass directly in URL to avoid storage issues
         if (content.length < 2000) {
