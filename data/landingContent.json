@@ -1,151 +1,149 @@
 {
   "hero": {
-    "title": "Discover Your Next Adventure with Dinamount",
-    "description": "Unlock the best hiking trails with AI-powered recommendations and exclusive deals. Find your perfect route today!",
+    "title": "AI-Powered Landing Pages <span class=\"text-primary-500\">in Minutes</span>",
+    "description": "Generate compelling content and SEO-optimized landing pages with minimal effort. Powered by advanced AI to help you stand out.",
     "primaryCta": {
-      "text": "Find My Trail",
-      "link": "#"
+      "text": "Try Demo",
+      "link": "/demo"
     },
     "secondaryCta": {
-      "text": "Learn More",
-      "link": "#"
+      "text": "Documentation",
+      "link": "/docs"
     }
   },
   "mainFeatures": [
     {
       "id": 1,
-      "icon": "FiMapPin",
-      "title": "AI-Powered Trail Recommendations",
-      "description": "Our intelligent algorithm analyzes your preferences and experience level to suggest the perfect hiking trails for you.",
+      "icon": "FiUsers",
+      "title": "AI Content Generation",
+      "description": "Our AI generates high-quality, customized content based on your business description. Get compelling copy that resonates with your audience.",
       "image": "landingDemoImage"
     },
     {
       "id": 2,
-      "icon": "FiPercent",
-      "title": "Exclusive Deals & Discounts",
-      "description": "Get access to special offers on gear, accommodations, and guided tours from our trusted partners.",
+      "icon": "FiSmartphone",
+      "title": "Responsive Templates",
+      "description": "Choose from professionally designed, mobile-responsive templates that adapt perfectly to any screen size. Customize colors and fonts with ease.",
       "image": "dashboardDemoImage"
     },
     {
       "id": 3,
-      "icon": "FiCompass",
-      "title": "Detailed Trail Information",
-      "description": "Explore comprehensive trail maps, elevation profiles, user reviews, and real-time conditions to plan your hike with confidence.",
+      "icon": "FiLock",
+      "title": "SEO Optimization",
+      "description": "Every landing page comes with built-in SEO optimization, ensuring your content ranks well in search engines and reaches your target audience.",
       "image": "landingDemoImage"
     }
   ],
-  "featureTitle": "Dinamount Features",
-  "featureDescription": "Explore the powerful features that make Dinamount the ultimate hiking companion.",
+  "featureTitle": "Features for building a portfolio",
+  "featureDescription": "Whether you're a small business owner or a large corporation, our landing page generator has everything you need to create a compelling online presence.",
   "features": [
     {
-      "title": "Personalized Recommendations",
-      "description": "Get trail suggestions tailored to your skill level and interests.",
-      "icon": "FiCheckCircle"
+      "title": "Multiple LLM Providers",
+      "description": "Support for OpenAI, Google Gemini, and other LLM providers gives you flexibility in choosing your AI backend.",
+      "icon": "FiTrendingUp"
     },
     {
-      "title": "Real-Time Trail Conditions",
-      "description": "Stay informed about weather, closures, and other important updates.",
-      "icon": "FiCheckCircle"
+      "title": "Blog Generation",
+      "description": "Generate SEO-optimized blog posts automatically with our AI. Includes basic CMS functionality for easy management.",
+      "icon": "FiList"
     },
     {
-      "title": "Offline Maps",
-      "description": "Download maps for offline access and navigate even without a connection.",
-      "icon": "FiCheckCircle"
+      "title": "Analytics Integration",
+      "description": "Built-in support for multiple analytics providers including Umami, Plausible, and Google Analytics.",
+      "icon": "FiClock"
     },
     {
-      "title": "Community Reviews",
-      "description": "Read reviews and ratings from other hikers to get valuable insights.",
-      "icon": "FiCheckCircle"
+      "title": "Custom Templates",
+      "description": "Create and save your own templates or modify existing ones to match your brand perfectly.",
+      "icon": "FiUsers"
     },
     {
-      "title": "Gear Recommendations",
-      "description": "Find the best gear for your adventures with expert recommendations.",
-      "icon": "FiCheckCircle"
+      "title": "Version Control",
+      "description": "Keep track of all your landing page versions and roll back changes when needed.",
+      "icon": "FiLock"
     },
     {
-      "title": "Route Planning Tools",
-      "description": "Plan your route with detailed maps, elevation profiles and waypoints.",
-      "icon": "FiCheckCircle"
+      "title": "Fast Deployment",
+      "description": "Deploy your landing pages instantly with integrated hosting and CDN support.",
+      "icon": "FiBarChart2"
     }
   ],
   "cta": {
-    "title": "Ready to Explore?",
-    "description": "Start your hiking journey with Dinamount today and discover amazing trails near you.",
+    "title": "Start Creating Today",
+    "description": "Generate your first AI-powered landing page in under 5 minutes. Choose a template, describe your business, and let our AI do the rest.",
     "button": {
-      "text": "Start Your Free Trial",
-      "link": "#"
+      "text": "Try Demo",
+      "link": "/demo"
     }
   },
   "faqs": {
-    "title": "Frequently Asked Questions",
-    "description": "Common questions about Dinamount",
+    "title": "Frequently asked questions",
+    "description": "If you have anything else you want to ask, <a href=\"mailto:info@example.com\" class=\"text-slate-900 underline dark:text-slate-200\">reach out to us</a>.",
     "questions": [
       {
-        "question": "How does Dinamount recommend trails?",
-        "answer": "Dinamount uses an AI-powered algorithm that analyzes your preferences, skill level, location, and trail conditions to suggest the best hiking trails for you."
-      },
-      {
-        "question": "Can I use Dinamount offline?",
-        "answer": "Yes! You can download trail maps and information for offline access, allowing you to navigate even without an internet connection."
-      },
-      {
-        "question": "Are the trail conditions updated in real-time?",
-        "answer": "We strive to provide the most up-to-date information on trail conditions, including weather, closures, and hazards, through partnerships with local authorities and user reports."
-      },
-      {
-        "question": "How do I report a trail issue or hazard?",
-        "answer": "You can easily report trail issues directly through the Dinamount app. Your reports help us keep the community informed and safe."
-      },
-      {
-        "question": "What kind of deals can I find on Dinamount?",
-        "answer": "We partner with leading outdoor retailers, gear manufacturers, and tour operators to offer exclusive discounts and deals on hiking gear, accommodations, and guided tours."
+        "question": "How does the AI content generation work?",
+        "answer": "Simply describe your business or product, and our AI will generate compelling, context-aware content for your landing page. You can then edit and refine the content as needed."
       }
     ]
   },
   "pricing": {
-    "title": "Choose Your Dinamount Plan",
-    "description": "Unlock the perfect plan for your hiking needs.",
+    "title": "Simple pricing for any business",
+    "description": "Choose the plan that best fits your needs. All plans include core AI generation features and updates.",
     "plans": [
       {
-        "name": "Explorer",
-        "price": "$4.99/month",
-        "description": "For casual hikers looking to discover new trails.",
-        "features": ["AI Trail Recommendations", "Basic Trail Information", "Community Reviews"],
+        "name": "Basic",
+        "price": "$29",
+        "description": "Perfect for small businesses and startups looking to establish their online presence.",
+        "features": [
+          "1 landing page per month",
+          "Basic AI content generation",
+          "2 pre-designed templates",
+          "Basic SEO optimization",
+          "Email support"
+        ],
         "cta": {
-          "text": "Start Exploring",
-          "link": "#"
+          "text": "Start with Basic",
+          "link": "/register"
         }
       },
       {
-        "name": "Adventurer",
-        "price": "$9.99/month",
-        "description": "For experienced hikers who want detailed trail insights.",
+        "name": "Pro",
+        "price": "$79",
+        "description": "For growing businesses that need more content and customization options.",
         "features": [
-          "All Explorer Features",
-          "Offline Maps",
-          "Real-Time Trail Conditions",
-          "Gear Recommendations"
+          "5 landing pages per month",
+          "Advanced AI content generation",
+          "All templates included",
+          "Advanced SEO optimization",
+          "Blog post generation",
+          "Priority support",
+          "Custom CSS options"
         ],
         "cta": {
-          "text": "Upgrade to Adventurer",
-          "link": "#"
+          "text": "Subscribe to Pro",
+          "link": "/register"
+        }
+      },
+      {
+        "name": "Enterprise",
+        "price": "$199",
+        "description": "For companies requiring unlimited generations and white-label options.",
+        "features": [
+          "Unlimited landing pages",
+          "Premium AI content generation",
+          "Custom template creation",
+          "Advanced SEO with keyword research",
+          "Unlimited blog posts",
+          "White-label options",
+          "24/7 priority support",
+          "API access",
+          "Custom integrations"
+        ],
+        "cta": {
+          "text": "Contact Sales",
+          "link": "/contact"
         },
         "highlighted": true
-      },
-      {
-        "name": "Trailblazer",
-        "price": "$49.99/year",
-        "description": "For avid hikers who want the ultimate Dinamount experience.",
-        "features": [
-          "All Adventurer Features",
-          "Priority Support",
-          "Early Access to New Features",
-          "Exclusive Deals"
-        ],
-        "cta": {
-          "text": "Become a Trailblazer",
-          "link": "#"
-        }
       }
     ]
   }
