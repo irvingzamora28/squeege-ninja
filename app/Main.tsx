@@ -137,9 +137,7 @@ export default function Home() {
               key={feature.title}
               className="rounded-lg border border-gray-200 p-6 transition-shadow hover:shadow-lg dark:border-gray-700"
             >
-              <div className="bg-primary-100 mb-4 flex h-10 w-10 items-center justify-center rounded-full dark:bg-gray-800">
-                <FeatureIcon icon={feature.icon} />
-              </div>
+              <FeatureIcon icon={feature.icon} />
               <h3 className="mb-2 text-xl font-semibold">{feature.title}</h3>
               <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
             </div>
