@@ -74,7 +74,8 @@
     "button": {
       "text": "Try Demo",
       "link": "/demo"
-    }
+    },
+    "collectEmail": true
   },
   "faqs": {
     "title": "Frequently asked questions",

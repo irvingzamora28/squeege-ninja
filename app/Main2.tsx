@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { useEmailSubscription } from '@/lib/useEmailSubscription'
 import {
   FiMenu,
   FiUsers,
@@ -108,6 +109,8 @@ const FeaturesSection = () => {
 const Main2 = () => {
   const { hero, mainFeatures, featureTitle, featureDescription, features, cta, pricing } =
     landingContent
+  const [email, setEmail] = useState('')
+  const { subscribe, status, message } = useEmailSubscription()
 
   return (
     <>
@@ -355,12 +358,45 @@ const Main2 = () => {
               </h2>
               <p className="mt-4 text-lg text-gray-300">{cta.description}</p>
               <div className="mt-8 flex justify-center">
-                <Link
-                  href={cta.button.link}
-                  className="bg-primary-500 hover:bg-primary-600 inline-flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-white md:px-8 md:py-4 md:text-lg"
-                >
-                  {cta.button.text}
-                </Link>
+                {cta.collectEmail ? (
+                  <form
+                    className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+                    onSubmit={async (e) => {
+                      e.preventDefault()
+                      await subscribe(email)
+                      if (status === 'success') setEmail('')
+                    }}
+                  >
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your email"
+                      className="focus:border-primary-500 focus:ring-primary-200 focus:ring-opacity-50 rounded-md border border-gray-300 px-4 py-2 text-base focus:ring dark:border-gray-600 dark:text-gray-800"
+                      disabled={status === 'loading'}
+                    />
+                    <button
+                      type="submit"
+                      className="bg-primary-500 hover:bg-primary-600 rounded-md px-8 py-2 text-base font-medium text-white disabled:opacity-60"
+                      disabled={status === 'loading'}
+                    >
+                      {status === 'loading' ? 'Submitting...' : cta.button.text}
+                    </button>
+                    {message && (
+                      <div className="text-primary-600 dark:text-primary-400 mt-2 w-full text-center text-sm">
+                        {message}
+                      </div>
+                    )}
+                  </form>
+                ) : (
+                  <Link
+                    href={cta.button.link}
+                    className="bg-primary-500 hover:bg-primary-600 inline-flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-white md:px-8 md:py-4 md:text-lg"
+                  >
+                    {cta.button.text}
+                  </Link>
+                )}
               </div>
             </div>
           </div>
