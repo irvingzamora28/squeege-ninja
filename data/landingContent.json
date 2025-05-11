@@ -73,7 +73,7 @@
     "description": "Generate your first AI-powered landing page in under 5 minutes. Choose a template, describe your business, and let our AI do the rest.",
     "button": {
       "text": "Try Demo",
-      "link": "/demo"
+      "link": "/api/subscribe"
     },
     "collectEmail": true
   },

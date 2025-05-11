@@ -360,34 +360,38 @@ const Main2 = () => {
               <div className="mt-8 flex justify-center">
                 {cta.collectEmail ? (
                   <form
-                    className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+                    className="flex flex-col items-center justify-center gap-4"
                     onSubmit={async (e) => {
                       e.preventDefault()
                       await subscribe(email)
                       if (status === 'success') setEmail('')
                     }}
                   >
-                    <input
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter your email"
-                      className="focus:border-primary-500 focus:ring-primary-200 focus:ring-opacity-50 rounded-md border border-gray-300 px-4 py-2 text-base focus:ring dark:border-gray-600 dark:text-gray-800"
-                      disabled={status === 'loading'}
-                    />
-                    <button
-                      type="submit"
-                      className="bg-primary-500 hover:bg-primary-600 rounded-md px-8 py-2 text-base font-medium text-white disabled:opacity-60"
-                      disabled={status === 'loading'}
-                    >
-                      {status === 'loading' ? 'Submitting...' : cta.button.text}
-                    </button>
-                    {message && (
-                      <div className="text-primary-600 dark:text-primary-400 mt-2 w-full text-center text-sm">
-                        {message}
-                      </div>
-                    )}
+                    <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-center">
+                      <input
+                        type="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your email"
+                        className="focus:border-primary-500 focus:ring-primary-200 focus:ring-opacity-50 rounded-md border border-gray-300 px-4 py-2 text-base focus:ring dark:border-gray-600 dark:text-gray-800"
+                        disabled={status === 'loading'}
+                      />
+                      <button
+                        type="submit"
+                        className="bg-primary-500 hover:bg-primary-600 rounded-md px-8 py-2 text-base font-medium text-white disabled:opacity-60"
+                        disabled={status === 'loading'}
+                      >
+                        {status === 'loading' ? 'Submitting...' : cta.button.text}
+                      </button>
+                    </div>
+                    <div className="mt-2 flex h-6 w-full items-center justify-center">
+                      {message && (
+                        <span className="text-primary-600 dark:text-primary-400 text-sm">
+                          {message}
+                        </span>
+                      )}
+                    </div>
                   </form>
                 ) : (
                   <Link
