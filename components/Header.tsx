@@ -6,6 +6,7 @@ import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
 import Image from 'next/image'
+import landingContent from '@/data/landingContent.json'
 
 const Header = () => {
   let headerClass =
@@ -13,7 +14,16 @@ const Header = () => {
   if (siteMetadata.stickyNav) {
     headerClass += ' sticky top-0 z-50'
   }
-
+  console.log('About landingcontent')
+  console.log(landingContent)
+  // If the pricing section is NOT in the landing content, remove it from the header
+  const navLinks = headerNavLinks.filter(
+    (link) =>
+      !(
+        (!landingContent.pricing && link.title === 'Pricing') ||
+        (!landingContent.features && link.title === 'Features')
+      )
+  )
   return (
     <header className={headerClass}>
       <Link href="/" aria-label={siteMetadata.headerTitle}>
@@ -31,8 +41,8 @@ const Header = () => {
         </div>
       </Link>
       <div className="flex items-center space-x-4 leading-5 sm:-mr-6 sm:space-x-6">
-        <div className="no-scrollbar hidden max-w-40 items-center gap-x-4 overflow-x-auto sm:flex md:max-w-72 lg:max-w-96">
-          {headerNavLinks
+        <div className="no-scrollbar hidden max-w-52 items-center gap-x-4 overflow-x-auto sm:flex md:max-w-72 lg:max-w-fit">
+          {navLinks
             .filter((link) => link.href !== '/')
             .map((link) => (
               <Link

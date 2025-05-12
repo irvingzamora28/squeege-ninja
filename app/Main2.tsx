@@ -114,59 +114,6 @@ const Main2 = () => {
 
   return (
     <>
-      <header>
-        <nav>
-          <div className="relative z-50 mx-auto flex max-w-7xl justify-between px-4 py-8 sm:px-6 lg:px-8">
-            <div className="relative z-10 flex items-center gap-16">
-              <div className="hidden lg:flex lg:gap-10">
-                <Link
-                  href="/#features"
-                  className="relative -mx-3 -my-2 rounded-lg px-3 py-2 text-sm text-slate-700 transition-colors delay-150 hover:text-slate-900 hover:delay-0 dark:text-slate-300"
-                >
-                  <span className="relative z-10">Features</span>
-                </Link>
-                <Link
-                  href="/#pricing"
-                  className="relative -mx-3 -my-2 rounded-lg px-3 py-2 text-sm text-slate-700 transition-colors delay-150 hover:text-slate-900 hover:delay-0 dark:text-slate-300"
-                >
-                  <span className="relative z-10">Pricing</span>
-                </Link>
-              </div>
-            </div>
-            <div className="flex items-center gap-6">
-              <div className="lg:hidden" data-headlessui-state="">
-                <button
-                  className="relative z-10 -m-2 inline-flex items-center rounded-lg stroke-gray-900 p-2 hover:bg-gray-200/50 hover:stroke-gray-600 focus:not-data-focus:outline-hidden active:stroke-gray-900"
-                  aria-label="Toggle site navigation"
-                  type="button"
-                  aria-expanded="false"
-                  data-headlessui-state=""
-                  id="headlessui-popover-button-:R1epfja:"
-                >
-                  <FiMenu className="h-6 w-6" />
-                </button>
-              </div>
-              <div
-                hidden
-                style={{
-                  position: 'fixed',
-                  top: '1px',
-                  left: '1px',
-                  width: '1px',
-                  height: 0,
-                  padding: 0,
-                  margin: '-1px',
-                  overflow: 'hidden',
-                  clip: 'rect(0, 0, 0, 0)',
-                  whiteSpace: 'nowrap',
-                  borderWidth: 0,
-                  display: 'none',
-                }}
-              ></div>
-            </div>
-          </div>
-        </nav>
-      </header>
       <main className="flex-auto">
         <div className="overflow-hidden py-20 sm:py-32 lg:pb-32 xl:pb-36">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
