@@ -1,5 +1,5 @@
 {
-  "activeTemplate": "Main2",
+  "activeTemplate": "Main3",
   "availableTemplates": [
     {
       "id": "Main",
@@ -20,6 +20,20 @@
       "name": "Modern Dashboard Template",
       "description": "A contemporary layout with a full-width hero image, grid-based features, and card-style blog posts. Ideal for startups and tech companies.",
       "image": "/static/images/templates/template-main2.jpg",
+      "elements": [
+        "Full-width hero with side image",
+        "Grid-based feature cards",
+        "Card-style blog posts",
+        "Prominent CTA section",
+        "Colorful icon set"
+      ],
+      "colors": "Gradient accents with light/dark sections"
+    },
+    {
+      "id": "Main3",
+      "name": "Modern Business Template",
+      "description": "A contemporary layout with a full-width hero image, grid-based features, and card-style blog posts. Ideal for startups and tech companies.",
+      "image": "/static/images/templates/template-main3.jpg",
       "elements": [
         "Full-width hero with side image",
         "Grid-based feature cards",
