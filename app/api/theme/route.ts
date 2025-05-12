@@ -131,17 +131,17 @@ async function saveThemeSettings(theme: ThemeSettings) {
 }
 
 /* Direct overrides for utility classes */
-.bg-primary-50, .bg-primary-50 * { background-color: ${adjustColor(theme.primaryColor, 0.95)} !important; }
-.bg-primary-100, .bg-primary-100 * { background-color: ${adjustColor(theme.primaryColor, 0.9)} !important; }
-.bg-primary-200, .bg-primary-200 * { background-color: ${adjustColor(theme.primaryColor, 0.8)} !important; }
-.bg-primary-300, .bg-primary-300 * { background-color: ${adjustColor(theme.primaryColor, 0.7)} !important; }
-.bg-primary-400, .bg-primary-400 * { background-color: ${adjustColor(theme.primaryColor, 0.6)} !important; }
-.bg-primary-500, .bg-primary-500 * { background-color: ${theme.primaryColor} !important; }
-.bg-primary-600, .bg-primary-600 * { background-color: ${adjustColor(theme.primaryColor, 0.4)} !important; }
-.bg-primary-700, .bg-primary-700 * { background-color: ${adjustColor(theme.primaryColor, 0.3)} !important; }
-.bg-primary-800, .bg-primary-800 * { background-color: ${adjustColor(theme.primaryColor, 0.2)} !important; }
-.bg-primary-900, .bg-primary-900 * { background-color: ${adjustColor(theme.primaryColor, 0.1)} !important; }
-.bg-primary-950, .bg-primary-950 * { background-color: ${adjustColor(theme.primaryColor, 0.05)} !important; }
+.bg-primary-50 { background-color: ${adjustColor(theme.primaryColor, 0.95)} !important; }
+.bg-primary-100 { background-color: ${adjustColor(theme.primaryColor, 0.9)} !important; }
+.bg-primary-200 { background-color: ${adjustColor(theme.primaryColor, 0.8)} !important; }
+.bg-primary-300 { background-color: ${adjustColor(theme.primaryColor, 0.7)} !important; }
+.bg-primary-400 { background-color: ${adjustColor(theme.primaryColor, 0.6)} !important; }
+.bg-primary-500 { background-color: ${theme.primaryColor} !important; }
+.bg-primary-600 { background-color: ${adjustColor(theme.primaryColor, 0.4)} !important; }
+.bg-primary-700 { background-color: ${adjustColor(theme.primaryColor, 0.3)} !important; }
+.bg-primary-800 { background-color: ${adjustColor(theme.primaryColor, 0.2)} !important; }
+.bg-primary-900 { background-color: ${adjustColor(theme.primaryColor, 0.1)} !important; }
+.bg-primary-950 { background-color: ${adjustColor(theme.primaryColor, 0.05)} !important; }
 
 .text-primary-50, .text-primary-50 * { color: ${adjustColor(theme.primaryColor, 0.95)} !important; }
 .text-primary-100, .text-primary-100 * { color: ${adjustColor(theme.primaryColor, 0.9)} !important; }
