@@ -60,10 +60,10 @@ const HeroSection = () => {
   return (
     <>
       <div className="mx-auto max-w-7xl px-4 pt-20 pb-16 text-center sm:px-6 lg:px-8 lg:pt-32">
-        <h1 className="font-display mx-auto max-w-4xl text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
+        <h1 className="font-display mx-auto max-w-4xl text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl dark:text-white">
           <span dangerouslySetInnerHTML={{ __html: hero.title }} />
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700 sm:text-xl">
+        <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700 sm:text-xl dark:text-slate-200">
           {hero.description}
         </p>
         <div className="mt-10 flex justify-center gap-x-6">
@@ -74,7 +74,7 @@ const HeroSection = () => {
             {hero.primaryCta.text}
           </Link>
           <Link
-            className="group inline-flex items-center justify-center rounded-full px-4 py-2 text-sm text-slate-700 ring-1 ring-slate-200 hover:text-slate-900 hover:ring-slate-300 focus:outline-hidden focus-visible:ring-slate-300 focus-visible:outline-blue-600 active:bg-slate-100 active:text-slate-600 sm:px-10 sm:py-8 sm:text-2xl"
+            className="group inline-flex items-center justify-center rounded-full px-4 py-2 text-sm text-slate-700 ring-1 ring-slate-200 hover:text-slate-900 hover:ring-slate-300 focus:outline-hidden focus-visible:ring-slate-300 focus-visible:outline-blue-600 active:bg-slate-100 active:text-slate-600 sm:px-10 sm:py-8 sm:text-2xl dark:text-slate-200"
             href={hero.secondaryCta.link}
           >
             {hero.secondaryCta.text}
@@ -176,10 +176,12 @@ const SecondaryFeaturesSection = () => {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl md:text-center">
-          <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
+          <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl dark:text-white">
             {featureTitle}
           </h2>
-          <p className="mt-4 text-lg tracking-tight text-slate-700">{featureDescription}</p>
+          <p className="mt-4 text-lg tracking-tight text-slate-700 dark:text-slate-200">
+            {featureDescription}
+          </p>
         </div>
         <div className="-mx-4 mt-20 flex flex-col gap-y-10 overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
           {features.map((feature) => {
@@ -189,10 +191,16 @@ const SecondaryFeaturesSection = () => {
               <div key={feature.title}>
                 <div className="mx-auto max-w-2xl">
                   <div className="w-9">
-                    {Icon && <Icon className="bg-primary-600 h-9 w-9 rounded-lg p-2 text-white" />}
+                    {Icon && (
+                      <Icon className="bg-primary-600 dark:bg-primary-200 h-9 w-9 rounded-lg p-2 text-white" />
+                    )}
                   </div>
-                  <h3 className="text-primary-600 mt-6 text-xl font-medium">{feature.title}</h3>
-                  <p className="font-display mt-2 text-lg text-slate-900">{feature.description}</p>
+                  <h3 className="text-primary-600 dark:text-primary-200 mt-6 text-xl font-medium">
+                    {feature.title}
+                  </h3>
+                  <p className="font-display mt-2 text-lg text-slate-900 dark:text-slate-200">
+                    {feature.description}
+                  </p>
                 </div>
               </div>
             )
@@ -211,10 +219,16 @@ const SecondaryFeaturesSection = () => {
               <div key={feature.title}>
                 <div className="relative my-6 opacity-90 hover:opacity-100">
                   <div className="w-9">
-                    {Icon && <Icon className="bg-primary-600 h-9 w-9 rounded-lg p-2 text-white" />}
+                    {Icon && (
+                      <Icon className="bg-primary-600 dark:bg-primary-200 h-9 w-9 rounded-lg p-2 text-white" />
+                    )}
                   </div>
-                  <h3 className="text-primary-600 mt-3 text-xl font-medium">{feature.title}</h3>
-                  <p className="mt-2 text-lg text-slate-900">{feature.description}</p>
+                  <h3 className="text-primary-600 dark:text-primary-200 mt-3 text-xl font-medium">
+                    {feature.title}
+                  </h3>
+                  <p className="mt-2 text-lg text-slate-900 dark:text-slate-200">
+                    {feature.description}
+                  </p>
                 </div>
               </div>
             )
@@ -367,18 +381,18 @@ const FaqSection = () => {
     <section
       id="faq"
       aria-labelledby="faq-title"
-      className="relative overflow-hidden bg-slate-50 py-20 sm:py-32"
+      className="relative overflow-hidden bg-slate-50 py-20 sm:py-32 dark:bg-gray-800"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2
             id="faq-title"
-            className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl"
+            className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl dark:text-white"
           >
             {faqs.title}
           </h2>
           <p
-            className="mt-4 text-lg tracking-tight text-slate-700"
+            className="mt-4 text-lg tracking-tight text-slate-700 dark:text-slate-200"
             dangerouslySetInnerHTML={{ __html: faqs.description }}
           />
         </div>
@@ -387,8 +401,10 @@ const FaqSection = () => {
             <li key={index}>
               <ul className="flex flex-col gap-y-8">
                 <li>
-                  <h3 className="font-display text-lg/7 text-slate-900">{faq.question}</h3>
-                  <p className="mt-4 text-sm text-slate-700">{faq.answer}</p>
+                  <h3 className="font-display text-lg/7 text-slate-900 dark:text-white">
+                    {faq.question}
+                  </h3>
+                  <p className="mt-4 text-sm text-slate-700 dark:text-slate-200">{faq.answer}</p>
                 </li>
               </ul>
             </li>
