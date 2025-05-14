@@ -53,32 +53,32 @@ Generate a complete JSON object that follows this structure:
     {
       "title": "Feature 1 title",
       "description": "Feature 1 description",
-      "icon": "FiCheckCircle"
+      "icon": "FiUsers"
     },
     {
       "title": "Feature 2 title",
       "description": "Feature 2 description",
-      "icon": "FiCheckCircle"
+      "icon": "FiSmartphone"
     },
     {
       "title": "Feature 3 title",
       "description": "Feature 3 description",
-      "icon": "FiCheckCircle"
+      "icon": "FiLock"
     },
     {
       "title": "Feature 4 title",
       "description": "Feature 4 description",
-      "icon": "FiCheckCircle"
+      "icon": "FiTrendingUp"
     },
     {
       "title": "Feature 5 title",
       "description": "Feature 5 description",
-      "icon": "FiCheckCircle"
+      "icon": "FiList"
     },
     {
       "title": "Feature 6 title",
       "description": "Feature 6 description",
-      "icon": "FiCheckCircle"
+      "icon": "FiClock"
     }
   ],
   "cta": {
@@ -174,7 +174,7 @@ Based on the user's description, create a compelling and relevant landing page c
 3. Create relevant feature titles and descriptions
 4. Generate realistic FAQs that potential customers might ask
 5. Adjust pricing plans to match the business model
-6. Use appropriate icons (use Feather icon names like FiUsers, FiLayers, etc.)
+6. Use appropriate icons (use react-icons names like FiUsers, FiLayers, etc.)
 
 Return ONLY the JSON object without any additional text or explanation.
 
