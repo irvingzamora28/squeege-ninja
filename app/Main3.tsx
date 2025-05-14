@@ -29,7 +29,7 @@ const HeroSection = () => {
         </p>
         <div className="mt-10 flex justify-center gap-x-6">
           <Link
-            className="group inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700 hover:text-slate-100 focus:outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 active:bg-slate-800 active:text-slate-300 sm:px-10 sm:py-8 sm:text-2xl"
+            className="group dark:bg-primary-900 dark:hover:bg-primary-800 inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700 hover:text-slate-100 focus:outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 active:bg-slate-800 active:text-slate-300 sm:px-10 sm:py-8 sm:text-2xl dark:hover:text-slate-200"
             href={hero.primaryCta.link}
           >
             {hero.primaryCta.text}
@@ -370,7 +370,9 @@ const FaqSection = () => {
 }
 
 const PricingSection = () => {
-  const { pricing } = landingContent
+  const pricing = landingContent.pricing ?? null
+  if (!pricing) return null
+
   return (
     <section id="pricing" aria-label="Pricing" className="bg-slate-900 py-20 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -425,7 +427,7 @@ const PricingSection = () => {
                 ))}
               </ul>
               <Link
-                className={`group mt-8 inline-flex items-center justify-center rounded-full px-4 py-2 text-sm text-white ring-1 ring-slate-700 hover:ring-slate-500 focus:outline-hidden focus-visible:outline-white active:text-slate-400 active:ring-slate-700 ${plan.highlighted ? 'bg-slate-100 text-slate-100' : 'bg-primary-600 text-slate-100'}`}
+                className={`group text-md mt-8 inline-flex items-center justify-center rounded-full px-4 py-2 ring-1 ring-slate-700 hover:ring-slate-500 focus:outline-hidden focus-visible:outline-white active:text-slate-400 active:ring-slate-700 ${plan.highlighted ? 'bg-slate-100 text-slate-600' : 'bg-primary-600 text-slate-100'}`}
                 color="white"
                 aria-label={`Get started with the ${plan.name} plan for ${plan.price}`}
                 href={plan.cta.link}
