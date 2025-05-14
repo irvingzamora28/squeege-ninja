@@ -14,48 +14,37 @@
 }
 
 /* Direct overrides for utility classes */
-.bg-primary-50,
-.bg-primary-50 * {
+.bg-primary-50 {
   background-color: #76a8f9 !important;
 }
-.bg-primary-100,
-.bg-primary-100 * {
+.bg-primary-100 {
   background-color: #629bf8 !important;
 }
-.bg-primary-200,
-.bg-primary-200 * {
+.bg-primary-200 {
   background-color: #4f8ff7 !important;
 }
-.bg-primary-300,
-.bg-primary-300 * {
+.bg-primary-300 {
   background-color: #4588f6 !important;
 }
-.bg-primary-400,
-.bg-primary-400 * {
+.bg-primary-400 {
   background-color: #3f85f6 !important;
 }
-.bg-primary-500,
-.bg-primary-500 * {
+.bg-primary-500 {
   background-color: #3b82f6 !important;
 }
-.bg-primary-600,
-.bg-primary-600 * {
+.bg-primary-600 {
   background-color: #3575dd !important;
 }
-.bg-primary-700,
-.bg-primary-700 * {
+.bg-primary-700 {
   background-color: #2f68c5 !important;
 }
-.bg-primary-800,
-.bg-primary-800 * {
+.bg-primary-800 {
   background-color: #295bac !important;
 }
-.bg-primary-900,
-.bg-primary-900 * {
+.bg-primary-900 {
   background-color: #234e94 !important;
 }
-.bg-primary-950,
-.bg-primary-950 * {
+.bg-primary-950 {
   background-color: #1e417b !important;
 }
 
