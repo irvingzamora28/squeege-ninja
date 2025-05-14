@@ -1,3 +1,6 @@
+import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
+import { allBlogs } from 'contentlayer/generated'
+
 export default function AdminDashboard() {
   return (
     <>
@@ -6,7 +9,7 @@ export default function AdminDashboard() {
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <DashboardCard
           title="Total Posts"
-          value="24"
+          value={allCoreContent(sortPosts(allBlogs)).length.toString()}
           description="3 new in the last week"
           icon={<DocumentIcon />}
         />
