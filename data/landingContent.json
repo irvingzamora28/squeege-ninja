@@ -87,6 +87,26 @@
       }
     ]
   },
+  "testimonials": [
+    {
+      "quote": "AllSet Template is so easy to use, it helps me reach more people using the AI SEO Blog generation feature. ",
+      "name": "Sheryl Stein",
+      "title": "CEO at Lynch LLC",
+      "image": "/_next/static/media/avatar-1.c78616b7.png"
+    },
+    {
+      "quote": "What I love most about AllSet Template is that it recognizes the importance of my business features and creates a website that is easy to navigate and understand.",
+      "name": "Anna Banks",
+      "title": "Marketing Director at Velocity Industries",
+      "image": "/_next/static/media/avatar-4.16b4e29e.png"
+    },
+    {
+      "quote": "The best part about AllSet Template is that it helps me save money by generating content automatically and saving me time.",
+      "name": "Linda Kohl",
+      "title": "Marketing Director at Indigo Industries",
+      "image": "/_next/static/media/avatar-5.e7f7faf2.png"
+    }
+  ],
   "pricing": {
     "title": "Simple pricing for any business",
     "description": "Choose the plan that best fits your needs. All plans include core AI generation features and updates.",

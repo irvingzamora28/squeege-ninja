@@ -309,7 +309,9 @@ const CallToActionSection = () => {
   )
 }
 
-const TestimonialsSection = ({ testimonials }) => {
+const TestimonialsSection = () => {
+  const { testimonials } = landingContent
+
   return (
     <section
       id="testimonials"
@@ -487,40 +489,16 @@ const PricingSection = () => {
 }
 
 const Main3 = () => {
-  const testimonials = [
-    {
-      quote:
-        'TaxPal is so easy to use I can’t help but wonder if it’s really doing the things the government expects me to do.',
-      name: 'Sheryl Berge',
-      title: 'CEO at Lynch LLC',
-      image: '/_next/static/media/avatar-1.c78616b7.png',
-    },
-    {
-      quote:
-        'I’m trying to get a hold of someone in support, I’m in a lot of trouble right now and they are saying it has something to do with my books. Please get back to me right away.',
-      name: 'Amy Hahn',
-      title: 'Director at Velocity Industries',
-      image: '/_next/static/media/avatar-4.16b4e29e.png',
-    },
-    {
-      quote:
-        'The best part about TaxPal is every time I pay my employees, my bank balance doesn’t go down like it used to. Looking forward to spending this extra cash when I figure out why my card is being declined.',
-      name: 'Leland Kiehn',
-      title: 'Founder of Kiehn and Sons',
-      image: '/_next/static/media/avatar-5.e7f7faf2.png',
-    },
-  ]
-
   return (
     <div>
       <main>
-        <HeroSection />
-        <FeaturesSection />
-        <SecondaryFeaturesSection />
-        <CallToActionSection />
-        <TestimonialsSection testimonials={testimonials} />
-        <PricingSection />
-        <FaqSection />
+        {landingContent.hero && <HeroSection />}
+        {landingContent.mainFeatures?.length > 0 && <FeaturesSection />}
+        {landingContent.features?.length > 0 && <SecondaryFeaturesSection />}
+        {landingContent.cta && <CallToActionSection />}
+        {landingContent.testimonials?.length > 0 && <TestimonialsSection />}
+        {landingContent.pricing && <PricingSection />}
+        {landingContent.faqs?.questions?.length > 0 && <FaqSection />}
       </main>
     </div>
   )
