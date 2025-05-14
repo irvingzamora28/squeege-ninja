@@ -7,7 +7,7 @@ const siteMetadata = {
     'AI-powered Next.js landing page generator for compelling content and SEO-optimized blog posts.',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
+  siteUrl: 'https://allset-template.vercel.app',
   siteRepo: 'https://github.com',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo2.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.jpg`,
