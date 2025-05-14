@@ -1,59 +1,20 @@
 'use client'
 
-import { FaBars } from 'react-icons/fa'
 import { useState } from 'react'
 import landingDemoImage from '../public/static/images/landing-demo.jpeg'
 import dashboardDemoImage from '../public/static/images/dashboard-demo.jpg'
 import Image from 'next/image'
-import landingContent from '@/data/landingContent.json'
+import dataLandingContent from '@/data/landingContent.json'
+import type { LandingContent } from './allset/landing-content/types' // adjust path if needed
 import Link from 'next/link'
-import {
-  HiOutlineBolt,
-  HiOutlineMagnifyingGlass,
-  HiOutlineDevicePhoneMobile,
-  HiOutlineSquares2X2,
-  HiOutlineChartBar,
-  HiOutlineRocketLaunch,
-  HiCheckCircle,
-} from 'react-icons/hi2'
-import {
-  FiUsers,
-  FiSmartphone,
-  FiLock,
-  FiTrendingUp,
-  FiList,
-  FiClock,
-  FiBarChart2,
-  FiSearch,
-  FiTag,
-  FiCompass,
-  FiPercent,
-  FiMapPin,
-} from 'react-icons/fi'
+
 import { useEmailSubscription } from '@/lib/useEmailSubscription'
+import FeatureIcon from '@/components/FeatureIcon'
+import { HiCheckCircle } from 'react-icons/hi2'
+
+const landingContent = dataLandingContent as LandingContent
 
 const MAX_DISPLAY = 3
-
-const iconMap = {
-  HiLightningBolt: HiOutlineBolt,
-  HiMagnifyingGlass: HiOutlineMagnifyingGlass,
-  HiDevicePhoneMobile: HiOutlineDevicePhoneMobile,
-  HiSquares2X2: HiOutlineSquares2X2,
-  HiChartBar: HiOutlineChartBar,
-  HiRocket: HiOutlineRocketLaunch,
-  FiUsers: FiUsers,
-  FiSmartphone: FiSmartphone,
-  FiLock: FiLock,
-  FiTrendingUp: FiTrendingUp,
-  FiList: FiList,
-  FiClock: FiClock,
-  FiBarChart2: FiBarChart2,
-  FiSearch,
-  FiTag,
-  FiCompass,
-  FiPercent,
-  FiMapPin,
-}
 
 const HeroSection = () => {
   const { hero } = landingContent
@@ -185,15 +146,11 @@ const SecondaryFeaturesSection = () => {
         </div>
         <div className="-mx-4 mt-20 flex flex-col gap-y-10 overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
           {features.map((feature) => {
-            const Icon = iconMap[feature.icon]
-
             return (
               <div key={feature.title}>
                 <div className="mx-auto max-w-2xl">
                   <div className="w-9">
-                    {Icon && (
-                      <Icon className="bg-primary-600 dark:bg-primary-200 h-9 w-9 rounded-lg p-2 text-white" />
-                    )}
+                    <FeatureIcon icon={feature.icon} />
                   </div>
                   <h3 className="text-primary-600 dark:text-primary-200 mt-6 text-xl font-medium">
                     {feature.title}
@@ -214,14 +171,11 @@ const SecondaryFeaturesSection = () => {
           aria-orientation="horizontal"
         >
           {features.map((feature) => {
-            const Icon = iconMap[feature.icon]
             return (
               <div key={feature.title}>
                 <div className="relative my-6 opacity-90 hover:opacity-100">
                   <div className="w-9">
-                    {Icon && (
-                      <Icon className="bg-primary-600 dark:bg-primary-200 h-9 w-9 rounded-lg p-2 text-white" />
-                    )}
+                    <FeatureIcon icon={feature.icon} />
                   </div>
                   <h3 className="text-primary-600 dark:text-primary-200 mt-3 text-xl font-medium">
                     {feature.title}
@@ -246,10 +200,7 @@ const CallToActionSection = () => {
   const { subscribe, status, message } = useEmailSubscription()
 
   return (
-    <section
-      id="get-started-today"
-      className="relative overflow-hidden bg-gray-900 py-32 dark:bg-gray-500"
-    >
+    <section id="cta" className="relative overflow-hidden bg-gray-900 py-32 dark:bg-gray-500">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-lg text-center">
           <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl dark:text-slate-900">
@@ -310,7 +261,8 @@ const CallToActionSection = () => {
 }
 
 const TestimonialsSection = () => {
-  const { testimonials } = landingContent
+  const testimonials = landingContent.testimonials ?? []
+  if (!testimonials.length) return null
 
   return (
     <section
@@ -496,7 +448,7 @@ const Main3 = () => {
         {landingContent.mainFeatures?.length > 0 && <FeaturesSection />}
         {landingContent.features?.length > 0 && <SecondaryFeaturesSection />}
         {landingContent.cta && <CallToActionSection />}
-        {landingContent.testimonials?.length > 0 && <TestimonialsSection />}
+        {landingContent.testimonials && <TestimonialsSection />}
         {landingContent.pricing && <PricingSection />}
         {landingContent.faqs?.questions?.length > 0 && <FaqSection />}
       </main>

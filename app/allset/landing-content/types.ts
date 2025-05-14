@@ -44,6 +44,7 @@ export interface CtaSection {
   title: string
   description: string
   button: CtaButton
+  collectEmail?: boolean
 }
 
 export interface FaqsSection {
@@ -58,6 +59,13 @@ export interface PricingSection {
   plans: PricingPlan[]
 }
 
+export interface Testimonial {
+  name: string
+  quote: string
+  image: string
+  title?: string
+}
+
 export interface LandingContent {
   hero: HeroSection
   mainFeatures: MainFeature[]
@@ -66,5 +74,6 @@ export interface LandingContent {
   features: Feature[]
   cta: CtaSection
   faqs: FaqsSection
-  pricing: PricingSection
+  pricing?: PricingSection
+  testimonials?: Testimonial[]
 }

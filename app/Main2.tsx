@@ -2,42 +2,16 @@
 
 import React, { useState } from 'react'
 import { useEmailSubscription } from '@/lib/useEmailSubscription'
-import {
-  FiMenu,
-  FiUsers,
-  FiSmartphone,
-  FiLock,
-  FiTrendingUp,
-  FiList,
-  FiClock,
-  FiBarChart2,
-  FiSearch,
-  FiTag,
-  FiCompass,
-  FiPercent,
-  FiMapPin,
-} from 'react-icons/fi'
 import landingDemoImage from '../public/static/images/landing-demo.jpeg'
 import dashboardDemoImage from '../public/static/images/dashboard-demo.jpg'
 import Image from 'next/image'
-import landingContent from '@/data/landingContent.json'
+import dataLandingContent from '@/data/landingContent.json'
 import Link from 'next/link'
 import { HiCheckCircle } from 'react-icons/hi2'
+import FeatureIcon from '@/components/FeatureIcon'
+import { LandingContent } from './allset/landing-content/types'
 
-const iconMap = {
-  FiUsers: FiUsers,
-  FiSmartphone: FiSmartphone,
-  FiLock: FiLock,
-  FiTrendingUp: FiTrendingUp,
-  FiList: FiList,
-  FiClock: FiClock,
-  FiBarChart2: FiBarChart2,
-  FiSearch,
-  FiTag,
-  FiCompass,
-  FiPercent,
-  FiMapPin,
-}
+const landingContent = dataLandingContent as LandingContent
 
 const imageMap = {
   landingDemoImage: landingDemoImage,
@@ -62,7 +36,6 @@ const FeaturesSection = ({ mainFeatures }) => {
             aria-orientation="vertical"
           >
             {mainFeatures.map((feature) => {
-              const Icon = iconMap[feature.icon]
               return (
                 <button
                   key={feature.id}
@@ -77,7 +50,7 @@ const FeaturesSection = ({ mainFeatures }) => {
                   }`}
                 >
                   <div className="relative z-10 p-8">
-                    <Icon className="h-8 w-8 text-white" />
+                    <FeatureIcon icon={feature.icon} />
                     <h3 className="mt-6 text-lg font-semibold text-white">{feature.title}</h3>
                     <p className="mt-2 text-sm text-gray-400">{feature.description}</p>
                   </div>
@@ -236,10 +209,9 @@ const SecondaryFeaturesSection = ({ featureTitle, featureDescription, features }
         </div>
         <ul className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 text-sm sm:mt-20 sm:grid-cols-2 md:gap-y-10 lg:max-w-none lg:grid-cols-3">
           {features.map((feature) => {
-            const Icon = iconMap[feature.icon]
             return (
               <li key={feature.title} className="rounded-2xl border border-gray-200 p-8">
-                {Icon && <Icon className="text-primary-500 h-8 w-8" />}
+                <FeatureIcon icon={feature.icon} />
                 <h3 className="mt-6 text-lg font-semibold text-slate-900 md:text-2xl dark:text-slate-200">
                   {feature.title}
                 </h3>

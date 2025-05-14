@@ -6,60 +6,21 @@ import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 import Image from 'next/image'
 import landingDemoImage from '../public/static/images/landing-demo.jpeg'
-import landingContent from '@/data/landingContent.json'
+import dataLandingContent from '@/data/landingContent.json'
 import { sortPosts, allCoreContent } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
-import {
-  HiOutlineBolt,
-  HiOutlineMagnifyingGlass,
-  HiOutlineDevicePhoneMobile,
-  HiOutlineSquares2X2,
-  HiOutlineChartBar,
-  HiOutlineRocketLaunch,
-  HiCheckCircle,
-} from 'react-icons/hi2'
-import {
-  FiUsers,
-  FiSmartphone,
-  FiLock,
-  FiTrendingUp,
-  FiList,
-  FiClock,
-  FiBarChart2,
-  FiSearch,
-  FiTag,
-  FiCompass,
-  FiPercent,
-  FiMapPin,
-} from 'react-icons/fi'
+import { HiCheckCircle } from 'react-icons/hi2'
+import { iconMap, getIconComponent } from '@/lib/utils/iconMap'
 import { useEmailSubscription } from '@/lib/useEmailSubscription'
 import { useState } from 'react'
+import { LandingContent } from './allset/landing-content/types'
+
+const landingContent = dataLandingContent as LandingContent
 
 const MAX_DISPLAY = 3
 
-const iconMap = {
-  HiLightningBolt: HiOutlineBolt,
-  HiMagnifyingGlass: HiOutlineMagnifyingGlass,
-  HiDevicePhoneMobile: HiOutlineDevicePhoneMobile,
-  HiSquares2X2: HiOutlineSquares2X2,
-  HiChartBar: HiOutlineChartBar,
-  HiRocket: HiOutlineRocketLaunch,
-  FiUsers: FiUsers,
-  FiSmartphone: FiSmartphone,
-  FiLock: FiLock,
-  FiTrendingUp: FiTrendingUp,
-  FiList: FiList,
-  FiClock: FiClock,
-  FiBarChart2: FiBarChart2,
-  FiSearch,
-  FiTag,
-  FiCompass,
-  FiPercent,
-  FiMapPin,
-}
-
 const FeatureIcon = ({ icon }) => {
-  const IconComponent = iconMap[icon]
+  const IconComponent = getIconComponent(icon)
   if (!IconComponent) {
     console.warn(`Icon ${icon} not found in iconMap`)
     return null
