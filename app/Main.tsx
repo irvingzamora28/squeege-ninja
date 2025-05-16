@@ -20,38 +20,18 @@ const landingContent = dataLandingContent as LandingContent
 import { ContactFormData, useContactSubmission } from '@/lib/useContactSubmission'
 
 const ContactSection = ({ contact }) => {
-  const [form, setForm] = useState<ContactFormData>(() => ({
-    name: '',
-    email: '',
-    message: '',
-  }))
-  const [touched, setTouched] = useState({})
-  const { submitContact, status, message, setMessage } = useContactSubmission()
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [event.target.name]: event.target.value })
-    setMessage('')
-  }
-  const handleBlur = (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setTouched({ ...touched, [event.target.name]: true })
-  }
-  const validate = () => {
-    return contact.fields.every((f) => !f.required || form[f.name]?.trim())
-  }
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    setTouched(Object.fromEntries(contact.fields.map((f) => [f.name, true])))
-    if (!validate()) return
-    submitContact(form)
-  }
-  const [containerHeight, setContainerHeight] = useState<number | undefined>(undefined)
-  const formRef = useRef<HTMLFormElement>(null)
-
-  useEffect(() => {
-    if (formRef.current && !containerHeight) {
-      setContainerHeight(formRef.current.offsetHeight)
-    }
-  }, [formRef, containerHeight])
+  const {
+    form,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    validate,
+    status,
+    message,
+    formRef,
+    containerHeight,
+  } = useContactSubmission(contact.fields)
 
   return (
     <div
