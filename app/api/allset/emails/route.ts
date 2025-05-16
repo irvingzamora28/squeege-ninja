@@ -9,6 +9,7 @@ export async function GET() {
     const emails = await getAllEmails()
     return NextResponse.json({ emails })
   } catch (error) {
+    console.error('API /api/allset/emails error:', error)
     return NextResponse.json({ emails: [], error: 'Failed to fetch emails' }, { status: 500 })
   }
 }

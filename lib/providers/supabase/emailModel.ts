@@ -1,4 +1,4 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js'
+import type { SupabaseClient } from '@supabase/supabase-js'
 import { IEmailModel } from '../../models/email'
 import { ALLSET_EMAILS_TABLE } from '../../constants'
 import type { Email } from '../../models/email'
@@ -6,13 +6,8 @@ import type { Email } from '../../models/email'
 export class SupabaseEmailModel implements IEmailModel {
   private supabase: SupabaseClient
 
-  constructor() {
-    const supabaseUrl = process.env.SUPABASE_URL || ''
-    const supabaseKey = process.env.SUPABASE_KEY || ''
-    if (!supabaseUrl || !supabaseKey) {
-      throw new Error('Supabase URL and Key must be set for SupabaseEmailModel')
-    }
-    this.supabase = createClient(supabaseUrl, supabaseKey)
+  constructor(supabase: SupabaseClient) {
+    this.supabase = supabase
   }
 
   async getAll(): Promise<Email[]> {
@@ -20,20 +15,33 @@ export class SupabaseEmailModel implements IEmailModel {
       .from(ALLSET_EMAILS_TABLE)
       .select('id, email, created_at')
       .order('created_at', { ascending: false })
-    if (error) throw error
+    if (error) {
+      console.error('Supabase getAll error:', error)
+      throw error
+    }
+    console.log('Supabase getAll data:', data)
     return data || []
   }
 
   async insert(email: string): Promise<void> {
-    const { error } = await this.supabase.from(ALLSET_EMAILS_TABLE).insert([{ email }])
-    if (error) throw error
+    const { error, data } = await this.supabase.from(ALLSET_EMAILS_TABLE).insert([{ email }])
+    if (error) {
+      console.error('Supabase insert error:', error)
+      throw error
+    }
+    console.log('Supabase insert data:', data)
   }
 
   async getCount(): Promise<number> {
-    const { count, error } = await this.supabase
+    console.log('Supabase getCount')
+    const { count, error, data } = await this.supabase
       .from(ALLSET_EMAILS_TABLE)
       .select('*', { count: 'exact', head: true })
-    if (error) throw error
+    if (error) {
+      console.error('Supabase getCount error:', error)
+      throw error
+    }
+    console.log('Supabase getCount:', { count, data })
     return count || 0
   }
 }
