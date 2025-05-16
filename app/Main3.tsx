@@ -443,6 +443,8 @@ const PricingSection = () => {
   )
 }
 
+import Main3ContactSection from './Main3ContactSection'
+
 const Main3 = () => {
   return (
     <div>
@@ -457,6 +459,7 @@ const Main3 = () => {
         {landingContent.testimonials && <TestimonialsSection />}
         {landingContent.pricing && <PricingSection />}
         {landingContent.faqs?.questions?.length > 0 && <FaqSection />}
+        {landingContent.contact && <Main3ContactSection contact={landingContent.contact} />}
       </main>
     </div>
   )
