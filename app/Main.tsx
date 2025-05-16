@@ -12,10 +12,116 @@ import { allBlogs } from 'contentlayer/generated'
 import { HiCheckCircle } from 'react-icons/hi2'
 import { iconMap, getIconComponent } from '@/lib/utils/iconMap'
 import { useEmailSubscription } from '@/lib/useEmailSubscription'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { LandingContent } from './allset/landing-content/types'
 
 const landingContent = dataLandingContent as LandingContent
+
+import { ContactFormData, useContactSubmission } from '@/lib/useContactSubmission'
+
+const ContactSection = ({ contact }) => {
+  const [form, setForm] = useState<ContactFormData>(() => ({
+    name: '',
+    email: '',
+    message: '',
+  }))
+  const [touched, setTouched] = useState({})
+  const { submitContact, status, message, setMessage } = useContactSubmission()
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [event.target.name]: event.target.value })
+    setMessage('')
+  }
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setTouched({ ...touched, [event.target.name]: true })
+  }
+  const validate = () => {
+    return contact.fields.every((f) => !f.required || form[f.name]?.trim())
+  }
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setTouched(Object.fromEntries(contact.fields.map((f) => [f.name, true])))
+    if (!validate()) return
+    submitContact(form)
+  }
+  const [containerHeight, setContainerHeight] = useState<number | undefined>(undefined)
+  const formRef = useRef<HTMLFormElement>(null)
+
+  useEffect(() => {
+    if (formRef.current && !containerHeight) {
+      setContainerHeight(formRef.current.offsetHeight)
+    }
+  }, [formRef, containerHeight])
+
+  return (
+    <div
+      className="relative flex flex-col items-center justify-center py-16"
+      style={containerHeight ? { minHeight: containerHeight } : {}}
+    >
+      <h2 className="mb-4 text-center text-3xl font-bold">{contact.title}</h2>
+      <p className="mb-8 text-center text-lg text-gray-600 dark:text-gray-400">
+        {contact.description}
+      </p>
+      <div
+        style={{ position: 'relative', width: '100%', maxWidth: 560, minHeight: containerHeight }}
+      >
+        <form
+          ref={formRef}
+          className={`mx-auto w-full space-y-6 transition-opacity duration-300 ${status === 'success' ? 'pointer-events-none absolute opacity-0' : 'relative opacity-100'}`}
+          onSubmit={handleSubmit}
+        >
+          {contact.fields.map((field) => (
+            <div key={field.name}>
+              <label className="mb-2 block font-medium" htmlFor={field.name}>
+                {field.label}
+                {field.required && <span className="text-primary-500 ml-1">*</span>}
+              </label>
+              {field.type === 'textarea' ? (
+                <textarea
+                  id={field.name}
+                  name={field.name}
+                  value={form[field.name]}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  required={field.required}
+                  className="focus:border-primary-500 focus:ring-primary-200 focus:ring-opacity-50 w-full rounded-md border border-gray-300 px-4 py-2 focus:ring dark:border-gray-700 dark:bg-gray-900"
+                  rows={5}
+                />
+              ) : (
+                <input
+                  id={field.name}
+                  name={field.name}
+                  type={field.type}
+                  value={form[field.name]}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  required={field.required}
+                  className="focus:border-primary-500 focus:ring-primary-200 focus:ring-opacity-50 w-full rounded-md border border-gray-300 px-4 py-2 focus:ring dark:border-gray-700 dark:bg-gray-900"
+                />
+              )}
+            </div>
+          ))}
+          {status === 'error' && <div className="text-center text-red-500">{message}</div>}
+          <button
+            type="submit"
+            className="bg-primary-500 hover:bg-primary-600 w-full rounded-md px-8 py-3 text-base font-medium text-white disabled:opacity-60"
+            disabled={status === 'loading' || !validate()}
+          >
+            {status === 'loading' ? 'Sending...' : contact.submitLabel}
+          </button>
+        </form>
+        <div
+          className={`absolute top-0 left-0 w-full text-center transition-opacity duration-300 ${status === 'success' ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
+          style={{ minHeight: containerHeight }}
+        >
+          <p className="text-primary-600 dark:text-primary-400 mt-2 text-lg">
+            {message || contact.successMessage}
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 const MAX_DISPLAY = 3
 
@@ -246,7 +352,7 @@ const BlogPostsSection = ({ posts }) => (
 export default function Home() {
   const sortedPosts = sortPosts(allBlogs)
   const posts = allCoreContent(sortedPosts)
-  const { hero, mainFeatures, features, cta, pricing } = landingContent
+  const { hero, mainFeatures, features, cta, pricing, contact } = landingContent
 
   return (
     <div className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-10/12 xl:px-0">
@@ -256,6 +362,7 @@ export default function Home() {
       <PricingSection pricing={pricing} />
       <CtaSection cta={cta} />
       <BlogPostsSection posts={posts} />
+      {contact && <ContactSection contact={contact} />}
     </div>
   )
 }

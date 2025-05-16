@@ -78,6 +78,21 @@ export interface GallerySection {
   images: GalleryImage[]
 }
 
+export interface ContactField {
+  name: string
+  label: string
+  type: string
+  required: boolean
+}
+
+export interface ContactSection {
+  title: string
+  description: string
+  fields: ContactField[]
+  submitLabel: string
+  successMessage: string
+}
+
 export interface LandingContent {
   hero: HeroSection
   mainFeatures: MainFeature[]
@@ -89,4 +104,5 @@ export interface LandingContent {
   faqs: FaqsSection
   pricing?: PricingSection
   testimonials?: Testimonial[]
+  contact?: ContactSection
 }

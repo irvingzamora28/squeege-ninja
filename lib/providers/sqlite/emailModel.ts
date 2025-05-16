@@ -1,8 +1,8 @@
 import type Database from 'better-sqlite3'
 import { ALLSET_EMAILS_TABLE } from '../../constants'
-import type { Email } from '../../models/email'
+import type { Email, IEmailModel } from '../../models/email'
 
-export class SQLiteEmailModel {
+export class SQLiteEmailModel implements IEmailModel {
   constructor(private db: Database) {}
 
   async getAll(): Promise<Email[]> {

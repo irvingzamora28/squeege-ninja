@@ -185,5 +185,16 @@
         }
       }
     ]
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Have questions? Fill out the form below and we’ll get back to you!",
+    "fields": [
+      { "name": "name", "label": "Name", "type": "text", "required": false },
+      { "name": "email", "label": "Email", "type": "email", "required": true },
+      { "name": "message", "label": "Message", "type": "textarea", "required": true }
+    ],
+    "submitLabel": "Send Message",
+    "successMessage": "Thank you for reaching out! We’ll get back to you soon."
   }
 }
