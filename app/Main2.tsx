@@ -566,6 +566,8 @@ const FaqSection = ({ faqs }) => {
   )
 }
 
+import Main2ContactSection from './Main2ContactSection'
+
 const Main2 = () => {
   const {
     hero,
@@ -577,6 +579,7 @@ const Main2 = () => {
     gallery,
     pricing,
     faqs,
+    contact,
   } = landingContent
 
   return (
@@ -595,6 +598,7 @@ const Main2 = () => {
         {landingContent.gallery && <GallerySection gallery={gallery} />}
         {landingContent.pricing && <PricingSection pricing={pricing} />}
         {landingContent.faqs && <FaqSection faqs={faqs} />}
+        {landingContent.contact && <Main2ContactSection contact={contact} />}
       </main>
     </>
   )
