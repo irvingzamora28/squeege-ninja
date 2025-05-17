@@ -336,20 +336,20 @@ const ProjectsSection = () => {
 }
 
 const FeaturesGridSection = () => {
-  const { features, featureTitle, featureDescription } = landingContent
+  const { features } = landingContent
 
   return (
     <section className="bg-gray-50 py-20 dark:bg-gray-800">
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">{featureTitle}</h2>
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">{features.title}</h2>
           <p className="mx-auto max-w-3xl text-xl text-gray-600 dark:text-gray-400">
-            {featureDescription}
+            {features.description}
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, index) => {
+          {features.items.map((feature, index) => {
             const IconComponent = featureIconMap[feature.icon] || FiSettings
 
             return (

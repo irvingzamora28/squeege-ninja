@@ -176,7 +176,7 @@ const FeaturesGridSection = ({ features }) => (
   <div className="py-16">
     <h2 className="mb-12 text-center text-3xl font-bold">Everything You Need to Launch Fast</h2>
     <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-      {features.map((feature) => (
+      {features.items.map((feature) => (
         <div
           key={feature.title}
           className="rounded-lg border border-gray-200 p-6 transition-shadow hover:shadow-lg dark:border-gray-700"

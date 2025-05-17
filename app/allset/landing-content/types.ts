@@ -13,6 +13,12 @@ export interface MainFeature {
   image: string
 }
 
+export interface FeaturesSection {
+  title: string
+  description: string
+  items: Feature[]
+}
+
 export interface Feature {
   title: string
   description: string
@@ -152,9 +158,7 @@ export interface ContactSection {
 export interface LandingContent {
   hero: HeroSection
   mainFeatures: MainFeature[]
-  featureTitle: string
-  featureDescription: string
-  features: Feature[]
+  features: FeaturesSection[]
   cta: CtaSection
   gallery?: GallerySection
   faqs: FaqsSection

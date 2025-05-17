@@ -88,40 +88,42 @@
       "image": "landingDemoImage"
     }
   ],
-  "featureTitle": "Why Choose Our Electrical Services",
-  "featureDescription": "We deliver reliable, efficient, and safe electrical solutions for businesses of all sizes.",
-  "features": [
-    {
-      "title": "Certified Professionals",
-      "description": "All our electricians are certified and undergo regular training on the latest technologies.",
-      "icon": "FiAward"
-    },
-    {
-      "title": "Energy Efficiency",
-      "description": "We design systems that maximize energy efficiency, reducing your operational costs.",
-      "icon": "FiZap"
-    },
-    {
-      "title": "Custom Solutions",
-      "description": "Every business has unique electrical needs. We design custom solutions for your specific requirements.",
-      "icon": "FiSettings"
-    },
-    {
-      "title": "Transparent Pricing",
-      "description": "No hidden fees or surprises. We provide detailed quotes before starting any work.",
-      "icon": "FiDollarSign"
-    },
-    {
-      "title": "Scheduled Maintenance",
-      "description": "Prevent costly downtime with our scheduled maintenance programs tailored to your business.",
-      "icon": "FiCalendar"
-    },
-    {
-      "title": "24/7 Emergency Service",
-      "description": "Electrical emergencies can happen anytime. Our team is ready to respond 24/7.",
-      "icon": "FiPhone"
-    }
-  ],
+  "features": {
+    "title": "Why Choose Our Electrical Services",
+    "description": "We deliver reliable, efficient, and safe electrical solutions for businesses of all sizes.",
+    "items": [
+      {
+        "title": "Certified Professionals",
+        "description": "All our electricians are certified and undergo regular training on the latest technologies.",
+        "icon": "FiAward"
+      },
+      {
+        "title": "Energy Efficiency",
+        "description": "We design systems that maximize energy efficiency, reducing your operational costs.",
+        "icon": "FiZap"
+      },
+      {
+        "title": "Custom Solutions",
+        "description": "Every business has unique electrical needs. We design custom solutions for your specific requirements.",
+        "icon": "FiSettings"
+      },
+      {
+        "title": "Transparent Pricing",
+        "description": "No hidden fees or surprises. We provide detailed quotes before starting any work.",
+        "icon": "FiDollarSign"
+      },
+      {
+        "title": "Scheduled Maintenance",
+        "description": "Prevent costly downtime with our scheduled maintenance programs tailored to your business.",
+        "icon": "FiCalendar"
+      },
+      {
+        "title": "24/7 Emergency Service",
+        "description": "Electrical emergencies can happen anytime. Our team is ready to respond 24/7.",
+        "icon": "FiPhone"
+      }
+    ]
+  },
   "cta": {
     "title": "Ready to Power Your Business?",
     "description": "Contact us today for a free consultation and quote on your industrial electrical project.",
