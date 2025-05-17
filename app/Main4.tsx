@@ -237,7 +237,7 @@ const ProjectsSection = () => {
             <div className="group relative overflow-hidden rounded-2xl shadow-2xl">
               <div className="relative h-[70vh] w-full">
                 <Image
-                  src={projects.items[0].image || '/static/images/placeholder.jpg'}
+                  src={projects.items[0].image || '/static/images/services/project1.jpg'}
                   alt={projects.items[0].title}
                   fill
                   priority
@@ -291,7 +291,7 @@ const ProjectsSection = () => {
               <div key={index} className="group relative overflow-hidden rounded-xl shadow-xl">
                 <div className="relative h-96">
                   <Image
-                    src={project.image || '/static/images/placeholder.jpg'}
+                    src={project.image || '/static/images/services/project3.jpg'}
                     alt={project.title}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
