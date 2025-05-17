@@ -265,7 +265,7 @@ const CallToActionSection = () => {
 }
 
 const TestimonialsSection = () => {
-  const testimonials = landingContent.testimonials ?? []
+  const testimonials = landingContent.testimonials
   if (!testimonials) return null
 
   return (
@@ -277,15 +277,14 @@ const TestimonialsSection = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl md:text-center">
           <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl dark:text-white">
-            Loved by businesses worldwide.
+            {testimonials.title}
           </h2>
           <p className="mt-4 text-lg tracking-tight text-slate-700 dark:text-white">
-            Our software is so simple that people can’t help but fall in love with it. Simplicity is
-            easy when you just skip tons of mission-critical features.
+            {testimonials.description}
           </p>
         </div>
         <ul className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3">
-          {testimonials.map((testimonial, index) => (
+          {testimonials.testimonials.map((testimonial, index) => (
             <li key={index} className="rounded-2xl dark:bg-gray-800">
               <ul className="flex flex-col gap-y-6 sm:gap-y-8">
                 <li>
