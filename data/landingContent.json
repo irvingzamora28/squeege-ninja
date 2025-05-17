@@ -1,105 +1,159 @@
 {
   "hero": {
-    "title": "Launch Your Business with Allset Template",
-    "description": "Effortlessly create stunning landing pages and SEO-optimized blog posts using AI. Get your business online and visible in minutes.",
+    "title": "Professional Electrical Solutions for Industry",
+    "image": "/static/images/services/industrial-electrical.jpg",
+    "description": "Reliable industrial electrical installations, maintenance, and repairs by certified professionals. Powering businesses across the nation with safety and efficiency.",
     "primaryCta": {
-      "text": "Start Building Now",
-      "link": "#cta"
+      "text": "Get a Free Quote",
+      "link": "#contact"
     },
     "secondaryCta": {
-      "text": "View Features",
-      "link": "#features"
+      "text": "Our Services",
+      "link": "#services"
     }
+  },
+  "services": [
+    {
+      "title": "Industrial Installations",
+      "description": "Complete electrical system design and installation for manufacturing facilities, warehouses, and industrial complexes.",
+      "icon": "FaIndustry",
+      "image": "/static/images/services/service1.jpg"
+    },
+    {
+      "title": "Electrical Maintenance",
+      "description": "Preventative maintenance programs to ensure your electrical systems operate at peak efficiency and prevent costly downtime.",
+      "icon": "FaTools",
+      "image": "/static/images/services/service2.jpg"
+    },
+    {
+      "title": "Emergency Repairs",
+      "description": "24/7 emergency electrical repair services to minimize downtime and keep your business running smoothly.",
+      "icon": "FaBolt",
+      "image": "/static/images/services/service3.jpg"
+    },
+    {
+      "title": "System Upgrades",
+      "description": "Modernize your electrical infrastructure to improve efficiency, reduce costs, and meet current safety standards.",
+      "icon": "FaChartLine",
+      "image": "/static/images/services/service4.jpg"
+    }
+  ],
+  "projects": {
+    "title": "Our Recent Projects",
+    "description": "Take a look at some of our recent industrial electrical installations",
+    "items": [
+      {
+        "title": "Manufacturing Plant Rewiring",
+        "description": "Complete electrical system overhaul for a 50,000 sq ft manufacturing facility.",
+        "image": "/static/images/services/project1.jpg",
+        "category": "Industrial",
+        "completionDate": "January 2025"
+      },
+      {
+        "title": "Warehouse Lighting Upgrade",
+        "description": "Energy-efficient LED lighting installation reducing power consumption by 60%.",
+        "image": "/static/images/services/project2.jpg",
+        "category": "Commercial",
+        "completionDate": "March 2025"
+      },
+      {
+        "title": "Solar Power Integration",
+        "description": "Installation of solar panels and integration with existing electrical systems.",
+        "image": "/static/images/services/project3.jpg",
+        "category": "Renewable Energy",
+        "completionDate": "April 2025"
+      }
+    ]
   },
   "mainFeatures": [
     {
       "id": 1,
-      "icon": "FaMagic",
-      "title": "AI-Powered Landing Page Generation",
-      "description": "Generate compelling landing page content in seconds using our AI dashboard. No coding required!",
+      "icon": "FaBolt",
+      "title": "Licensed Electrical Contractors",
+      "description": "Our team of certified electrical contractors brings decades of experience to every industrial project.",
       "image": "landingDemoImage"
     },
     {
       "id": 2,
-      "icon": "FiEdit",
-      "title": "SEO Blog Post Creation",
-      "description": "Boost your search ranking with AI-generated blog posts. Provide valuable content and attract more customers.",
+      "icon": "FaShieldAlt",
+      "title": "Safety First Approach",
+      "description": "We prioritize safety in every installation and maintenance project, exceeding industry standards.",
       "image": "landingDemoImage"
     },
     {
       "id": 3,
-      "icon": "FiMonitor",
-      "title": "Easy-to-Use Dashboard",
-      "description": "Manage all your content creation from one central dashboard. Simple, intuitive, and effective.",
+      "icon": "FaClock",
+      "title": "24/7 Emergency Service",
+      "description": "Electrical emergencies don't wait for business hours. Our team is available around the clock.",
       "image": "landingDemoImage"
     }
   ],
-  "featureTitle": "Allset Template Features",
-  "featureDescription": "Unlock the power of AI to create stunning landing pages and SEO-optimized content that drives results.",
+  "featureTitle": "Why Choose Our Electrical Services",
+  "featureDescription": "We deliver reliable, efficient, and safe electrical solutions for businesses of all sizes.",
   "features": [
     {
-      "title": "AI Content Generation",
-      "description": "Let our AI write compelling copy for your landing pages and blog posts.",
-      "icon": "FiCpu"
+      "title": "Certified Professionals",
+      "description": "All our electricians are certified and undergo regular training on the latest technologies.",
+      "icon": "FiAward"
     },
     {
-      "title": "SEO Optimization",
-      "description": "Improve your search engine ranking with AI-powered SEO suggestions.",
-      "icon": "FiSearch"
+      "title": "Energy Efficiency",
+      "description": "We design systems that maximize energy efficiency, reducing your operational costs.",
+      "icon": "FiZap"
     },
     {
-      "title": "Customizable Templates",
-      "description": "Choose from a variety of templates and customize them to match your brand.",
-      "icon": "FiLayout"
+      "title": "Custom Solutions",
+      "description": "Every business has unique electrical needs. We design custom solutions for your specific requirements.",
+      "icon": "FiSettings"
     },
     {
-      "title": "Analytics Dashboard",
-      "description": "Track your website traffic and performance with our detailed analytics dashboard.",
-      "icon": "FiTrendingUp"
+      "title": "Transparent Pricing",
+      "description": "No hidden fees or surprises. We provide detailed quotes before starting any work.",
+      "icon": "FiDollarSign"
     },
     {
-      "title": "Content Scheduling",
-      "description": "Schedule your blog posts in advance to maintain a consistent content calendar.",
+      "title": "Scheduled Maintenance",
+      "description": "Prevent costly downtime with our scheduled maintenance programs tailored to your business.",
       "icon": "FiCalendar"
     },
     {
-      "title": "24/7 Support",
-      "description": "Get help whenever you need it with our dedicated support team.",
-      "icon": "FiHeadphones"
+      "title": "24/7 Emergency Service",
+      "description": "Electrical emergencies can happen anytime. Our team is ready to respond 24/7.",
+      "icon": "FiPhone"
     }
   ],
   "cta": {
-    "title": "Ready to Launch Your Business?",
-    "description": "Start creating your landing page and blog posts today with Allset Template.",
+    "title": "Ready to Power Your Business?",
+    "description": "Contact us today for a free consultation and quote on your industrial electrical project.",
     "button": {
-      "text": "Get Started Now",
-      "link": "#"
+      "text": "Contact Us Now",
+      "link": "#contact"
     },
     "collectEmail": true
   },
   "faqs": {
     "title": "Frequently Asked Questions",
-    "description": "Common questions about Allset Template",
+    "description": "Common questions about our electrical services",
     "questions": [
       {
-        "question": "What is Allset Template?",
-        "answer": "Allset Template is an AI-powered platform that helps you create landing pages and SEO-optimized blog posts quickly and easily."
+        "question": "Are your electricians licensed and insured?",
+        "answer": "Yes, all our electricians are fully licensed, insured, and certified to work on industrial electrical systems."
       },
       {
-        "question": "Do I need coding experience to use Allset Template?",
-        "answer": "No, Allset Template is designed to be user-friendly and requires no coding experience."
+        "question": "How quickly can you respond to an emergency?",
+        "answer": "We offer 24/7 emergency services with typical response times of under 2 hours for critical situations."
       },
       {
-        "question": "How does the AI content generation work?",
-        "answer": "Our AI uses advanced algorithms to generate high-quality content based on your input and preferences."
+        "question": "Do you provide warranties on your work?",
+        "answer": "Yes, we offer a comprehensive warranty on all our installations and repairs, typically ranging from 1-5 years depending on the project."
       },
       {
-        "question": "Can I customize the templates?",
-        "answer": "Yes, you can customize the templates to match your brand and style."
+        "question": "Can you help with energy efficiency upgrades?",
+        "answer": "Absolutely! We specialize in energy-efficient electrical systems that can significantly reduce your operational costs."
       },
       {
-        "question": "What kind of support do you offer?",
-        "answer": "We offer 24/7 support via email, chat, and phone."
+        "question": "Do you handle permits for electrical work?",
+        "answer": "Yes, we handle all necessary permits and ensure all work meets or exceeds local electrical codes and regulations."
       }
     ]
   },
@@ -140,61 +194,110 @@
     ]
   },
   "pricing": {
-    "title": "Pricing Plans",
-    "description": "Choose the plan that fits your needs",
+    "title": "Service Plans",
+    "description": "Choose the maintenance plan that fits your business needs",
     "plans": [
       {
-        "name": "Starter",
-        "price": "$19/month",
-        "description": "Perfect for launching your first business.",
-        "features": ["Unlimited Landing Pages", "5 AI Blog Posts", "Basic Analytics"],
-        "cta": {
-          "text": "Get Started",
-          "link": "#"
-        }
-      },
-      {
-        "name": "Growth",
-        "price": "$49/month",
-        "description": "Ideal for growing businesses.",
+        "name": "Basic Maintenance",
+        "price": "From $199/month",
+        "description": "Essential maintenance for small businesses.",
         "features": [
-          "All Starter features",
-          "Unlimited AI Blog Posts",
-          "Advanced Analytics",
-          "SEO Optimization Tools"
+          "Quarterly Inspections",
+          "Emergency Response",
+          "Basic Repairs",
+          "Safety Compliance Checks"
         ],
         "cta": {
           "text": "Get Started",
-          "link": "#"
+          "link": "#contact"
+        }
+      },
+      {
+        "name": "Standard Maintenance",
+        "price": "From $399/month",
+        "description": "Comprehensive coverage for medium-sized facilities.",
+        "features": [
+          "Monthly Inspections",
+          "Priority Emergency Response",
+          "Parts & Labor Included",
+          "Thermal Imaging Scans",
+          "Load Analysis"
+        ],
+        "cta": {
+          "text": "Get Started",
+          "link": "#contact"
         },
         "highlighted": true
       },
       {
-        "name": "Enterprise",
-        "price": "$99/month",
-        "description": "For established businesses seeking maximum growth.",
+        "name": "Premium Maintenance",
+        "price": "Custom Pricing",
+        "description": "Complete electrical management for large industrial facilities.",
         "features": [
-          "All Growth features",
-          "Dedicated Account Manager",
-          "Custom Integrations",
-          "Priority Support"
+          "All Standard features",
+          "Weekly Inspections",
+          "Dedicated Technician",
+          "24/7 Monitoring Systems",
+          "Annual System Upgrades"
         ],
         "cta": {
           "text": "Contact Sales",
-          "link": "#"
+          "link": "#contact"
         }
       }
     ]
   },
   "contact": {
-    "title": "Contact Us",
-    "description": "Have questions? Fill out the form below and we’ll get back to you!",
+    "title": "Request a Free Quote",
+    "description": "Tell us about your electrical project and we'll provide a detailed quote within 24 hours.",
     "fields": [
-      { "name": "name", "label": "Name", "type": "text", "required": false },
+      { "name": "name", "label": "Name", "type": "text", "required": true },
       { "name": "email", "label": "Email", "type": "email", "required": true },
-      { "name": "message", "label": "Message", "type": "textarea", "required": true }
+      { "name": "phone", "label": "Phone", "type": "tel", "required": true },
+      { "name": "company", "label": "Company", "type": "text", "required": false },
+      { "name": "projectType", "label": "Project Type", "type": "text", "required": false },
+      { "name": "message", "label": "Project Details", "type": "textarea", "required": true }
     ],
-    "submitLabel": "Send Message",
-    "successMessage": "Thank you for reaching out! We’ll get back to you soon."
+    "submitLabel": "Request Quote",
+    "successMessage": "Thank you for your inquiry! We'll contact you within 24 hours with a detailed quote.",
+    "contactInfo": {
+      "title": "Contact Information",
+      "phone": {
+        "label": "Phone",
+        "number": "(555) 123-4567",
+        "hours": "Mon-Fri: 8am - 6pm"
+      },
+      "email": {
+        "label": "Email",
+        "address": "info@electricalservices.com",
+        "responseTime": "We respond within 24 hours"
+      },
+      "location": {
+        "label": "Location",
+        "address": ["1234 Industrial Blvd", "Anytown, USA 12345"]
+      }
+    }
+  },
+  "testimonials": {
+    "title": "What Our Clients Say",
+    "description": "Here's what some of our clients have to say about our electrical services",
+    "image": "/static/images/services/testimonials-bg.jpg",
+    "testimonials": [
+      {
+        "name": "John Donovan",
+        "title": "Operations Manager, Midwest Manufacturing",
+        "quote": "Their team completed our factory rewiring project ahead of schedule and under budget. The new system has improved our efficiency by 35%."
+      },
+      {
+        "name": "Sarah Chen",
+        "title": "Facility Director, TechCore Industries",
+        "quote": "We've been using their maintenance services for over 3 years. Their preventative approach has eliminated unexpected downtime completely."
+      },
+      {
+        "name": "Michael Rodriguez",
+        "title": "CEO, Rodriguez Construction",
+        "quote": "Their electrical team integrated seamlessly with our construction crews. The quality of work and attention to detail was outstanding."
+      }
+    ]
   }
 }

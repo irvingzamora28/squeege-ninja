@@ -38,6 +38,7 @@ export interface HeroSection {
   description: string
   primaryCta: CtaButton
   secondaryCta: CtaButton
+  image?: string
 }
 
 export interface CtaSection {
@@ -59,6 +60,13 @@ export interface PricingSection {
   plans: PricingPlan[]
 }
 
+export interface TestimonialSection {
+  title?: string
+  description?: string
+  image?: string
+  testimonials: Testimonial[]
+}
+
 export interface Testimonial {
   name: string
   quote: string
@@ -78,11 +86,57 @@ export interface GallerySection {
   images: GalleryImage[]
 }
 
+export interface Service {
+  title: string
+  description: string
+  icon: string
+  image: string
+}
+
+export interface Project {
+  title: string
+  description: string
+  image: string
+  category: string
+  completionDate: string
+}
+
+export interface ProjectsSection {
+  title: string
+  description: string
+  items: Project[]
+}
+
 export interface ContactField {
   name: string
   label: string
   type: string
   required: boolean
+}
+
+export interface ContactInfo {
+  title: string
+  phone?: {
+    label: string
+    number: string
+    hours?: string
+  }
+  email?: {
+    label: string
+    address: string
+    responseTime?: string
+  }
+  location?: {
+    label: string
+    address: string[]
+  }
+}
+
+export interface EmergencyService {
+  title: string
+  description: string
+  hotlineLabel: string
+  hotlineNumber: string
 }
 
 export interface ContactSection {
@@ -91,6 +145,8 @@ export interface ContactSection {
   fields: ContactField[]
   submitLabel: string
   successMessage: string
+  contactInfo?: ContactInfo
+  emergencyService?: EmergencyService
 }
 
 export interface LandingContent {
@@ -103,6 +159,8 @@ export interface LandingContent {
   gallery?: GallerySection
   faqs: FaqsSection
   pricing?: PricingSection
-  testimonials?: Testimonial[]
+  testimonials?: TestimonialSection
   contact?: ContactSection
+  services?: Service[]
+  projects?: ProjectsSection
 }
