@@ -266,7 +266,7 @@ const CallToActionSection = () => {
 
 const TestimonialsSection = () => {
   const testimonials = landingContent.testimonials ?? []
-  if (!testimonials.length) return null
+  if (!testimonials) return null
 
   return (
     <section

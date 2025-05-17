@@ -574,14 +574,14 @@ const Main2 = () => {
   return (
     <>
       <main className="flex-auto">
-        {landingContent.hero && <HeroSection hero={hero} />}
-        {landingContent.mainFeatures && <FeaturesSection mainFeatures={mainFeatures} />}
-        {landingContent.features && <SecondaryFeaturesSection features={features} />}
-        {landingContent.cta && <CTASection cta={cta} />}
-        {landingContent.gallery && <GallerySection gallery={gallery} />}
-        {landingContent.pricing && <PricingSection pricing={pricing} />}
-        {landingContent.faqs && <FaqSection faqs={faqs} />}
-        {landingContent.contact && <Main2ContactSection contact={contact} />}
+        {hero && <HeroSection hero={hero} />}
+        {mainFeatures && <FeaturesSection mainFeatures={mainFeatures} />}
+        {features && <SecondaryFeaturesSection features={features} />}
+        {cta && <CTASection cta={cta} />}
+        {gallery && <GallerySection gallery={gallery} />}
+        {pricing && <PricingSection pricing={pricing} />}
+        {faqs && <FaqSection faqs={faqs} />}
+        {contact && <Main2ContactSection contact={contact} />}
       </main>
     </>
   )
