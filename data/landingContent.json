@@ -12,32 +12,36 @@
       "link": "#services"
     }
   },
-  "services": [
-    {
-      "title": "Industrial Installations",
-      "description": "Complete electrical system design and installation for manufacturing facilities, warehouses, and industrial complexes.",
-      "icon": "FaIndustry",
-      "image": "/static/images/services/service1.jpg"
-    },
-    {
-      "title": "Electrical Maintenance",
-      "description": "Preventative maintenance programs to ensure your electrical systems operate at peak efficiency and prevent costly downtime.",
-      "icon": "FaTools",
-      "image": "/static/images/services/service2.jpg"
-    },
-    {
-      "title": "Emergency Repairs",
-      "description": "24/7 emergency electrical repair services to minimize downtime and keep your business running smoothly.",
-      "icon": "FaBolt",
-      "image": "/static/images/services/service3.jpg"
-    },
-    {
-      "title": "System Upgrades",
-      "description": "Modernize your electrical infrastructure to improve efficiency, reduce costs, and meet current safety standards.",
-      "icon": "FaChartLine",
-      "image": "/static/images/services/service4.jpg"
-    }
-  ],
+  "services": {
+    "title": "Our Electrical Services",
+    "description": "We provide comprehensive electrical solutions for industrial and commercial facilities",
+    "items": [
+      {
+        "title": "Industrial Installations",
+        "description": "Complete electrical system design and installation for manufacturing facilities, warehouses, and industrial complexes.",
+        "icon": "FaIndustry",
+        "image": "/static/images/services/service1.jpg"
+      },
+      {
+        "title": "Electrical Maintenance",
+        "description": "Preventative maintenance programs to ensure your electrical systems operate at peak efficiency and prevent costly downtime.",
+        "icon": "FaTools",
+        "image": "/static/images/services/service2.jpg"
+      },
+      {
+        "title": "Emergency Repairs",
+        "description": "24/7 emergency electrical repair services to minimize downtime and keep your business running smoothly.",
+        "icon": "FaBolt",
+        "image": "/static/images/services/service3.jpg"
+      },
+      {
+        "title": "System Upgrades",
+        "description": "Modernize your electrical infrastructure to improve efficiency, reduce costs, and meet current safety standards.",
+        "icon": "FaChartLine",
+        "image": "/static/images/services/service4.jpg"
+      }
+    ]
+  },
   "projects": {
     "title": "Our Recent Projects",
     "description": "Take a look at some of our recent industrial electrical installations",

@@ -92,6 +92,12 @@ export interface GallerySection {
   images: GalleryImage[]
 }
 
+export interface ServiceSection {
+  title: string
+  description: string
+  items: Service[]
+}
+
 export interface Service {
   title: string
   description: string
@@ -158,13 +164,13 @@ export interface ContactSection {
 export interface LandingContent {
   hero: HeroSection
   mainFeatures: MainFeature[]
-  features: FeaturesSection[]
+  features: FeaturesSection
   cta: CtaSection
   gallery?: GallerySection
   faqs: FaqsSection
   pricing?: PricingSection
   testimonials?: TestimonialSection
   contact?: ContactSection
-  services?: Service[]
+  services?: ServiceSection
   projects?: ProjectsSection
 }

@@ -25,7 +25,10 @@ Generate a complete JSON object that follows this structure:
       "link": "#"
     }
   },
-  "services": [
+  "services": {
+    "title": "Services section title",
+    "description": "Services section description",
+    "items": [
     {
       "title": "Service 1 title",
       "description": "Service 1 description",
@@ -38,7 +41,7 @@ Generate a complete JSON object that follows this structure:
       "icon": "FaTools",
       "image": "/placeholder.jpg"
     }
-  ],
+  ] },
   "projects": {
     "title": "Projects section title",
     "description": "Projects section description",

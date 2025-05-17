@@ -130,6 +130,9 @@ const FeaturesSection = () => {
 
 const SecondaryFeaturesSection = () => {
   const { features } = landingContent
+
+  if (!features || features.items.length === 0) return null
+
   return (
     <section
       id="secondary-features"
@@ -171,7 +174,7 @@ const SecondaryFeaturesSection = () => {
           role="tablist"
           aria-orientation="horizontal"
         >
-          {features.map((feature) => {
+          {features.items.map((feature) => {
             return (
               <div key={feature.title}>
                 <div className="relative my-6 opacity-90 hover:opacity-100">
@@ -451,7 +454,7 @@ const Main3 = () => {
       <main>
         {landingContent.hero && <HeroSection />}
         {landingContent.mainFeatures?.length > 0 && <FeaturesSection />}
-        {landingContent.features?.length > 0 && <SecondaryFeaturesSection />}
+        {landingContent.features?.items?.length > 0 && <SecondaryFeaturesSection />}
         {landingContent.cta && <CallToActionSection />}
         {landingContent.gallery && (
           <GallerySection gallery={landingContent.gallery} variant="dark" />

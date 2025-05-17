@@ -21,7 +21,8 @@ const Header = () => {
     (link) =>
       !(
         (!landingContent.pricing && link.title === 'Pricing') ||
-        (!landingContent.features && link.title === 'Features')
+        (!landingContent.features && link.title === 'Features') ||
+        (!landingContent.contact && link.title === 'Contact')
       )
   )
   // Use logo from siteMetadata (always string)

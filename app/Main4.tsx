@@ -113,20 +113,20 @@ const HeroSection = () => {
 const ServicesSection = () => {
   const { services } = landingContent
 
-  if (!services || services.length === 0) return null
+  if (!services || services.items.length === 0) return null
 
   return (
     <section id="services" className="bg-white py-24 dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
-          <h2 className="mb-4 text-4xl font-bold md:text-5xl">Our Electrical Services</h2>
+          <h2 className="mb-4 text-4xl font-bold md:text-5xl">{services.title}</h2>
           <p className="mx-auto max-w-3xl text-xl text-gray-600 dark:text-gray-400">
-            We provide comprehensive electrical solutions for industrial and commercial facilities
+            {services.description}
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
-          {services.map((service, index) => {
+          {services.items.map((service, index) => {
             const IconComponent = serviceIconMap[service.icon] || FaIndustry
 
             return (
@@ -339,7 +339,7 @@ const FeaturesGridSection = () => {
   const { features } = landingContent
 
   return (
-    <section className="bg-gray-50 py-20 dark:bg-gray-800">
+    <section className="bg-gray-50 py-20 dark:bg-gray-800" id="features">
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
           <h2 className="mb-4 text-3xl font-bold md:text-4xl">{features.title}</h2>
@@ -884,7 +884,7 @@ const Main4 = () => {
       {landingContent.services && <ServicesSection />}
       {landingContent.projects && <ProjectsSection />}
       {landingContent.mainFeatures?.length > 0 && <MainFeaturesSection />}
-      {landingContent.features?.length > 0 && <FeaturesGridSection />}
+      {landingContent.features?.items?.length > 0 && <FeaturesGridSection />}
       {landingContent.testimonials && landingContent.testimonials.testimonials.length > 0 && (
         <TestimonialsSection />
       )}
