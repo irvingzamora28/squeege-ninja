@@ -400,7 +400,7 @@ const TestimonialsSection = () => {
             {testimonials.testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="hover:border-primary-500/50 group flex h-full flex-col rounded-xl border border-white/10 bg-white/10 p-8 backdrop-blur-sm transition-all hover:bg-white/15"
+                className="hover:border-primary-500 group flex h-full flex-col rounded-xl border border-white/10 bg-white/10 p-8 backdrop-blur-sm transition-all hover:bg-white/15"
               >
                 {/* Quote icon */}
                 <div className="text-primary-400 mb-6">
@@ -418,7 +418,7 @@ const TestimonialsSection = () => {
 
                 <div className="mt-auto flex items-start pt-8">
                   <div className="flex-shrink-0">
-                    <div className="ring-primary-500/50 group-hover:ring-primary-500 relative mr-4 h-16 w-16 overflow-hidden rounded-full ring-2 transition-all">
+                    <div className="ring-primary-500 group-hover:ring-primary-500 relative mr-4 h-16 w-16 overflow-hidden rounded-full ring-2 transition-all">
                       <Image
                         src={testimonial.image || 'https://picsum.photos/200'}
                         alt={testimonial.name}

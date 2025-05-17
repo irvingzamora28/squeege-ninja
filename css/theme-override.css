@@ -151,3 +151,75 @@
 .hover\:border-primary-500:hover * {
   border-color: #f59e0b !important;
 }
+
+/* Ring variants */
+.ring-primary-50,
+.ring-primary-50 * {
+  --tw-ring-color: #f8bb54 !important;
+}
+.ring-primary-100,
+.ring-primary-100 * {
+  --tw-ring-color: #f7b13c !important;
+}
+.ring-primary-200,
+.ring-primary-200 * {
+  --tw-ring-color: #f6a823 !important;
+}
+.ring-primary-300,
+.ring-primary-300 * {
+  --tw-ring-color: #f6a317 !important;
+}
+.ring-primary-400,
+.ring-primary-400 * {
+  --tw-ring-color: #f5a010 !important;
+}
+.ring-primary-500,
+.ring-primary-500 * {
+  --tw-ring-color: #f59e0b !important;
+}
+.ring-primary-600,
+.ring-primary-600 * {
+  --tw-ring-color: #dd8e0a !important;
+}
+.ring-primary-700,
+.ring-primary-700 * {
+  --tw-ring-color: #c47e09 !important;
+}
+.ring-primary-800,
+.ring-primary-800 * {
+  --tw-ring-color: #ac6f08 !important;
+}
+.ring-primary-900,
+.ring-primary-900 * {
+  --tw-ring-color: #935f07 !important;
+}
+.ring-primary-950,
+.ring-primary-950 * {
+  --tw-ring-color: #7b4f06 !important;
+}
+
+/* Hover ring variants */
+.hover\:ring-primary-500:hover,
+.hover\:ring-primary-500:hover * {
+  --tw-ring-color: #f59e0b !important;
+}
+.hover\:ring-primary-600:hover,
+.hover\:ring-primary-600:hover * {
+  --tw-ring-color: #dd8e0a !important;
+}
+.hover\:ring-primary-700:hover,
+.hover\:ring-primary-700:hover * {
+  --tw-ring-color: #c47e09 !important;
+}
+.hover\:ring-primary-800:hover,
+.hover\:ring-primary-800:hover * {
+  --tw-ring-color: #ac6f08 !important;
+}
+.hover\:ring-primary-900:hover,
+.hover\:ring-primary-900:hover * {
+  --tw-ring-color: #935f07 !important;
+}
+.hover\:ring-primary-950:hover,
+.hover\:ring-primary-950:hover * {
+  --tw-ring-color: #7b4f06 !important;
+}
