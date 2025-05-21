@@ -15,6 +15,16 @@ export default function LandingContentPage() {
   const [saveMessage, setSaveMessage] = useState('')
   const [editorMode, setEditorMode] = useState<'json' | 'form'>('json')
 
+  // Section tab state for form editor
+  const [activeSection, setActiveSection] = useState('')
+  useEffect(() => {
+    const sectionKeys =
+      parsedContent && typeof parsedContent === 'object' && !Array.isArray(parsedContent)
+        ? Object.keys(parsedContent)
+        : []
+    if (sectionKeys.length > 0) setActiveSection(sectionKeys[0])
+  }, [content, parsedContent])
+
   // Fetch the current landing content
   useEffect(() => {
     async function fetchLandingContent() {
@@ -246,11 +256,37 @@ export default function LandingContentPage() {
                 </div>
               </form>
             </div>
-          ) : (
-            parsedContent && (
-              <FormEditor content={parsedContent} onSave={handleFormSubmit} isSaving={isSaving} />
-            )
-          )}
+          ) : parsedContent &&
+            typeof parsedContent === 'object' &&
+            !Array.isArray(parsedContent) ? (
+            <>
+              {Object.keys(parsedContent).length > 1 ? (
+                <div className="mb-4 flex gap-2">
+                  {Object.keys(parsedContent).map((key) => (
+                    <button
+                      key={key}
+                      onClick={() => setActiveSection(key)}
+                      className={
+                        activeSection === key
+                          ? 'bg-primary-600 rounded px-3 py-1 text-white'
+                          : 'rounded bg-gray-200 px-3 py-1 text-gray-700 hover:bg-gray-300'
+                      }
+                    >
+                      {key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+              <FormEditor
+                content={parsedContent[activeSection] || parsedContent}
+                onSave={(sectionData) => {
+                  const updated = { ...parsedContent, [activeSection]: sectionData }
+                  handleFormSubmit(updated)
+                }}
+                isSaving={isSaving}
+              />
+            </>
+          ) : null}
         </>
       )}
     </>
