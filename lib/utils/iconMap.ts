@@ -8,7 +8,7 @@ import {
   HiOutlineChartBar,
   HiOutlineRocketLaunch,
 } from 'react-icons/hi2'
-import { FaMagic, FaBars } from 'react-icons/fa'
+import { FaMagic, FaBars, FaShieldAlt, FaBolt, FaClock } from 'react-icons/fa'
 import {
   FiUsers,
   FiSmartphone,
@@ -61,6 +61,9 @@ export const iconMap: Record<string, React.ComponentType<SVGProps<SVGSVGElement>
   FiEdit,
   FaMagic,
   FaBars,
+  FaBolt,
+  FaShieldAlt,
+  FaClock,
   FiCamera,
   FiEye,
   FiMail,

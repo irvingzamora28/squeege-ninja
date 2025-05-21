@@ -3,6 +3,7 @@ import Main from './Main'
 import Main2 from './Main2'
 import Main3 from './Main3'
 import Main4 from './Main4'
+import Main5 from './Main5'
 import { getSiteConfig } from '../lib/config'
 
 export default async function Page() {
@@ -23,6 +24,10 @@ export default async function Page() {
 
   if (activeTemplate === 'Main4') {
     return <Main4 />
+  }
+
+  if (activeTemplate === 'Main5') {
+    return <Main5 />
   }
 
   // Default to Main
