@@ -4,15 +4,21 @@ import { useEffect, useState } from 'react'
 import type { EmailRecord } from '@/types/email'
 import { emailTemplates } from '@/lib/email/config'
 import { sendEmail } from '@/lib/email/client'
+import type { EmailTemplateDataInstance } from '@/lib/models/emailTemplateData'
 
 export default function EmailsPage() {
   const [emails, setEmails] = useState<EmailRecord[]>([])
   const [selectedEmails, setSelectedEmails] = useState<Set<string>>(new Set())
   const [selectedTemplate, setSelectedTemplate] = useState<keyof typeof emailTemplates>('welcome')
+  const [templateDataInstances, setTemplateDataInstances] = useState<EmailTemplateDataInstance[]>(
+    []
+  )
+  const [selectedDataInstance, setSelectedDataInstance] =
+    useState<EmailTemplateDataInstance | null>(null)
   const [isSending, setIsSending] = useState(false)
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
+  const [error, setError] = useState<string>('')
 
   useEffect(() => {
     const fetchEmails = async () => {
@@ -31,6 +37,17 @@ export default function EmailsPage() {
     }
     fetchEmails()
   }, [])
+
+  // Fetch template data instances when selectedTemplate changes
+  useEffect(() => {
+    if (!selectedTemplate) return
+    fetch(`/api/template-data?template=${selectedTemplate}`)
+      .then((res) => res.json())
+      .then((instances) => {
+        setTemplateDataInstances(instances || [])
+        setSelectedDataInstance(instances && instances.length > 0 ? instances[0] : null)
+      })
+  }, [selectedTemplate])
 
   const handleEmailToggle = (email: string) => {
     const newSelected = new Set(selectedEmails)
@@ -55,25 +72,36 @@ export default function EmailsPage() {
       setMessage({ text: 'Please select at least one email', type: 'error' })
       return
     }
+    if (!selectedDataInstance) {
+      setMessage({ text: 'Please select a data instance for this template', type: 'error' })
+      return
+    }
 
     setIsSending(true)
     setMessage(null)
 
     try {
       const results = await Promise.allSettled(
-        Array.from(selectedEmails).map((email) =>
-          sendEmail({
+        Array.from(selectedEmails).map((email) => {
+          let parsedData: unknown = selectedDataInstance.data
+          if (typeof parsedData === 'string') {
+            try {
+              parsedData = JSON.parse(parsedData)
+            } catch {
+              // Failed to parse template data, fallback to empty object
+              parsedData = {}
+            }
+          }
+          return sendEmail({
             to: email,
             subject: `Your ${selectedTemplate} email`,
             template: selectedTemplate,
-            data: {
-              name: email.split('@')[0],
-              welcomeMessage: `This is a test ${selectedTemplate} email`,
-              ctaUrl: 'https://example.com',
-              ctaText: 'Learn More',
-            },
+            data:
+              typeof parsedData === 'object' && parsedData !== null
+                ? { ...parsedData, name: email.split('@')[0] }
+                : { name: email.split('@')[0] },
           })
-        )
+        })
       )
 
       const successCount = results.filter((r) => r.status === 'fulfilled' && r.value.success).length
@@ -102,7 +130,7 @@ export default function EmailsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl p-4 sm:p-8">
+    <div className="max-w-8xl mx-auto p-4 sm:p-8">
       <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <h1 className="text-3xl font-bold dark:text-white">Email Subscribers</h1>
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
@@ -118,6 +146,61 @@ export default function EmailsPage() {
               </option>
             ))}
           </select>
+          {/* Data Instance Dropdown */}
+          <select
+            value={selectedDataInstance ? String(selectedDataInstance.created_at) : ''}
+            onChange={(e) => {
+              const instance = templateDataInstances.find(
+                (i) => String(i.created_at) === e.target.value
+              )
+              setSelectedDataInstance(instance || null)
+            }}
+            className="rounded-md border px-3 py-2 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+            disabled={isSending || templateDataInstances.length === 0}
+            style={{ minWidth: 180 }}
+          >
+            {templateDataInstances.length === 0 ? (
+              <option value="">No Data Instances</option>
+            ) : (
+              templateDataInstances.map((instance, idx) => {
+                // Parse data if it's a string
+                let parsedData: unknown = instance.data
+                if (typeof parsedData === 'string') {
+                  try {
+                    parsedData = JSON.parse(parsedData)
+                  } catch {
+                    // Failed to parse template data, fallback to empty object
+                    parsedData = {}
+                  }
+                }
+                // Prefer updated_at, fallback to created_at, fallback to empty string
+                const dateStr = instance.updated_at || instance.created_at || ''
+                const dateLabel = dateStr ? new Date(dateStr).toLocaleString() : 'No Date'
+                return (
+                  <option
+                    key={instance.id ?? `${dateStr}-${idx}`}
+                    value={instance.id ?? `${dateStr}-${idx}`}
+                  >
+                    {instance.template ||
+                      (typeof parsedData === 'object' &&
+                      parsedData !== null &&
+                      'ebookTitle' in parsedData
+                        ? (parsedData as { ebookTitle?: string }).ebookTitle
+                        : undefined) ||
+                      `Instance #${idx + 1}`}{' '}
+                    ({dateLabel})
+                  </option>
+                )
+              })
+            )}
+          </select>
+          <a
+            href={`/allset/emails/template-data?template=${selectedTemplate}`}
+            className="flex items-center justify-center rounded-md bg-green-600 px-4 py-2 text-white hover:bg-green-700"
+            style={{ textDecoration: 'none' }}
+          >
+            + Create Data Instance
+          </a>
           <button
             onClick={handleSendEmails}
             disabled={isSending || selectedEmails.size === 0}

@@ -1,0 +1,58 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { promises as fs } from 'fs'
+import path from 'path'
+
+// Store a simple download log in memory (for demo; replace with DB in production)
+const DOWNLOAD_LOG_PATH = path.join(process.cwd(), 'data', 'download-log.json')
+const UPLOADS_DIR = path.join(process.cwd(), 'public', 'uploads')
+
+async function hasDownloaded(downloadKey: string, userId: string): Promise<boolean> {
+  try {
+    const logRaw = await fs.readFile(DOWNLOAD_LOG_PATH, 'utf8')
+    const log = JSON.parse(logRaw)
+    return Boolean(log[downloadKey]?.includes(userId))
+  } catch {
+    return false
+  }
+}
+
+async function logDownload(downloadKey: string, userId: string) {
+  let log = {}
+  try {
+    const logRaw = await fs.readFile(DOWNLOAD_LOG_PATH, 'utf8')
+    log = JSON.parse(logRaw)
+  } catch (e) {
+    /* ignore error, fallback to 404 */
+  }
+  if (!log[downloadKey]) log[downloadKey] = []
+  if (!log[downloadKey].includes(userId)) log[downloadKey].push(userId)
+  await fs.writeFile(DOWNLOAD_LOG_PATH, JSON.stringify(log, null, 2))
+}
+
+export async function GET(req: NextRequest) {
+  const url = new URL(req.url)
+  const file = url.searchParams.get('file') // e.g. '1712345678-myfile.pdf'
+  const userId = url.searchParams.get('user') // e.g. user email or id
+  if (!file || !userId) return NextResponse.json({ error: 'Missing file or user' }, { status: 400 })
+
+  const downloadKey = file // could be more complex (e.g. template+file)
+  if (await hasDownloaded(downloadKey, userId)) {
+    return NextResponse.json({ error: 'Already downloaded' }, { status: 403 })
+  }
+
+  const filePath = path.join(UPLOADS_DIR, file)
+  try {
+    await fs.access(filePath)
+    await logDownload(downloadKey, userId)
+    const fileBuffer = await fs.readFile(filePath)
+    return new NextResponse(fileBuffer, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/octet-stream',
+        'Content-Disposition': `attachment; filename="${file}"`,
+      },
+    })
+  } catch {
+    return NextResponse.json({ error: 'File not found' }, { status: 404 })
+  }
+}

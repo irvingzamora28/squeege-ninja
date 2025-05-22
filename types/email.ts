@@ -1,3 +1,16 @@
+export interface EbookDeliveryEmailVars {
+  name: string
+  ebookTitle: string
+  ebookDescription?: string
+  ebookCover?: string
+  downloadUrl: string
+  expiryNotice?: string
+  additionalContent?: string
+  siteName: string
+  showUnsubscribe?: boolean
+  unsubscribeUrl?: string
+}
+
 export interface EmailTemplateData {
   [key: string]: string | number | boolean | undefined | null
   name?: string

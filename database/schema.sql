@@ -11,3 +11,12 @@ CREATE TABLE IF NOT EXISTS allset_contact_submissions (
   message TEXT NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Email Template Data Table
+CREATE TABLE IF NOT EXISTS allset_email_template_data (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  template TEXT NOT NULL,
+  data TEXT NOT NULL, -- JSON stringified data
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);

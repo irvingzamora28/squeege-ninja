@@ -71,6 +71,39 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
         </div>
       )
     }
+    if (fieldKey === 'downloadUrl') {
+      return (
+        <div key={fullKey} className="mb-4">
+          <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            {label}
+          </label>
+          <input
+            type="file"
+            accept="application/pdf,application/epub+zip,.mobi,.doc,.docx,.txt,.zip,.rar"
+            className="block w-full rounded border-gray-300 shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+            onChange={async (e) => {
+              const file = e.target.files?.[0]
+              if (!file) return
+              const formData = new FormData()
+              formData.append('file', file)
+              const res = await fetch('/api/upload', { method: 'POST', body: formData })
+              const { url } = await res.json()
+              handleFieldChange(fullKey, url)
+            }}
+          />
+          {getValueAtPath(formData, fullKey) && (
+            <a
+              href={getValueAtPath(formData, fullKey)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-1 block text-blue-600 underline"
+            >
+              Download uploaded file
+            </a>
+          )}
+        </div>
+      )
+    }
     return (
       <div key={fullKey} className="mb-4">
         <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
