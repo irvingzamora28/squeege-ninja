@@ -47,6 +47,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   </NavLink>
                   <NavLink href="/allset/posts">Posts</NavLink>
                   <NavLink href="/allset/emails">Emails</NavLink>
+                  <NavLink href="/allset/cta-config">CTA Config</NavLink>
                   <NavLink href="/allset/landing-content">Landing Content</NavLink>
                   <NavLink href="/allset/templates">Templates</NavLink>
                   <NavLink href="/allset/settings">Settings</NavLink>
@@ -78,6 +79,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </NavLink>
             <NavLink href="/allset/emails" className="whitespace-nowrap">
               Emails
+            </NavLink>
+            <NavLink href="/allset/cta-config" className="whitespace-nowrap">
+              CTA Config
             </NavLink>
             <NavLink href="/allset/landing-content" className="whitespace-nowrap">
               Landing Content

@@ -1,5 +1,6 @@
 // Database provider interface for scalable, swappable DB backends
 import type { EmailTemplateDataInstance } from './models/emailTemplateData'
+import type { CTAConfigInstance } from './models/ctaConfig'
 
 export interface IDatabaseProvider {
   getAllEmails(): Promise<{ id: number; email: string; created_at: string }[]>
@@ -25,4 +26,15 @@ export interface IDatabaseProvider {
     updates: Partial<Omit<EmailTemplateDataInstance, 'id' | 'created_at' | 'updated_at'>>
   ): Promise<void>
   deleteTemplateData(id: number): Promise<void>
+
+  // CTA Config Methods
+  getAllCTAConfig(): Promise<CTAConfigInstance[]>
+  getCTAConfigById(id: number): Promise<CTAConfigInstance | null>
+  getCTAConfigByType(cta_type: string): Promise<CTAConfigInstance | null>
+  insertCTAConfig(instance: Omit<CTAConfigInstance, 'id' | 'updated_at'>): Promise<number>
+  updateCTAConfig(
+    id: number,
+    updates: Partial<Omit<CTAConfigInstance, 'id' | 'updated_at'>>
+  ): Promise<void>
+  deleteCTAConfig(id: number): Promise<void>
 }

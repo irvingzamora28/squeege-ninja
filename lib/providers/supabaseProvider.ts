@@ -3,13 +3,16 @@ import { SupabaseEmailModel } from './supabase/emailModel'
 import { SupabaseEmailTemplateDataProvider } from './supabase/emailTemplateDataModel'
 import { IDatabaseProvider } from '../dbProvider'
 import { ContactSubmission, SupabaseContactModel } from '../models/contact'
-import type { EmailTemplateDataInstance } from '../models/emailTemplateData'
+import { EmailTemplateDataInstance } from '../models/emailTemplateData'
+import { CTAConfigInstance } from '../models/ctaConfig'
+import { SupabaseCTAConfigProvider } from './supabase/ctaConfigModel'
 
 export class SupabaseProvider implements IDatabaseProvider {
   private supabase: SupabaseClient
   private emailModel: SupabaseEmailModel
   private contactModel: SupabaseContactModel
   private emailTemplateDataModel: SupabaseEmailTemplateDataProvider
+  private ctaConfigModel: SupabaseCTAConfigProvider
 
   constructor() {
     const supabaseUrl = process.env.SUPABASE_URL || ''
@@ -21,6 +24,7 @@ export class SupabaseProvider implements IDatabaseProvider {
     this.emailModel = new SupabaseEmailModel(this.supabase)
     this.contactModel = new SupabaseContactModel(this.supabase)
     this.emailTemplateDataModel = new SupabaseEmailTemplateDataProvider(this.supabase)
+    this.ctaConfigModel = new SupabaseCTAConfigProvider(this.supabase)
   }
 
   async getAllEmails(): Promise<{ id: number; email: string; created_at: string }[]> {
@@ -68,5 +72,28 @@ export class SupabaseProvider implements IDatabaseProvider {
 
   async deleteTemplateData(id: number): Promise<void> {
     return this.emailTemplateDataModel.delete(id)
+  }
+
+  // CTA Config Methods
+  async getAllCTAConfig(): Promise<CTAConfigInstance[]> {
+    return this.ctaConfigModel.getAll()
+  }
+  async getCTAConfigById(id: number): Promise<CTAConfigInstance | null> {
+    return this.ctaConfigModel.getById(id)
+  }
+  async getCTAConfigByType(cta_type: string): Promise<CTAConfigInstance | null> {
+    return this.ctaConfigModel.getByType(cta_type)
+  }
+  async insertCTAConfig(instance: Omit<CTAConfigInstance, 'id' | 'updated_at'>): Promise<number> {
+    return this.ctaConfigModel.insert(instance)
+  }
+  async updateCTAConfig(
+    id: number,
+    updates: Partial<Omit<CTAConfigInstance, 'id' | 'updated_at'>>
+  ): Promise<void> {
+    return this.ctaConfigModel.update(id, updates)
+  }
+  async deleteCTAConfig(id: number): Promise<void> {
+    return this.ctaConfigModel.delete(id)
   }
 }
