@@ -117,7 +117,7 @@ const FeaturesSection = () => {
                   className="w-full"
                   style={{ color: 'transparent' }}
                   sizes="(min-width: 1024px) 67.8125rem, (min-width: 640px) 100vw, 45rem"
-                  src={imageMap[selectedFeature.image]}
+                  src={selectedFeature.image}
                 />
               </div>
             </div>
