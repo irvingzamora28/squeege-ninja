@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
 
   // Only log and redirect, do not try to access the file system
   try {
-    await logDownload(downloadKey, userId)
+    // await logDownload(downloadKey, userId)
     // Redirect to the static file in public/uploads
     return NextResponse.redirect(`/uploads/${file}`, 302)
   } catch {
