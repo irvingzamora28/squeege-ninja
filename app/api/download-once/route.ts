@@ -40,19 +40,12 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Already downloaded' }, { status: 403 })
   }
 
-  const filePath = path.join(UPLOADS_DIR, file)
+  // Only log and redirect, do not try to access the file system
   try {
-    await fs.access(filePath)
     await logDownload(downloadKey, userId)
-    const fileBuffer = await fs.readFile(filePath)
-    return new NextResponse(fileBuffer, {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/octet-stream',
-        'Content-Disposition': `attachment; filename="${file}"`,
-      },
-    })
+    // Redirect to the static file in public/uploads
+    return NextResponse.redirect(`/uploads/${file}`, 302)
   } catch {
-    return NextResponse.json({ error: 'File not found' }, { status: 404 })
+    return NextResponse.json({ error: 'File not found or logging failed' }, { status: 404 })
   }
 }
