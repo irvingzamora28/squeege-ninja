@@ -19,7 +19,7 @@ const imageMap = {
 }
 
 const FeaturesSection = ({ mainFeatures }) => {
-  const [selectedFeature, setSelectedFeature] = useState(mainFeatures[0])
+  const [selectedFeature, setSelectedFeature] = useState(mainFeatures.items[0])
 
   return (
     <section
@@ -35,7 +35,7 @@ const FeaturesSection = ({ mainFeatures }) => {
             role="tablist"
             aria-orientation="vertical"
           >
-            {mainFeatures.map((feature) => {
+            {mainFeatures.items.map((feature) => {
               return (
                 <button
                   key={feature.id}

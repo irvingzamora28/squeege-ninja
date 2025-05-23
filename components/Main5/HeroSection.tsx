@@ -6,13 +6,13 @@ import { HiOutlineSparkles } from 'react-icons/hi'
 import Link from 'next/link'
 import Image from 'next/image'
 import { containerVariants, itemVariants } from './AnimationVariants'
-import { Feature, HeroSection as HeroSectionType } from 'app/allset/landing-content/types'
+import { MainFeature, HeroSection as HeroSectionType } from 'app/allset/landing-content/types'
 import { FiEye } from 'react-icons/fi'
 import FeatureIcon from '@/components/FeatureIcon'
 
 interface HeroSectionProps {
   hero: HeroSectionType
-  mainFeatures: Feature[]
+  mainFeatures: MainFeature[]
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ hero, mainFeatures }) => {

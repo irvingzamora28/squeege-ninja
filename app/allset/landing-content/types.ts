@@ -5,6 +5,12 @@ export interface CtaButton {
   link: string
 }
 
+export interface MainFeaturesSection {
+  title?: string
+  description?: string
+  items: MainFeature[]
+}
+
 export interface MainFeature {
   id: number
   icon: string
@@ -167,7 +173,7 @@ export interface ContactSection {
 
 export interface LandingContent {
   hero: HeroSection
-  mainFeatures: MainFeature[]
+  mainFeatures: MainFeaturesSection
   features: FeaturesSection
   cta: CtaSection
   gallery?: GallerySection

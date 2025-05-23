@@ -29,9 +29,9 @@ const Main5 = () => {
   const { hero, mainFeatures, features, cta, pricing, contact, faqs, testimonials } = landingContent
   return (
     <div className="min-h-screen overflow-hidden bg-gradient-to-b from-gray-50 to-white text-gray-900 dark:from-gray-900 dark:to-gray-800 dark:text-gray-100">
-      <HeroSection hero={hero} mainFeatures={mainFeatures} />
+      <HeroSection hero={hero} mainFeatures={mainFeatures.items} />
       <StatsSection stats={stats} />
-      <MainFeaturesSection mainFeatures={mainFeatures} />
+      <MainFeaturesSection mainFeatures={mainFeatures.items} />
       <AppShowcaseSection />
       <FeaturesSection features={features} />
       {testimonials && <TestimonialsSection testimonials={testimonials} />}

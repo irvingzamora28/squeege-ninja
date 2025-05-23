@@ -159,7 +159,7 @@ const MainFeaturesSection = ({ mainFeatures }) => (
   <div className="py-16">
     <h2 className="mb-12 text-center text-3xl font-bold">Main Features</h2>
     <div className="grid gap-8 md:grid-cols-3">
-      {mainFeatures.map((feature) => (
+      {mainFeatures.items.map((feature) => (
         <div
           key={feature.id}
           className="rounded-lg border border-gray-200 p-6 transition-shadow hover:shadow-lg dark:border-gray-700"

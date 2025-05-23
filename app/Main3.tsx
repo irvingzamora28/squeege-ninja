@@ -53,7 +53,7 @@ const imageMap = {
 }
 
 const FeaturesSection = () => {
-  const [selectedFeature, setSelectedFeature] = useState(landingContent.mainFeatures[0])
+  const [selectedFeature, setSelectedFeature] = useState(landingContent.mainFeatures.items[0])
 
   return (
     <section
@@ -69,7 +69,7 @@ const FeaturesSection = () => {
               role="tablist"
               aria-orientation="vertical"
             >
-              {landingContent.mainFeatures.map((feature) => {
+              {landingContent.mainFeatures.items.map((feature) => {
                 return (
                   <div
                     key={feature.title}
@@ -452,7 +452,7 @@ const Main3 = () => {
     <div>
       <main>
         {landingContent.hero && <HeroSection />}
-        {landingContent.mainFeatures?.length > 0 && <FeaturesSection />}
+        {landingContent.mainFeatures?.items?.length > 0 && <FeaturesSection />}
         {landingContent.features?.items?.length > 0 && <SecondaryFeaturesSection />}
         {landingContent.cta && <CallToActionSection />}
         {landingContent.gallery && (

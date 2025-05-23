@@ -190,14 +190,14 @@ const MainFeaturesSection = () => {
     <section className="bg-gray-50 py-20 dark:bg-gray-800">
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">Why Choose Us</h2>
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">{mainFeatures.title}</h2>
           <p className="mx-auto max-w-3xl text-xl text-gray-600 dark:text-gray-400">
-            Our team of certified professionals delivers excellence in every project
+            {mainFeatures.description}
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
-          {mainFeatures.map((feature, index) => {
+          {mainFeatures.items.map((feature, index) => {
             const IconComponent = featureIconMap[feature.icon] || FaBolt
 
             return (
@@ -883,7 +883,7 @@ const Main4 = () => {
       <HeroSection />
       {landingContent.services && <ServicesSection />}
       {landingContent.projects && <ProjectsSection />}
-      {landingContent.mainFeatures?.length > 0 && <MainFeaturesSection />}
+      {landingContent.mainFeatures?.items?.length > 0 && <MainFeaturesSection />}
       {landingContent.features?.items?.length > 0 && <FeaturesGridSection />}
       {landingContent.testimonials && landingContent.testimonials.testimonials.length > 0 && (
         <TestimonialsSection />

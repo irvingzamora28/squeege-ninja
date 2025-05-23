@@ -55,7 +55,10 @@ Generate a complete JSON object that follows this structure:
       }
     ]
   },
-  "mainFeatures": [
+  "mainFeatures": {
+    "title": "Main Features",
+    "description": "Main Features description",
+    "items": [
     {
       "id": 1,
       "icon": "FaBolt",
@@ -77,7 +80,7 @@ Generate a complete JSON object that follows this structure:
       "description": "Feature 3 description",
       "image": "/placeholder.jpg"
     }
-  ],
+  ]},
   "features": {
     "title": "Features section title",
     "description": "Features section description",
