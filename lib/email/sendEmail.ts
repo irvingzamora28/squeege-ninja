@@ -25,7 +25,6 @@ export async function sendEmail({
       ...data,
       siteName: process.env.NEXT_PUBLIC_SITE_NAME || 'Our Service',
       currentYear: new Date().getFullYear(),
-      downloadUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/api/download-once?file=${encodeURIComponent(data.downloadUrl ? data.downloadUrl.replace('/uploads/', '') : '')}&user=${encodeURIComponent(to)}`,
       unsubscribeUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/unsubscribe?email=${encodeURIComponent(to)}`,
     }
 

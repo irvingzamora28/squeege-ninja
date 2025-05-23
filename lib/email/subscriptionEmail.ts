@@ -36,6 +36,11 @@ export async function sendSubscriptionEmail(
     templateData = {} as EmailTemplateData
   }
 
+  // If templateData contains downloadUrl, add it to templateData
+  if (templateData.downloadUrl) {
+    templateData.downloadUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/download-once?file=${encodeURIComponent(templateData.downloadUrl.replace('/uploads/', ''))}&user=${encodeURIComponent(email)}`
+  }
+
   // Send the email using the correct template
   const subject =
     templateData.subject ||
