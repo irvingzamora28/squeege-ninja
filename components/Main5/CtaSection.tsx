@@ -16,7 +16,7 @@ const CtaSection: React.FC<CtaSectionProps> = ({ cta }) => {
   const [email, setEmail] = useState('')
   const { subscribe, status, message } = useEmailSubscription()
   return (
-    <section className="relative overflow-hidden py-24">
+    <section id="cta" className="relative overflow-hidden py-24">
       {/* Background gradient */}
       <div className="from-primary-600 absolute inset-0 bg-gradient-to-br to-purple-700"></div>
 

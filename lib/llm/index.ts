@@ -106,6 +106,28 @@ Generate a complete JSON object that follows this structure:
     },
     "collectEmail": true
   },
+  "stats": {
+    "title": "Stats section title",
+    "description": "Stats section description",
+    "items": [
+      {
+        "value": "98%",
+        "label": "User Satisfaction"
+      },
+      {
+        "value": "50+",
+        "label": "Items"
+      },
+      {
+        "value": "50K+",
+        "label": "Active Users"
+      },
+      {
+        "value": "5M+",
+        "label": "Item"
+      }
+    ]
+  },
   "faqs": {
     "title": "Frequently Asked Questions",
     "description": "Common questions about our product",

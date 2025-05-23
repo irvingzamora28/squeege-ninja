@@ -171,6 +171,17 @@ export interface ContactSection {
   emergencyService?: EmergencyService
 }
 
+export interface StatsSection {
+  title: string
+  description: string
+  items: StatItem[]
+}
+
+export interface StatItem {
+  value: string
+  label: string
+}
+
 export interface LandingContent {
   hero: HeroSection
   mainFeatures: MainFeaturesSection
@@ -183,4 +194,5 @@ export interface LandingContent {
   contact?: ContactSection
   services?: ServiceSection
   projects?: ProjectsSection
+  stats?: StatsSection
 }

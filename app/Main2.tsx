@@ -9,7 +9,7 @@ import dataLandingContent from '@/data/landingContent.json'
 import Link from 'next/link'
 import { HiCheckCircle } from 'react-icons/hi2'
 import FeatureIcon from '@/components/FeatureIcon'
-import { LandingContent, GalleryImage } from './allset/landing-content/types'
+import { LandingContent, GalleryImage, MainFeaturesSection } from './allset/landing-content/types'
 
 const landingContent = dataLandingContent as LandingContent
 
@@ -18,7 +18,7 @@ const imageMap = {
   dashboardDemoImage: dashboardDemoImage,
 }
 
-const FeaturesSection = ({ mainFeatures }) => {
+const FeaturesSection = ({ mainFeatures }: { mainFeatures: MainFeaturesSection }) => {
   const [selectedFeature, setSelectedFeature] = useState(mainFeatures.items[0])
 
   return (

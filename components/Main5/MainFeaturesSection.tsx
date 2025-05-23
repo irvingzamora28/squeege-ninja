@@ -5,19 +5,9 @@ import { motion } from 'framer-motion'
 import { FiArrowRight } from 'react-icons/fi'
 import { containerVariants, itemVariants, fadeInUpVariants } from './AnimationVariants'
 import FeatureIcon from '@/components/FeatureIcon'
+import { MainFeaturesSection as MainFeaturesSectionType } from 'app/allset/landing-content/types'
 
-interface MainFeature {
-  id: number
-  icon: string
-  title: string
-  description: string
-}
-
-interface MainFeaturesSectionProps {
-  mainFeatures: MainFeature[]
-}
-
-const MainFeaturesSection: React.FC<MainFeaturesSectionProps> = ({ mainFeatures }) => {
+const MainFeaturesSection = ({ mainFeatures }: { mainFeatures: MainFeaturesSectionType }) => {
   return (
     <section className="bg-white py-24 dark:bg-gray-800" id="main-features">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -26,9 +16,27 @@ const MainFeaturesSection: React.FC<MainFeaturesSectionProps> = ({ mainFeatures 
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
           variants={containerVariants}
+          className="mb-16 text-center"
+        >
+          <motion.h2 variants={itemVariants} className="mb-4 text-3xl font-bold md:text-4xl">
+            {mainFeatures.title}
+          </motion.h2>
+          <motion.p
+            variants={itemVariants}
+            className="mx-auto max-w-3xl text-xl text-gray-600 dark:text-gray-400"
+          >
+            {mainFeatures.description}
+          </motion.p>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={containerVariants}
           className="grid gap-8 md:grid-cols-3"
         >
-          {mainFeatures.map((feature) => (
+          {mainFeatures.items.map((feature) => (
             <motion.div
               key={feature.id}
               variants={fadeInUpVariants}
