@@ -5,8 +5,17 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { extractHandlebarsVariables } from '@/lib/utils/handlebarsVars'
 import FormEditor from '../../landing-content/components/FormEditor'
 import type { EmailTemplateData } from '@/types/email'
+import { Suspense } from 'react'
 
 export default function TemplateDataPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TemplateDataPageContent />
+    </Suspense>
+  )
+}
+
+function TemplateDataPageContent() {
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -44,7 +53,6 @@ export default function TemplateDataPage() {
       .catch(() => setError('Network error loading template content'))
   }, [template])
 
-  // Save handler for FormEditor
   const handleSave = async (data: EmailTemplateData) => {
     setIsSaving(true)
     setError(null)
