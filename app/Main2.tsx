@@ -351,9 +351,9 @@ const PricingSection = ({ pricing }) => {
                   <div className="order-last mt-6">
                     <ul className="-my-2 divide-y divide-gray-200 text-sm text-slate-700 dark:text-slate-300">
                       {plan.features.map((feature) => (
-                        <li key={feature} className="flex py-2">
+                        <li key={feature.text} className="flex py-2">
                           <HiCheckCircle className="text-primary-500 h-6 w-6 flex-none" />
-                          <span className="ml-4">{feature}</span>
+                          <span className="ml-4">{feature.text}</span>
                         </li>
                       ))}
                     </ul>
@@ -382,9 +382,9 @@ const PricingSection = ({ pricing }) => {
                   <div className="order-last mt-6">
                     <ul className="-my-2 divide-y divide-gray-800 text-sm text-gray-300 dark:text-slate-600">
                       {plan.features.map((feature) => (
-                        <li key={feature} className="flex py-2">
+                        <li key={feature.text} className="flex py-2">
                           <HiCheckCircle className="h-6 w-6 flex-none text-white dark:text-slate-800" />
-                          <span className="ml-4">{feature}</span>
+                          <span className="ml-4">{feature.text}</span>
                         </li>
                       ))}
                     </ul>

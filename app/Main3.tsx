@@ -425,7 +425,7 @@ const PricingSection = () => {
                       className={`h-5 w-5 flex-none ${plan.highlighted ? 'text-slate-100' : 'text-slate-400'}`}
                       aria-hidden="true"
                     />
-                    <span className="ml-4">{feature}</span>
+                    <span className="ml-4">{feature.text}</span>
                   </li>
                 ))}
               </ul>

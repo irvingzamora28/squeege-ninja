@@ -75,21 +75,21 @@
       "icon": "FaBolt",
       "title": "Licensed Electrical Contractors",
       "description": "Our team of certified electrical contractors brings decades of experience to every industrial project.",
-      "image": "landingDemoImage"
+      "image": "/static/images/services/industrial-electrical.jpg"
     },
     {
       "id": 2,
       "icon": "FaShieldAlt",
       "title": "Safety First Approach",
       "description": "We prioritize safety in every installation and maintenance project, exceeding industry standards.",
-      "image": "landingDemoImage"
+      "image": "/static/images/services/industrial-electrical.jpg"
     },
     {
       "id": 3,
       "icon": "FaClock",
       "title": "24/7 Emergency Service",
       "description": "Electrical emergencies don't wait for business hours. Our team is available around the clock.",
-      "image": "landingDemoImage"
+      "image": "/static/images/services/industrial-electrical.jpg"
     }
   ],
   "features": {
@@ -208,10 +208,18 @@
         "price": "From $199/month",
         "description": "Essential maintenance for small businesses.",
         "features": [
-          "Quarterly Inspections",
-          "Emergency Response",
-          "Basic Repairs",
-          "Safety Compliance Checks"
+          {
+            "text": "Quarterly Inspections"
+          },
+          {
+            "text": "Emergency Response"
+          },
+          {
+            "text": "Basic Repairs"
+          },
+          {
+            "text": "Safety Compliance Checks"
+          }
         ],
         "cta": {
           "text": "Get Started",
@@ -223,11 +231,21 @@
         "price": "From $399/month",
         "description": "Comprehensive coverage for medium-sized facilities.",
         "features": [
-          "Monthly Inspections",
-          "Priority Emergency Response",
-          "Parts & Labor Included",
-          "Thermal Imaging Scans",
-          "Load Analysis"
+          {
+            "text": "Monthly Inspections"
+          },
+          {
+            "text": "Priority Emergency Response"
+          },
+          {
+            "text": "Parts & Labor Included"
+          },
+          {
+            "text": "Thermal Imaging Scans"
+          },
+          {
+            "text": "Load Analysis"
+          }
         ],
         "cta": {
           "text": "Get Started",
@@ -240,11 +258,21 @@
         "price": "Custom Pricing",
         "description": "Complete electrical management for large industrial facilities.",
         "features": [
-          "All Standard features",
-          "Weekly Inspections",
-          "Dedicated Technician",
-          "24/7 Monitoring Systems",
-          "Annual System Upgrades"
+          {
+            "text": "All Standard features"
+          },
+          {
+            "text": "Weekly Inspections"
+          },
+          {
+            "text": "Dedicated Technician"
+          },
+          {
+            "text": "24/7 Monitoring Systems"
+          },
+          {
+            "text": "Annual System Upgrades"
+          }
         ],
         "cta": {
           "text": "Contact Sales",
@@ -257,12 +285,42 @@
     "title": "Request a Free Quote",
     "description": "Tell us about your electrical project and we'll provide a detailed quote within 24 hours.",
     "fields": [
-      { "name": "name", "label": "Name", "type": "text", "required": true },
-      { "name": "email", "label": "Email", "type": "email", "required": true },
-      { "name": "phone", "label": "Phone", "type": "tel", "required": true },
-      { "name": "company", "label": "Company", "type": "text", "required": false },
-      { "name": "projectType", "label": "Project Type", "type": "text", "required": false },
-      { "name": "message", "label": "Project Details", "type": "textarea", "required": true }
+      {
+        "name": "name",
+        "label": "Name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "email",
+        "label": "Email",
+        "type": "email",
+        "required": true
+      },
+      {
+        "name": "phone",
+        "label": "Phone",
+        "type": "tel",
+        "required": true
+      },
+      {
+        "name": "company",
+        "label": "Company",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "projectType",
+        "label": "Project Type",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "message",
+        "label": "Project Details",
+        "type": "textarea",
+        "required": true
+      }
     ],
     "submitLabel": "Request Quote",
     "successMessage": "Thank you for your inquiry! We'll contact you within 24 hours with a detailed quote.",

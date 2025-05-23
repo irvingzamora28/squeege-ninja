@@ -34,9 +34,13 @@ export interface PricingPlan {
   name: string
   price: string
   description: string
-  features: string[]
+  features: PricingFeature[]
   cta: CtaButton
   highlighted?: boolean
+}
+
+export interface PricingFeature {
+  text: string
 }
 
 export interface HeroSection {

@@ -149,9 +149,9 @@ Generate a complete JSON object that follows this structure:
         "price": "$9/month",
         "description": "Perfect for individuals",
         "features": [
-          "Feature 1",
-          "Feature 2",
-          "Feature 3"
+          { "text": "Feature 1" },
+          { "text": "Feature 2" },
+          { "text": "Feature 3" }
         ],
         "cta": {
           "text": "Get Started",
@@ -163,10 +163,10 @@ Generate a complete JSON object that follows this structure:
         "price": "$29/month",
         "description": "Ideal for small teams",
         "features": [
-          "All Basic features",
-          "Feature 4",
-          "Feature 5",
-          "Feature 6"
+          { "text": "All Basic features" },
+          { "text": "Feature 4" },
+          { "text": "Feature 5" },
+          { "text": "Feature 6" }
         ],
         "cta": {
           "text": "Get Started",
@@ -179,10 +179,10 @@ Generate a complete JSON object that follows this structure:
         "price": "Contact us",
         "description": "For large organizations",
         "features": [
-          "All Pro features",
-          "Feature 7",
-          "Feature 8",
-          "Feature 9"
+          { "text": "All Pro features" },
+          { "text": "Feature 7" },
+          { "text": "Feature 8" },
+          { "text": "Feature 9" }
         ],
         "cta": {
           "text": "Contact Sales",

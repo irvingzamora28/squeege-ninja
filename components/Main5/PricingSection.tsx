@@ -73,7 +73,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ pricing }) => {
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-start">
                       <FaCheck className="mt-1 mr-3 flex-shrink-0 text-green-500" />
-                      <span className="text-gray-600 dark:text-gray-400">{feature}</span>
+                      <span className="text-gray-600 dark:text-gray-400">{feature.text}</span>
                     </li>
                   ))}
                 </ul>

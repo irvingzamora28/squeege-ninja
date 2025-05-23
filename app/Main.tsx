@@ -207,9 +207,9 @@ const PricingSection = ({ pricing }) => (
           <div className="mt-4 text-4xl font-bold">{plan.price}</div>
           <ul className="mt-8 space-y-4">
             {plan.features.map((feature) => (
-              <li key={feature} className="flex items-center">
+              <li key={feature.text} className="flex items-center">
                 <HiCheckCircle className="text-primary-500 h-5 w-5" />
-                <span className="ml-3">{feature}</span>
+                <span className="ml-3">{feature.text}</span>
               </li>
             ))}
           </ul>
