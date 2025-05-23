@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { promises as fs } from 'fs'
 import path from 'path'
+import siteMetadata from '@/data/siteMetadata'
 
 // Store a simple download log in memory (for demo; replace with DB in production)
 const DOWNLOAD_LOG_PATH = path.join(process.cwd(), 'data', 'download-log.json')
@@ -55,7 +56,8 @@ export async function GET(req: NextRequest) {
   // Only log and redirect, do not try to access the file system
   try {
     // await logDownload(downloadKey, userId)
-    const redirectUrl = `/uploads/${file}`
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || siteMetadata.siteUrl
+    const redirectUrl = `${baseUrl.replace(/\/$/, '')}/uploads/${file}`
     console.log('[download-once] Redirecting to', redirectUrl)
     return NextResponse.redirect(redirectUrl, 302)
   } catch (err) {
