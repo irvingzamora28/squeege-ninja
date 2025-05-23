@@ -36,9 +36,9 @@ export async function GET(req: NextRequest) {
   if (!file || !userId) return NextResponse.json({ error: 'Missing file or user' }, { status: 400 })
 
   const downloadKey = file // could be more complex (e.g. template+file)
-  if (await hasDownloaded(downloadKey, userId)) {
-    return NextResponse.json({ error: 'Already downloaded' }, { status: 403 })
-  }
+  // if (await hasDownloaded(downloadKey, userId)) {
+  //   return NextResponse.json({ error: 'Already downloaded' }, { status: 403 })
+  // }
 
   // Only log and redirect, do not try to access the file system
   try {
