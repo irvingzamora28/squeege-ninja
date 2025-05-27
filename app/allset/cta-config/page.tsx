@@ -12,6 +12,11 @@ const CTA_OPTIONS = [
       'Send a subscriber an ebook automatically after signup using the ebook-delivery template.',
   },
   {
+    label: 'Downloadable Item',
+    value: 'downloadable-item',
+    description: 'Send a download link for a file (ZIP, template, etc.) after signup.',
+  },
+  {
     label: 'Newsletter',
     value: 'newsletter',
     description:
@@ -134,9 +139,15 @@ export default function CTAConfigPage() {
             let label = `ID #${d.id}`
             try {
               const parsed = JSON.parse(d.data || '{}')
-              if (d.template === 'ebook-delivery' && parsed.ebookTitle) label = parsed.ebookTitle
-              if (d.template === 'welcome' && parsed.welcomeMessage) label = parsed.welcomeMessage
-              if (d.template === 'newsletter' && parsed.subject) label = parsed.subject
+              if (d.template === 'ebook-delivery' && parsed.ebookTitle) {
+                label = `Ebook: ${parsed.ebookTitle}`
+              } else if (d.template === 'downloadable-item' && parsed.itemName) {
+                label = `Download: ${parsed.itemName}`
+              } else if (d.template === 'welcome' && parsed.welcomeMessage) {
+                label = `Welcome: ${parsed.welcomeMessage.substring(0, 50)}${parsed.welcomeMessage.length > 50 ? '...' : ''}`
+              } else if (d.template === 'newsletter' && parsed.subject) {
+                label = `Newsletter: ${parsed.subject}`
+              }
             } catch (err) {
               console.error('Error parsing template data:', err)
             }

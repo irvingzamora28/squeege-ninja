@@ -5,10 +5,12 @@ This module provides a flexible and scalable email service for the application, 
 ## Features
 
 - **Templating**: Uses Handlebars for flexible email templates
-- **Multiple Email Types**: Support for different email types (welcome, newsletter, ebook delivery)
+- **Multiple Email Types**: Support for different email types (welcome, newsletter, ebook delivery, downloadable items)
 - **Attachments**: Send files like PDFs with emails
 - **Responsive Design**: Emails are mobile-friendly
 - **Unsubscribe Links**: Built-in support for unsubscribe functionality
+- **File Information Display**: Show file details like format, size, and instructions
+- **Download Management**: Support for expiring download links
 
 ## Setup
 
@@ -98,6 +100,58 @@ await sendEmail({
 ### Email Templates
 
 Email templates are located in the `templates/emails` directory. The base layout is defined in `templates/emails/layouts/base.hbs`.
+
+#### Available Templates
+
+1. **Welcome Email** (`welcome`)
+
+   - For new user onboarding
+   - Required data: `name`, `welcomeMessage`, `ctaUrl`, `ctaText`
+
+2. **Newsletter** (`newsletter`)
+
+   - For sending newsletters and updates
+   - Required data: `name`, `content`, `ctaUrl`, `ctaText`
+   - Optional: `featuredImage`, `showUnsubscribe`
+
+3. **Ebook Delivery** (`ebook-delivery`)
+
+   - For delivering digital products like ebooks
+   - Required data: `name`, `ebookTitle`, `downloadUrl`
+   - Optional: `ebookDescription`, `ebookCover`, `expiryNotice`, `additionalContent`
+
+4. **Downloadable Item** (`downloadable-item`)
+   - For delivering downloadable content like templates or resource packs
+   - Required data: `name`, `itemName`, `downloadUrl`, `itemType`, `fileInfo`
+   - Optional: `itemDescription`, `itemPreview`, `expiryNotice`, `additionalContent`
+   - `fileInfo` should include: `format`, `size`, and optionally `instructions`
+
+#### Example: Sending a Downloadable Item
+
+```typescript
+await sendEmail({
+  to: 'user@example.com',
+  subject: 'Your Download is Ready!',
+  template: emailTemplates['downloadable-item'],
+  data: {
+    name: 'John',
+    siteName: 'Your Brand',
+    itemName: 'Ultimate Template Pack',
+    itemType: 'template pack',
+    itemDescription: 'A collection of professional templates to get you started.',
+    itemPreview: 'https://example.com/images/template-preview.jpg',
+    downloadUrl: 'https://example.com/downloads/template-pack.zip',
+    fileInfo: {
+      format: 'ZIP',
+      size: '24.5 MB',
+      instructions: 'After downloading, extract the ZIP file to access your templates.',
+    },
+    expiryNotice: 'This download link will expire in 7 days.',
+    additionalContent:
+      '<p>Need help using these templates? Check out our <a href="https://example.com/help">help documentation</a>.</p>',
+  },
+})
+```
 
 #### Creating a New Template
 

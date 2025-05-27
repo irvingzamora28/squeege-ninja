@@ -24,6 +24,7 @@ export const emailTemplates = {
   welcome: 'welcome',
   newsletter: 'newsletter',
   'ebook-delivery': 'ebook-delivery',
+  'downloadable-item': 'downloadable-item',
 } as const
 
 export type EmailTemplate = keyof typeof emailTemplates

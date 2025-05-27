@@ -3,7 +3,7 @@
 
 export interface CTAConfigInstance {
   id: number
-  cta_type: string // 'ebook-delivery', 'newsletter', or 'welcome'
+  cta_type: string // 'ebook-delivery', 'newsletter', 'downloadable-item', or 'welcome'
   template_data_id: number // FK to EmailTemplateDataInstance
   newsletter_frequency?: string | null // 'daily', 'weekly', 'monthly', or null
   updated_at: string

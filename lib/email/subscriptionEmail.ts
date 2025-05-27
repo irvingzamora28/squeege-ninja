@@ -36,10 +36,35 @@ export async function sendSubscriptionEmail(
     templateData = {} as EmailTemplateData
   }
 
-  // If templateData contains downloadUrl, add it to templateData
+  // Process download URL for secure delivery
   if (templateData.downloadUrl) {
-    templateData.downloadUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/download-once?file=${encodeURIComponent(templateData.downloadUrl.replace('/uploads/', ''))}&user=${encodeURIComponent(email)}`
+    const secureDownloadUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/download-once?file=${encodeURIComponent(templateData.downloadUrl.replace('/uploads/', ''))}&user=${encodeURIComponent(email)}`
+
+    // Update the appropriate URL based on template type
+    if (ctaConfig.cta_type === 'ebook-delivery') {
+      templateData.downloadUrl = secureDownloadUrl
+    } else if (ctaConfig.cta_type === 'downloadable-item') {
+      // For downloadable items, we might have a fileInfo object to update
+      templateData.downloadUrl = secureDownloadUrl
+
+      // Ensure fileInfo has required fields
+      if (!templateData.fileInfo) {
+        templateData.fileInfo = {
+          format: 'ZIP',
+          size: 'Unknown',
+          instructions: 'Extract the downloaded ZIP file to access your content.',
+        }
+      }
+
+      // Set default itemType if not provided
+      if (!templateData.itemType) {
+        templateData.itemType = 'downloadable content'
+      }
+    }
   }
+
+  // The name should be obtained from the email
+  templateData.name = email.split('@')[0]
 
   // Send the email using the correct template
   const subject =
@@ -48,7 +73,9 @@ export async function sendSubscriptionEmail(
       ? 'Welcome to our Newsletter!'
       : ctaConfig.cta_type === 'ebook-delivery'
         ? 'Your Ebook is Here!'
-        : 'Welcome!')
+        : ctaConfig.cta_type === 'downloadable-item'
+          ? `Your ${templateData.itemName || 'Download'} is Ready!`
+          : 'Welcome!')
 
   return await sendEmail({
     to: email,

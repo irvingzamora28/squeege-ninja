@@ -11,8 +11,14 @@ export interface EbookDeliveryEmailVars {
   unsubscribeUrl?: string
 }
 
+export interface FileInfo {
+  format: string
+  size: string
+  instructions?: string
+}
+
 export interface EmailTemplateData {
-  [key: string]: string | number | boolean | undefined | null
+  [key: string]: string | number | boolean | FileInfo | undefined | null
   name?: string
   welcomeMessage?: string
   ctaUrl?: string
@@ -31,6 +37,12 @@ export interface EmailTemplateData {
   unsubscribeUrl?: string
   subject?: string
   title?: string
+  // Downloadable item specific fields
+  itemName?: string
+  itemType?: string
+  itemDescription?: string
+  itemPreview?: string
+  fileInfo?: FileInfo
 }
 
 export interface EmailRecord {
