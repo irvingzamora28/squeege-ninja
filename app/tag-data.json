@@ -1,7 +1,11 @@
 {
   "landingpage": 1,
-  "ai": 1,
+  "ai": 2,
   "templates": 1,
   "contentcreation": 1,
-  "conversion": 1
+  "conversion": 1,
+  "seo": 1,
+  "landing-pages": 1,
+  "organic-traffic": 1,
+  "content-marketing": 1
 }

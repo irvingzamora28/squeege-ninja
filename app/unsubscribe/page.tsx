@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import siteMetadata from '@/data/siteMetadata'
 
-export default function UnsubscribePage() {
+function UnsubscribeContent() {
   const searchParams = useSearchParams()
   const [email, setEmail] = useState<string>('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -132,5 +132,19 @@ export default function UnsubscribePage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function UnsubscribePage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex h-48 items-center justify-center">
+          <div className="border-t-primary-500 h-8 w-8 animate-spin rounded-full border-4 border-slate-300"></div>
+        </div>
+      }
+    >
+      <UnsubscribeContent />
+    </Suspense>
   )
 }
