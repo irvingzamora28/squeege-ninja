@@ -11,6 +11,7 @@ import {
   PricingSection,
   CtaSection,
   FaqSection,
+  ContactSection,
 } from '@/components/Main5'
 import dataLandingContent from '@/data/landingContent.json'
 import { LandingContent } from './allset/landing-content/types'
@@ -31,6 +32,7 @@ const Main5 = () => {
       {pricing && <PricingSection pricing={pricing} />}
       <CtaSection cta={cta} />
       <FaqSection faqs={faqs} />
+      {contact && <ContactSection contact={contact} />}
     </div>
   )
 }
