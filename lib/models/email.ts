@@ -7,6 +7,7 @@ export interface IEmailModel {
   getAll(): Promise<Email[]>
   insert(email: string): Promise<void>
   getCount(): Promise<number>
+  deleteEmail(id: number): Promise<void>
 }
 
 export { SQLiteEmailModel } from '../providers/sqlite/emailModel'

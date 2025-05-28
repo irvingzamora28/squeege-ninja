@@ -17,4 +17,8 @@ export class SQLiteEmailModel implements IEmailModel {
     const row = this.db.prepare(`SELECT COUNT(*) as count FROM ${ALLSET_EMAILS_TABLE}`).get()
     return typeof row.count === 'number' ? row.count : 0
   }
+
+  async deleteEmail(id: number): Promise<void> {
+    this.db.prepare(`DELETE FROM ${ALLSET_EMAILS_TABLE} WHERE id = ?`).run(id)
+  }
 }

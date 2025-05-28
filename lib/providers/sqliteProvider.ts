@@ -33,6 +33,9 @@ export class SQLiteProvider implements IDatabaseProvider {
   async insertEmail(email: string): Promise<void> {
     this.emailModel.insert(email)
   }
+  async deleteEmail(id: number): Promise<void> {
+    return this.emailModel.deleteEmail(id)
+  }
   async getSubscriptionCount(): Promise<number> {
     return this.emailModel.getCount()
   }

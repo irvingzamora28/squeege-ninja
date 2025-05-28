@@ -35,6 +35,10 @@ export class SupabaseProvider implements IDatabaseProvider {
     return this.emailModel.insert(email)
   }
 
+  async deleteEmail(id: number): Promise<void> {
+    return this.emailModel.deleteEmail(id)
+  }
+
   async getSubscriptionCount(): Promise<number> {
     return this.emailModel.getCount()
   }

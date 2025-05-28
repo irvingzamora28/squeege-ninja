@@ -5,6 +5,7 @@ import type { CTAConfigInstance } from './models/ctaConfig'
 export interface IDatabaseProvider {
   getAllEmails(): Promise<{ id: number; email: string; created_at: string }[]>
   insertEmail(email: string): Promise<void>
+  deleteEmail(id: number): Promise<void>
   getSubscriptionCount(): Promise<number>
 
   getAllContactSubmissions(): Promise<

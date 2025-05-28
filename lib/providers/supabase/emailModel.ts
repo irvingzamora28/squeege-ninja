@@ -44,4 +44,13 @@ export class SupabaseEmailModel implements IEmailModel {
     console.log('Supabase getCount:', { count, data })
     return count || 0
   }
+
+  async deleteEmail(id: number): Promise<void> {
+    const { error } = await this.supabase.from(ALLSET_EMAILS_TABLE).delete().eq('id', id)
+    if (error) {
+      console.error('Supabase deleteEmail error:', error)
+      throw error
+    }
+    console.log(`Supabase email with ID ${id} deleted successfully`)
+  }
 }
