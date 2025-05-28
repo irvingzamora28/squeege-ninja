@@ -38,7 +38,7 @@ export async function renderTemplate(
       currentYear: new Date().getFullYear(),
       unsubscribeUrl:
         data.unsubscribeUrl ||
-        `${process.env.NEXT_PUBLIC_SITE_URL}/unsubscribe?email=${encodeURIComponent(data.to || '')}`,
+        `${process.env.NEXT_PUBLIC_SITE_URL}/unsubscribe?email=${encodeURIComponent(typeof data.to === 'object' ? '' : String(data.to || ''))}`,
     }
 
     return template(templateData)
