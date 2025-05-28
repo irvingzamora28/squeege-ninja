@@ -128,12 +128,12 @@
         "label": "Professional Templates"
       },
       {
-        "value": "10K+",
+        "value": "1K+",
         "label": "Downloads"
       },
       {
-        "value": "24/7",
-        "label": "Support"
+        "value": "2+",
+        "label": "AI based features"
       }
     ]
   },
@@ -144,6 +144,10 @@
       {
         "question": "Is ALLSET Template really free?",
         "answer": "Yes! You can download and use ALLSET Template completely free of charge. Simply provide your email address to get started."
+      },
+      {
+        "question": "Can you create a custom solution for my specific needs?",
+        "answer": "Absolutely! If you need a tailored solution that goes beyond our standard templates, our team can build a custom solution specifically for your requirements. Contact us to discuss your project and get a quote."
       },
       {
         "question": "Do I need any design or technical skills to use ALLSET Template?",
@@ -159,7 +163,7 @@
       },
       {
         "question": "What kind of support do you offer?",
-        "answer": "We offer comprehensive documentation and email support to help you get the most out of ALLSET Template. We're also constantly improving our platform based on user feedback."
+        "answer": "We offer email support to help you get the most out of ALLSET Template. We're also constantly improving our platform based on user feedback."
       }
     ]
   },

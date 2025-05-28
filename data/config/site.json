@@ -1,5 +1,5 @@
 {
-  "activeTemplate": "Main3",
+  "activeTemplate": "Main5",
   "availableTemplates": [
     {
       "id": "Main",
@@ -56,6 +56,32 @@
         "Detailed contact form with quote request"
       ],
       "colors": "Professional blue/slate with high contrast sections"
+    },
+    {
+      "id": "Main5",
+      "name": "Modern Business Template",
+      "description": "A comprehensive business template featuring smooth animations, a modern hero section, interactive statistics counters, feature highlights with hover effects, app showcase, testimonials, pricing tables with hover states, and an animated FAQ section. Perfect for SaaS companies and digital products looking to impress with fluid motion and interactive elements.",
+      "image": "/static/images/templates/template-main5.jpg",
+      "animations": [
+        "Fade-in on scroll",
+        "Staggered list animations",
+        "Interactive hover effects",
+        "Smooth scroll behavior",
+        "Animated counters",
+        "Section entrance transitions"
+      ],
+      "elements": [
+        "Hero section with main features",
+        "Statistics counter section",
+        "Main features with icons and descriptions",
+        "App showcase section",
+        "Detailed feature highlights",
+        "Customer testimonials",
+        "Pricing tables",
+        "Call-to-action section",
+        "FAQ section with collapsible items"
+      ],
+      "colors": "Dark/light theme with gradient accents"
     }
   ]
 }
