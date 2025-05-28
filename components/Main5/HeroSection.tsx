@@ -46,8 +46,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ hero, mainFeatures }) => {
           <motion.h1
             variants={itemVariants}
             className="via-primary-800 dark:via-primary-300 mb-6 bg-gradient-to-r from-gray-900 to-purple-900 bg-clip-text text-4xl leading-tight font-extrabold text-transparent sm:text-5xl md:text-6xl dark:from-white dark:to-purple-300"
-            dangerouslySetInnerHTML={{ __html: hero.title }}
-          ></motion.h1>
+          >
+            {hero.title}
+          </motion.h1>
 
           <motion.p
             variants={itemVariants}

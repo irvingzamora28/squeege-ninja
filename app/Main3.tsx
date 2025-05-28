@@ -22,8 +22,11 @@ const HeroSection = () => {
   return (
     <>
       <div className="mx-auto max-w-7xl px-4 pt-20 pb-16 text-center sm:px-6 lg:px-8 lg:pt-32">
-        <h1 className="font-display mx-auto max-w-4xl text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl dark:text-white">
-          <span dangerouslySetInnerHTML={{ __html: hero.title }} />
+        <h1 className="font-display mx-auto max-w-4xl text-5xl font-medium tracking-tight sm:text-7xl">
+          <span className="text-primary-500">{hero.title.split(' ')[0]}</span>{' '}
+          <span className="text-slate-900 dark:text-white">
+            {hero.title.split(' ').slice(1).join(' ')}
+          </span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700 sm:text-xl dark:text-slate-200">
           {hero.description}
@@ -348,10 +351,12 @@ const FaqSection = () => {
           >
             {faqs.title}
           </h2>
-          <p
-            className="mt-4 text-lg tracking-tight text-slate-700 dark:text-slate-200"
-            dangerouslySetInnerHTML={{ __html: faqs.description }}
-          />
+          <p className="mt-4 text-lg tracking-tight text-slate-700 dark:text-slate-200">
+            {faqs.description.split(' ').slice(0, -2).join(' ')}{' '}
+            <span className="text-primary-500">
+              {faqs.description.split(' ').slice(-2).join(' ')}
+            </span>
+          </p>
         </div>
         <ul className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-3">
           {faqs.questions.map((faq, index) => (

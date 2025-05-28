@@ -117,10 +117,12 @@ const FeatureIcon = ({ icon }) => {
 const HeroSection = ({ hero }) => (
   <div className="flex flex-col-reverse items-center justify-between py-16 md:py-24 lg:flex-row">
     <div className="space-y-6 lg:w-1/2">
-      <h1
-        className="text-4xl font-extrabold tracking-tight text-slate-800 md:text-6xl dark:text-slate-200"
-        dangerouslySetInnerHTML={{ __html: hero.title }}
-      />
+      <h1 className="text-4xl font-extrabold tracking-tight md:text-6xl">
+        <span className="text-primary-500">{hero.title.split(' ')[0]}</span>{' '}
+        <span className="text-slate-900 dark:text-white">
+          {hero.title.split(' ').slice(1).join(' ')}
+        </span>
+      </h1>
       <p className="text-lg text-gray-600 md:text-xl dark:text-gray-400">{hero.description}</p>
       <div className="flex flex-col gap-4 sm:flex-row">
         <Link

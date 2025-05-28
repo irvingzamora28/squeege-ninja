@@ -85,10 +85,12 @@ const HeroSection = ({ hero }) => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-8 lg:gap-y-20">
           <div className="relative z-10 mx-auto max-w-2xl lg:col-span-7 lg:max-w-none lg:pt-6 xl:col-span-6">
-            <h1
-              className="text-4xl font-medium tracking-tight text-slate-900 dark:text-slate-200"
-              dangerouslySetInnerHTML={{ __html: hero.title }}
-            />
+            <h1 className="text-4xl font-extrabold tracking-tight md:text-6xl">
+              <span className="text-primary-500">{hero.title.split(' ')[0]}</span>{' '}
+              <span className="text-slate-900 dark:text-white">
+                {hero.title.split(' ').slice(1).join(' ')}
+              </span>
+            </h1>
             <p className="mt-6 text-lg text-slate-600 dark:text-slate-300">{hero.description}</p>
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-4">
               <Link
@@ -556,10 +558,12 @@ const FaqSection = ({ faqs }) => {
           >
             {faqs.title}
           </h2>
-          <p
-            className="mt-2 text-lg text-slate-600 dark:text-slate-300"
-            dangerouslySetInnerHTML={{ __html: faqs.description }}
-          />
+          <p className="mt-4 text-lg tracking-tight text-slate-700 dark:text-slate-200">
+            {faqs.description.split(' ').slice(0, -2).join(' ')}{' '}
+            <span className="text-primary-500">
+              {faqs.description.split(' ').slice(-2).join(' ')}
+            </span>
+          </p>
         </div>
         <ul className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:max-w-none lg:grid-cols-3">
           {faqs.questions.map((faq, index) => (
