@@ -44,7 +44,7 @@ const ContactSection = ({ contact }: ContactSectionProps) => {
         viewport={{ once: true, amount: 0.25 }}
         className="mb-4 text-center text-3xl font-bold text-slate-900 dark:text-white"
       >
-        {contact.title} pompin
+        {contact.title}
       </motion.h2>
       <motion.p
         variants={fadeIn('up', 'tween', 0.2, 0.6)}
