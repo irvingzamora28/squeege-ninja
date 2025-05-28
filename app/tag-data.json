@@ -1,11 +1,16 @@
 {
+  "conversion": 2,
+  "landing-page": 1,
+  "design": 1,
+  "ai": 5,
+  "marketing": 2,
+  "landing-pages": 2,
+  "conversions": 1,
+  "templates": 2,
   "landingpage": 1,
-  "ai": 2,
-  "templates": 1,
   "contentcreation": 1,
-  "conversion": 1,
-  "seo": 1,
-  "landing-pages": 1,
-  "organic-traffic": 1,
-  "content-marketing": 1
+  "seo": 2,
+  "blogging": 1,
+  "content-marketing": 2,
+  "organic-traffic": 2
 }
