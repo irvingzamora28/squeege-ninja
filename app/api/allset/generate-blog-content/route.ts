@@ -34,6 +34,7 @@ export async function POST(request: NextRequest) {
 
     // Generate blog content using the LLM service
     const result = await llmService.generateBlogContent(title, description, existingPostsInfo)
+    console.log(result)
 
     if (result.error) {
       return NextResponse.json({ success: false, message: result.error }, { status: 500 })
