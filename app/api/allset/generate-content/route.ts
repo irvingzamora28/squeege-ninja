@@ -4,6 +4,7 @@ import path from 'path'
 import { llmService } from '@/lib/llm'
 import { LandingContent } from '@/lib/llm/types'
 import siteMetadata from '@/data/siteMetadata'
+import { generateImagesForLandingContent } from '@/lib/llm/generateLandingImages'
 
 // For static export, we need to handle this differently
 export const dynamic = 'error'
@@ -46,7 +47,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Save the generated content to the file
+    await generateImagesForLandingContent(contentJson)
+
+    // Save the updated content to the file
     await fs.writeFile(landingContentFilePath, JSON.stringify(contentJson, null, 2), 'utf-8')
 
     return NextResponse.json({

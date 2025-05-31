@@ -6,6 +6,7 @@ import { OpenAIProvider } from './providers/openai'
 import { GoogleGenAIProvider } from './providers/google-genai'
 import { LLMProvider, LLMResponse } from './types'
 import { BLOG_CONTENT_PROMPT, BLOG_TITLES_PROMPT, LANDING_CONTENT_PROMPT } from '../constants'
+import { generateImagesForLandingContent } from './generateLandingImages'
 
 /**
  * LLM service that provides a unified interface for different LLM providers
@@ -54,7 +55,28 @@ export class LLMService {
     // Add language instruction to the prompt
     const promptWithLanguage = `${languageInstruction}\n\nGenerate the landing page content in ${language === 'es-mx' ? 'Spanish' : 'English'}.\n\n${LANDING_CONTENT_PROMPT}${businessDescription}`
 
-    return this.provider.generateContent(promptWithLanguage)
+    // Step 1: Generate landing content JSON
+    const initialResponse = await this.provider.generateContent(promptWithLanguage)
+    if (!initialResponse.content) return initialResponse
+
+    let landingContentObj: Record<string, unknown> | unknown[]
+    try {
+      landingContentObj =
+        typeof initialResponse.content === 'string'
+          ? JSON.parse(initialResponse.content)
+          : initialResponse.content
+    } catch (err) {
+      return {
+        error: 'Failed to parse landing content JSON',
+        content: initialResponse.content,
+      }
+    }
+
+    // Step 2: Generate images for all imagePrompt fields
+    await generateImagesForLandingContent(landingContentObj)
+
+    // Step 3: Return the updated content
+    return initialResponse
   }
 
   /**
