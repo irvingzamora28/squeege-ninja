@@ -22,6 +22,24 @@ export interface BlogTitleSuggestion {
   tags: string[] // Array of tags for the blog post
 }
 
+export interface LLMImageResponse {
+  success: boolean
+  image_data?: string // base64
+  mime_type?: string
+  text_response?: string
+  model?: string
+  error?: string
+}
+
+export interface LLMImageProvider {
+  generateImage(
+    prompt: string,
+    model?: string,
+    aspectRatio?: string,
+    opts?: Record<string, unknown>
+  ): Promise<LLMImageResponse>
+}
+
 export interface LandingContent {
   hero: {
     title: string
