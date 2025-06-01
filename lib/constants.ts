@@ -314,21 +314,15 @@ The blog post should:
 Existing blog posts for internal linking:
 {{existingPosts}}
 
-IMPORTANT: Return ONLY the Markdown content directly, not wrapped in JSON or any other format. DO NOT return a JSON object with a blog_post field. The content should be pure Markdown text ready to be used in an MDX file without any additional processing.
+IMPORTANT: Return a JSON object with two fields:
+- "content": The full Markdown blog post as a string (do NOT wrap it in another object or add extra fields)
+- "coverImagePrompt": A detailed, vivid description for a hero image that would visually represent the blog post. The prompt should be creative, relevant to the blog title and description, and suitable for AI image generation (e.g., "A modern digital illustration of a robot writing a blog post on a laptop, vibrant colors, futuristic office, digital art").
 
-Example of INCORRECT format (DO NOT DO THIS):
-
+Example output:
 {
-  "blog_post": "# Blog Title\n\nContent here..."
+  "content": "# Blog Title\n\nContent here...",
+  "coverImagePrompt": "A modern digital illustration of..."
 }
-
-
-Example of CORRECT format (DO THIS):
-
-# Blog Title
-
-Content here...
-
 
 Title: {{title}}
 Description: {{description}}

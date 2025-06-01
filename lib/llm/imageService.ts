@@ -20,12 +20,17 @@ export class LLMImageService {
     }
   }
 
-  async generateImage(
-    prompt: string,
-    model?: string,
-    aspectRatio?: string,
+  async generateImage({
+    prompt,
+    model,
+    aspectRatio,
+    opts,
+  }: {
+    prompt: string
+    model?: string
+    aspectRatio?: string
     opts?: Record<string, unknown>
-  ): Promise<LLMImageResponse> {
+  }): Promise<LLMImageResponse> {
     return this.provider.generateImage(prompt, model, aspectRatio, opts)
   }
 }

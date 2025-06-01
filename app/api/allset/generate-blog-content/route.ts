@@ -3,6 +3,10 @@ import { allBlogs } from 'contentlayer/generated'
 import { llmService } from '@/lib/llm'
 import siteMetadata from '@/data/siteMetadata'
 import { cleanBlogContent } from '@/lib/utils/cleanBlogContent'
+import { injectHeroImage } from '@/lib/utils/injectHeroImage'
+import { llmImageService } from '@/lib/llm/imageService'
+import fs from 'fs/promises'
+import path from 'path'
 
 // For static export, we need to handle this differently
 export const dynamic = 'error'
@@ -49,18 +53,64 @@ export async function POST(request: NextRequest) {
       existingPostsInfo,
       contentLanguage
     )
-    console.log(result)
 
     if (result.error) {
+      console.error('Error generating blog content:', result.error)
       return NextResponse.json({ success: false, message: result.error }, { status: 500 })
     }
 
-    // Clean up the content to ensure it's not wrapped in JSON
-    const cleanContent = cleanBlogContent(result.content)
+    // Parse the JSON returned by the LLM
+    let parsed: { content: string; coverImagePrompt: string }
+    try {
+      parsed = typeof result.content === 'string' ? JSON.parse(result.content) : result.content
+    } catch (err) {
+      console.error('Error parsing LLM JSON output:', err)
+      return NextResponse.json(
+        { success: false, message: 'Failed to parse LLM JSON output', raw: result.content },
+        { status: 500 }
+      )
+    }
+
+    // Clean up the markdown content
+    let cleanContent = cleanBlogContent(parsed.content)
+
+    // Generate slug (same as frontmatter convention)
+    const slug = title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-+|-+$/g, '')
+
+    // Generate hero image
+    let heroImagePath = `/static/images/blogs/${slug}-hero.png`
+    try {
+      const imageRes = await llmImageService.generateImage({
+        prompt: parsed.coverImagePrompt,
+        aspectRatio: '16:9',
+      })
+      if (imageRes.success && imageRes.image_data) {
+        const imgDir = path.join(process.cwd(), 'public/static/images/blogs')
+        await fs.mkdir(imgDir, { recursive: true })
+        const imgPath = path.join(imgDir, `${slug}-hero.png`)
+        await fs.writeFile(imgPath, Buffer.from(imageRes.image_data, 'base64'))
+      } else {
+        console.warn('Image generation failed:', imageRes.error)
+        heroImagePath = '/static/images/hero.jpg' // fallback
+      }
+    } catch (e) {
+      console.error('Error generating hero image:', e)
+      heroImagePath = '/static/images/hero.jpg' // fallback
+    }
+
+    // Inject hero image after frontmatter
+    cleanContent = injectHeroImage(cleanContent, heroImagePath, parsed.coverImagePrompt)
 
     return NextResponse.json({
       success: true,
       content: cleanContent,
+      slug,
+      heroImage: heroImagePath,
     })
   } catch (error: unknown) {
     console.error('Error generating blog content:', error)

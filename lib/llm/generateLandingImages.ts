@@ -24,7 +24,10 @@ export async function generateImagesForLandingContent(obj: unknown, prefix = 'la
       try {
         // Only generate if image is missing or placeholder
         if (!('image' in obj) || obj.image === '/placeholder.jpg') {
-          const imageResp = await llmImageService.generateImage(obj.imagePrompt)
+          const imageResp = await llmImageService.generateImage({
+            prompt: obj.imagePrompt,
+            aspectRatio: '16:9',
+          })
           if (imageResp?.success && imageResp.image_data) {
             const base64 = imageResp.image_data.replace(/^data:image\/\w+;base64,/, '')
             await fs.writeFile(filePath, Buffer.from(base64, 'base64'))
