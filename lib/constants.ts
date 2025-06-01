@@ -314,14 +314,27 @@ The blog post should:
 Existing blog posts for internal linking:
 {{existingPosts}}
 
-IMPORTANT: Return a JSON object with two fields:
+IMPORTANT: Return a JSON object with the following fields:
 - "content": The full Markdown blog post as a string (do NOT wrap it in another object or add extra fields)
 - "coverImagePrompt": A detailed, vivid description for a hero image that would visually represent the blog post. The prompt should be creative, relevant to the blog title and description, and suitable for AI image generation (e.g., "A modern digital illustration of a robot writing a blog post on a laptop, vibrant colors, futuristic office, digital art").
+- "inlineImagePrompts": An array of 2-3 objects. Each object should have:
+    - "prompt": A vivid, relevant image description for a section of the blog.
+    - "section": The exact heading (or a short excerpt of the paragraph) where the image should be inserted. Use the actual markdown heading or a unique phrase from the blog content.
 
 Example output:
 {
-  "content": "# Blog Title\n\nContent here...",
-  "coverImagePrompt": "A modern digital illustration of..."
+  "content": "# Blog Title\n\n## AI for Landing Pages\n...\n## Results\n...",
+  "coverImagePrompt": "A modern digital illustration of...",
+  "inlineImagePrompts": [
+    {
+      "prompt": "A close-up of a person designing a landing page on a tablet, digital art, bright colors.",
+      "section": "## AI for Landing Pages"
+    },
+    {
+      "prompt": "A graph showing increased conversions after using AI, digital art, blue and green palette.",
+      "section": "## Results"
+    }
+  ]
 }
 
 Title: {{title}}

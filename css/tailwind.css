@@ -202,3 +202,17 @@ input:-webkit-autofill:focus {
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+
+/* Professional blog image style for MDX-injected images */
+.blog-image {
+  display: block;
+  margin: 2rem auto;
+  border-radius: 16px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.08),
+    0 1.5px 6px rgba(0, 0, 0, 0.06);
+  border: 1px solid #ececec;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+}

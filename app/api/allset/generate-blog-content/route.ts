@@ -60,7 +60,11 @@ export async function POST(request: NextRequest) {
     }
 
     // Parse the JSON returned by the LLM
-    let parsed: { content: string; coverImagePrompt: string }
+    let parsed: {
+      content: string
+      coverImagePrompt: string
+      inlineImagePrompts?: Array<{ prompt: string; section: string }>
+    }
     try {
       parsed = typeof result.content === 'string' ? JSON.parse(result.content) : result.content
     } catch (err) {
@@ -105,6 +109,34 @@ export async function POST(request: NextRequest) {
 
     // Inject hero image after frontmatter
     cleanContent = injectHeroImage(cleanContent, heroImagePath, parsed.coverImagePrompt)
+
+    // Handle inline images
+    if (Array.isArray(parsed.inlineImagePrompts)) {
+      const inlineImages: Array<{ imagePath: string; altText: string; section: string }> = []
+      for (let i = 0; i < parsed.inlineImagePrompts.length; i++) {
+        const { prompt, section } = parsed.inlineImagePrompts[i] || {}
+        if (typeof prompt === 'string' && typeof section === 'string') {
+          const imagePath = `/static/images/blogs/${slug}-inline-${i + 1}.png`
+          try {
+            const imageRes = await llmImageService.generateImage({ prompt, aspectRatio: '16:9' })
+            if (imageRes.success && imageRes.image_data) {
+              const imgDir = path.join(process.cwd(), 'public/static/images/blogs')
+              await fs.mkdir(imgDir, { recursive: true })
+              const imgFile = path.join(imgDir, `${slug}-inline-${i + 1}.png`)
+              await fs.writeFile(imgFile, Buffer.from(imageRes.image_data, 'base64'))
+            } else {
+              console.warn('Inline image generation failed:', imageRes.error)
+            }
+          } catch (e) {
+            console.error('Error generating inline image:', e)
+          }
+          inlineImages.push({ imagePath, altText: prompt, section })
+        }
+      }
+      // Inject all inline images
+      const { injectInlineImages } = await import('@/lib/utils/injectInlineImages')
+      cleanContent = injectInlineImages(cleanContent, inlineImages)
+    }
 
     return NextResponse.json({
       success: true,
