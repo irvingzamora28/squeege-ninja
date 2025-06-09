@@ -182,7 +182,20 @@ export interface StatItem {
   label: string
 }
 
-export interface LandingContent {
+export interface BaseLandingContent {
+  pageType: string
+  seo?: {
+    title: string
+    description: string
+    keywords?: string[]
+  }
+  theme?: {
+    primaryColor?: string
+  }
+}
+
+export interface ProductSaaSLandingContent extends BaseLandingContent {
+  pageType: 'product' | 'saas'
   hero: HeroSection
   mainFeatures: MainFeaturesSection
   features: FeaturesSection
@@ -196,3 +209,75 @@ export interface LandingContent {
   projects?: ProjectsSection
   stats?: StatsSection
 }
+
+export interface YouTubeLandingContent extends BaseLandingContent {
+  pageType: 'youtube'
+  channelInfo: {
+    name: string
+    description: string
+    subscriberCount: string
+    profileImage: string
+    bannerImage: string
+    joinDate: string
+    totalViews: string
+    links: Array<{
+      platform: string
+      url: string
+      icon: string
+    }>
+  }
+  featuredVideos: Array<{
+    id: string
+    title: string
+    description: string
+    thumbnail: string
+    viewCount: string
+    duration: string
+    publishedAt: string
+    url: string
+  }>
+  playlists?: Array<{
+    id: string
+    title: string
+    description: string
+    videoCount: number
+    thumbnail: string
+    lastUpdated: string
+  }>
+  cta: {
+    subscribeText: string
+    subscribeLink: string
+    joinText: string
+    joinLink: string
+    socialLinks: Array<{
+      platform: string
+      url: string
+      icon: string
+    }>
+  }
+  about?: {
+    title: string
+    content: string
+    stats: Array<{
+      label: string
+      value: string
+    }>
+  }
+}
+
+export type LandingContent = ProductSaaSLandingContent | YouTubeLandingContent
+
+export const PAGE_TYPES = {
+  product: {
+    id: 'product',
+    name: 'Product/SaaS',
+    description: 'For digital products and software services',
+  },
+  youtube: {
+    id: 'youtube',
+    name: 'YouTube Channel',
+    description: 'For content creators and YouTube channels',
+  },
+} as const
+
+export type PageType = keyof typeof PAGE_TYPES

@@ -1,55 +1,39 @@
 'use client'
 
 import { useState } from 'react'
-import { LandingContent } from '@/lib/llm/types'
+import { PAGE_TYPES } from '../types'
 
 interface ContentGeneratorProps {
-  onContentGenerated: (content: LandingContent) => void
+  onGenerate: (prompt: string) => Promise<void>
+  isLoading: boolean
+  pageType: string
 }
 
-export default function ContentGenerator({ onContentGenerated }: ContentGeneratorProps) {
+export default function ContentGenerator({
+  onGenerate,
+  isLoading,
+  pageType,
+}: ContentGeneratorProps) {
   const [description, setDescription] = useState('')
-  const [isGenerating, setIsGenerating] = useState(false)
   const [error, setError] = useState('')
   const [generationMessage, setGenerationMessage] = useState('')
 
   const handleGenerate = async () => {
     if (!description.trim()) {
-      setError('Please provide a description of your business or SaaS product')
+      setError('Please provide a description')
       return
     }
 
     setError('')
     setGenerationMessage('')
-    setIsGenerating(true)
 
     try {
-      const response = await fetch('/api/allset/generate-content', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ description }),
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.message || 'Failed to generate content')
-      }
-
-      const data = await response.json()
-
-      if (data.success) {
-        setGenerationMessage('Content generated successfully!')
-        onContentGenerated(data.content)
-      } else {
-        throw new Error(data.message || 'Failed to generate content')
-      }
-    } catch (err: unknown) {
+      await onGenerate(description)
+      setGenerationMessage('Content generated successfully!')
+      setDescription('')
+    } catch (err) {
       console.error('Error generating content:', err)
-      setError(err instanceof Error ? err.message : 'An error occurred while generating content')
-    } finally {
-      setIsGenerating(false)
+      setError('Failed to generate content. Please try again.')
     }
   }
 
@@ -100,17 +84,12 @@ export default function ContentGenerator({ onContentGenerated }: ContentGenerato
         <button
           type="button"
           onClick={handleGenerate}
-          disabled={isGenerating || !description.trim()}
-          className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 rounded-md px-4 py-2 text-sm font-medium text-white focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:opacity-70"
+          disabled={isLoading}
+          className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 mt-4 w-full rounded-md px-4 py-2 text-sm font-medium text-white focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:opacity-70"
         >
-          {isGenerating ? (
-            <>
-              <span className="mr-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
-              Generating...
-            </>
-          ) : (
-            'Generate Content'
-          )}
+          {isLoading
+            ? 'Generating...'
+            : `Generate ${PAGE_TYPES[pageType as keyof typeof PAGE_TYPES]?.name || ''} Content`}
         </button>
       </div>
     </div>

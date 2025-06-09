@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import FormEditor from './components/FormEditor'
 import ContentGenerator from './components/ContentGenerator'
-import { LandingContent } from '@/lib/llm/types'
+import { LandingContent, PageType, PAGE_TYPES } from './types'
 
 export default function LandingContentPage() {
   const [content, setContent] = useState('')
@@ -13,7 +13,8 @@ export default function LandingContentPage() {
   const [isSaving, setIsSaving] = useState(false)
   const [error, setError] = useState('')
   const [saveMessage, setSaveMessage] = useState('')
-  const [editorMode, setEditorMode] = useState<'json' | 'form'>('json')
+  const [editorMode, setEditorMode] = useState<'json' | 'form'>('form')
+  const [pageType, setPageType] = useState<PageType>('product')
 
   // Section tab state for form editor
   const [activeSection, setActiveSection] = useState('')
@@ -41,6 +42,11 @@ export default function LandingContentPage() {
         setContent(formattedContent)
         setParsedContent(data)
         setOriginalContent(formattedContent)
+
+        // Set page type if available in the content
+        if (data.pageType) {
+          setPageType(data.pageType as PageType)
+        }
       } catch (err) {
         console.error('Error fetching landing content:', err)
         setError('Failed to load landing content. Please try again.')
@@ -139,6 +145,38 @@ export default function LandingContentPage() {
     }
   }
 
+  const handleGenerateContent = async (prompt: string) => {
+    try {
+      setIsLoading(true)
+      setError('')
+
+      const response = await fetch('/api/allset/generate-content', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt,
+          pageType,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to generate content')
+      }
+
+      const data = await response.json()
+      const formattedContent = JSON.stringify(data, null, 2)
+      setContent(formattedContent)
+      setParsedContent(data)
+    } catch (err) {
+      console.error('Error generating content:', err)
+      setError('Failed to generate content. Please try again.')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   // Reset to original content
   const handleReset = () => {
     setContent(originalContent)
@@ -165,40 +203,65 @@ export default function LandingContentPage() {
   }
 
   return (
-    <>
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Landing Content Editor</h1>
-        <div className="flex space-x-2">
-          {editorMode === 'json' && (
-            <>
-              <button
-                type="button"
-                onClick={handleFormat}
-                className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 rounded-md px-3 py-2 text-sm font-medium text-white focus:ring-2 focus:ring-offset-2 focus:outline-none"
-              >
-                Format JSON
-              </button>
-              <button
-                type="button"
-                onClick={handleReset}
-                className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 rounded-md px-3 py-2 text-sm font-medium text-white focus:ring-2 focus:ring-offset-2 focus:outline-none"
-              >
-                Reset Changes
-              </button>
-            </>
-          )}
-          <button
-            type="button"
-            onClick={() => setEditorMode(editorMode === 'json' ? 'form' : 'json')}
-            className="rounded-md bg-slate-600 px-3 py-2 text-sm font-medium text-white hover:bg-slate-700 focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:outline-none"
-          >
-            Switch to {editorMode === 'json' ? 'Form' : 'JSON'} Editor
-          </button>
-        </div>
+    <div className="container mx-auto p-4">
+      <h1 className="mb-6 text-2xl font-bold">Landing Page Content Editor</h1>
+
+      <div className="mb-6">
+        <h2 className="mb-2 text-lg font-semibold">Page Type</h2>
+        <select
+          value={pageType}
+          onChange={(e) => setPageType(e.target.value as PageType)}
+          className="w-full rounded-md border p-2"
+          disabled={isLoading}
+        >
+          {Object.entries(PAGE_TYPES).map(([id, type]) => (
+            <option key={id} value={id}>
+              {type.name} - {type.description}
+            </option>
+          ))}
+        </select>
       </div>
 
-      {/* AI Content Generator */}
-      {!isLoading && <ContentGenerator onContentGenerated={handleContentGenerated} />}
+      <div className="grid grid-cols-1 gap-6">
+        <div className="mb-6 flex items-center justify-self-end">
+          <div className="flex space-x-2">
+            {editorMode === 'json' && (
+              <>
+                <button
+                  type="button"
+                  onClick={handleFormat}
+                  className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 rounded-md px-3 py-2 text-sm font-medium text-white focus:ring-2 focus:ring-offset-2 focus:outline-none"
+                >
+                  Format JSON
+                </button>
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 rounded-md px-3 py-2 text-sm font-medium text-white focus:ring-2 focus:ring-offset-2 focus:outline-none"
+                >
+                  Reset Changes
+                </button>
+              </>
+            )}
+            <button
+              type="button"
+              onClick={() => setEditorMode(editorMode === 'json' ? 'form' : 'json')}
+              className="rounded-md bg-slate-600 px-3 py-2 text-sm font-medium text-white hover:bg-slate-700 focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:outline-none"
+            >
+              Switch to {editorMode === 'json' ? 'Form' : 'JSON'} Editor
+            </button>
+          </div>
+        </div>
+
+        {/* AI Content Generator */}
+        {!isLoading && (
+          <ContentGenerator
+            onGenerate={handleGenerateContent}
+            isLoading={isLoading}
+            pageType={pageType}
+          />
+        )}
+      </div>
 
       {isLoading ? (
         <div className="flex justify-center rounded-lg bg-slate-100 p-6 py-8 shadow-md dark:bg-gray-800">
@@ -289,6 +352,6 @@ export default function LandingContentPage() {
           ) : null}
         </>
       )}
-    </>
+    </div>
   )
 }
