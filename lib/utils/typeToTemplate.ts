@@ -93,6 +93,28 @@ export const createProductTemplate = (): Partial<ProductSaaSLandingContent> => {
         },
       ],
     },
+    stats: {
+      title: 'Stats section title',
+      description: 'Stats section description',
+      items: [
+        {
+          value: '98%',
+          label: 'User Satisfaction',
+        },
+        {
+          value: '50+',
+          label: 'Items',
+        },
+        {
+          value: '50K+',
+          label: 'Active Users',
+        },
+        {
+          value: '5M+',
+          label: 'Item',
+        },
+      ],
+    },
     pricing: {
       title: 'Pricing Plans',
       description: 'Choose the plan that fits your needs',
@@ -124,6 +146,36 @@ export const createProductTemplate = (): Partial<ProductSaaSLandingContent> => {
             link: '#',
           },
           highlighted: true,
+        },
+      ],
+    },
+    contact: {
+      title: 'Contact section title',
+      description: 'Contact section description',
+      fields: [
+        { name: 'name', label: 'Name', type: 'text', required: true },
+        { name: 'email', label: 'Email', type: 'email', required: true },
+      ],
+      submitLabel: 'Submit button text',
+      successMessage: 'Success message after form submission',
+      contactInfo: {
+        title: 'Contact Information',
+        phone: { label: 'Phone', number: '', hours: '' },
+        email: { label: 'Email', address: '', responseTime: '' },
+        location: { label: 'Location', address: ['Address line 1', 'Address line 2'] },
+      },
+    },
+    testimonials: {
+      title: 'Testimonials section title',
+      description: 'Testimonials section description',
+      image: '/placeholder.jpg',
+      testimonials: [
+        {
+          name: 'Client Name',
+          title: 'Client Title',
+          quote: 'Client testimonial quote.',
+          image: '/placeholder.jpg',
+          imagePrompt: 'Describe the image for the generator here.',
         },
       ],
     },
@@ -220,6 +272,22 @@ export const createYouTubeTemplate = (): Partial<YouTubeLandingContent> => {
           value: 'January 2020',
         },
       ],
+    },
+    contact: {
+      title: 'Contact section title',
+      description: 'Contact section description',
+      fields: [
+        { name: 'name', label: 'Name', type: 'text', required: true },
+        { name: 'email', label: 'Email', type: 'email', required: true },
+      ],
+      submitLabel: 'Submit button text',
+      successMessage: 'Success message after form submission',
+      contactInfo: {
+        title: 'Contact Information',
+        phone: { label: 'Phone', number: '', hours: '' },
+        email: { label: 'Email', address: '', responseTime: '' },
+        location: { label: 'Location', address: ['Address line 1', 'Address line 2'] },
+      },
     },
   }
 }

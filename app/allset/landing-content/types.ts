@@ -270,6 +270,7 @@ export interface YouTubeLandingContent extends BaseLandingContent {
       value: string
     }>
   }
+  contact?: ContactSection
 }
 
 export type LandingContent = ProductSaaSLandingContent | YouTubeLandingContent
