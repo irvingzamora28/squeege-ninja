@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { PageType } from '../types'
 
 const ImageUploader = ({ value, onChange }: { value: string; onChange: (url: string) => void }) => (
   <div>
@@ -27,6 +28,7 @@ interface FieldRendererProps {
   handleArrayAdd: (path: string) => void
   handleArrayRemove: (path: string, idx: number) => void
   formData: unknown
+  pageType?: PageType
 }
 
 export const FieldRenderer: React.FC<FieldRendererProps> = ({
@@ -38,9 +40,38 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
   handleArrayAdd,
   handleArrayRemove,
   formData,
+  pageType = 'product',
 }) => {
   const fullKey = [...parentKeys, fieldKey].join('.')
   const label = fieldKey.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())
+
+  // Helper function to get field-specific help text based on page type
+  const getFieldHelpText = () => {
+    // Only show help text for top-level fields
+    if (parentKeys.length > 0) return null
+
+    const helpTexts: Record<string, Record<string, string>> = {
+      product: {
+        heroSection:
+          'The main section at the top of the page with headline, subheading, and call to action',
+        features: 'Key product features or benefits',
+        pricing: 'Pricing plans and options',
+        testimonials: 'Customer reviews and testimonials',
+        callToAction: 'Final call to action section at the bottom of the page',
+      },
+      youtube: {
+        channelInfo: 'Information about the YouTube channel',
+        featuredVideos: 'Highlighted videos from the channel',
+        playlists: 'Collections of videos organized by theme',
+        subscriberCount: 'Number of channel subscribers',
+        socialLinks: 'Links to other social media platforms',
+      },
+    }
+
+    return helpTexts[pageType]?.[fieldKey] || null
+  }
+
+  const helpText = getFieldHelpText()
 
   if (typeof value === 'string') {
     if (fieldKey === 'description') {
@@ -48,6 +79,9 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
         <div key={fullKey}>
           <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
             {label}
+            {helpText && (
+              <span className="ml-1 text-xs text-gray-500 dark:text-gray-400">({helpText})</span>
+            )}
           </label>
           <textarea
             value={getValueAtPath(formData, fullKey)}
@@ -123,6 +157,9 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
       <div key={fullKey} className="mb-4">
         <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
           {label}
+          {helpText && (
+            <span className="ml-1 text-xs text-gray-500 dark:text-gray-400">({helpText})</span>
+          )}
         </label>
         <input
           type="number"
@@ -138,6 +175,9 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
       <div key={fullKey} className="mb-4">
         <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
           {label}
+          {helpText && (
+            <span className="ml-1 text-xs text-gray-500 dark:text-gray-400">({helpText})</span>
+          )}
         </label>
         <input
           type="checkbox"
@@ -153,6 +193,9 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
       <div key={fullKey + '-array'} className="mb-4">
         <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
           {label}
+          {helpText && (
+            <span className="ml-1 text-xs text-gray-500 dark:text-gray-400">({helpText})</span>
+          )}
         </label>
         {/* // eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         {getValueAtPath(formData, fullKey).map((item: unknown, idx: number) => (
@@ -177,6 +220,7 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
                   handleArrayAdd={handleArrayAdd}
                   handleArrayRemove={handleArrayRemove}
                   formData={formData}
+                  pageType={pageType}
                 />
               ))
             ) : (
@@ -219,6 +263,7 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
             handleArrayAdd={handleArrayAdd}
             handleArrayRemove={handleArrayRemove}
             formData={formData}
+            pageType={pageType}
           />
         ))}
       </div>

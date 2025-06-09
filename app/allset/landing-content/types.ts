@@ -17,6 +17,7 @@ export interface MainFeature {
   title: string
   description: string
   image: string
+  imagePrompt?: string
 }
 
 export interface FeaturesSection {
@@ -55,6 +56,7 @@ export interface HeroSection {
   primaryCta: CtaButton
   secondaryCta: CtaButton
   image?: string
+  imagePrompt?: string
 }
 
 export interface CtaSection {
@@ -80,6 +82,7 @@ export interface TestimonialSection {
   title?: string
   description?: string
   image?: string
+  imagePrompt?: string
   testimonials: Testimonial[]
 }
 
@@ -88,12 +91,14 @@ export interface Testimonial {
   quote: string
   image: string
   title?: string
+  imagePrompt?: string
 }
 
 export interface GalleryImage {
   src: string
   alt: string
   caption: string
+  imagePrompt?: string
 }
 
 export interface GallerySection {
@@ -113,12 +118,14 @@ export interface Service {
   description: string
   icon: string
   image: string
+  imagePrompt?: string
 }
 
 export interface Project {
   title: string
   description: string
   image: string
+  imagePrompt?: string
   category: string
   completionDate: string
 }

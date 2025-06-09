@@ -14,8 +14,8 @@ const landingContentFilePath = path.join(process.cwd(), 'data', 'landingContent.
 
 export async function POST(request: NextRequest) {
   try {
-    // Get the business description from the request
-    const { description } = await request.json()
+    // Get the business description and page type from the request
+    const { description, pageType } = await request.json()
 
     if (!description || typeof description !== 'string') {
       return NextResponse.json(
@@ -24,12 +24,20 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Validate page type if provided
+    if (pageType && typeof pageType !== 'string') {
+      return NextResponse.json(
+        { success: false, message: 'Invalid page type format' },
+        { status: 400 }
+      )
+    }
+
     // Use the site's language setting
     const contentLanguage = siteMetadata.language
     console.log(`API: Generating landing content in site language: ${contentLanguage}`)
 
-    // Generate landing content using the LLM service with the site language
-    const result = await llmService.generateLandingContent(description, contentLanguage)
+    // Generate landing content using the LLM service with the site language and page type
+    const result = await llmService.generateLandingContent(description, contentLanguage, pageType)
 
     if (result.error) {
       return NextResponse.json({ success: false, message: result.error }, { status: 500 })

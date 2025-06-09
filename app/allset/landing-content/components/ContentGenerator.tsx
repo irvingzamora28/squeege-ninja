@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { PAGE_TYPES } from '../types'
 
 interface ContentGeneratorProps {
-  onGenerate: (prompt: string) => Promise<void>
+  onGenerate: (prompt: string, pageType: string) => Promise<void>
   isLoading: boolean
   pageType: string
 }
@@ -28,7 +28,7 @@ export default function ContentGenerator({
     setGenerationMessage('')
 
     try {
-      await onGenerate(description)
+      await onGenerate(description, pageType)
       setGenerationMessage('Content generated successfully!')
       setDescription('')
     } catch (err) {

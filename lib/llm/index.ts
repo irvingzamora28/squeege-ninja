@@ -7,6 +7,8 @@ import { GoogleGenAIProvider } from './providers/google-genai'
 import { LLMProvider, LLMResponse } from './types'
 import { BLOG_CONTENT_PROMPT, BLOG_TITLES_PROMPT, LANDING_CONTENT_PROMPT } from '../constants'
 import { generateImagesForLandingContent } from './generateLandingImages'
+import { getTemplateStringForPageType } from '../utils/typeToTemplate'
+import { PageType } from '../../app/allset/landing-content/types'
 
 /**
  * LLM service that provides a unified interface for different LLM providers
@@ -42,18 +44,26 @@ export class LLMService {
    * Generate landing content based on user input
    * @param businessDescription Description of the business or SaaS product
    * @param language The language code to generate content in (defaults to 'en-us')
+   * @param pageType The type of landing page to generate (product, youtube, etc.)
    * @returns Generated landing content as JSON
    */
   async generateLandingContent(
     businessDescription: string,
-    language: string = 'en-us'
+    language: string = 'en-us',
+    pageType: string = 'product'
   ): Promise<LLMResponse> {
     // Get language instruction or default to English if language not supported
     const languageInstruction =
       this.languageInstructions[language] || this.languageInstructions['en-us']
 
+    // Generate dynamic template string based on page type
+    const template = getTemplateStringForPageType(pageType as PageType)
+
+    // Add page type instruction to the prompt
+    const pageTypeInstruction = `\nCreate content for a "${pageType}" type landing page following this structure:`
+
     // Add language instruction to the prompt
-    const promptWithLanguage = `${languageInstruction}\n\nGenerate the landing page content in ${language === 'es-mx' ? 'Spanish' : 'English'}.\n\n${LANDING_CONTENT_PROMPT}${businessDescription}`
+    const promptWithLanguage = `${languageInstruction}\n\nGenerate the landing page content in ${language === 'es-mx' ? 'Spanish' : 'English'}.${pageTypeInstruction}\n\n${LANDING_CONTENT_PROMPT}\n${template}\n\nBusiness description: ${businessDescription}`
 
     // Step 1: Generate landing content JSON
     const initialResponse = await this.provider.generateContent(promptWithLanguage)
