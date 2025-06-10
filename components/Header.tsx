@@ -20,14 +20,20 @@ const Header = () => {
     headerClass += ' sticky top-0 z-50'
   }
   // If the pricing section is NOT in the landing content, remove it from the header
-  const navLinks = headerNavLinks.filter(
-    (link) =>
-      !(
-        (!landingContent.pricing && link.title === 'Pricing') ||
-        (!landingContent.features && link.title === 'Features') ||
+  const navLinks = headerNavLinks.filter((link) => {
+    if (landingContent.pageType === 'product' || landingContent.pageType === 'saas') {
+      return !(
+        (!('pricing' in landingContent && landingContent.pricing) && link.title === 'Pricing') ||
+        (!('features' in landingContent && landingContent.features) && link.title === 'Features') ||
         (!landingContent.contact && link.title === 'Contact')
       )
-  )
+    }
+    if (landingContent.pageType === 'youtube') {
+      return !(!landingContent.contact && link.title === 'Contact')
+    }
+    // Default: don't filter anything out
+    return true
+  })
   // Use logo from siteMetadata (always string)
   let logoSrc: string
   if (typeof siteMetadata.siteLogo === 'string') {

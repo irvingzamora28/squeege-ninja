@@ -12,11 +12,7 @@ import {
   ContactSection,
 } from '../components/Main6'
 
-// For development - in production this would come from the API
-const landingContent = {
-  ...dataLandingContent,
-  pageType: 'youtube',
-} as YouTubeLandingContent
+const landingContent = dataLandingContent as unknown as YouTubeLandingContent
 
 const Main6 = () => {
   const { channelInfo, featuredVideos, playlists, cta, about, contact, seo } = landingContent
