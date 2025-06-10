@@ -9,9 +9,13 @@ import dataLandingContent from '@/data/landingContent.json'
 import Link from 'next/link'
 import { HiCheckCircle } from 'react-icons/hi2'
 import FeatureIcon from '@/components/FeatureIcon'
-import { LandingContent, GalleryImage, MainFeaturesSection } from './allset/landing-content/types'
+import {
+  ProductSaaSLandingContent,
+  GalleryImage,
+  MainFeaturesSection,
+} from './allset/landing-content/types'
 
-const landingContent = dataLandingContent as LandingContent
+const landingContent = dataLandingContent as ProductSaaSLandingContent
 
 const imageMap = {
   landingDemoImage: landingDemoImage,

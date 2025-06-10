@@ -5,7 +5,7 @@ import landingDemoImage from '../public/static/images/landing-demo.jpeg'
 import dashboardDemoImage from '../public/static/images/dashboard-demo.jpg'
 import Image from 'next/image'
 import dataLandingContent from '@/data/landingContent.json'
-import type { LandingContent } from './allset/landing-content/types' // adjust path if needed
+import type { ProductSaaSLandingContent } from './allset/landing-content/types' // adjust path if needed
 import Link from 'next/link'
 import GallerySection from '@/components/GallerySection'
 
@@ -13,7 +13,7 @@ import { useEmailSubscription } from '@/lib/useEmailSubscription'
 import FeatureIcon from '@/components/FeatureIcon'
 import { HiCheckCircle } from 'react-icons/hi2'
 
-const landingContent = dataLandingContent as LandingContent
+const landingContent = dataLandingContent as ProductSaaSLandingContent
 
 const MAX_DISPLAY = 3
 

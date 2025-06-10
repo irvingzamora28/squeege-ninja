@@ -13,9 +13,9 @@ import { HiCheckCircle } from 'react-icons/hi2'
 import { iconMap, getIconComponent } from '@/lib/utils/iconMap'
 import { useEmailSubscription } from '@/lib/useEmailSubscription'
 import { useState, useRef, useEffect } from 'react'
-import { LandingContent } from './allset/landing-content/types'
+import { ProductSaaSLandingContent } from './allset/landing-content/types'
 
-const landingContent = dataLandingContent as LandingContent
+const landingContent = dataLandingContent as ProductSaaSLandingContent
 
 import { ContactFormData, useContactSubmission } from '@/lib/useContactSubmission'
 

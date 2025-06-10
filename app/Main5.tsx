@@ -14,9 +14,9 @@ import {
   ContactSection,
 } from '@/components/Main5'
 import dataLandingContent from '@/data/landingContent.json'
-import { LandingContent } from './allset/landing-content/types'
+import { ProductSaaSLandingContent } from './allset/landing-content/types'
 
-const landingContent = dataLandingContent as LandingContent
+const landingContent = dataLandingContent as ProductSaaSLandingContent
 
 const Main5 = () => {
   const { hero, mainFeatures, features, cta, pricing, contact, faqs, testimonials, stats } =
