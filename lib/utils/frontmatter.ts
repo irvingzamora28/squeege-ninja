@@ -1,3 +1,7 @@
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
+
 /**
  * Utility functions for handling YAML frontmatter in MDX files
  */
@@ -95,4 +99,34 @@ export const generateFrontmatter = (postData: {
     .join('\n')
 
   return frontmatter
+}
+
+/**
+ * Get existing blog titles from the data/blog directory
+ * @returns Array of existing blog titles and their slugs
+ */
+export const getExistingBlogTitles = (): { title: string; slug: string }[] => {
+  try {
+    const blogDir = path.join(process.cwd(), 'data/blog')
+    if (!fs.existsSync(blogDir)) {
+      console.warn('Blog directory not found:', blogDir)
+      return []
+    }
+
+    const files = fs.readdirSync(blogDir)
+    const mdxFiles = files.filter((file) => file.endsWith('.mdx') || file.endsWith('.md'))
+
+    return mdxFiles.map((file) => {
+      const filePath = path.join(blogDir, file)
+      const fileContent = fs.readFileSync(filePath, 'utf8')
+      const { data } = matter(fileContent)
+      return {
+        title: data.title || '',
+        slug: file.replace(/\.(mdx|md)$/, ''),
+      }
+    })
+  } catch (error) {
+    console.error('Error reading blog titles:', error)
+    return []
+  }
 }

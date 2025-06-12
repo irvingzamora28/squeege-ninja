@@ -9,6 +9,7 @@ import { BLOG_CONTENT_PROMPT, BLOG_TITLES_PROMPT, LANDING_CONTENT_PROMPT } from 
 import { generateImagesForLandingContent } from './generateLandingImages'
 import { getTemplateStringForPageType } from '../utils/typeToTemplate'
 import { PageType } from '../../app/allset/landing-content/types'
+import { getExistingBlogTitles } from '../utils/frontmatter'
 
 /**
  * LLM service that provides a unified interface for different LLM providers
@@ -103,8 +104,15 @@ export class LLMService {
     const languageInstruction =
       this.languageInstructions[language] || this.languageInstructions['en-us']
 
-    // Add language instruction to the prompt
-    const promptWithLanguage = `${languageInstruction}\n\n${BLOG_TITLES_PROMPT}${landingContent}`
+    // Get existing blog titles to avoid repetition
+    const existingBlogTitles = getExistingBlogTitles()
+    const existingTitlesText =
+      existingBlogTitles.length > 0
+        ? `\n\nEXISTING BLOG TITLES (DO NOT REPEAT THESE):\n${existingBlogTitles.map((blog) => `- "${blog.title}"`).join('\n')}`
+        : ''
+
+    // Add language instruction and existing titles to the prompt
+    const promptWithLanguage = `${languageInstruction}\n\n${BLOG_TITLES_PROMPT}${existingTitlesText}\n\n${landingContent}`
 
     return this.provider.generateContent(promptWithLanguage)
   }

@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
     let heroImagePath = `/static/images/blogs/${slug}-hero.png`
     try {
       const imageRes = await llmImageService.generateImage({
-        prompt: parsed.coverImagePrompt,
+        prompt: 'Avoid using any text in the image. ' + parsed.coverImagePrompt,
         aspectRatio: '16:9',
       })
       if (imageRes.success && imageRes.image_data) {
