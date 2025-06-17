@@ -1,0 +1,15 @@
+{
+  "name": "AllSet Assistant",
+  "personality": "friendly",
+  "systemPrompt": "You are a helpful assistant for our product. Answer customer questions accurately and politely.",
+  "enabled": true,
+  "knowledgeBase": [
+    {
+      "id": "1748358981285",
+      "title": "Productos especiales",
+      "content": "Hay productos especiales que tenemos, uno de ellos es el carro rojo",
+      "dateAdded": "2025-05-27T15:16:21.285Z"
+    }
+  ],
+  "language": "spanish"
+}

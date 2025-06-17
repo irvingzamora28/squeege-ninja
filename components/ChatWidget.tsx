@@ -1,0 +1,287 @@
+'use client'
+
+import { useState, useEffect, useRef } from 'react'
+
+type Message = {
+  role: 'user' | 'assistant'
+  content: string
+  timestamp: Date
+}
+
+type AgentConfig = {
+  name: string
+  personality: string
+  language: string
+  systemPrompt: string
+  enabled: boolean
+}
+
+export default function ChatWidget() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [message, setMessage] = useState('')
+  const [messages, setMessages] = useState<Message[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [agentConfig, setAgentConfig] = useState<AgentConfig | null>(null)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  // Fetch agent configuration on mount
+  useEffect(() => {
+    const fetchAgentConfig = async () => {
+      try {
+        const response = await fetch('/api/allset/agent/config')
+        if (response.ok) {
+          const data = await response.json()
+          setAgentConfig(data)
+
+          // If enabled, add welcome message
+          if (data.enabled) {
+            const welcomeMessage =
+              data.language === 'spanish'
+                ? `¡Hola! Soy ${data.name}. ¿En qué puedo ayudarte hoy?`
+                : `Hi there! I'm ${data.name}. How can I help you today?`
+
+            setMessages([
+              {
+                role: 'assistant',
+                content: welcomeMessage,
+                timestamp: new Date(),
+              },
+            ])
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching agent config:', error)
+      }
+    }
+
+    fetchAgentConfig()
+  }, [])
+
+  // Scroll to bottom of messages
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
+
+  // Only show chat widget if agent is enabled
+  if (!agentConfig?.enabled) {
+    return null
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (!message.trim()) return
+
+    // Add user message
+    const userMessage: Message = {
+      role: 'user',
+      content: message,
+      timestamp: new Date(),
+    }
+
+    setMessages((prev) => [...prev, userMessage])
+    setMessage('')
+    setIsLoading(true)
+
+    try {
+      // Send message to API
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [...messages, userMessage].map((msg) => ({
+            role: msg.role,
+            content: msg.content,
+          })),
+          systemPrompt: agentConfig?.systemPrompt,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to get response')
+      }
+
+      const data = await response.json()
+
+      // Add assistant message
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          content: data.message,
+          timestamp: new Date(),
+        },
+      ])
+    } catch (error) {
+      console.error('Error sending message:', error)
+
+      // Add error message
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          content:
+            agentConfig?.language === 'spanish'
+              ? 'Lo siento, hubo un error al procesar tu mensaje. Por favor, inténtalo de nuevo.'
+              : 'Sorry, there was an error processing your message. Please try again.',
+          timestamp: new Date(),
+        },
+      ])
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  return (
+    <div className="fixed right-4 bottom-4 z-50">
+      {/* Chat button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lg focus:ring-2 focus:ring-offset-2 focus:outline-none"
+        aria-label={isOpen ? 'Close chat' : 'Open chat'}
+      >
+        {isOpen ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+            />
+          </svg>
+        )}
+      </button>
+
+      {/* Chat window */}
+      {isOpen && (
+        <div className="absolute right-0 bottom-16 h-96 w-80 rounded-lg bg-white shadow-xl sm:w-96 dark:bg-gray-800">
+          {/* Chat header */}
+          <div className="bg-primary-600 flex items-center justify-between rounded-t-lg p-4 text-white">
+            <h3 className="text-lg font-medium">{agentConfig?.name || 'Chat Assistant'}</h3>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="hover:bg-primary-700 rounded-full p-1 focus:ring-2 focus:ring-white focus:outline-none"
+              aria-label="Close chat"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {/* Chat messages */}
+          <div className="h-64 overflow-y-auto p-4">
+            {messages.map((msg, index) => (
+              <div
+                key={index}
+                className={`mb-3 flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={`max-w-3/4 rounded-lg px-4 py-2 ${
+                    msg.role === 'user'
+                      ? 'bg-primary-100 dark:bg-primary-900 text-gray-800 dark:text-gray-100'
+                      : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100'
+                  }`}
+                >
+                  <p className="text-sm">{msg.content}</p>
+                  <p className="mt-1 text-right text-xs text-gray-500 dark:text-gray-400">
+                    {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </p>
+                </div>
+              </div>
+            ))}
+            {isLoading && (
+              <div className="mb-3 flex justify-start">
+                <div className="max-w-3/4 rounded-lg bg-gray-100 px-4 py-2 text-gray-800 dark:bg-gray-700 dark:text-gray-100">
+                  <div className="flex space-x-1">
+                    <div className="h-2 w-2 animate-bounce rounded-full bg-gray-500 dark:bg-gray-300"></div>
+                    <div
+                      className="h-2 w-2 animate-bounce rounded-full bg-gray-500 dark:bg-gray-300"
+                      style={{ animationDelay: '0.2s' }}
+                    ></div>
+                    <div
+                      className="h-2 w-2 animate-bounce rounded-full bg-gray-500 dark:bg-gray-300"
+                      style={{ animationDelay: '0.4s' }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Chat input */}
+          <form
+            onSubmit={handleSubmit}
+            className="flex border-t border-gray-200 p-4 dark:border-gray-700"
+          >
+            <input
+              type="text"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder={
+                agentConfig?.language === 'spanish' ? 'Escribe un mensaje...' : 'Type a message...'
+              }
+              className="focus:border-primary-500 focus:ring-primary-500 flex-1 rounded-l-lg border-gray-300 bg-gray-100 px-4 py-2 focus:ring-1 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+              disabled={isLoading}
+            />
+            <button
+              type="submit"
+              className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 rounded-r-lg px-4 py-2 text-white focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:opacity-50"
+              disabled={isLoading || !message.trim()}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                />
+              </svg>
+            </button>
+          </form>
+        </div>
+      )}
+    </div>
+  )
+}

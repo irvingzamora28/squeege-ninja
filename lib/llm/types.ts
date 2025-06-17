@@ -7,6 +7,11 @@ export interface LLMResponse {
   error?: string
 }
 
+export interface ChatMessage {
+  role: 'user' | 'assistant' | 'system'
+  content: string
+}
+
 export interface LLMProvider {
   /**
    * Generate content based on a prompt
@@ -14,6 +19,14 @@ export interface LLMProvider {
    * @returns The generated content
    */
   generateContent(prompt: string): Promise<LLMResponse>
+
+  /**
+   * Generate a chat response based on a prompt and conversation history.
+   * @param messages The array of messages forming the conversation history.
+   * @param systemPrompt Optional system prompt to guide the assistant's behavior.
+   * @returns The generated chat message content as a string.
+   */
+  generateChatResponse(messages: ChatMessage[], systemPrompt?: string): Promise<string>
 }
 
 export interface BlogTitleSuggestion {

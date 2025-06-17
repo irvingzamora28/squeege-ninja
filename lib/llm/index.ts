@@ -17,7 +17,7 @@ import siteMetadata from '@/data/siteMetadata'
  * LLM service that provides a unified interface for different LLM providers
  */
 export class LLMService {
-  private provider: LLMProvider
+  public provider: LLMProvider
 
   constructor() {
     // Initialize the provider based on environment variables
