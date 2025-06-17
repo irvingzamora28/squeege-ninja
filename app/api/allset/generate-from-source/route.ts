@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { llmService } from '@/lib/llm'
 import siteMetadata from '@/data/siteMetadata'
 
-export const maxDuration = 120 // Set max duration to 120 seconds for long-running operations
+export const maxDuration = 60 // Set max duration to 60 seconds for long-running operations
 
 /**
  * API route to generate blog content from various sources (text, URL, PDF)
