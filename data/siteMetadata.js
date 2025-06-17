@@ -1,10 +1,10 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'ALLSET Template',
+  title: 'ALLSET Template: AI-Powered Landing Pages',
   author: 'imzodev',
   headerTitle: 'ALLSET Template',
   description:
-    'AI-powered Next.js landing page generator for compelling content and SEO-optimized blog posts.',
+    'Launch professional, high-converting landing pages in minutes—no design or technical skills required. Completely free to download!',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://allset-template.online',

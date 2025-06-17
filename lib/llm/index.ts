@@ -10,6 +10,8 @@ import { generateImagesForLandingContent } from './generateLandingImages'
 import { getTemplateStringForPageType } from '../utils/typeToTemplate'
 import { PageType } from '../../app/allset/landing-content/types'
 import { getExistingBlogTitles } from '../utils/frontmatter'
+import { allBlogs } from 'contentlayer/generated'
+import siteMetadata from '@/data/siteMetadata'
 
 /**
  * LLM service that provides a unified interface for different LLM providers
@@ -157,6 +159,138 @@ export class LLMService {
     const result = await this.provider.generateContent(promptWithLanguage)
 
     return result
+  }
+
+  /**
+   * Generate blog content from source text (URL, PDF, or pasted text)
+   * @param sourceText The source text to generate content from
+   * @param language The language code to generate content in (defaults to 'en-us')
+   * @returns Generated blog post with title, summary, content, and tags
+   */
+  async generateContentFromSource(
+    sourceText: string,
+    language: string = 'en-us'
+  ): Promise<LLMResponse> {
+    // Get language instruction or default to English if language not supported
+    const languageInstruction =
+      this.languageInstructions[language] || this.languageInstructions['en-us']
+
+    // Truncate text if it's too long (most LLMs have token limits)
+    const truncatedText =
+      sourceText.length > 10000 ? sourceText.substring(0, 10000) + '...' : sourceText
+
+    // Step 1: Generate a blog title and description based on the source text
+    // Get existing blog titles to avoid repetition
+    const existingBlogTitles = getExistingBlogTitles()
+    const existingTitlesText =
+      existingBlogTitles.length > 0
+        ? `\n\nEXISTING BLOG TITLES (DO NOT REPEAT THESE):\n${existingBlogTitles.map((blog) => `- "${blog.title}"`).join('\n')}`
+        : ''
+
+    // Generate only 1 blog title
+    const modifiedBlogTitlesPrompt = BLOG_TITLES_PROMPT.replace(
+      'generate 5 blog post titles',
+      'generate 1 blog post title'
+    )
+
+    // Add the source text and brand info to the prompt
+    const brandInfo = `ABOUT OUR BRAND:\nBrand Name: ${siteMetadata.title}\nDescription: ${siteMetadata.description}\n`
+
+    // Add language instruction, brand info, and existing titles to the prompt
+    const titlePrompt = `${languageInstruction}\n\n${brandInfo}\n${modifiedBlogTitlesPrompt}${existingTitlesText}\n\nSOURCE CONTENT:\n${truncatedText}\n\nBased on this source content, create a title that aligns with our brand. Do not mention other brands or businesses in the title.`
+
+    const titleResponse = await this.provider.generateContent(titlePrompt)
+
+    if (titleResponse.error) {
+      return titleResponse
+    }
+
+    // Parse the title response
+    let titleData
+    try {
+      titleData =
+        typeof titleResponse.content === 'string'
+          ? JSON.parse(titleResponse.content)
+          : titleResponse.content
+
+      // Make sure we have an array with at least one item
+      if (!Array.isArray(titleData) || titleData.length === 0) {
+        throw new Error('Invalid title data format')
+      }
+    } catch (error) {
+      console.error('Error parsing title data:', error)
+      return {
+        error: 'Failed to generate blog title',
+        content: '',
+      }
+    }
+
+    // Get the first title suggestion
+    const titleSuggestion = titleData[0]
+
+    // Step 2: Generate the blog content using the title, description AND source text
+    // Get information about existing blog posts for internal linking
+    const existingPosts = allBlogs
+      .filter((post) => !post.draft)
+      .map((post) => ({
+        title: post.title,
+        slug: post.slug,
+        summary: post.summary,
+        tags: post.tags,
+      }))
+      .slice(0, 5) // Limit to 5 posts for context
+
+    // Format existing posts information
+    const existingPostsInfo =
+      existingPosts.length > 0
+        ? existingPosts
+            .map((post) => `- "${post.title}" (slug: ${post.slug}) - ${post.summary}`)
+            .join('\n')
+        : 'No existing posts yet.'
+
+    // Create a custom prompt that includes the source text
+    const customContentPrompt = BLOG_CONTENT_PROMPT.replace('{{title}}', titleSuggestion.title)
+      .replace('{{description}}', titleSuggestion.description)
+      .replace('{{existingPosts}}', existingPostsInfo)
+
+    const contentPromptWithSource = `${languageInstruction}\n\n${brandInfo}\n${customContentPrompt}\n\nSOURCE CONTENT TO USE AS REFERENCE:\n${truncatedText}\n\nUse the above source content to inform and enrich your blog post. Extract key information, quotes, data points, and insights from the source to create a comprehensive and informative article that aligns with our brand. Do not mention other brands or businesses by name - reframe the content to be about our brand and our offerings. If the source mentions competitors or other solutions, present our brand as the solution instead.`
+
+    // Generate content using the custom prompt with source text
+    const contentResponse = await this.provider.generateContent(contentPromptWithSource)
+
+    if (contentResponse.error) {
+      return contentResponse
+    }
+
+    // Parse the content response
+    let contentData
+    try {
+      contentData =
+        typeof contentResponse.content === 'string'
+          ? JSON.parse(contentResponse.content)
+          : contentResponse.content
+    } catch (error) {
+      console.error('Error parsing content data:', error)
+      return {
+        error: 'Failed to generate blog content',
+        content: '',
+      }
+    }
+
+    // Combine the title and content data
+    const result = {
+      title: titleSuggestion.title,
+      summary: titleSuggestion.description,
+      content: contentData.content || '',
+      tags: titleSuggestion.tags,
+      coverImagePrompt: contentData.coverImagePrompt || '',
+      inlineImagePrompts: contentData.inlineImagePrompts || [],
+    }
+
+    return {
+      content: JSON.stringify(result),
+      error: undefined,
+    }
   }
 }
 
