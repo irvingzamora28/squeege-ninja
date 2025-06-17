@@ -450,6 +450,7 @@ function NewPostContent() {
             {/* Tabs */}
             <div className="mb-4 flex border-b">
               <button
+                type="button"
                 className={`px-4 py-2 text-sm font-medium ${activeTab === 'text' ? 'border-primary-500 text-primary-600 border-b-2' : 'text-gray-500'}`}
                 onClick={() => setActiveTab('text')}
               >
@@ -459,6 +460,7 @@ function NewPostContent() {
                 </div>
               </button>
               <button
+                type="button"
                 className={`px-4 py-2 text-sm font-medium ${activeTab === 'url' ? 'border-primary-500 text-primary-600 border-b-2' : 'text-gray-500'}`}
                 onClick={() => setActiveTab('url')}
               >
@@ -468,6 +470,7 @@ function NewPostContent() {
                 </div>
               </button>
               <button
+                type="button"
                 className={`px-4 py-2 text-sm font-medium ${activeTab === 'pdf' ? 'border-primary-500 text-primary-600 border-b-2' : 'text-gray-500'}`}
                 onClick={() => setActiveTab('pdf')}
               >
