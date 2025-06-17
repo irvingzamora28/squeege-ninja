@@ -64,10 +64,13 @@ export async function POST(request: NextRequest) {
  * @returns Generated blog content
  */
 async function generateContentFromText(text: string) {
-  try {
+  // Helper to attempt generation and parsing
+  async function attemptGeneration(attempt: number) {
     // Use the site's language setting
     const contentLanguage = siteMetadata.language
-    console.log(`API: Generating blog content from source in site language: ${contentLanguage}`)
+    console.log(
+      `API: Generating blog content from source in site language: ${contentLanguage} (attempt ${attempt})`
+    )
 
     // Use the LLM service to generate content
     const result = await llmService.generateContentFromSource(text, contentLanguage)
@@ -77,23 +80,34 @@ async function generateContentFromText(text: string) {
     }
 
     const raw = typeof result.content === 'string' ? result.content : JSON.stringify(result.content)
-
     // Try to extract the first JSON object from the string
     const jsonMatch = raw.match(/{[\s\S]*}/)
     if (!jsonMatch) {
       throw new Error('No JSON object found in LLM response')
     }
     const jsonString = jsonMatch[0]
-
     try {
       const parsedContent = JSON.parse(jsonString)
       return parsedContent
     } catch (error) {
-      console.error('JSON parse error:', error, 'Raw:', jsonString)
+      console.error(`[Attempt ${attempt}] JSON parse error:`, error, 'Raw:', jsonString)
       throw new Error('Failed to parse LLM JSON output')
     }
-  } catch (error) {
-    console.error('Error in generateContentFromText:', error)
-    throw error
+  }
+
+  // Try once, then retry if failure
+  try {
+    return await attemptGeneration(1)
+  } catch (err1) {
+    console.warn('First attempt to generate content failed, retrying...')
+    try {
+      return await attemptGeneration(2)
+    } catch (err2) {
+      // Compose a more verbal error for the frontend
+      const errorMessage =
+        'Sorry, the blog content could not be generated automatically. This may be due to an unexpected response from the AI service. Please try again in a few minutes, or edit your input and try again.'
+      console.error('Second attempt failed:', err2)
+      throw new Error(errorMessage)
+    }
   }
 }
