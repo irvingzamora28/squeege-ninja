@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { extractTextFromPdfFile } from '@/lib/utils/pdf-client'
 
 type KnowledgeItem = {
   id: string
@@ -29,6 +30,8 @@ export default function AgentPage() {
   // Knowledge item form state
   const [knowledgeTitle, setKnowledgeTitle] = useState('')
   const [knowledgeContent, setKnowledgeContent] = useState('')
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [extractingPdf, setExtractingPdf] = useState(false)
 
   // Configuration state
   const [config, setConfig] = useState<AgentConfig>({
@@ -69,6 +72,30 @@ export default function AgentPage() {
       ...config,
       [name]: type === 'checkbox' ? checked : value,
     })
+  }
+
+  // Handle file input change
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setSelectedFile(file)
+      setExtractingPdf(true)
+      setError(null)
+      try {
+        const extractedText = await extractTextFromPdfFile(file)
+        setKnowledgeContent(extractedText)
+      } catch (err) {
+        setError(
+          err instanceof Error ? err.message : 'An unknown error occurred during PDF extraction'
+        )
+        setKnowledgeContent('') // Clear content on error
+      } finally {
+        setExtractingPdf(false)
+      }
+    } else {
+      setSelectedFile(null)
+      setKnowledgeContent('') // Clear content if no file is selected
+    }
   }
 
   // Handle form submission
@@ -377,10 +404,31 @@ export default function AgentPage() {
             />
           </div>
 
+          <div className="mb-4">
+            <label
+              htmlFor="knowledgePdf"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Upload PDF (Optional)
+            </label>
+            <input
+              type="file"
+              id="knowledgePdf"
+              accept=".pdf"
+              onChange={handleFileChange}
+              className="focus:border-primary-500 focus:ring-primary-500 file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 mt-1 block w-full rounded-md border-gray-300 shadow-sm file:mr-4 file:rounded-full file:border-0 file:px-4 file:py-2 file:text-sm file:font-semibold sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+            />
+            {extractingPdf && (
+              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                Extracting text from PDF...
+              </p>
+            )}
+          </div>
+
           <button
             type="button"
             onClick={handleAddKnowledge}
-            disabled={addingKnowledge}
+            disabled={addingKnowledge || extractingPdf}
             className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 dark:bg-primary-700 dark:hover:bg-primary-800 inline-flex items-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:opacity-75"
           >
             {addingKnowledge ? 'Adding...' : 'Add to Knowledge Base'}
