@@ -4,6 +4,7 @@ import path from 'path'
 import { llmService } from '@/lib/llm'
 import { Chatbot } from '@/lib/llm/chatbot'
 import { ChatMessage } from '@/lib/llm/types'
+import { rateLimit, getClientIp } from '@/lib/rate-limit'
 
 type KnowledgeItem = {
   id: string
@@ -17,6 +18,35 @@ const configFilePath = path.join(process.cwd(), 'data', 'agent-config.json')
 
 export async function POST(request: NextRequest) {
   try {
+    // Apply rate limiting
+    const clientIp = getClientIp(request)
+    const rateLimitResult = rateLimit(clientIp, {
+      limit: 2, // Allow 10 requests per window
+      windowInSeconds: 60 * 60, // 1 hour window
+    })
+
+    // If rate limit exceeded, return 429 Too Many Requests
+    if (!rateLimitResult.success) {
+      return NextResponse.json(
+        {
+          error: 'Rate limit exceeded. Please try again later.',
+          rateLimitInfo: {
+            limit: rateLimitResult.limit,
+            remaining: rateLimitResult.remaining,
+            resetTime: new Date(rateLimitResult.resetTime).toISOString(),
+          },
+        },
+        {
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': rateLimitResult.limit.toString(),
+            'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
+            'X-RateLimit-Reset': Math.floor(rateLimitResult.resetTime / 1000).toString(),
+          },
+        }
+      )
+    }
+
     // Get request body
     const { messages, systemPrompt } = await request.json()
 
@@ -32,6 +62,7 @@ export async function POST(request: NextRequest) {
     if (lastMessage.role !== 'user') {
       return NextResponse.json({ error: 'The last message must be from the user' }, { status: 400 })
     }
+    console.log('Last message:', lastMessage)
 
     // Read agent configuration
     let agentConfig = {
@@ -112,6 +143,7 @@ export async function POST(request: NextRequest) {
 
     // Send the last user message and get response
     const response = await chatbot.sendMessage(lastMessage.content)
+    console.log('Response HERE:', response)
 
     return NextResponse.json({ message: response })
   } catch (error) {

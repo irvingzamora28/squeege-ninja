@@ -1,28 +1,16 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-
-type Message = {
-  role: 'user' | 'assistant'
-  content: string
-  timestamp: Date
-}
-
-type AgentConfig = {
-  name: string
-  personality: string
-  language: string
-  systemPrompt: string
-  enabled: boolean
-}
+import { useChatbot, AgentConfig, Message } from '@/hooks/useChatbot'
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
   const [message, setMessage] = useState('')
-  const [messages, setMessages] = useState<Message[]>([])
-  const [isLoading, setIsLoading] = useState(false)
   const [agentConfig, setAgentConfig] = useState<AgentConfig | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  // Use the custom chatbot hook
+  const { messages, isLoading, sendMessage, setInitialMessages } = useChatbot(agentConfig)
 
   // Fetch agent configuration on mount
   useEffect(() => {
@@ -40,7 +28,7 @@ export default function ChatWidget() {
                 ? `¡Hola! Soy ${data.name}. ¿En qué puedo ayudarte hoy?`
                 : `Hi there! I'm ${data.name}. How can I help you today?`
 
-            setMessages([
+            setInitialMessages([
               {
                 role: 'assistant',
                 content: welcomeMessage,
@@ -72,66 +60,9 @@ export default function ChatWidget() {
 
     if (!message.trim()) return
 
-    // Add user message
-    const userMessage: Message = {
-      role: 'user',
-      content: message,
-      timestamp: new Date(),
-    }
-
-    setMessages((prev) => [...prev, userMessage])
+    // Use the sendMessage function from the hook
+    await sendMessage(message)
     setMessage('')
-    setIsLoading(true)
-
-    try {
-      // Send message to API
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          messages: [...messages, userMessage].map((msg) => ({
-            role: msg.role,
-            content: msg.content,
-          })),
-          systemPrompt: agentConfig?.systemPrompt,
-        }),
-      })
-
-      if (!response.ok) {
-        throw new Error('Failed to get response')
-      }
-
-      const data = await response.json()
-
-      // Add assistant message
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: 'assistant',
-          content: data.message,
-          timestamp: new Date(),
-        },
-      ])
-    } catch (error) {
-      console.error('Error sending message:', error)
-
-      // Add error message
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: 'assistant',
-          content:
-            agentConfig?.language === 'spanish'
-              ? 'Lo siento, hubo un error al procesar tu mensaje. Por favor, inténtalo de nuevo.'
-              : 'Sorry, there was an error processing your message. Please try again.',
-          timestamp: new Date(),
-        },
-      ])
-    } finally {
-      setIsLoading(false)
-    }
   }
 
   return (
