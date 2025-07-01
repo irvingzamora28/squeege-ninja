@@ -108,7 +108,7 @@ export default function ChatWidget() {
 
       {/* Chat window */}
       {isOpen && (
-        <div className="absolute right-0 bottom-16 h-96 w-80 rounded-lg bg-white shadow-xl sm:w-96 dark:bg-gray-800">
+        <div className="fixed right-4 bottom-20 h-[32rem] w-[90%] max-w-[24rem] rounded-lg bg-white shadow-xl sm:w-[28rem] sm:max-w-none md:w-[32rem] lg:w-[40rem] xl:w-[45rem] dark:bg-gray-800">
           {/* Chat header */}
           <div className="bg-primary-600 flex items-center justify-between rounded-t-lg p-4 text-white">
             <h3 className="text-lg font-medium">{agentConfig?.name || 'Chat Assistant'}</h3>
@@ -135,37 +135,39 @@ export default function ChatWidget() {
           </div>
 
           {/* Chat messages */}
-          <div className="h-64 overflow-y-auto p-4">
+          <div className="h-[calc(32rem-8rem)] overflow-y-auto p-4">
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`mb-3 flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`mb-4 flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-3/4 rounded-lg px-4 py-2 ${
+                  className={`max-w-3/4 rounded-2xl px-4 py-3 shadow-sm ${
                     msg.role === 'user'
-                      ? 'bg-primary-100 dark:bg-primary-900 text-gray-800 dark:text-gray-100'
-                      : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100'
+                      ? 'border-primary-500 dark:border-primary-400 border-2 bg-white dark:bg-gray-800'
+                      : 'border-2 border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-800'
                   }`}
                 >
-                  <p className="text-sm">{msg.content}</p>
-                  <p className="mt-1 text-right text-xs text-gray-500 dark:text-gray-400">
-                    {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                  </p>
+                  <p className="text-sm text-gray-800 dark:text-gray-100">{msg.content}</p>
+                  <div className="mt-1.5 flex items-center justify-end">
+                    <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+                      {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </span>
+                  </div>
                 </div>
               </div>
             ))}
             {isLoading && (
-              <div className="mb-3 flex justify-start">
-                <div className="max-w-3/4 rounded-lg bg-gray-100 px-4 py-2 text-gray-800 dark:bg-gray-700 dark:text-gray-100">
-                  <div className="flex space-x-1">
-                    <div className="h-2 w-2 animate-bounce rounded-full bg-gray-500 dark:bg-gray-300"></div>
+              <div className="mb-4 flex justify-start">
+                <div className="max-w-3/4 rounded-2xl border-2 border-gray-300 bg-white px-4 py-3 shadow-sm dark:border-gray-600 dark:bg-gray-800">
+                  <div className="flex items-center justify-center space-x-1.5 py-1">
+                    <div className="bg-primary-500 dark:bg-primary-400 h-2.5 w-2.5 animate-bounce rounded-full"></div>
                     <div
-                      className="h-2 w-2 animate-bounce rounded-full bg-gray-500 dark:bg-gray-300"
+                      className="bg-primary-500 dark:bg-primary-400 h-2.5 w-2.5 animate-bounce rounded-full"
                       style={{ animationDelay: '0.2s' }}
                     ></div>
                     <div
-                      className="h-2 w-2 animate-bounce rounded-full bg-gray-500 dark:bg-gray-300"
+                      className="bg-primary-500 dark:bg-primary-400 h-2.5 w-2.5 animate-bounce rounded-full"
                       style={{ animationDelay: '0.4s' }}
                     ></div>
                   </div>
