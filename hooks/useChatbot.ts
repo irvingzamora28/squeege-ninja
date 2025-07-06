@@ -36,25 +36,25 @@ export function useChatbot(agentConfig: AgentConfig | null) {
   const sendMessage = async (userMessage: string): Promise<void> => {
     if (!userMessage.trim()) return
 
-    // Add user message to chat
     const userMessageObj: Message = {
       role: 'user',
       content: userMessage,
       timestamp: new Date(),
     }
+    const newMessages = [...messages, userMessageObj]
 
-    setMessages((prev) => [...prev, userMessageObj])
+    setMessages(newMessages)
     setIsLoading(true)
 
     try {
-      // Send message to API
+      // Send message to API with the full, up-to-date conversation history
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          messages: [...messages, userMessageObj].map((msg) => ({
+          messages: newMessages.map((msg) => ({
             role: msg.role,
             content: msg.content,
           })),

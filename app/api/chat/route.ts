@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
     // Apply rate limiting
     const clientIp = getClientIp(request)
     const rateLimitResult = rateLimit(clientIp, {
-      limit: 2, // Allow 10 requests per window
+      limit: 10, // Allow 10 requests per window
       windowInSeconds: 60 * 60, // 1 hour window
     })
 
@@ -50,7 +50,10 @@ export async function POST(request: NextRequest) {
     // Get request body
     const { messages, systemPrompt } = await request.json()
 
-    if (!messages || !Array.isArray(messages) || messages.length === 0) {
+    // Type assertion and logging for debugging
+    const typedMessages: ChatMessage[] = messages as ChatMessage[]
+
+    if (!typedMessages || typedMessages.length === 0) {
       return NextResponse.json(
         { error: 'Messages are required and must be a non-empty array' },
         { status: 400 }
@@ -129,21 +132,18 @@ export async function POST(request: NextRequest) {
       enhancedSystemPrompt += `\n\n${knowledgeContext}`
     }
 
-    // Create chatbot instance with the enhanced system prompt
     const chatbot = new Chatbot(llmService.provider, enhancedSystemPrompt)
-
-    // Add previous messages to conversation history (except the last one)
-    for (let i = 0; i < messages.length - 1; i++) {
-      const msg = messages[i]
-      chatbot.getHistory().push({
-        role: msg.role as 'user' | 'assistant',
+    // Only add up to the second-to-last message; sendMessage will append the last user message
+    for (let i = 0; i < typedMessages.length - 1; i++) {
+      const msg = typedMessages[i]
+      chatbot.addToHistory({
+        role: msg.role as 'user' | 'assistant' | 'system',
         content: msg.content,
       })
     }
 
-    // Send the last user message and get response
+    // Use sendMessage with an empty string to get a response using the full history
     const response = await chatbot.sendMessage(lastMessage.content)
-    console.log('Response HERE:', response)
 
     return NextResponse.json({ message: response })
   } catch (error) {

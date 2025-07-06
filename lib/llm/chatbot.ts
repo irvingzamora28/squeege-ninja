@@ -39,6 +39,14 @@ export class Chatbot {
   }
 
   /**
+   * Adds a message to the current conversation history.
+   * @param msg ChatMessage to add.
+   */
+  addToHistory(msg: ChatMessage): void {
+    this.conversationHistory.push(msg)
+  }
+
+  /**
    * Retrieves the current conversation history.
    * @returns Array of chat messages.
    */
