@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import dataLandingContent from '@/data/landingContent.json'
-import { LandingContent, ProductSaaSLandingContent } from './allset/landing-content/types'
+import { ServicesLandingContent } from './allset/landing-content/types'
 import { useEmailSubscription } from '@/lib/useEmailSubscription'
 import { useContactSubmission } from '@/lib/useContactSubmission'
 import { FaIndustry, FaTools, FaBolt, FaChartLine, FaShieldAlt, FaClock } from 'react-icons/fa'
@@ -18,7 +18,7 @@ import {
   Variants,
 } from 'framer-motion'
 
-const landingContent = dataLandingContent as ProductSaaSLandingContent
+const landingContent = dataLandingContent as ServicesLandingContent
 
 // Map of icons for services section
 const serviceIconMap = {

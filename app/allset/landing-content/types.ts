@@ -201,8 +201,8 @@ export interface BaseLandingContent {
   }
 }
 
-export interface ProductSaaSLandingContent extends BaseLandingContent {
-  pageType: 'product' | 'saas'
+export interface ServicesLandingContent extends BaseLandingContent {
+  pageType: 'services'
   hero: HeroSection
   mainFeatures: MainFeaturesSection
   features: FeaturesSection
@@ -213,6 +213,20 @@ export interface ProductSaaSLandingContent extends BaseLandingContent {
   testimonials?: TestimonialSection
   contact?: ContactSection
   services?: ServiceSection
+  projects?: ProjectsSection
+  stats?: StatsSection
+}
+
+export interface ProductSaaSLandingContent extends BaseLandingContent {
+  pageType: 'product' | 'saas'
+  hero: HeroSection
+  mainFeatures: MainFeaturesSection
+  features: FeaturesSection
+  cta: CtaSection
+  faqs: FaqsSection
+  pricing?: PricingSection
+  testimonials?: TestimonialSection
+  contact?: ContactSection
   projects?: ProjectsSection
   stats?: StatsSection
 }
@@ -285,6 +299,11 @@ export const PAGE_TYPES = {
     id: 'youtube',
     name: 'YouTube Channel',
     description: 'For content creators and YouTube channels',
+  },
+  services: {
+    id: 'services',
+    name: 'Services',
+    description: 'For service-based businesses',
   },
 } as const
 

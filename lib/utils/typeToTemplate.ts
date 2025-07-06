@@ -5,6 +5,7 @@ import {
   ProductSaaSLandingContent,
   YouTubeLandingContent,
   PageType,
+  ServicesLandingContent,
 } from '../../app/allset/landing-content/types'
 
 /**
@@ -293,10 +294,196 @@ export const createYouTubeTemplate = (): Partial<YouTubeLandingContent> => {
 }
 
 /**
+ * Creates a template object for a services landing page
+ *
+ **/
+export const createServicesTemplate = (): Partial<ServicesLandingContent> => {
+  return {
+    pageType: 'services',
+    hero: {
+      title: 'Professional Services for Your Needs',
+      description:
+        'Expert solutions for dental clinics, mechanics, auto repair shops, and medical clinics.',
+      image: '/placeholder.jpg',
+      imagePrompt:
+        'A modern, clean, and welcoming hero image representing a professional service business.',
+      primaryCta: {
+        text: 'Get Started',
+        link: '#',
+      },
+      secondaryCta: {
+        text: 'Learn More',
+        link: '#',
+      },
+    },
+    gallery: {
+      title: 'Our Work Gallery',
+      description: 'See examples of our recent projects and satisfied clients.',
+      images: [
+        {
+          src: '/placeholder1.jpg',
+          alt: 'Gallery image 1',
+          caption: 'A bright, professional workspace or successful project outcome.',
+          imagePrompt: 'A bright, professional workspace or successful project outcome.',
+        },
+        {
+          src: '/placeholder2.jpg',
+          alt: 'Gallery image 2',
+          caption: 'Friendly staff assisting a customer in a clean environment.',
+          imagePrompt: 'Friendly staff assisting a customer in a clean environment.',
+        },
+      ],
+    },
+    services: {
+      title: 'Our Services',
+      description: 'Comprehensive services tailored for your business.',
+      items: [
+        {
+          title: 'Dental Care',
+          description: 'Modern dental solutions for clinics.',
+          icon: 'FaTooth',
+          image: '/service-dental.jpg',
+          imagePrompt: 'A dental clinic with modern equipment.',
+        },
+        {
+          title: 'Auto Repair',
+          description: 'Reliable repairs for all vehicle types.',
+          icon: 'FaCar',
+          image: '/service-auto.jpg',
+          imagePrompt: 'A mechanic working on a car.',
+        },
+        {
+          title: 'Medical Consulting',
+          description: 'Professional support for medical clinics.',
+          icon: 'FaStethoscope',
+          image: '/service-medical.jpg',
+          imagePrompt: 'A doctor consulting with a patient.',
+        },
+        {
+          title: 'General Mechanics',
+          description: 'Expert mechanical services for any need.',
+          icon: 'FaWrench',
+          image: '/service-mechanic.jpg',
+          imagePrompt: 'A mechanic using tools in a workshop.',
+        },
+      ],
+    },
+    projects: {
+      title: 'Recent Projects',
+      description: 'Showcasing our successful collaborations.',
+      items: [
+        {
+          title: 'Dental Clinic Revamp',
+          description: 'Complete digital transformation for a dental clinic.',
+          image: '/placeholder3.jpg',
+          imagePrompt: 'A modern dental clinic interior with happy staff.',
+          category: 'Dental',
+          completionDate: '2024-01-15',
+        },
+        {
+          title: 'Auto Shop Upgrade',
+          description: 'Workflow optimization for a busy auto repair shop.',
+          image: '/placeholder4.jpg',
+          imagePrompt: 'A mechanic working on a car in a clean garage.',
+          category: 'Auto Repair',
+          completionDate: '2024-03-22',
+        },
+      ],
+    },
+    mainFeatures: {
+      title: 'Why Choose Us',
+      description: 'Key benefits of partnering with our service team.',
+      items: [
+        {
+          id: 1,
+          icon: 'FaCheckCircle',
+          title: 'Certified Professionals',
+          description: 'Our team is fully certified and highly experienced.',
+          image: '/placeholder5.jpg',
+          imagePrompt: 'A group of professionals with certificates.',
+        },
+        {
+          id: 2,
+          icon: 'FaSmile',
+          title: 'Customer Satisfaction',
+          description: 'We prioritize your satisfaction above all.',
+          image: '/placeholder6.jpg',
+          imagePrompt: 'A happy customer shaking hands with a service provider.',
+        },
+      ],
+    },
+    testimonials: {
+      title: 'What Our Clients Say',
+      description: 'Hear from our satisfied customers.',
+      image: '/testimonials-section.jpg',
+      imagePrompt: 'A collage of happy clients from different service industries.',
+      testimonials: [
+        {
+          name: 'Jane Doe',
+          quote: 'Outstanding service and support! Our clinic runs smoother than ever.',
+          image: '/avatar1.jpg',
+          title: 'Dental Clinic Owner',
+          imagePrompt: 'A smiling dental clinic owner.',
+        },
+        {
+          name: 'John Smith',
+          quote: 'Professional, reliable, and effective solutions.',
+          image: '/avatar2.jpg',
+          title: 'Auto Repair Shop Manager',
+          imagePrompt: 'A happy auto shop manager in a garage.',
+        },
+      ],
+    },
+    cta: {
+      title: 'Ready to Transform Your Business?',
+      description: 'Contact us today to get a personalized consultation.',
+      button: {
+        text: 'Contact Us',
+        link: '#contact',
+      },
+      collectEmail: true,
+    },
+    faqs: {
+      title: 'Frequently Asked Questions',
+      description: 'Answers to common questions about our services.',
+      questions: [
+        {
+          question: 'How do I get started?',
+          answer: 'Simply contact us using the form below and we will reach out to you promptly.',
+        },
+        {
+          question: 'Do you offer custom solutions?',
+          answer: 'Yes, all our services can be tailored to your business needs.',
+        },
+      ],
+    },
+    contact: {
+      title: 'Contact Us',
+      description: 'We are here to help. Reach out for a free consultation.',
+      fields: [
+        { name: 'name', label: 'Name', type: 'text', required: true },
+        { name: 'email', label: 'Email', type: 'email', required: true },
+        { name: 'message', label: 'Message', type: 'textarea', required: true },
+      ],
+      submitLabel: 'Send Message',
+      successMessage: 'Thank you for contacting us! We will get back to you soon.',
+      contactInfo: {
+        title: 'Contact Information',
+        phone: { label: 'Phone', number: '', hours: '' },
+        email: { label: 'Email', address: '', responseTime: '' },
+        location: { label: 'Location', address: ['Address line 1', 'Address line 2'] },
+      },
+    },
+  }
+}
+
+/**
  * Creates a template object for a given page type
  */
 export const createTemplateForPageType = (pageType: PageType) => {
   switch (pageType) {
+    case 'services':
+      return createServicesTemplate()
     case 'youtube':
       return createYouTubeTemplate()
     case 'product':
