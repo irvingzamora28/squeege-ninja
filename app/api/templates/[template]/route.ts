@@ -3,8 +3,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import { promises as fs } from 'fs'
 import path from 'path'
 
-export async function GET(req: NextRequest, context: { params: Promise<{ template: string }> }) {
-  const { template } = await context.params
+export async function GET(req: NextRequest) {
+  // Extract the [template] param from the URL
+  const url = new URL(req.url)
+  const segments = url.pathname.split('/')
+  const template = segments[segments.length - 1]
   if (!template) return new NextResponse('Invalid template', { status: 400 })
   const filePath = path.join(process.cwd(), 'templates', 'emails', `${template}.hbs`)
   try {

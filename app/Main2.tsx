@@ -10,12 +10,12 @@ import Link from 'next/link'
 import { HiCheckCircle } from 'react-icons/hi2'
 import FeatureIcon from '@/components/FeatureIcon'
 import {
-  ProductSaaSLandingContent,
+  ServicesLandingContent,
   GalleryImage,
   MainFeaturesSection,
 } from './allset/landing-content/types'
 
-const landingContent = dataLandingContent as ProductSaaSLandingContent
+const landingContent = dataLandingContent as ServicesLandingContent
 
 const imageMap = {
   landingDemoImage: landingDemoImage,

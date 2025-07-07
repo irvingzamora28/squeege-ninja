@@ -8,11 +8,12 @@ import { ServiceData } from 'app/allset/landing-content/types'
 import ServiceLayoutServices from '@/layouts/ServiceLayoutServices'
 
 type ServicePageProps = {
-  params: { id: string }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- This disables the lint error for 'any' on the next line
+  params: any
 }
 
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
-  const service = servicesData.services.find((s) => s.id === params.id)
+  const service = servicesData.services.find((s) => s.id === (params.id as string))
 
   if (!service) {
     return {
@@ -43,8 +44,8 @@ export async function generateStaticParams() {
   }))
 }
 
-export default function Page({ params }: ServicePageProps) {
-  const service = servicesData.services.find((s) => s.id === params.id)
+export default async function Page({ params }: ServicePageProps) {
+  const service = servicesData.services.find((s) => s.id === (params.id as string))
 
   if (!service) {
     notFound()
