@@ -22,9 +22,9 @@ const layouts = {
 }
 
 export async function generateMetadata(props: {
-  params: Promise<{ slug: string[] }>
+  params: { slug: string[] }
 }): Promise<Metadata | undefined> {
-  const params = await props.params
+  const { params } = props
   const slug = decodeURI(params.slug.join('/'))
   const post = allBlogs.find((p) => p.slug === slug)
   const authorList = post?.authors || ['default']
@@ -79,8 +79,7 @@ export const generateStaticParams = async () => {
     .map((p) => ({ slug: p.slug!.split('/').map((name) => decodeURI(name)) }))
 }
 
-export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
-  const params = await props.params
+export default function Page({ params }: { params: { slug: string[] } }) {
   const slug = decodeURI(params.slug.join('/'))
   // Filter out drafts in production
   const sortedCoreContents = allCoreContent(sortPosts(allBlogs))

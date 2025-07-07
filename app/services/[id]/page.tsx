@@ -7,10 +7,8 @@ import siteConfig from '@/data/config/site.json'
 import { ServiceData } from 'app/allset/landing-content/types'
 import ServiceLayoutServices from '@/layouts/ServiceLayoutServices'
 
-interface ServicePageProps {
-  params: {
-    id: string
-  }
+type ServicePageProps = {
+  params: { id: string }
 }
 
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
@@ -45,7 +43,7 @@ export async function generateStaticParams() {
   }))
 }
 
-export default function ServicePage({ params }: ServicePageProps) {
+export default function Page({ params }: ServicePageProps) {
   const service = servicesData.services.find((s) => s.id === params.id)
 
   if (!service) {

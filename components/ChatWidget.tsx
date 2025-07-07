@@ -43,6 +43,7 @@ export default function ChatWidget() {
     }
 
     fetchAgentConfig()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Scroll to bottom of messages

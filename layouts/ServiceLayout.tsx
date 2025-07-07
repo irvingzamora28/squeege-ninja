@@ -17,6 +17,7 @@ import {
   FaChartLine,
   FaUsers,
 } from 'react-icons/fa'
+import Link from 'next/link'
 
 // Animation variants
 const fadeIn = {
@@ -215,10 +216,13 @@ export default function ServiceLayout({ service = sampleService }: ServiceLayout
 
         <div className="relative z-10 container mx-auto px-4">
           <motion.div variants={fadeInUp} className="mb-8">
-            <button className="group inline-flex items-center rounded-full bg-white/80 px-6 py-3 text-indigo-600 shadow-lg backdrop-blur-sm transition-all duration-300 hover:text-indigo-700 hover:shadow-xl dark:bg-gray-800/80 dark:text-indigo-400 dark:hover:text-indigo-300">
+            <Link
+              href="/services"
+              className="group inline-flex items-center rounded-full bg-white/80 px-6 py-3 text-indigo-600 shadow-lg backdrop-blur-sm transition-all duration-300 hover:text-indigo-700 hover:shadow-xl dark:bg-gray-800/80 dark:text-indigo-400 dark:hover:text-indigo-300"
+            >
               <FaArrowLeft className="mr-2 transition-transform group-hover:-translate-x-1" />
               <span className="font-medium">Back to all services</span>
-            </button>
+            </Link>
           </motion.div>
 
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
