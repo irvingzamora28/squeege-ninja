@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { ServiceData, ServiceLayoutProps } from '../app/allset/landing-content/types'
 import {
   FaArrowLeft,
   FaRocket,
@@ -77,43 +78,7 @@ const GradientOrb = ({ className, size = 'w-32 h-32' }) => (
   />
 )
 
-export interface ServiceData {
-  id: string
-  title: string
-  description: string
-  content: {
-    sections: Array<{
-      title: string
-      text: string
-      image?: string
-      imageAlt?: string
-      imagePosition?: 'left' | 'right' | 'full'
-    }>
-  }
-  icon?: string
-  image: string
-  features?: Array<{
-    title: string
-    description: string
-    icon?: string
-  }>
-  cta?: {
-    title: string
-    description: string
-    buttonText: string
-    buttonLink: string
-  }
-  relatedServices?: Array<{
-    id: string
-    title: string
-    description: string
-    image: string
-  }>
-}
-
-interface ServiceLayoutProps {
-  service: ServiceData
-}
+// Interface definitions moved to app/allset/landing-content/types.ts
 
 // Sample data for demo
 const sampleService: ServiceData = {

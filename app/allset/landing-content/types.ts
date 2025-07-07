@@ -121,6 +121,93 @@ export interface Service {
   imagePrompt?: string
 }
 
+// Extended service data for service detail pages
+export interface ServiceData {
+  id: string
+  title: string
+  description: string
+  content: {
+    sections: Array<{
+      title: string
+      text: string
+      image?: string
+      imageAlt?: string
+      imagePosition?: 'left' | 'right' | 'full'
+    }>
+  }
+  icon?: string
+  image: string
+  features?: Array<{
+    title: string
+    description: string
+    icon?: string
+  }>
+  cta?: {
+    title: string
+    description: string
+    buttonText: string
+    buttonLink: string
+  }
+  relatedServices?: Array<{
+    id: string
+    title: string
+    description: string
+    image: string
+  }>
+  category?: string
+  testimonials?: Array<{
+    name: string
+    role: string
+    quote: string
+    image?: string
+  }>
+  businessHours?: Array<{
+    day: string
+    hours: string
+  }>
+  contactInfo?: {
+    phone?: string
+    email?: string
+    address?: string[]
+  }
+  pricing?: Array<{
+    name: string
+    price: string
+    description: string
+    features: string[]
+    title?: string
+    duration?: string
+  }>
+  // Additional fields for service business templates
+  availability?: {
+    days: string
+    hours: string
+  }
+  location?: {
+    address: string
+    mapUrl?: string
+  }
+}
+
+export interface ServiceLayoutProps {
+  service: ServiceData
+}
+
+export interface ServiceItem {
+  id: string
+  title: string
+  description: string
+  image?: string
+  icon?: string
+  category?: string
+}
+
+export interface ServicesListLayoutProps {
+  title: string
+  description?: string
+  services: ServiceItem[]
+}
+
 export interface Project {
   title: string
   description: string
