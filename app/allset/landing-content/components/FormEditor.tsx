@@ -106,8 +106,12 @@ export default function FormEditor<T extends Record<string, unknown>>({
         <div className="mb-4 rounded-md bg-blue-50 p-4 dark:bg-blue-900/30">
           <div className="flex">
             <div className="text-sm text-blue-800 dark:text-blue-400">
-              <p className="font-medium">{PAGE_TYPES[pageType].name} Landing Page</p>
-              <p>{PAGE_TYPES[pageType].description}</p>
+              <p className="font-medium">
+                {PAGE_TYPES[pageType]?.name
+                  ? `${PAGE_TYPES[pageType].name} Landing Page`
+                  : 'Unknown Landing Page'}
+              </p>
+              <p>{PAGE_TYPES[pageType]?.description || ''}</p>
             </div>
           </div>
         </div>
