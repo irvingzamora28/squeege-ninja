@@ -143,6 +143,54 @@ Analytics configuration can be modified in `data/siteMetadata.js`. Supported pro
 └── admin/             # Admin panel pages
 ```
 
+---
+
+## Managing Client Sites from the Template
+
+This project includes a script to help you create and manage independent client sites based on your main template repository, while allowing you to manually sync updates from the main repo to each client repo as needed.
+
+### Creating a New Client Site
+
+Use the provided `create-client-site.sh` script to set up a new client site repository:
+
+```bash
+./create-client-site.sh <client-repo-url> <client-folder>
+```
+
+**Example:**
+
+```bash
+./create-client-site.sh https://github.com/your-org/client-site.git client-site
+```
+
+- `<client-repo-url>`: The URL of the new client site repository (must already exist and be empty on GitHub).
+- `<client-folder>`: The name of the local folder to create for the client site.
+
+This will:
+
+- Clone the main repo into the specified folder
+- Set the main repo as the `upstream` remote
+- Set the client repo as the `origin` remote
+- Push the initial code to the client repo
+
+### Updating a Client Site with Main Repo Changes
+
+When you want to sync updates from the main repo to a client site:
+
+```bash
+cd <client-folder>
+git fetch upstream
+git merge upstream/main
+# Resolve any merge conflicts, then:
+git push origin main
+```
+
+This workflow gives you full control over when and how updates are applied to each client site, and allows for customizations in each client repo.
+
+See `create-client-site.sh` for more details.
+
+---
+
 ## License
 
 This is commercial software. The use of this template is subject to the purchase
