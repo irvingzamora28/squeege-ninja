@@ -13,15 +13,20 @@ const PlaylistsSection: React.FC<PlaylistsSectionProps> = ({ playlists }) => {
   if (!playlists) return null
 
   return (
-    <section className="bg-gray-900 py-16">
-      <div className="container mx-auto px-4">
-        <h2 className="mb-2 text-center text-3xl font-bold">Playlists</h2>
-        <p className="mx-auto mb-12 max-w-2xl text-center text-gray-400">
-          Explore our curated collections of videos by topic
-        </p>
+    <section
+      className="relative bg-gray-900 bg-cover bg-center py-16"
+      style={{
+        backgroundImage: `url('${playlists.image || '/images/youtube-bg.jpg'}')`,
+      }}
+    >
+      {/* Overlay for darkening the background image */}
+      <div className="pointer-events-none absolute inset-0 bg-black/70" aria-hidden="true"></div>
+      <div className="relative container mx-auto px-4">
+        <h2 className="mb-2 text-center text-3xl font-bold">{playlists.title}</h2>
+        <p className="mx-auto mb-12 max-w-2xl text-center text-gray-400">{playlists.description}</p>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {playlists.map((playlist) => (
+          {playlists.items.map((playlist) => (
             <div
               key={playlist.id}
               className="group overflow-hidden rounded-xl bg-gray-800 transition-shadow hover:shadow-lg hover:shadow-red-500/10"

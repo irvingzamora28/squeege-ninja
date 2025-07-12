@@ -276,6 +276,40 @@ export interface StatItem {
   label: string
 }
 
+export interface FeaturedVideosSection {
+  title: string
+  description: string
+  items: VideoItem[]
+}
+
+export interface VideoItem {
+  id: string
+  title: string
+  description: string
+  thumbnail: string
+  viewCount: string
+  duration: string
+  publishedAt: string
+  url: string
+}
+
+export interface PlaylistsSection {
+  title: string
+  description: string
+  items: PlaylistItem[]
+  image?: string
+  imagePrompt?: string
+}
+
+export interface PlaylistItem {
+  id: string
+  title: string
+  description: string
+  thumbnail: string
+  videoCount: number
+  lastUpdated: string
+}
+
 export interface BaseLandingContent {
   pageType: { type: PageType }
   seo?: {
@@ -335,24 +369,8 @@ export interface YouTubeLandingContent extends BaseLandingContent {
       icon: string
     }>
   }
-  featuredVideos: Array<{
-    id: string
-    title: string
-    description: string
-    thumbnail: string
-    viewCount: string
-    duration: string
-    publishedAt: string
-    url: string
-  }>
-  playlists?: Array<{
-    id: string
-    title: string
-    description: string
-    videoCount: number
-    thumbnail: string
-    lastUpdated: string
-  }>
+  featuredVideos: FeaturedVideosSection
+  playlists?: PlaylistsSection
   cta: {
     subscribeText: string
     subscribeLink: string

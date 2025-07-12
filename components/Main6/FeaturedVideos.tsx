@@ -11,15 +11,13 @@ interface FeaturedVideosProps {
 
 const FeaturedVideos: React.FC<FeaturedVideosProps> = ({ videos }) => {
   return (
-    <section className="bg-black py-16">
+    <section className="bg-gray-900 py-16">
       <div className="container mx-auto px-4">
-        <h2 className="mb-2 text-center text-3xl font-bold">Featured Videos</h2>
-        <p className="mx-auto mb-12 max-w-2xl text-center text-gray-400">
-          Check out some of our most popular and trending content
-        </p>
+        <h2 className="mb-2 text-center text-3xl font-bold">{videos.title}</h2>
+        <p className="mx-auto mb-12 max-w-2xl text-center text-gray-400">{videos.description}</p>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {videos.map((video) => (
+          {videos.items.map((video) => (
             <div key={video.id} className="group">
               <a href={video.url} target="_blank" rel="noopener noreferrer" className="block">
                 {/* Thumbnail with overlay */}

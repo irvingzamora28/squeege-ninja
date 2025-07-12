@@ -26,7 +26,7 @@ const Main6 = () => {
       <FeaturedVideos videos={featuredVideos} />
 
       {/* Playlists Section */}
-      {playlists && playlists.length > 0 && <PlaylistsSection playlists={playlists} />}
+      {playlists && playlists.items.length > 0 && <PlaylistsSection playlists={playlists} />}
 
       {/* About Section */}
       {about && <AboutSection about={about} />}
