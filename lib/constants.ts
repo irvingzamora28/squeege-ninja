@@ -5,10 +5,12 @@ export const SQLITE_DB_DIR = 'database'
 export const SQLITE_DB_PATH = `${SQLITE_DB_DIR}/${SQLITE_DB_NAME}`
 export const SQLITE_SCHEMA_FILE = `${SQLITE_DB_DIR}/schema.sql`
 
-export const ALLSET_EMAILS_TABLE = 'allset_emails'
-export const ALLSET_CONTACT_SUBMISSIONS_TABLE = 'allset_contact_submissions'
-export const ALLSET_EMAIL_TEMPLATE_DATA_TABLE = 'allset_email_template_data'
-export const ALLSET_CTA_CONFIG_TABLE = 'allset_cta_config'
+export const TABLE_PREFIX = process.env.TABLE_PREFIX || 'allset_'
+
+export const EMAILS_TABLE = `${TABLE_PREFIX}emails`
+export const CONTACT_SUBMISSIONS_TABLE = `${TABLE_PREFIX}contact_submissions`
+export const EMAIL_TEMPLATE_DATA_TABLE = `${TABLE_PREFIX}email_template_data`
+export const CTA_CONFIG_TABLE = `${TABLE_PREFIX}cta_config`
 // The landing content prompt is now dynamic and uses templates generated from types
 export const LANDING_CONTENT_PROMPT = `
 You are a professional landing page content creator. Your task is to create content for a landing page based on the user's description of their business or SaaS product.

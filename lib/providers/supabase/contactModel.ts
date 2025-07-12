@@ -1,13 +1,13 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import type { ContactSubmission, IContactModel } from '../../models/contact'
-import { ALLSET_CONTACT_SUBMISSIONS_TABLE } from '../../constants'
+import { CONTACT_SUBMISSIONS_TABLE } from '../../constants'
 
 export class SupabaseContactModel implements IContactModel {
   constructor(private supabase: SupabaseClient) {}
 
   async getAll(): Promise<ContactSubmission[]> {
     const { data, error } = await this.supabase
-      .from(ALLSET_CONTACT_SUBMISSIONS_TABLE)
+      .from(CONTACT_SUBMISSIONS_TABLE)
       .select('id, name, email, message, created_at')
       .order('created_at', { ascending: false })
     if (error) throw error
@@ -15,7 +15,7 @@ export class SupabaseContactModel implements IContactModel {
   }
 
   async insert(data: Omit<ContactSubmission, 'id' | 'created_at'>): Promise<void> {
-    const { error } = await this.supabase.from(ALLSET_CONTACT_SUBMISSIONS_TABLE).insert([data])
+    const { error } = await this.supabase.from(CONTACT_SUBMISSIONS_TABLE).insert([data])
     if (error) throw error
   }
 }

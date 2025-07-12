@@ -1,6 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { CTAConfigInstance, ICTAConfigModel } from '../../models/ctaConfig'
-import { ALLSET_CTA_CONFIG_TABLE } from '../../constants'
+import { CTA_CONFIG_TABLE } from '../../constants'
 
 export class SupabaseCTAConfigProvider implements ICTAConfigModel {
   private client: SupabaseClient
@@ -10,7 +10,7 @@ export class SupabaseCTAConfigProvider implements ICTAConfigModel {
 
   async getAll(): Promise<CTAConfigInstance[]> {
     const { data, error } = await this.client
-      .from(ALLSET_CTA_CONFIG_TABLE)
+      .from(CTA_CONFIG_TABLE)
       .select('*')
       .order('id', { ascending: false })
     if (error) throw error
@@ -19,7 +19,7 @@ export class SupabaseCTAConfigProvider implements ICTAConfigModel {
 
   async getById(id: number): Promise<CTAConfigInstance | null> {
     const { data, error } = await this.client
-      .from(ALLSET_CTA_CONFIG_TABLE)
+      .from(CTA_CONFIG_TABLE)
       .select('*')
       .eq('id', id)
       .single()
@@ -29,7 +29,7 @@ export class SupabaseCTAConfigProvider implements ICTAConfigModel {
 
   async getByType(cta_type: string): Promise<CTAConfigInstance | null> {
     const { data, error } = await this.client
-      .from(ALLSET_CTA_CONFIG_TABLE)
+      .from(CTA_CONFIG_TABLE)
       .select('*')
       .eq('cta_type', cta_type)
       .order('updated_at', { ascending: false })
@@ -41,7 +41,7 @@ export class SupabaseCTAConfigProvider implements ICTAConfigModel {
 
   async insert(instance: Omit<CTAConfigInstance, 'id' | 'updated_at'>): Promise<number> {
     const { data, error } = await this.client
-      .from(ALLSET_CTA_CONFIG_TABLE)
+      .from(CTA_CONFIG_TABLE)
       .insert([
         {
           cta_type: instance.cta_type,
@@ -61,14 +61,14 @@ export class SupabaseCTAConfigProvider implements ICTAConfigModel {
     updates: Partial<Omit<CTAConfigInstance, 'id' | 'updated_at'>>
   ): Promise<void> {
     const { error } = await this.client
-      .from(ALLSET_CTA_CONFIG_TABLE)
+      .from(CTA_CONFIG_TABLE)
       .update({ ...updates, updated_at: new Date().toISOString() })
       .eq('id', id)
     if (error) throw error
   }
 
   async delete(id: number): Promise<void> {
-    const { error } = await this.client.from(ALLSET_CTA_CONFIG_TABLE).delete().eq('id', id)
+    const { error } = await this.client.from(CTA_CONFIG_TABLE).delete().eq('id', id)
     if (error) throw error
   }
 }

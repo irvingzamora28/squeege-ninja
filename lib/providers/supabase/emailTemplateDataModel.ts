@@ -1,6 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js'
 import { EmailTemplateDataInstance, IEmailTemplateDataModel } from '../../models/emailTemplateData'
-import { ALLSET_EMAIL_TEMPLATE_DATA_TABLE } from '../../constants'
+import { EMAIL_TEMPLATE_DATA_TABLE } from '../../constants'
 
 export class SupabaseEmailTemplateDataProvider implements IEmailTemplateDataModel {
   private client: SupabaseClient
@@ -10,7 +10,7 @@ export class SupabaseEmailTemplateDataProvider implements IEmailTemplateDataMode
 
   async getAll(): Promise<EmailTemplateDataInstance[]> {
     const { data, error } = await this.client
-      .from(ALLSET_EMAIL_TEMPLATE_DATA_TABLE)
+      .from(EMAIL_TEMPLATE_DATA_TABLE)
       .select('*')
       .order('id', { ascending: false })
     if (error) throw error
@@ -19,7 +19,7 @@ export class SupabaseEmailTemplateDataProvider implements IEmailTemplateDataMode
 
   async getById(id: number): Promise<EmailTemplateDataInstance | null> {
     const { data, error } = await this.client
-      .from(ALLSET_EMAIL_TEMPLATE_DATA_TABLE)
+      .from(EMAIL_TEMPLATE_DATA_TABLE)
       .select('*')
       .eq('id', id)
       .single()
@@ -29,7 +29,7 @@ export class SupabaseEmailTemplateDataProvider implements IEmailTemplateDataMode
 
   async getByTemplate(template: string): Promise<EmailTemplateDataInstance[]> {
     const { data, error } = await this.client
-      .from(ALLSET_EMAIL_TEMPLATE_DATA_TABLE)
+      .from(EMAIL_TEMPLATE_DATA_TABLE)
       .select('*')
       .eq('template', template)
       .order('id', { ascending: false })
@@ -41,7 +41,7 @@ export class SupabaseEmailTemplateDataProvider implements IEmailTemplateDataMode
     instance: Omit<EmailTemplateDataInstance, 'id' | 'created_at' | 'updated_at'>
   ): Promise<number> {
     const { data, error } = await this.client
-      .from(ALLSET_EMAIL_TEMPLATE_DATA_TABLE)
+      .from(EMAIL_TEMPLATE_DATA_TABLE)
       .insert([
         {
           template: instance.template,
@@ -59,14 +59,14 @@ export class SupabaseEmailTemplateDataProvider implements IEmailTemplateDataMode
     updates: Partial<Omit<EmailTemplateDataInstance, 'id' | 'created_at' | 'updated_at'>>
   ): Promise<void> {
     const { error } = await this.client
-      .from(ALLSET_EMAIL_TEMPLATE_DATA_TABLE)
+      .from(EMAIL_TEMPLATE_DATA_TABLE)
       .update({ ...updates, updated_at: new Date().toISOString() })
       .eq('id', id)
     if (error) throw error
   }
 
   async delete(id: number): Promise<void> {
-    const { error } = await this.client.from(ALLSET_EMAIL_TEMPLATE_DATA_TABLE).delete().eq('id', id)
+    const { error } = await this.client.from(EMAIL_TEMPLATE_DATA_TABLE).delete().eq('id', id)
     if (error) throw error
   }
 }

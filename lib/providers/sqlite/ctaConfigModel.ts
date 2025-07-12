@@ -1,27 +1,24 @@
 import type Database from 'better-sqlite3'
 import { CTAConfigInstance, ICTAConfigModel } from '../../models/ctaConfig'
-import { ALLSET_CTA_CONFIG_TABLE } from '../../constants'
+import { CTA_CONFIG_TABLE } from '../../constants'
 
 export class SQLiteCTAConfigProvider implements ICTAConfigModel {
   constructor(private db: Database) {}
 
   async getAll(): Promise<CTAConfigInstance[]> {
-    return this.db.all<CTAConfigInstance>(
-      `SELECT * FROM ${ALLSET_CTA_CONFIG_TABLE} ORDER BY id DESC`
-    )
+    return this.db.all<CTAConfigInstance>(`SELECT * FROM ${CTA_CONFIG_TABLE} ORDER BY id DESC`)
   }
 
   async getById(id: number): Promise<CTAConfigInstance | null> {
-    const row = this.db.get<CTAConfigInstance>(
-      `SELECT * FROM ${ALLSET_CTA_CONFIG_TABLE} WHERE id = ?`,
-      [id]
-    )
+    const row = this.db.get<CTAConfigInstance>(`SELECT * FROM ${CTA_CONFIG_TABLE} WHERE id = ?`, [
+      id,
+    ])
     return row || null
   }
 
   async getByType(cta_type: string): Promise<CTAConfigInstance | null> {
     const row = this.db.get<CTAConfigInstance>(
-      `SELECT * FROM ${ALLSET_CTA_CONFIG_TABLE} WHERE cta_type = ? ORDER BY updated_at DESC LIMIT 1`,
+      `SELECT * FROM ${CTA_CONFIG_TABLE} WHERE cta_type = ? ORDER BY updated_at DESC LIMIT 1`,
       [cta_type]
     )
     return row || null
@@ -29,7 +26,7 @@ export class SQLiteCTAConfigProvider implements ICTAConfigModel {
 
   async insert(instance: Omit<CTAConfigInstance, 'id' | 'updated_at'>): Promise<number> {
     const stmt = this.db.prepare(
-      `INSERT INTO ${ALLSET_CTA_CONFIG_TABLE} (cta_type, template_data_id, newsletter_frequency, updated_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)`
+      `INSERT INTO ${CTA_CONFIG_TABLE} (cta_type, template_data_id, newsletter_frequency, updated_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)`
     )
     const info = stmt.run(
       instance.cta_type,
@@ -61,12 +58,12 @@ export class SQLiteCTAConfigProvider implements ICTAConfigModel {
     values.push(id)
     this.db
       .prepare(
-        `UPDATE ${ALLSET_CTA_CONFIG_TABLE} SET ${fields.join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = ?`
+        `UPDATE ${CTA_CONFIG_TABLE} SET ${fields.join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = ?`
       )
       .run(...values)
   }
 
   async delete(id: number): Promise<void> {
-    this.db.prepare(`DELETE FROM ${ALLSET_CTA_CONFIG_TABLE} WHERE id = ?`).run(id)
+    this.db.prepare(`DELETE FROM ${CTA_CONFIG_TABLE} WHERE id = ?`).run(id)
   }
 }

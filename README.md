@@ -101,6 +101,30 @@ bun run dev
 
 ### Configuration
 
+#### Database Table Prefix (Multi-Client Support)
+
+You can configure the prefix used for all database table names by setting the `TABLE_PREFIX` environment variable in your `.env.local` file. This allows each client or deployment to have its own set of tables (e.g., `allset_`, `my_page_`, `youtube_channel_`).
+
+- **Default:** If `TABLE_PREFIX` is not set, it defaults to `allset_`.
+- **How to use:**
+  - For the default (allset):
+    ```env
+    # .env.local
+    TABLE_PREFIX=allset_
+    ```
+  - For a client named "my_page":
+    ```env
+    # .env.local
+    TABLE_PREFIX=my_page_
+    ```
+  - For a client named "youtube_channel":
+    ```env
+    # .env.local
+    TABLE_PREFIX=youtube_channel_
+    ```
+
+All table names in the database will use this prefix (e.g., `youtube_channel_emails`, `youtube_channel_contact_submissions`).
+
 #### LLM Providers
 
 Configure your preferred LLM provider in `.env.local`. The system supports:
