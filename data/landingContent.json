@@ -1,5 +1,5 @@
 {
-  "pageType": "product",
+  "pageType": { "type": "product" },
   "hero": {
     "title": "ALLSET Template: AI-Powered Landing Pages",
     "image": "/placeholder.jpg",

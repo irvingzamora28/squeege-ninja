@@ -277,7 +277,7 @@ export interface StatItem {
 }
 
 export interface BaseLandingContent {
-  pageType: PageType
+  pageType: { type: PageType }
   seo?: {
     title: string
     description: string
@@ -289,7 +289,7 @@ export interface BaseLandingContent {
 }
 
 export interface ServicesLandingContent extends BaseLandingContent {
-  pageType: PageType
+  pageType: { type: PageType }
   hero: HeroSection
   mainFeatures: MainFeaturesSection
   features: FeaturesSection
@@ -305,7 +305,7 @@ export interface ServicesLandingContent extends BaseLandingContent {
 }
 
 export interface ProductSaaSLandingContent extends BaseLandingContent {
-  pageType: PageType
+  pageType: { type: PageType }
   hero: HeroSection
   mainFeatures: MainFeaturesSection
   features: FeaturesSection
@@ -319,7 +319,7 @@ export interface ProductSaaSLandingContent extends BaseLandingContent {
 }
 
 export interface YouTubeLandingContent extends BaseLandingContent {
-  pageType: PageType
+  pageType: { type: PageType }
   channelInfo: {
     name: string
     description: string

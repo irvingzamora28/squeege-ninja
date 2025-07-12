@@ -13,7 +13,7 @@ import {
  */
 export const createProductTemplate = (): Partial<ProductSaaSLandingContent> => {
   return {
-    pageType: 'product',
+    pageType: { type: 'product' },
     seo: {
       title: 'Product Name - Product Description',
       description: 'SEO description for the product landing page',
@@ -188,7 +188,7 @@ export const createProductTemplate = (): Partial<ProductSaaSLandingContent> => {
  */
 export const createYouTubeTemplate = (): Partial<YouTubeLandingContent> => {
   return {
-    pageType: 'youtube',
+    pageType: { type: 'youtube' },
     seo: {
       title: 'Channel Name - YouTube Channel',
       description: 'Description of the YouTube channel for SEO purposes',
@@ -299,7 +299,7 @@ export const createYouTubeTemplate = (): Partial<YouTubeLandingContent> => {
  **/
 export const createServicesTemplate = (): Partial<ServicesLandingContent> => {
   return {
-    pageType: 'services',
+    pageType: { type: 'services' },
     hero: {
       title: 'Professional Services for Your Needs',
       description:

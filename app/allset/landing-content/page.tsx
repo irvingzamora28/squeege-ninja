@@ -213,8 +213,8 @@ export default function LandingContentPage() {
     setEditorMode('form')
 
     // Update page type if it's in the generated content
-    if (generatedContent.pageType && PAGE_TYPES[generatedContent.pageType]) {
-      setPageType({ type: generatedContent.pageType })
+    if (generatedContent.pageType && PAGE_TYPES[generatedContent.pageType.type]) {
+      setPageType({ type: generatedContent.pageType.type })
     }
   }
 

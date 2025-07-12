@@ -21,14 +21,14 @@ const Header = () => {
   }
   // If the pricing section is NOT in the landing content, remove it from the header
   const navLinks = headerNavLinks.filter((link) => {
-    if (landingContent.pageType === 'product' || landingContent.pageType === 'saas') {
+    if (landingContent.pageType.type === 'product') {
       return !(
         (!('pricing' in landingContent && landingContent.pricing) && link.title === 'Pricing') ||
         (!('features' in landingContent && landingContent.features) && link.title === 'Features') ||
         (!landingContent.contact && link.title === 'Contact')
       )
     }
-    if (landingContent.pageType === 'youtube') {
+    if (landingContent.pageType.type === 'youtube') {
       return !(!landingContent.contact && link.title === 'Contact')
     }
     // Default: don't filter anything out
