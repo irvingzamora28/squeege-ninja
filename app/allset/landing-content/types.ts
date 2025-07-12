@@ -325,7 +325,8 @@ export interface YouTubeLandingContent extends BaseLandingContent {
     description: string
     subscriberCount: string
     profileImage: string
-    bannerImage: string
+    image: string
+    imagePrompt: string
     joinDate: string
     totalViews: string
     links: Array<{

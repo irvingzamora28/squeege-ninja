@@ -196,10 +196,11 @@ export const createYouTubeTemplate = (): Partial<YouTubeLandingContent> => {
     },
     channelInfo: {
       name: 'Channel Name',
-      description: 'Detailed description of what the channel is about',
+      description: 'Small description of what the channel is about',
       subscriberCount: '100K',
       profileImage: '/placeholder.jpg',
-      bannerImage: '/placeholder.jpg',
+      image: '/placeholder.jpg',
+      imagePrompt: 'Describe the banner image for the generator here. (AVOID USING TEXT)',
       joinDate: 'January 2020',
       totalViews: '5M+',
       links: [

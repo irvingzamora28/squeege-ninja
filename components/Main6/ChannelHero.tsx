@@ -25,7 +25,7 @@ const ChannelHero: React.FC<ChannelHeroProps> = ({ channelInfo }) => {
       <div className="relative h-64 w-full overflow-hidden sm:h-80 lg:h-96">
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-transparent to-black/70"></div>
         <Image
-          src={channelInfo.bannerImage}
+          src={channelInfo.image}
           alt={`${channelInfo.name} banner`}
           fill
           className="object-cover"
