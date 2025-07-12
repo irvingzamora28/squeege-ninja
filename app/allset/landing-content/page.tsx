@@ -14,7 +14,7 @@ export default function LandingContentPage() {
   const [error, setError] = useState('')
   const [saveMessage, setSaveMessage] = useState('')
   const [editorMode, setEditorMode] = useState<'json' | 'form'>('form')
-  const [pageType, setPageType] = useState<PageType>('product')
+  const [pageType, setPageType] = useState<{ type: PageType }>({ type: 'product' })
 
   // Section tab state for form editor
   const [activeSection, setActiveSection] = useState('')
@@ -44,8 +44,14 @@ export default function LandingContentPage() {
         setOriginalContent(formattedContent)
 
         // Set page type if available in the content
-        if (data.pageType) {
-          setPageType(data.pageType as PageType)
+        if (
+          data.pageType &&
+          typeof data.pageType === 'object' &&
+          typeof data.pageType.type === 'string'
+        ) {
+          setPageType({ type: data.pageType.type })
+        } else {
+          setPageType({ type: 'product' })
         }
       } catch (err) {
         console.error('Error fetching landing content:', err)
@@ -145,7 +151,7 @@ export default function LandingContentPage() {
     }
   }
 
-  const handleGenerateContent = async (prompt: string, pageType: string) => {
+  const handleGenerateContent = async (prompt: string, pageType: { type: PageType }) => {
     setIsLoading(true)
     setError('')
 
@@ -192,7 +198,7 @@ export default function LandingContentPage() {
   // Format JSON
   const handleFormat = () => {
     try {
-      const parsed = JSON.parse(content)
+      const parsed = JSON.parse(content) as LandingContent
       setContent(JSON.stringify(parsed, null, 2))
       setError('')
     } catch (err) {
@@ -207,8 +213,8 @@ export default function LandingContentPage() {
     setEditorMode('form')
 
     // Update page type if it's in the generated content
-    if (generatedContent.pageType && Object.keys(PAGE_TYPES).includes(generatedContent.pageType)) {
-      setPageType(generatedContent.pageType as PageType)
+    if (generatedContent.pageType && PAGE_TYPES[generatedContent.pageType]) {
+      setPageType({ type: generatedContent.pageType })
     }
   }
 
@@ -262,8 +268,8 @@ export default function LandingContentPage() {
           </label>
           <select
             id="page-type"
-            value={pageType}
-            onChange={(e) => setPageType(e.target.value as PageType)}
+            value={pageType.type}
+            onChange={(e) => setPageType({ type: e.target.value as PageType })}
             className="rounded-md border-gray-300 py-2 pr-10 pl-3 text-sm focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
           >
             {Object.entries(PAGE_TYPES).map(([key, { name }]) => (

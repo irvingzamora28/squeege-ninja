@@ -24,12 +24,19 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Validate page type if provided
-    if (pageType && typeof pageType !== 'string') {
-      return NextResponse.json(
-        { success: false, message: 'Invalid page type format' },
-        { status: 400 }
-      )
+    // Accept pageType as either a string or { type: string }
+    let normalizedPageType: string | undefined = undefined
+    if (pageType) {
+      if (typeof pageType === 'string') {
+        normalizedPageType = pageType
+      } else if (typeof pageType === 'object' && typeof pageType.type === 'string') {
+        normalizedPageType = pageType.type
+      } else {
+        return NextResponse.json(
+          { success: false, message: 'Invalid page type format' },
+          { status: 400 }
+        )
+      }
     }
 
     // Use the site's language setting
@@ -37,7 +44,11 @@ export async function POST(request: NextRequest) {
     console.log(`API: Generating landing content in site language: ${contentLanguage}`)
 
     // Generate landing content using the LLM service with the site language and page type
-    const result = await llmService.generateLandingContent(description, contentLanguage, pageType)
+    const result = await llmService.generateLandingContent(
+      description,
+      contentLanguage,
+      normalizedPageType
+    )
 
     if (result.error) {
       return NextResponse.json({ success: false, message: result.error }, { status: 500 })

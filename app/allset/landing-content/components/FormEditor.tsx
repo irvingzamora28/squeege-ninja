@@ -9,14 +9,14 @@ interface FormEditorProps<T> {
   content: T
   onSave: (content: T) => void
   isSaving: boolean
-  pageType?: PageType
+  pageType?: { type: PageType }
 }
 
 export default function FormEditor<T extends Record<string, unknown>>({
   content,
   onSave,
   isSaving,
-  pageType = 'product',
+  pageType = { type: 'product' },
 }: FormEditorProps<T>) {
   const {
     formData,
@@ -45,7 +45,7 @@ export default function FormEditor<T extends Record<string, unknown>>({
     let fieldsToRender = Object.keys(formData)
 
     // If we have specific field requirements for a page type, filter the fields
-    if (pageType === 'product') {
+    if (pageType.type === 'product') {
       // For product pages, we want to prioritize product-specific fields
       const productFields = [
         ...commonFields,
@@ -63,7 +63,7 @@ export default function FormEditor<T extends Record<string, unknown>>({
         if (bIndex === -1) return -1
         return aIndex - bIndex
       })
-    } else if (pageType === 'youtube') {
+    } else if (pageType.type === 'youtube') {
       // For YouTube pages, prioritize video-related fields
       const youtubeFields = [
         ...commonFields,
@@ -94,7 +94,7 @@ export default function FormEditor<T extends Record<string, unknown>>({
         handleArrayAdd={handleArrayAdd}
         handleArrayRemove={handleArrayRemove}
         formData={formData}
-        pageType={pageType}
+        pageType={pageType.type}
       />
     ))
   }
@@ -107,11 +107,11 @@ export default function FormEditor<T extends Record<string, unknown>>({
           <div className="flex">
             <div className="text-sm text-blue-800 dark:text-blue-400">
               <p className="font-medium">
-                {PAGE_TYPES[pageType]?.name
-                  ? `${PAGE_TYPES[pageType].name} Landing Page`
+                {PAGE_TYPES[pageType.type]?.name
+                  ? `${PAGE_TYPES[pageType.type].name} Landing Page`
                   : 'Unknown Landing Page'}
               </p>
-              <p>{PAGE_TYPES[pageType]?.description || ''}</p>
+              <p>{PAGE_TYPES[pageType.type]?.description || ''}</p>
             </div>
           </div>
         </div>

@@ -40,7 +40,7 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
   handleArrayAdd,
   handleArrayRemove,
   formData,
-  pageType = 'product',
+  pageType = { type: 'product' },
 }) => {
   const fullKey = [...parentKeys, fieldKey].join('.')
   const label = fieldKey.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())
@@ -49,6 +49,9 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
   const getFieldHelpText = () => {
     // Only show help text for top-level fields
     if (parentKeys.length > 0) return null
+
+    // Normalize pageType to always use a string key
+    const pageTypeKey = typeof pageType === 'string' ? pageType : pageType.type
 
     const helpTexts: Record<string, Record<string, string>> = {
       product: {
@@ -68,7 +71,7 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
       },
     }
 
-    return helpTexts[pageType]?.[fieldKey] || null
+    return helpTexts[pageTypeKey]?.[fieldKey] || null
   }
 
   const helpText = getFieldHelpText()
@@ -220,7 +223,7 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
                   handleArrayAdd={handleArrayAdd}
                   handleArrayRemove={handleArrayRemove}
                   formData={formData}
-                  pageType={pageType}
+                  pageType={(typeof pageType === 'string' ? pageType : pageType.type) as PageType}
                 />
               ))
             ) : (
@@ -263,7 +266,7 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
             handleArrayAdd={handleArrayAdd}
             handleArrayRemove={handleArrayRemove}
             formData={formData}
-            pageType={pageType}
+            pageType={(typeof pageType === 'string' ? pageType : pageType.type) as PageType}
           />
         ))}
       </div>

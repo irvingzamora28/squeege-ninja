@@ -1,12 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { PAGE_TYPES } from '../types'
+import { PageType, PAGE_TYPES } from '../types'
 
 interface ContentGeneratorProps {
-  onGenerate: (prompt: string, pageType: string) => Promise<void>
+  onGenerate: (prompt: string, pageType: { type: PageType }) => Promise<void>
   isLoading: boolean
-  pageType: string
+  pageType: { type: PageType }
 }
 
 export default function ContentGenerator({
@@ -89,7 +89,7 @@ export default function ContentGenerator({
         >
           {isLoading
             ? 'Generating...'
-            : `Generate ${PAGE_TYPES[pageType as keyof typeof PAGE_TYPES]?.name || ''} Content`}
+            : `Generate ${PAGE_TYPES[pageType.type]?.name || ''} Content`}
         </button>
       </div>
     </div>
