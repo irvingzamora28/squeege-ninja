@@ -10,6 +10,7 @@ import {
   FaTiktok,
   FaFacebook,
   FaExternalLinkAlt,
+  FaLinkedin,
 } from 'react-icons/fa'
 import { YouTubeLandingContent } from 'app/allset/landing-content/types'
 
@@ -20,6 +21,7 @@ const platformIcons: Record<string, React.ReactNode> = {
   YouTube: <FaYoutube className="h-5 w-5" />,
   TikTok: <FaTiktok className="h-5 w-5" />,
   Facebook: <FaFacebook className="h-5 w-5" />,
+  LinkedIn: <FaLinkedin className="h-5 w-5" />,
 }
 
 interface ChannelHeroProps {
