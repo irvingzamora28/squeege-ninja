@@ -13,7 +13,7 @@ import { useEmailSubscription } from '@/lib/useEmailSubscription'
 import FeatureIcon from '@/components/FeatureIcon'
 import { HiCheckCircle } from 'react-icons/hi2'
 
-const landingContent = dataLandingContent as ServicesLandingContent
+const landingContent = dataLandingContent as unknown as ServicesLandingContent
 
 const MAX_DISPLAY = 3
 

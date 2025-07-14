@@ -15,7 +15,7 @@ import {
   MainFeaturesSection,
 } from './allset/landing-content/types'
 
-const landingContent = dataLandingContent as ServicesLandingContent
+const landingContent = dataLandingContent as unknown as ServicesLandingContent
 
 const imageMap = {
   landingDemoImage: landingDemoImage,

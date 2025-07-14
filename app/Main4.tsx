@@ -18,7 +18,7 @@ import {
   Variants,
 } from 'framer-motion'
 
-const landingContent = dataLandingContent as ServicesLandingContent
+const landingContent = dataLandingContent as unknown as ServicesLandingContent
 
 // Map of icons for services section
 const serviceIconMap = {

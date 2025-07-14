@@ -15,7 +15,7 @@ import { useEmailSubscription } from '@/lib/useEmailSubscription'
 import { useState, useRef, useEffect } from 'react'
 import { ProductSaaSLandingContent } from './allset/landing-content/types'
 
-const landingContent = dataLandingContent as ProductSaaSLandingContent
+const landingContent = dataLandingContent as unknown as ProductSaaSLandingContent
 
 import { ContactFormData, useContactSubmission } from '@/lib/useContactSubmission'
 

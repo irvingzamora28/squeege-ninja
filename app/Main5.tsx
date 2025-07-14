@@ -16,7 +16,7 @@ import {
 import dataLandingContent from '@/data/landingContent.json'
 import { ProductSaaSLandingContent } from './allset/landing-content/types'
 
-const landingContent = dataLandingContent as ProductSaaSLandingContent
+const landingContent = dataLandingContent as unknown as ProductSaaSLandingContent
 
 const Main5 = () => {
   const { hero, mainFeatures, features, cta, pricing, contact, faqs, testimonials, stats } =
