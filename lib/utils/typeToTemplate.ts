@@ -255,6 +255,7 @@ export const createYouTubeTemplate = (): Partial<YouTubeLandingContent> => {
           videoCount: 15,
           thumbnail: '/placeholder.jpg',
           lastUpdated: '2 weeks ago',
+          url: 'https://youtube.com/playlist?list=playlist1',
         },
       ],
     },

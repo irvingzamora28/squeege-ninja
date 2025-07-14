@@ -51,9 +51,12 @@ const PlaylistsSection: React.FC<PlaylistsSectionProps> = ({ playlists }) => {
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {playlists.items.map((playlist, index) => (
-            <motion.div
+            <motion.a
               key={playlist.id}
-              className="group relative"
+              href={playlist.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -114,15 +117,6 @@ const PlaylistsSection: React.FC<PlaylistsSectionProps> = ({ playlists }) => {
                     <div className="text-sm text-gray-500">
                       <span>Updated {playlist.lastUpdated}</span>
                     </div>
-
-                    <motion.button
-                      className="group/btn flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:from-purple-500 hover:to-pink-500 hover:shadow-lg hover:shadow-purple-500/25"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <span>View Playlist</span>
-                      <FaArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                    </motion.button>
                   </div>
                 </div>
 
@@ -132,7 +126,7 @@ const PlaylistsSection: React.FC<PlaylistsSectionProps> = ({ playlists }) => {
                 {/* Border Glow */}
                 <div className="absolute inset-0 rounded-2xl border border-purple-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>

@@ -308,6 +308,7 @@ export interface PlaylistItem {
   thumbnail: string
   videoCount: number
   lastUpdated: string
+  url: string
 }
 
 export interface BaseLandingContent {
