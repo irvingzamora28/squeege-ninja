@@ -5,12 +5,14 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { YouTubeLandingContent } from 'app/allset/landing-content/types'
 import { FaPlay, FaEye, FaClock, FaHeart, FaShare } from 'react-icons/fa'
+import { useShare } from '@/lib/hooks/useShare'
 
 interface FeaturedVideosProps {
   videos: YouTubeLandingContent['featuredVideos']
 }
 
 const FeaturedVideos: React.FC<FeaturedVideosProps> = ({ videos }) => {
+  const { share } = useShare()
   return (
     <section className="relative bg-gradient-to-b from-gray-900/50 to-black/50 py-20 backdrop-blur-sm">
       {/* Background Pattern */}
@@ -107,6 +109,14 @@ const FeaturedVideos: React.FC<FeaturedVideosProps> = ({ videos }) => {
                         className="rounded-full bg-gray-700 p-2 transition-colors hover:bg-blue-500"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
+                        onClick={() =>
+                          share({
+                            title: video.title,
+                            text: video.description,
+                            url: video.url,
+                          })
+                        }
+                        aria-label={`Share ${video.title}`}
                       >
                         <FaShare className="h-4 w-4" />
                       </motion.button>
