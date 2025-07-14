@@ -12,11 +12,13 @@ import {
   FaExternalLinkAlt,
   FaLinkedin,
 } from 'react-icons/fa'
+import { FaXTwitter } from 'react-icons/fa6'
 import { YouTubeLandingContent } from 'app/allset/landing-content/types'
 
 // Map platform names to icons
 const platformIcons: Record<string, React.ReactNode> = {
   Twitter: <FaTwitter className="h-5 w-5" />,
+  XTwitter: <FaXTwitter className="h-5 w-5" />,
   Instagram: <FaInstagram className="h-5 w-5" />,
   YouTube: <FaYoutube className="h-5 w-5" />,
   TikTok: <FaTiktok className="h-5 w-5" />,
