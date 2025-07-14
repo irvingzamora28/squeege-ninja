@@ -198,6 +198,7 @@ export const createYouTubeTemplate = (): Partial<YouTubeLandingContent> => {
       name: 'Channel Name',
       description: 'Small description of what the channel is about',
       subscriberCount: '100K',
+      joinLink: 'https://www.youtube.com/channel/UCxxxxxxxxx?sub_confirmation=1',
       profileImage: '/placeholder.jpg',
       image: '/placeholder.jpg',
       imagePrompt: 'Describe the banner image for the generator here. (AVOID USING TEXT)',

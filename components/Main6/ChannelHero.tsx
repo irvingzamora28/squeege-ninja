@@ -122,12 +122,20 @@ const ChannelHero: React.FC<ChannelHeroProps> = ({ channelInfo }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <div className="flex items-center gap-2 rounded-full bg-gradient-to-r from-red-500 to-pink-500 px-4 py-2">
-                <FaYoutube className="h-4 w-4" />
-                <span className="font-semibold text-white">
-                  {channelInfo.subscriberCount} subscribers
-                </span>
-              </div>
+              <motion.a
+                href={channelInfo.joinLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <div className="flex items-center gap-2 rounded-full bg-gradient-to-r from-red-500 to-pink-500 px-4 py-2">
+                  <FaYoutube className="h-4 w-4" />
+                  <span className="font-semibold text-white">
+                    {channelInfo.subscriberCount} subscribers
+                  </span>
+                </div>
+              </motion.a>
               <div className="flex items-center gap-2 rounded-full bg-gray-800/50 px-4 py-2 backdrop-blur-sm">
                 <span>{channelInfo.totalViews} views</span>
               </div>
