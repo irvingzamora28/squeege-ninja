@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { useChatbot, AgentConfig, Message } from '@/hooks/useChatbot'
+import { useChatbot, AgentConfig } from '@/lib/hooks/useChatbot'
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
