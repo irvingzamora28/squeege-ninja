@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import {
@@ -29,6 +29,9 @@ interface ChannelHeroProps {
 }
 
 const ChannelHero: React.FC<ChannelHeroProps> = ({ channelInfo }) => {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
   return (
     <section className="relative">
       {/* Enhanced Banner Image with Parallax Effect */}
@@ -50,28 +53,33 @@ const ChannelHero: React.FC<ChannelHeroProps> = ({ channelInfo }) => {
 
         {/* Floating particles */}
         <div className="absolute inset-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute h-2 w-2 rounded-full bg-white opacity-20"
-              initial={{
+          {mounted &&
+            [...Array(20)].map((_, i) => {
+              const initialPosition = {
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * 500,
                 scale: 0,
-              }}
-              animate={{
-                y: [null, -100],
-                scale: [0, 1, 0],
-                opacity: [0, 0.6, 0],
-              }}
-              transition={{
+              }
+              const transitionProps = {
                 duration: 3 + Math.random() * 2,
                 repeat: Infinity,
                 delay: Math.random() * 2,
-                ease: 'easeOut',
-              }}
-            />
-          ))}
+                ease: 'easeOut' as const,
+              }
+              return (
+                <motion.div
+                  key={i}
+                  className="absolute h-2 w-2 rounded-full bg-white opacity-20"
+                  initial={initialPosition}
+                  animate={{
+                    y: [null, -100],
+                    scale: [0, 1, 0],
+                    opacity: [0, 0.6, 0],
+                  }}
+                  transition={transitionProps}
+                />
+              )
+            })}
         </div>
       </motion.div>
 

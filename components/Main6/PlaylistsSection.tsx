@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { YouTubeLandingContent } from 'app/allset/landing-content/types'
@@ -11,6 +11,19 @@ interface PlaylistsSectionProps {
 }
 
 const PlaylistsSection: React.FC<PlaylistsSectionProps> = ({ playlists }) => {
+  const [mounted, setMounted] = React.useState(false)
+  useEffect(() => setMounted(true), [])
+
+  // Generate random durations for each playlist item only once on mount
+  const [durations] = React.useState(() =>
+    playlists
+      ? playlists.items.map(() => ({
+          hours: Math.floor(Math.random() * 5 + 1),
+          minutes: Math.floor(Math.random() * 60),
+        }))
+      : []
+  )
+
   if (!playlists) return null
 
   return (
@@ -100,7 +113,9 @@ const PlaylistsSection: React.FC<PlaylistsSectionProps> = ({ playlists }) => {
                   {/* Duration Indicator */}
                   <div className="absolute bottom-4 left-4 flex items-center rounded-full bg-black/80 px-3 py-1 text-sm font-medium text-white backdrop-blur-sm">
                     <FaClock className="mr-1 h-3 w-3" />
-                    Total: {Math.floor(Math.random() * 5 + 1)}h {Math.floor(Math.random() * 60)}m
+                    {mounted && durations[index]
+                      ? `Total: ${durations[index].hours}h ${durations[index].minutes}m`
+                      : 'Total: --h --m'}
                   </div>
                 </div>
 
