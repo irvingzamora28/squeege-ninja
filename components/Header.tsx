@@ -29,7 +29,11 @@ const Header = () => {
       )
     }
     if (landingContent.pageType.type === 'youtube') {
-      return !(!landingContent.contact && link.title === 'Contact')
+      return !(
+        (!('pricing' in landingContent && landingContent.pricing) && link.title === 'Pricing') ||
+        (!('features' in landingContent && landingContent.features) && link.title === 'Features') ||
+        (!landingContent.contact && link.title === 'Contact')
+      )
     }
     // Default: don't filter anything out
     return true
