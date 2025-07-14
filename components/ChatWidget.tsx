@@ -8,6 +8,7 @@ export default function ChatWidget() {
   const [message, setMessage] = useState('')
   const [agentConfig, setAgentConfig] = useState<AgentConfig | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   // Use the custom chatbot hook
   const { messages, isLoading, sendMessage, setInitialMessages } = useChatbot(agentConfig)
@@ -46,10 +47,13 @@ export default function ChatWidget() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // Scroll to bottom of messages
+  // Scroll to bottom of messages and focus input when messages change and chat is open
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [messages, isOpen])
 
   // Only show chat widget if agent is enabled
   if (!agentConfig?.enabled) {
@@ -61,9 +65,10 @@ export default function ChatWidget() {
 
     if (!message.trim()) return
 
+    // Clear the input immediately
+    setMessage('')
     // Use the sendMessage function from the hook
     await sendMessage(message)
-    setMessage('')
   }
 
   return (
@@ -184,6 +189,7 @@ export default function ChatWidget() {
             className="flex border-t border-gray-200 p-4 dark:border-gray-700"
           >
             <input
+              ref={inputRef}
               type="text"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
