@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { YouTubeLandingContent } from 'app/allset/landing-content/types'
 import { FaPlay, FaEye, FaClock, FaHeart, FaShare } from 'react-icons/fa'
 import { useShare } from '@/lib/hooks/useShare'
+import Toast from './Toast'
 
 interface FeaturedVideosProps {
   videos: YouTubeLandingContent['featuredVideos']
@@ -13,6 +14,15 @@ interface FeaturedVideosProps {
 
 const FeaturedVideos: React.FC<FeaturedVideosProps> = ({ videos }) => {
   const { share } = useShare()
+  const [toast, setToast] = React.useState(false)
+
+  const handleLike = (videoUrl: string) => {
+    setToast(true)
+    setTimeout(() => {
+      window.open(videoUrl, '_blank', 'noopener,noreferrer')
+    }, 2000)
+  }
+
   return (
     <section className="relative bg-gradient-to-b from-gray-900/50 to-black/50 py-20 backdrop-blur-sm">
       {/* Background Pattern */}
@@ -102,6 +112,8 @@ const FeaturedVideos: React.FC<FeaturedVideosProps> = ({ videos }) => {
                         className="rounded-full bg-gray-700 p-2 transition-colors hover:bg-red-500"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
+                        onClick={() => handleLike(video.url)}
+                        aria-label={`Like ${video.title}`}
                       >
                         <FaHeart className="h-4 w-4" />
                       </motion.button>
@@ -131,6 +143,11 @@ const FeaturedVideos: React.FC<FeaturedVideosProps> = ({ videos }) => {
           ))}
         </div>
       </div>
+      <Toast
+        message="To support the channel, please like the video on YouTube!"
+        show={toast}
+        onClose={() => setToast(false)}
+      />
     </section>
   )
 }
