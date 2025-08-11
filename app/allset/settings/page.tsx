@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+// site settings now come from DB via /api/settings
 
 export default function SettingsPage() {
   const [generalSettings, setGeneralSettings] = useState({
@@ -14,6 +15,14 @@ export default function SettingsPage() {
   const [logoPreview, setLogoPreview] = useState<string>('')
   const [logoFileName, setLogoFileName] = useState<string>('')
   const [logoFile, setLogoFile] = useState<File | null>(null)
+
+  // WhatsApp settings state
+  const [whatsappEnabled, setWhatsappEnabled] = useState<boolean>(false)
+  const [whatsappPhone, setWhatsappPhone] = useState<string>('')
+  const [whatsappMessage, setWhatsappMessage] = useState<string>('')
+  const [whatsappPosition, setWhatsappPosition] = useState<'bottom-right' | 'bottom-left'>(
+    'bottom-right'
+  )
 
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0]
@@ -29,6 +38,34 @@ export default function SettingsPage() {
       reader.readAsDataURL(file)
     }
   }
+
+  // Load WhatsApp config from API (DB-backed)
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const resp = await fetch('/api/settings', { cache: 'no-store' })
+        if (resp.ok) {
+          const data = await resp.json()
+          const s = data?.settings
+          if (!cancelled && data?.success && s) {
+            setWhatsappEnabled(!!s.whatsapp_enabled)
+            setWhatsappPhone(s.whatsapp_phone || '')
+            setWhatsappMessage(s.whatsapp_message || '')
+            setWhatsappPosition(
+              (s.whatsapp_position as 'bottom-right' | 'bottom-left') || 'bottom-right'
+            )
+            return
+          }
+        }
+      } catch {
+        // ignore
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
@@ -56,6 +93,34 @@ export default function SettingsPage() {
       setLogoFile(null)
     } else {
       setSaveMessage('Error updating logo: ' + (data.error || 'Unknown error'))
+    }
+
+    // Persist WhatsApp settings via API (DB-backed)
+    try {
+      const resp2 = await fetch('/api/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          whatsapp_enabled: whatsappEnabled,
+          whatsapp_phone: whatsappPhone,
+          whatsapp_message: whatsappMessage,
+          whatsapp_position: whatsappPosition,
+        }),
+      })
+      const resJson = await resp2.json()
+      if (resp2.ok && resJson?.success) {
+        setSaveMessage((prev) =>
+          prev ? prev + ' WhatsApp settings saved!' : 'WhatsApp settings saved!'
+        )
+      } else {
+        setSaveMessage((prev) =>
+          prev ? prev + ' (WhatsApp settings not saved)' : 'WhatsApp settings not saved'
+        )
+      }
+    } catch {
+      setSaveMessage((prev) =>
+        prev ? prev + ' (WhatsApp settings not saved)' : 'WhatsApp settings not saved'
+      )
     }
     setIsSaving(false)
     setTimeout(() => setSaveMessage(''), 3000)
@@ -164,6 +229,97 @@ export default function SettingsPage() {
                 className="focus:border-primary-500 focus:ring-primary-500 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                 required
               />
+            </div>
+          </div>
+
+          <div className="mb-6">
+            <h2 className="mb-4 text-xl font-semibold">Contact Settings</h2>
+
+            {/* WhatsApp Settings */}
+            <div className="mb-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+                    Enable WhatsApp
+                  </h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Show a floating WhatsApp contact button on your site
+                  </p>
+                </div>
+                <label className="relative inline-flex cursor-pointer items-center">
+                  <input
+                    type="checkbox"
+                    id="whatsappEnabled"
+                    name="whatsappEnabled"
+                    checked={whatsappEnabled}
+                    onChange={(e) => setWhatsappEnabled(e.target.checked)}
+                    className="peer sr-only"
+                    aria-label={`Toggle WhatsApp ${whatsappEnabled ? 'off' : 'on'}`}
+                  />
+                  <div className="peer peer-checked:bg-primary-600 peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 h-6 w-11 rounded-full bg-gray-200 peer-focus:ring-4 peer-focus:outline-none after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600 dark:bg-gray-700"></div>
+                  <span className="sr-only">Toggle WhatsApp {whatsappEnabled ? 'off' : 'on'}</span>
+                </label>
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="whatsappPhone"
+                className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                WhatsApp Phone (E.164 or digits)
+              </label>
+              <input
+                type="tel"
+                id="whatsappPhone"
+                name="whatsappPhone"
+                disabled={!whatsappEnabled}
+                value={whatsappPhone}
+                onChange={(e) => setWhatsappPhone(e.target.value)}
+                placeholder="e.g. +521234567890"
+                className="focus:border-primary-500 focus:ring-primary-500 block w-full rounded-md border-gray-300 shadow-sm disabled:opacity-60 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+              />
+            </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="whatsappMessage"
+                className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Default Message
+              </label>
+              <textarea
+                id="whatsappMessage"
+                name="whatsappMessage"
+                disabled={!whatsappEnabled}
+                value={whatsappMessage}
+                onChange={(e) => setWhatsappMessage(e.target.value)}
+                rows={2}
+                placeholder="Hello! I'd like to know more..."
+                className="focus:border-primary-500 focus:ring-primary-500 block w-full rounded-md border-gray-300 shadow-sm disabled:opacity-60 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+              />
+            </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="whatsappPosition"
+                className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Button Position
+              </label>
+              <select
+                id="whatsappPosition"
+                name="whatsappPosition"
+                disabled={!whatsappEnabled}
+                value={whatsappPosition}
+                onChange={(e) =>
+                  setWhatsappPosition(e.target.value as 'bottom-right' | 'bottom-left')
+                }
+                className="focus:border-primary-500 focus:ring-primary-500 block w-full rounded-md border-gray-300 shadow-sm disabled:opacity-60 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+              >
+                <option value="bottom-right">Bottom Right</option>
+                <option value="bottom-left">Bottom Left</option>
+              </select>
             </div>
           </div>
 

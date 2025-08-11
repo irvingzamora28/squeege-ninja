@@ -7,6 +7,8 @@ import { SQLITE_DB_PATH, SQLITE_SCHEMA_FILE } from '../constants'
 import { ContactSubmission, SQLiteContactModel } from '../models/contact'
 import type { EmailTemplateDataInstance } from '../models/emailTemplateData'
 import { CTAConfigInstance, SQLiteCTAConfigProvider } from '../models/ctaConfig'
+import { SQLiteSiteSettingsModel } from './sqlite/siteSettingsModel'
+import type { SiteSettings } from '../models/siteSettings'
 
 type Email = { id: number; email: string; created_at: string }
 
@@ -16,6 +18,7 @@ export class SQLiteProvider implements IDatabaseProvider {
   private contactModel: SQLiteContactModel
   private emailTemplateDataModel: SQLiteEmailTemplateDataProvider
   private ctaConfigModel: SQLiteCTAConfigProvider
+  private siteSettingsModel: SQLiteSiteSettingsModel
 
   constructor(dbPath: string = SQLITE_DB_PATH, schemaPath: string = SQLITE_SCHEMA_FILE) {
     this.db = new Database(dbPath)
@@ -25,6 +28,7 @@ export class SQLiteProvider implements IDatabaseProvider {
     this.contactModel = new SQLiteContactModel(this.db)
     this.emailTemplateDataModel = new SQLiteEmailTemplateDataProvider(this.db)
     this.ctaConfigModel = new SQLiteCTAConfigProvider(this.db)
+    this.siteSettingsModel = new SQLiteSiteSettingsModel(this.db)
   }
 
   async getAllEmails(): Promise<Email[]> {
@@ -99,5 +103,15 @@ export class SQLiteProvider implements IDatabaseProvider {
   }
   async deleteCTAConfig(id: number): Promise<void> {
     return this.ctaConfigModel.delete(id)
+  }
+
+  // Site Settings Methods
+  async getSiteSettings(): Promise<SiteSettings> {
+    return this.siteSettingsModel.get()
+  }
+  async updateSiteSettings(
+    patch: Partial<Omit<SiteSettings, 'id' | 'created_at' | 'updated_at'>>
+  ): Promise<SiteSettings> {
+    return this.siteSettingsModel.update(patch)
   }
 }

@@ -1,6 +1,7 @@
 // Database provider interface for scalable, swappable DB backends
 import type { EmailTemplateDataInstance } from './models/emailTemplateData'
 import type { CTAConfigInstance } from './models/ctaConfig'
+import type { SiteSettings } from './models/siteSettings'
 
 export interface IDatabaseProvider {
   getAllEmails(): Promise<{ id: number; email: string; created_at: string }[]>
@@ -38,4 +39,10 @@ export interface IDatabaseProvider {
     updates: Partial<Omit<CTAConfigInstance, 'id' | 'updated_at'>>
   ): Promise<void>
   deleteCTAConfig(id: number): Promise<void>
+
+  // Site Settings Methods
+  getSiteSettings(): Promise<SiteSettings>
+  updateSiteSettings(
+    patch: Partial<Omit<SiteSettings, 'id' | 'created_at' | 'updated_at'>>
+  ): Promise<SiteSettings>
 }

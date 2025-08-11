@@ -6,6 +6,8 @@ import { ContactSubmission, SupabaseContactModel } from '../models/contact'
 import { EmailTemplateDataInstance } from '../models/emailTemplateData'
 import { CTAConfigInstance } from '../models/ctaConfig'
 import { SupabaseCTAConfigProvider } from './supabase/ctaConfigModel'
+import { SupabaseSiteSettingsModel } from './supabase/siteSettingsModel'
+import type { SiteSettings } from '../models/siteSettings'
 
 export class SupabaseProvider implements IDatabaseProvider {
   private supabase: SupabaseClient
@@ -13,6 +15,7 @@ export class SupabaseProvider implements IDatabaseProvider {
   private contactModel: SupabaseContactModel
   private emailTemplateDataModel: SupabaseEmailTemplateDataProvider
   private ctaConfigModel: SupabaseCTAConfigProvider
+  private siteSettingsModel: SupabaseSiteSettingsModel
 
   constructor() {
     const supabaseUrl = process.env.SUPABASE_URL || ''
@@ -25,6 +28,7 @@ export class SupabaseProvider implements IDatabaseProvider {
     this.contactModel = new SupabaseContactModel(this.supabase)
     this.emailTemplateDataModel = new SupabaseEmailTemplateDataProvider(this.supabase)
     this.ctaConfigModel = new SupabaseCTAConfigProvider(this.supabase)
+    this.siteSettingsModel = new SupabaseSiteSettingsModel(this.supabase)
   }
 
   async getAllEmails(): Promise<{ id: number; email: string; created_at: string }[]> {
@@ -99,5 +103,15 @@ export class SupabaseProvider implements IDatabaseProvider {
   }
   async deleteCTAConfig(id: number): Promise<void> {
     return this.ctaConfigModel.delete(id)
+  }
+
+  // Site Settings Methods
+  async getSiteSettings(): Promise<SiteSettings> {
+    return this.siteSettingsModel.get()
+  }
+  async updateSiteSettings(
+    patch: Partial<Omit<SiteSettings, 'id' | 'created_at' | 'updated_at'>>
+  ): Promise<SiteSettings> {
+    return this.siteSettingsModel.update(patch)
   }
 }

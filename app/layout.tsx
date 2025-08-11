@@ -16,6 +16,7 @@ import AdminLayoutWrapper from './admin-layout-wrapper'
 import { getThemeSettings } from './lib/get-theme'
 import { Metadata } from 'next'
 import ChatWidgetWrapper from '@/components/ChatWidgetWrapper'
+import WhatsAppButton from '@/components/WhatsAppButton'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -108,6 +109,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                     <main className="mb-auto">{children}</main>
                     {/* Chat Widget */}
                     <ChatWidgetWrapper />
+                    {/* Floating WhatsApp Button */}
+                    <WhatsAppButton />
                   </SearchProvider>
                   <Footer />
                 </>
