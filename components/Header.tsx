@@ -11,7 +11,7 @@ import Image from 'next/image'
 import dataLandingContent from '@/data/landingContent.json'
 import { LandingContent } from 'app/allset/landing-content/types'
 
-const landingContent = dataLandingContent as LandingContent
+const landingContent = dataLandingContent as unknown as LandingContent
 
 const Header = () => {
   let headerClass =
