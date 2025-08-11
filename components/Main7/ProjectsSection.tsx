@@ -105,7 +105,7 @@ const ProjectsSection: React.FC<Props> = ({ projects }) => {
                     </svg>
                     {new Date(proj.completionDate).toLocaleDateString()}
                   </span>
-                  <span className="text-primary-600 dark:text-primary-400">View details</span>
+                  {/* <span className="text-primary-600 dark:text-primary-400">View details</span> */}
                 </div>
               </div>
             </motion.article>
