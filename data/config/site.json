@@ -1,5 +1,5 @@
 {
-  "activeTemplate": "Main5",
+  "activeTemplate": "Main8",
   "availableTemplates": [
     {
       "id": "Main",
@@ -114,6 +114,22 @@
         "Expandable FAQ accordion with smooth animations"
       ],
       "colors": "Customizable with built-in dark mode support"
+    },
+    {
+      "id": "Main8",
+      "name": "Services Landing Template",
+      "description": "Modern services business template with full-bleed hero, services grid, features, gallery, stats, projects, testimonials, pricing, FAQs, CTA, and contact.",
+      "image": "/static/images/templates/template-main8.jpg",
+      "elements": [
+        "Full-width hero with overlay CTA",
+        "Services grid with images and icons",
+        "Main features with icons",
+        "Optional gallery and stats",
+        "Projects/case studies",
+        "Testimonials and pricing",
+        "FAQ accordion, CTA, and contact form"
+      ],
+      "colors": "Light/dark theme with subtle gradients"
     }
   ]
 }
