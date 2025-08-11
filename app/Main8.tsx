@@ -54,7 +54,7 @@ const Main8 = () => {
       {services && services.items?.length ? <ServicesSection services={services} /> : null}
 
       {/* Feature list */}
-      <FeaturesSection features={features} />
+      {features && features.items?.length ? <FeaturesSection features={features} /> : null}
 
       {/* Optional gallery */}
       {gallery && gallery.images?.length ? <GallerySection gallery={gallery} /> : null}
