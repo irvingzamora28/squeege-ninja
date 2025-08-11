@@ -15,7 +15,7 @@ const landingContent = dataLandingContent as LandingContent
 
 const Header = () => {
   let headerClass =
-    'flex items-center w-full bg-slate-100 dark:bg-slate-900 dark:text-slate-200 justify-between py-10 mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-10/12 xl:px-0'
+    'flex items-center w-full bg-slate-100 dark:bg-slate-900 dark:text-slate-200 justify-between py-3 mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-10/12 xl:px-0'
   if (siteMetadata.stickyNav) {
     headerClass += ' sticky top-0 z-50'
   }
@@ -57,15 +57,13 @@ const Header = () => {
           <div className="mr-3">
             {typeof logoSrc === 'string' && logoSrc.startsWith('http') ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={logoSrc} alt="logo" width={64} height={64} style={{ borderRadius: 4 }} />
+              <img src={logoSrc} alt="logo" width={40} height={40} style={{ borderRadius: 4 }} />
             ) : (
-              <Image src={logoSrc} alt="logo" width={64} height={64} />
+              <Image src={logoSrc} alt="logo" width={40} height={40} />
             )}
           </div>
           {typeof siteMetadata.headerTitle === 'string' ? (
-            <div className="hidden h-6 text-2xl font-semibold sm:block">
-              {siteMetadata.headerTitle}
-            </div>
+            <div className="hidden text-xl font-semibold sm:block">{siteMetadata.headerTitle}</div>
           ) : (
             siteMetadata.headerTitle
           )}
