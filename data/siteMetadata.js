@@ -5,7 +5,7 @@ const siteMetadata = {
   headerTitle: 'ALLSET Template',
   description:
     'Launch professional, high-converting landing pages in minutes—no design or technical skills required. Completely free to download!',
-  language: 'en-us',
+  language: 'es-mx',
   theme: 'system', // system, dark or light
   siteUrl: 'https://allset-template.online',
   siteRepo: 'https://github.com',
@@ -23,7 +23,7 @@ const siteMetadata = {
   instagram: 'https://www.instagram.com',
   medium: 'https://medium.com',
   bluesky: 'https://bsky.app/',
-  locale: 'en-US',
+  locale: 'es-MX',
   // set to true if you want a navbar fixed to the top
   stickyNav: false,
   analytics: {

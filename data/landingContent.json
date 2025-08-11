@@ -1,294 +1,277 @@
 {
-  "pageType": { "type": "product" },
+  "pageType": {
+    "type": "services"
+  },
   "hero": {
-    "title": "ALLSET Template: AI-Powered Landing Pages",
-    "image": "/placeholder.jpg",
-    "description": "Launch professional, high-converting landing pages in minutes—no design or technical skills required. Completely free to download!",
+    "title": "¡Squeegee Ninja: Tus Ventanas Impecables en Ciudad Juárez!",
+    "description": "Servicios profesionales de limpieza de ventanas para tu hogar o negocio. ¡Cristales relucientes y una vista espectacular!",
+    "image": "/static/images/hero.png",
+    "imagePrompt": "Una ventana limpia y brillante con el reflejo del cielo azul y nubes, con el logotipo de Squeegee Ninja sutilmente superpuesto.",
     "primaryCta": {
-      "text": "Download Now (Free)",
-      "link": "#cta"
+      "text": "¡Cotiza Ahora!",
+      "link": "#contacto"
     },
     "secondaryCta": {
-      "text": "Learn More",
-      "link": "#features"
+      "text": "Ver Precios",
+      "link": "#precios"
     }
   },
   "services": {
-    "title": "Key Benefits of ALLSET Template",
-    "description": "Unlock the power of AI to revolutionize your landing page creation process.",
+    "title": "Nuestros Servicios Ninja",
+    "description": "¡Dejamos tus ventanas como nuevas!",
     "items": [
       {
-        "title": "AI-Powered Content Generation",
-        "description": "Let our AI create compelling features, FAQs, testimonials, and more, tailored to your business.",
-        "icon": "FaIndustry",
-        "image": "/placeholder.jpg"
+        "title": "Limpieza Residencial",
+        "description": "Para que tu hogar siempre luzca impecable en Ciudad Juárez.",
+        "icon": "FaHome",
+        "image": "/static/images/services/limpieza-residencial.png",
+        "imagePrompt": "Una casa en Ciudad Juárez con ventanas brillantes y limpias."
       },
       {
-        "title": "SEO Blog Generator",
-        "description": "Boost your search engine rankings with AI-generated blog posts, driving organic traffic to your site.",
-        "icon": "FaTools",
-        "image": "/placeholder.jpg"
+        "title": "Limpieza Comercial",
+        "description": "Dale una imagen profesional a tu negocio en Ciudad Juárez.",
+        "icon": "FaBuilding",
+        "image": "/static/images/services/limpieza-comercial.png",
+        "imagePrompt": "Un edificio de oficinas en Ciudad Juárez con ventanas limpias y relucientes."
+      },
+      {
+        "title": "Limpieza de Mosquiteros",
+        "description": "¡Dile adiós al polvo y a los bichos con mosquiteros limpios en Ciudad Juárez!",
+        "icon": "FaWindowClose",
+        "image": "/static/images/services/limpieza-mosquiteros.png",
+        "imagePrompt": "Un mosquitero limpio y libre de polvo, con luz solar brillando a través de él en Ciudad Juárez."
       }
     ]
   },
   "projects": {
-    "title": "Landing Page Templates",
-    "description": "Explore our range of professionally designed templates to suit your specific business needs.",
+    "title": "Proyectos Recientes",
+    "description": "¡Échale un ojo a lo que hemos estado haciendo!",
     "items": [
       {
-        "title": "E-commerce Template",
-        "description": "Showcase your products and drive sales with a visually appealing and conversion-optimized e-commerce landing page.",
-        "image": "/placeholder.jpg",
-        "category": "E-commerce",
-        "completionDate": "October 2024"
+        "title": "Casa en Misiones",
+        "description": "Limpieza completa de todas las ventanas y mosquiteros en Ciudad Juárez.",
+        "image": "/static/images/gallery/proyecto-misiones.png",
+        "imagePrompt": "Una casa grande y lujosa en las Misiones, en Ciudad Juárez con ventanas impecables.",
+        "category": "Residencial",
+        "completionDate": "2025-07-10"
+      },
+      {
+        "title": "Oficinas en Pronaf",
+        "description": "Mantenimiento regular de ventanas para una imagen profesional en Ciudad Juárez.",
+        "image": "/static/images/gallery/proyecto-pronaf.png",
+        "imagePrompt": "Un edificio de oficinas moderno en la zona de Pronaf de Ciudad Juárez con ventanas limpias y relucientes.",
+        "category": "Comercial",
+        "completionDate": "2025-07-01"
       }
     ]
   },
   "mainFeatures": {
-    "title": "Main Features",
-    "description": "ALLSET Template's AI-driven power at your fingertips.",
+    "title": "¿Por qué elegir Squeegee Ninja?",
+    "description": "¡Te damos el mejor servicio y la mejor atención!",
     "items": [
       {
         "id": 1,
-        "icon": "FaBolt",
-        "title": "Instant Content Creation",
-        "description": "Generate all the essential landing page content in seconds.",
-        "image": "/static/images/feat1.jpg"
+        "icon": "FaCheckCircle",
+        "title": "Atención Personalizada",
+        "description": "Nos adaptamos a tus necesidades y horarios.",
+        "image": "/static/images/hero.png",
+        "imagePrompt": "Un representante de Squeegee Ninja hablando con un cliente en su casa."
       },
       {
         "id": 2,
-        "icon": "FaShieldAlt",
-        "title": "SEO Optimization",
-        "description": "Attract more organic traffic with SEO-optimized content.",
-        "image": "/static/images/feat2.jpg"
+        "icon": "FaHandshake",
+        "title": "Precios Claros",
+        "description": "Sin sorpresas, ¡lo que ves es lo que pagas!",
+        "image": "/static/images/hero.png",
+        "imagePrompt": "Un recibo con precios claros y detallados, mostrando el logotipo de Squeegee Ninja."
       },
       {
         "id": 3,
-        "icon": "FaShieldAlt",
-        "title": "Professional Results",
-        "description": "Get landing pages that are visually appealing, optimized for conversions, and ready to attract customers.",
-        "image": "/static/images/feat3.jpg"
+        "icon": "FaWhatsapp",
+        "title": "Contacto Directo",
+        "description": "¡Siempre disponibles por WhatsApp, teléfono o correo!",
+        "image": "/static/images/hero.png",
+        "imagePrompt": "Un teléfono celular mostrando una conversación de WhatsApp con el logotipo de Squeegee Ninja."
       }
     ]
   },
-  "features": {
-    "title": "More Features",
-    "description": "Explore the features that make ALLSET Template the best choice for your landing page needs.",
-    "items": [
+  "testimonials": {
+    "title": "Lo que dicen nuestros clientes",
+    "description": "¡Clientes felices son nuestra mejor carta de presentación!",
+    "image": "/static/images/hero.png",
+    "imagePrompt": "Una imagen con varias fotos de clientes sonriendo frente a ventanas limpias.",
+    "testimonials": [
       {
-        "title": "5 Professional Templates",
-        "description": "Choose from five beautifully designed, ready-to-use layouts.",
-        "icon": "FiUsers"
+        "name": "María Rodríguez",
+        "quote": "¡Mis ventanas nunca habían estado tan limpias! ¡Súper recomendado!",
+        "image": "/static/images/hero.png",
+        "title": "Ama de Casa",
+        "imagePrompt": "Una ama de casa sonriendo frente a una ventana limpia en su hogar."
       },
       {
-        "title": "Mobile-Responsive Design",
-        "description": "Ensure your landing pages look great on any device.",
-        "icon": "FiSmartphone"
-      },
-      {
-        "title": "Customizable Templates",
-        "description": "Easily modify the templates to match your brand.",
-        "icon": "FiEdit"
-      },
-      {
-        "title": "Free to Use",
-        "description": "ALLSET Template is completely free to download and use.",
-        "icon": "FiEdit"
-      },
-      {
-        "title": "No Design or Technical Skills Required",
-        "description": "ALLSET Template is designed to be user-friendly, even if you have zero technical experience. Our AI generates all the necessary content, and our templates are easy to customize.",
-        "icon": "FiEdit"
-      },
-      {
-        "title": "Time-Saving Automation",
-        "description": "Focus on your business, not building landing pages.",
-        "icon": "FiEdit"
+        "name": "Juan Pérez",
+        "quote": "Excelente servicio y muy profesionales. ¡Mi negocio luce impecable!",
+        "image": "/static/images/hero.png",
+        "title": "Dueño de Negocio",
+        "imagePrompt": "Un dueño de negocio sonriendo frente a las ventanas limpias de su local."
       }
     ]
   },
   "cta": {
-    "title": "Ready to Launch Your Landing Page?",
-    "description": "Download ALLSET Template for free and start building today!",
+    "title": "¡Dale un respiro a tus ventanas!",
+    "description": "¡Contáctanos hoy mismo y obtén una cotización gratis!",
     "button": {
-      "text": "Download Now (Free)",
-      "link": "#"
+      "text": "¡Contáctanos!",
+      "link": "#contacto"
     },
     "collectEmail": true
   },
-  "stats": {
-    "title": "Trusted by Businesses Worldwide",
-    "description": "Join our growing community of satisfied users.",
-    "items": [
-      {
-        "value": "95%",
-        "label": "User Satisfaction"
-      },
-      {
-        "value": "5",
-        "label": "Professional Templates"
-      },
-      {
-        "value": "1K+",
-        "label": "Downloads"
-      },
-      {
-        "value": "2+",
-        "label": "AI based features"
-      }
-    ]
-  },
   "faqs": {
-    "title": "Frequently Asked Questions",
-    "description": "Everything you need to know about ALLSET Template.",
+    "title": "Preguntas Frecuentes",
+    "description": "¡Resolvemos tus dudas!",
     "questions": [
       {
-        "question": "Is ALLSET Template really free?",
-        "answer": "Yes! You can download and use ALLSET Template completely free of charge. Simply provide your email address to get started."
+        "question": "¿Qué incluye el servicio?",
+        "answer": "El servicio incluye la limpieza de cristales, mosquiteros, marcos y rieles de la ventana."
       },
       {
-        "question": "Can you create a custom solution for my specific needs?",
-        "answer": "Absolutely! If you need a tailored solution that goes beyond our standard templates, our team can build a custom solution specifically for your requirements. Contact us to discuss your project and get a quote."
+        "question": "¿Cómo puedo agendar una cita?",
+        "answer": "Puedes contactarnos por WhatsApp, teléfono o correo electrónico. ¡Estamos a tus órdenes!"
       },
       {
-        "question": "Do I need any design or technical skills to use ALLSET Template?",
-        "answer": "No, ALLSET Template is designed to be user-friendly, even if you have zero technical experience. Our AI generates all the necessary content, and our templates are easy to customize."
-      },
-      {
-        "question": "How does the AI content generation work?",
-        "answer": "Simply describe your business or product, and our AI will instantly create all the essential content for your landing page, including features, FAQs, testimonials, and calls to action."
-      },
-      {
-        "question": "Can I customize the templates and AI-generated content?",
-        "answer": "Yes, you have full control over your landing page. You can easily customize the templates, edit the AI-generated content, and add your own branding."
-      },
-      {
-        "question": "What kind of support do you offer?",
-        "answer": "We offer email support to help you get the most out of ALLSET Template. We're also constantly improving our platform based on user feedback."
-      }
-    ]
-  },
-  "pricing": {
-    "title": "Pricing (No Cost)",
-    "description": "ALLSET Template is free to download. Future premium features may be available.",
-    "plans": [
-      {
-        "name": "Free",
-        "price": "$0",
-        "description": "Get started with ALLSET Template for free!",
-        "features": [
-          {
-            "text": "5 Professional Templates"
-          },
-          {
-            "text": "AI-Powered Content Generation"
-          },
-          {
-            "text": "SEO Blog Generator"
-          }
-        ],
-        "cta": {
-          "text": "Download Now",
-          "link": "#cta"
-        },
-        "highlighted": true
-      },
-      {
-        "name": "Premium (Coming Soon)",
-        "price": "TBD",
-        "description": "Unlock advanced features and priority support.",
-        "features": [
-          {
-            "text": "All Free features"
-          },
-          {
-            "text": "Advanced Analytics"
-          },
-          {
-            "text": "A/B Testing"
-          },
-          {
-            "text": "AI Customer Service Agent"
-          },
-          {
-            "text": "Enhanced Blog Generation with Smart Images"
-          },
-          {
-            "text": "Priority Support"
-          }
-        ],
-        "cta": {
-          "text": "Join Waitlist",
-          "link": "#cta"
-        }
+        "question": "¿Cómo determinan el precio final?",
+        "answer": "El precio publicado es un estimado, el precio final puede variar y se determina en el lugar del trabajo."
       }
     ]
   },
   "contact": {
-    "title": "Contact Us",
-    "description": "Have questions? Get in touch with our team.",
+    "title": "¡Contáctanos!",
+    "description": "¡Estamos listos para atenderte!",
     "fields": [
       {
         "name": "name",
-        "label": "Name",
+        "label": "Nombre",
         "type": "text",
         "required": true
       },
       {
         "name": "email",
-        "label": "Email",
+        "label": "Correo Electrónico",
         "type": "email",
         "required": true
       },
       {
         "name": "message",
-        "label": "Message",
+        "label": "Mensaje",
         "type": "textarea",
-        "required": false
+        "required": true
       }
     ],
-    "submitLabel": "Send Message",
-    "successMessage": "Thank you for your message! We'll be in touch soon.",
+    "submitLabel": "Enviar Mensaje",
+    "successMessage": "¡Gracias por contactarnos! ¡Te responderemos a la brevedad!",
     "contactInfo": {
-      "title": "Contact Information",
+      "title": "Información de Contacto",
       "phone": {
-        "label": "Phone",
-        "number": "",
-        "hours": ""
+        "label": "Teléfono",
+        "number": "+52 1 656 317 4337",
+        "hours": "Lunes a Viernes de 9am a 6pm"
       },
       "email": {
-        "label": "Email",
-        "address": "contact@allset-template.online",
-        "responseTime": "24 hours"
+        "label": "Correo Electrónico",
+        "address": "squeegee.ninja.mx@gmail.com",
+        "responseTime": "Respondemos en menos de 24 horas"
       },
       "location": {
-        "label": "Location",
-        "address": ["Online", "Worldwide"]
+        "label": "Ubicación",
+        "address": ["Ciudad Juárez, Chihuahua", "México"]
       }
     }
   },
-  "testimonials": {
-    "title": "What Our Users Are Saying",
-    "description": "Read testimonials from businesses that have transformed their landing pages with ALLSET Template.",
-    "image": "/placeholder.jpg",
-    "testimonials": [
+  "gallery": {
+    "title": "Trabajos Recientes",
+    "description": "Antes y después de limpiezas profesionales en casas y negocios de Ciudad Juárez.",
+    "images": [
       {
-        "name": "Ralph Nault",
-        "title": "Software Engineer",
-        "quote": "The blog posts generated by ALLSET Template are so engaging and informative that our website traffic has skyrocketed.",
-        "image": "/static/images/testimonial1.jpg"
+        "src": "/static/images/gallery/limpieza-vidrio-1.png",
+        "alt": "Limpieza de ventana casa - ambos lados",
+        "caption": "Colonia Praderas de los Oasis II • Ambos lados"
       },
       {
-        "name": "Jazmin Salinas",
-        "title": "Marketing Manager",
-        "quote": "ALLSET Template has saved us so much time and money. Our landing pages are now more effective than ever!",
-        "image": "/static/images/testimonial2.jpg"
+        "src": "/static/images/gallery/limpieza-vidrio-2.png",
+        "alt": "Antes y después en residencia",
+        "caption": "Colonia Frontera • Vidrios exteriores"
       },
       {
-        "name": "Emily Davis",
-        "title": "Marketing Manager",
-        "quote": "ALLSET Template has been a lifesaver for our marketing team. It has helped us create professional landing pages in minutes.",
-        "image": "/static/images/testimonial3.jpg"
+        "src": "/static/images/gallery/limpieza-vidrio-3.png",
+        "alt": "Ventana y mosquitero detallados",
+        "caption": "Colonia Álvaro Obregón • Ventana y mosquitero"
+      },
+      {
+        "src": "/static/images/gallery/limpieza-vidrio-4.png",
+        "alt": "Limpieza de mosquitero",
+        "caption": "Mosquitero • Cambio visible"
+      },
+      {
+        "src": "/static/images/gallery/limpieza-vidrio-5.png",
+        "alt": "Ventanal con acabado impecable",
+        "caption": "Residencial • Cristal impecable"
+      },
+      {
+        "src": "/static/images/gallery/limpieza-vidrio-6.png",
+        "alt": "Limpieza de ventana",
+        "caption": "Colonia Anáhuac • Ambos lados"
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Precios de Limpieza de Ventanas",
+    "description": "Precios por ventana para servicio residencial en Ciudad Juárez. Incluye cristal, mosquitero, marco y riel. El precio final puede variar y se determina en el lugar del trabajo.",
+    "plans": [
+      {
+        "name": "Solo Exterior",
+        "price": "$90 MXN",
+        "description": "Limpieza del cristal exterior, mosquitero, marco y riel.",
+        "features": [
+          { "text": "Cristal exterior" },
+          { "text": "Mosquitero" },
+          { "text": "Marco" },
+          { "text": "Riel" }
+        ],
+        "cta": {
+          "text": "Cotizar por WhatsApp",
+          "link": "https://wa.me/526563174337?text=Hola%20Squeegee%20Ninja,%20quiero%20cotizar%20limpieza%20de%20ventanas%20(solo%20exterior)."
+        },
+        "highlighted": false
+      },
+      {
+        "name": "Ambos Lados",
+        "price": "$140 MXN",
+        "description": "Limpieza interior y exterior. Incluye mosquitero, marco y riel.",
+        "features": [
+          { "text": "Cristal interior y exterior" },
+          { "text": "Mosquitero" },
+          { "text": "Marco" },
+          { "text": "Riel" }
+        ],
+        "cta": {
+          "text": "Agendar por WhatsApp",
+          "link": "https://wa.me/526563174337?text=Hola%20Squeegee%20Ninja,%20quiero%20agendar%20limpieza%20de%20ventanas%20(ambos%20lados)."
+        },
+        "highlighted": true
+      },
+      {
+        "name": "Negocios",
+        "price": "A cotizar",
+        "description": "Precios para locales y edificios según volumen y accesibilidad.",
+        "features": [
+          { "text": "Cotización en sitio" },
+          { "text": "Horarios flexibles" },
+          { "text": "Facturación disponible (si aplica)" }
+        ],
+        "cta": {
+          "text": "Solicitar cotización",
+          "link": "https://wa.me/526563174337?text=Hola%20Squeegee%20Ninja,%20quisiera%20cotización%20para%20negocio."
+        }
       }
     ]
   }
