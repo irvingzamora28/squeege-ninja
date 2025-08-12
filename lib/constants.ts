@@ -12,6 +12,11 @@ export const CONTACT_SUBMISSIONS_TABLE = `${TABLE_PREFIX}contact_submissions`
 export const EMAIL_TEMPLATE_DATA_TABLE = `${TABLE_PREFIX}email_template_data`
 export const CTA_CONFIG_TABLE = `${TABLE_PREFIX}cta_config`
 export const SITE_SETTINGS_TABLE = `${TABLE_PREFIX}site_settings`
+// Booking system tables (single-business)
+export const SERVICES_TABLE = `${TABLE_PREFIX}services`
+export const BOOKINGS_TABLE = `${TABLE_PREFIX}bookings`
+export const SERVICE_AVAILABILITY_RULES_TABLE = `${TABLE_PREFIX}service_availability_rules`
+export const HOLIDAYS_TABLE = `${TABLE_PREFIX}holidays`
 // The landing content prompt is now dynamic and uses templates generated from types
 export const LANDING_CONTENT_PROMPT = `
 You are a professional landing page content creator. Your task is to create content for a landing page based on the user's description of their business or SaaS product.
