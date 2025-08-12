@@ -79,7 +79,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className={`fixed z-40 ${isRight ? 'right-4 md:right-6' : 'left-4 md:left-6'} bottom-4 md:bottom-6`}
+      className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg hover:bg-emerald-600"
     >
       <span className="sr-only">Chat on WhatsApp</span>
       <div className="transition-transform duration-200 hover:scale-105">
