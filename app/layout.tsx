@@ -114,10 +114,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                       </main>
                       {/* Chat Widget */}
                       {/* Floating Action Buttons (FAB) Stack */}
-<div className="fixed z-50 flex flex-col-reverse items-end gap-4 right-4 bottom-4 md:right-6 md:bottom-6">
-  <WhatsAppButton />
-  <ChatWidgetWrapper />
-</div>
+                      <div className="fixed right-4 bottom-4 z-50 flex flex-col-reverse items-end gap-4 md:right-6 md:bottom-6">
+                        <WhatsAppButton />
+                        <ChatWidgetWrapper />
+                      </div>
                     </SearchProvider>
                     <Footer />
                   </>
