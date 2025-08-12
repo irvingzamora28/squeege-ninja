@@ -17,6 +17,8 @@ import { getThemeSettings } from './lib/get-theme'
 import { Metadata } from 'next'
 import ChatWidgetWrapper from '@/components/ChatWidgetWrapper'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import BookingProvider from '@/components/booking/BookingProvider'
+import BookingWidget from '@/components/booking/BookingWidget'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -99,25 +101,29 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="bg-slate-100 text-slate-800 antialiased dark:bg-slate-900 dark:text-slate-200">
         <DarkThemeProvider>
           <ThemeProvider initialColor={initialColor}>
-            <AdminLayoutWrapper
-              regularContent={
-                <>
-                  <VercelAnalytics />
-                  <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-                  <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
-                    <Header />
-                    <main className="mb-auto">{children}</main>
-                    {/* Chat Widget */}
-                    <ChatWidgetWrapper />
-                    {/* Floating WhatsApp Button */}
-                    <WhatsAppButton />
-                  </SearchProvider>
-                  <Footer />
-                </>
-              }
-            >
-              {children}
-            </AdminLayoutWrapper>
+            <BookingProvider>
+              <AdminLayoutWrapper
+                regularContent={
+                  <>
+                    <VercelAnalytics />
+                    <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
+                    <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+                      <Header />
+                      <main className="mb-auto">{children}</main>
+                      {/* Chat Widget */}
+                      <ChatWidgetWrapper />
+                      {/* Floating WhatsApp Button */}
+                      <WhatsAppButton />
+                    </SearchProvider>
+                    <Footer />
+                  </>
+                }
+              >
+                {children}
+              </AdminLayoutWrapper>
+              {/* Global Booking Widget */}
+              <BookingWidget />
+            </BookingProvider>
           </ThemeProvider>
         </DarkThemeProvider>
       </body>
