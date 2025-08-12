@@ -36,6 +36,21 @@ export class SQLiteProvider implements IDatabaseProvider {
     this.db = new Database(dbPath)
     const schema = fs.readFileSync(schemaPath, 'utf-8')
     this.db.exec(schema)
+    // Lightweight migrations for existing DBs
+    try {
+      const cols = this.db
+        .prepare(`PRAGMA table_info(allset_site_settings)`) // TABLE_PREFIX assumed default in SQLite file
+        .all() as { name: string }[]
+      const hasBookingEnabled = cols.some((c) => c.name === 'booking_widget_enabled')
+      if (!hasBookingEnabled) {
+        this.db.exec(
+          `ALTER TABLE allset_site_settings ADD COLUMN booking_widget_enabled INTEGER NOT NULL DEFAULT 1`
+        )
+      }
+    } catch (e) {
+      // Do not block app startup on migration helper
+      console.warn('SQLite migration check failed:', e)
+    }
     this.emailModel = new SQLiteEmailModel(this.db)
     this.contactModel = new SQLiteContactModel(this.db)
     this.emailTemplateDataModel = new SQLiteEmailTemplateDataProvider(this.db)

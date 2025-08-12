@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
       whatsapp_message: string
       whatsapp_position: 'bottom-right' | 'bottom-left'
       assistant_enabled: boolean
+      booking_widget_enabled: boolean
       site_language: string
     }> = {}
 
@@ -30,6 +31,8 @@ export async function POST(req: NextRequest) {
       patch.whatsapp_position = body.whatsapp_position
     if (typeof body.assistant_enabled === 'boolean')
       patch.assistant_enabled = body.assistant_enabled
+    if (typeof body.booking_widget_enabled === 'boolean')
+      patch.booking_widget_enabled = body.booking_widget_enabled
     if (typeof body.site_language === 'string') patch.site_language = body.site_language
 
     const updated = await db.updateSiteSettings(patch)

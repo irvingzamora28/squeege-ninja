@@ -23,6 +23,8 @@ export default function SettingsPage() {
   const [whatsappPosition, setWhatsappPosition] = useState<'bottom-right' | 'bottom-left'>(
     'bottom-right'
   )
+  // Booking widget visibility state
+  const [bookingWidgetEnabled, setBookingWidgetEnabled] = useState<boolean>(true)
 
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0]
@@ -55,6 +57,7 @@ export default function SettingsPage() {
             setWhatsappPosition(
               (s.whatsapp_position as 'bottom-right' | 'bottom-left') || 'bottom-right'
             )
+            setBookingWidgetEnabled(!!s.booking_widget_enabled)
             return
           }
         }
@@ -105,6 +108,7 @@ export default function SettingsPage() {
           whatsapp_phone: whatsappPhone,
           whatsapp_message: whatsappMessage,
           whatsapp_position: whatsappPosition,
+          booking_widget_enabled: bookingWidgetEnabled,
         }),
       })
       const resJson = await resp2.json()
@@ -229,6 +233,39 @@ export default function SettingsPage() {
                 className="focus:border-primary-500 focus:ring-primary-500 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                 required
               />
+            </div>
+          </div>
+
+          <div className="mb-6">
+            <h2 className="mb-4 text-xl font-semibold">Booking Settings</h2>
+
+            {/* Booking Widget Visibility */}
+            <div className="mb-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+                    Enable Booking Widget
+                  </h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Show the global booking widget across the site
+                  </p>
+                </div>
+                <label className="relative inline-flex cursor-pointer items-center">
+                  <input
+                    type="checkbox"
+                    id="bookingWidgetEnabled"
+                    name="bookingWidgetEnabled"
+                    checked={bookingWidgetEnabled}
+                    onChange={(e) => setBookingWidgetEnabled(e.target.checked)}
+                    className="peer sr-only"
+                    aria-label={`Toggle Booking Widget ${bookingWidgetEnabled ? 'off' : 'on'}`}
+                  />
+                  <div className="peer peer-checked:bg-primary-600 peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 h-6 w-11 rounded-full bg-gray-200 peer-focus:ring-4 peer-focus:outline-none after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600 dark:bg-gray-700"></div>
+                  <span className="sr-only">
+                    Toggle Booking Widget {bookingWidgetEnabled ? 'off' : 'on'}
+                  </span>
+                </label>
+              </div>
             </div>
           </div>
 

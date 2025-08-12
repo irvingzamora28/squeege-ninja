@@ -68,6 +68,25 @@ export default function BookingWidget() {
   const { isOpen, close, defaultServiceId } = useBookingUI()
   const t = useI18n()
 
+  // Respect backend toggle: do not render if disabled
+  const [enabled, setEnabled] = useState<boolean | undefined>(undefined)
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const res = await fetch('/api/settings', { cache: 'no-store' })
+        if (!res.ok) throw new Error('settings fetch failed')
+        const data = await res.json()
+        if (!cancelled) setEnabled(Boolean(data?.settings?.booking_widget_enabled))
+      } catch {
+        if (!cancelled) setEnabled(true) // fail-open to preserve current behavior
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   const [services, setServices] = useState<Service[]>([])
   const [loadingServices, setLoadingServices] = useState(false)
   const [serviceId, setServiceId] = useState<number | ''>('')
@@ -187,6 +206,11 @@ export default function BookingWidget() {
     const dd = String(d.getDate()).padStart(2, '0')
     return `${d.getFullYear()}-${mm}-${dd}`
   }, [])
+
+  // Do not render UI when disabled by settings
+  if (enabled === false) {
+    return null
+  }
 
   if (typeof document === 'undefined') return null
   if (!isOpen) return null

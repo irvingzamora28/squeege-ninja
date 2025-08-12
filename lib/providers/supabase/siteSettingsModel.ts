@@ -11,7 +11,7 @@ export class SupabaseSiteSettingsModel implements ISiteSettingsModel {
     const { data, error } = await this.supabase
       .from(SITE_SETTINGS_TABLE)
       .select(
-        'id, whatsapp_enabled, whatsapp_phone, whatsapp_message, whatsapp_position, assistant_enabled, site_language, created_at, updated_at'
+        'id, whatsapp_enabled, whatsapp_phone, whatsapp_message, whatsapp_position, assistant_enabled, booking_widget_enabled, site_language, created_at, updated_at'
       )
       .eq('id', 1)
       .limit(1)
@@ -33,6 +33,7 @@ export class SupabaseSiteSettingsModel implements ISiteSettingsModel {
             whatsapp_message: '',
             whatsapp_position: 'bottom-right',
             assistant_enabled: 0,
+            booking_widget_enabled: 1,
             site_language: 'en-us',
           },
         ])
@@ -57,6 +58,7 @@ export class SupabaseSiteSettingsModel implements ISiteSettingsModel {
       whatsapp_message: string
       whatsapp_position: 'bottom-right' | 'bottom-left'
       assistant_enabled: number
+      booking_widget_enabled: number
       site_language: string
     }>
     const updatePayload: UpdatePayload = {}
@@ -70,6 +72,8 @@ export class SupabaseSiteSettingsModel implements ISiteSettingsModel {
       updatePayload.whatsapp_position = patch.whatsapp_position
     if (typeof patch.assistant_enabled !== 'undefined')
       updatePayload.assistant_enabled = patch.assistant_enabled ? 1 : 0
+    if (typeof patch.booking_widget_enabled !== 'undefined')
+      updatePayload.booking_widget_enabled = patch.booking_widget_enabled ? 1 : 0
     if (typeof patch.site_language !== 'undefined')
       updatePayload.site_language = patch.site_language
 

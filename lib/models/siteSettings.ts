@@ -10,6 +10,8 @@ export type SiteSettings = {
   whatsapp_position: 'bottom-right' | 'bottom-left'
   // Assistant
   assistant_enabled: boolean
+  // Booking widget visibility
+  booking_widget_enabled: boolean
   // i18n
   site_language: string
   // timestamps as ISO strings
@@ -33,6 +35,7 @@ export type SiteSettingsDBRow = {
   whatsapp_message: string
   whatsapp_position: 'bottom-right' | 'bottom-left' | null
   assistant_enabled: number
+  booking_widget_enabled: number
   site_language: string
   created_at?: string
   updated_at?: string
@@ -47,6 +50,7 @@ export function mapSiteSettingsRow(row: SiteSettingsDBRow): SiteSettings {
     whatsapp_message: row.whatsapp_message || '',
     whatsapp_position: (row.whatsapp_position as 'bottom-right' | 'bottom-left') || 'bottom-right',
     assistant_enabled: !!row.assistant_enabled,
+    booking_widget_enabled: !!row.booking_widget_enabled,
     site_language: row.site_language || 'en-us',
     created_at: row.created_at,
     updated_at: row.updated_at,
