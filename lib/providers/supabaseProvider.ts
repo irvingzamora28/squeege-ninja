@@ -8,6 +8,14 @@ import { CTAConfigInstance } from '../models/ctaConfig'
 import { SupabaseCTAConfigProvider } from './supabase/ctaConfigModel'
 import { SupabaseSiteSettingsModel } from './supabase/siteSettingsModel'
 import type { SiteSettings } from '../models/siteSettings'
+import { SupabaseServiceModel } from './supabase/serviceModel'
+import { SupabaseBookingModel } from './supabase/bookingModel'
+import type { Service } from '../models/service'
+import type { Booking } from '../models/booking'
+import { SupabaseAvailabilityRuleModel } from './supabase/availabilityRuleModel'
+import { SupabaseHolidayModel } from './supabase/holidayModel'
+import type { AvailabilityRule } from '../models/availabilityRule'
+import type { Holiday } from '../models/holiday'
 
 export class SupabaseProvider implements IDatabaseProvider {
   private supabase: SupabaseClient
@@ -16,6 +24,10 @@ export class SupabaseProvider implements IDatabaseProvider {
   private emailTemplateDataModel: SupabaseEmailTemplateDataProvider
   private ctaConfigModel: SupabaseCTAConfigProvider
   private siteSettingsModel: SupabaseSiteSettingsModel
+  private serviceModel: SupabaseServiceModel
+  private bookingModel: SupabaseBookingModel
+  private availabilityRuleModel: SupabaseAvailabilityRuleModel
+  private holidayModel: SupabaseHolidayModel
 
   constructor() {
     const supabaseUrl = process.env.SUPABASE_URL || ''
@@ -29,6 +41,10 @@ export class SupabaseProvider implements IDatabaseProvider {
     this.emailTemplateDataModel = new SupabaseEmailTemplateDataProvider(this.supabase)
     this.ctaConfigModel = new SupabaseCTAConfigProvider(this.supabase)
     this.siteSettingsModel = new SupabaseSiteSettingsModel(this.supabase)
+    this.serviceModel = new SupabaseServiceModel(this.supabase)
+    this.bookingModel = new SupabaseBookingModel(this.supabase)
+    this.availabilityRuleModel = new SupabaseAvailabilityRuleModel(this.supabase)
+    this.holidayModel = new SupabaseHolidayModel(this.supabase)
   }
 
   async getAllEmails(): Promise<{ id: number; email: string; created_at: string }[]> {
@@ -113,5 +129,84 @@ export class SupabaseProvider implements IDatabaseProvider {
     patch: Partial<Omit<SiteSettings, 'id' | 'created_at' | 'updated_at'>>
   ): Promise<SiteSettings> {
     return this.siteSettingsModel.update(patch)
+  }
+
+  // Services (single-business)
+  async getAllServices(): Promise<Service[]> {
+    return this.serviceModel.getAll()
+  }
+  async getServiceById(id: number): Promise<Service | null> {
+    return this.serviceModel.getById(id)
+  }
+  async insertService(data: Omit<Service, 'id' | 'created_at'>): Promise<number> {
+    return this.serviceModel.insert(data)
+  }
+  async updateService(
+    id: number,
+    updates: Partial<Omit<Service, 'id' | 'created_at'>>
+  ): Promise<void> {
+    return this.serviceModel.update(id, updates)
+  }
+  async deleteService(id: number): Promise<void> {
+    return this.serviceModel.delete(id)
+  }
+
+  // Explicit availability removed; compute via rules+holidays
+
+  // Bookings
+  async getAllBookings(): Promise<Booking[]> {
+    return this.bookingModel.getAll()
+  }
+  async getBookingsByService(service_id: number): Promise<Booking[]> {
+    return this.bookingModel.getByService(service_id)
+  }
+  async getBookingById(id: number): Promise<Booking | null> {
+    return this.bookingModel.getById(id)
+  }
+  async insertBooking(data: Omit<Booking, 'id' | 'created_at' | 'updated_at'>): Promise<number> {
+    return this.bookingModel.insert(data)
+  }
+  async updateBooking(
+    id: number,
+    updates: Partial<Omit<Booking, 'id' | 'created_at' | 'updated_at'>>
+  ): Promise<void> {
+    return this.bookingModel.update(id, updates)
+  }
+  async deleteBooking(id: number): Promise<void> {
+    return this.bookingModel.delete(id)
+  }
+
+  // Availability Rules (recurring weekly)
+  async getAvailabilityRulesByService(service_id: number): Promise<AvailabilityRule[]> {
+    return this.availabilityRuleModel.getByService(service_id)
+  }
+  async insertAvailabilityRule(data: Omit<AvailabilityRule, 'id' | 'created_at'>): Promise<number> {
+    return this.availabilityRuleModel.insert(data)
+  }
+  async updateAvailabilityRule(
+    id: number,
+    updates: Partial<Omit<AvailabilityRule, 'id' | 'created_at'>>
+  ): Promise<void> {
+    return this.availabilityRuleModel.update(id, updates)
+  }
+  async deleteAvailabilityRule(id: number): Promise<void> {
+    return this.availabilityRuleModel.delete(id)
+  }
+
+  // Holidays (date exceptions)
+  async getHolidaysByService(service_id: number): Promise<Holiday[]> {
+    return this.holidayModel.getByService(service_id)
+  }
+  async insertHoliday(data: Omit<Holiday, 'id' | 'created_at'>): Promise<number> {
+    return this.holidayModel.insert(data)
+  }
+  async updateHoliday(
+    id: number,
+    updates: Partial<Omit<Holiday, 'id' | 'created_at'>>
+  ): Promise<void> {
+    return this.holidayModel.update(id, updates)
+  }
+  async deleteHoliday(id: number): Promise<void> {
+    return this.holidayModel.delete(id)
   }
 }

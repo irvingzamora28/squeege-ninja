@@ -57,3 +57,70 @@ INSERT OR IGNORE INTO allset_site_settings (
   1, '+521234567890', 'Hello, I am interested in your services!', 'bottom-right',
   0, 'es-mx'
 );
+
+-- ==========================================
+-- Booking System Tables
+-- ==========================================
+
+-- Services (single business)
+-- Services (single business)
+CREATE TABLE IF NOT EXISTS allset_services (
+  id BIGSERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  description TEXT,
+  image_url TEXT,
+  duration_minutes INTEGER NOT NULL DEFAULT 60,
+  price NUMERIC(10,2) NOT NULL DEFAULT 0,
+  active BOOLEAN NOT NULL DEFAULT true,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Recurring weekly availability rules
+CREATE TABLE IF NOT EXISTS allset_service_availability_rules (
+  id BIGSERIAL PRIMARY KEY,
+  service_id BIGINT NOT NULL REFERENCES allset_services(id) ON DELETE CASCADE,
+  weekday INTEGER NOT NULL CHECK (weekday BETWEEN 0 AND 6),
+  start_time_local TEXT NOT NULL,
+  end_time_local TEXT NOT NULL,
+  timezone TEXT NOT NULL,
+  capacity INTEGER NOT NULL DEFAULT 1,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_avail_rules_service_id
+  ON allset_service_availability_rules(service_id);
+CREATE INDEX IF NOT EXISTS idx_avail_rules_weekday
+  ON allset_service_availability_rules(weekday);
+
+-- Bookings for a specific service (single business)
+CREATE TABLE IF NOT EXISTS allset_bookings (
+  id BIGSERIAL PRIMARY KEY,
+  service_id BIGINT NOT NULL REFERENCES allset_services(id) ON DELETE CASCADE,
+  customer_name TEXT NOT NULL,
+  customer_email TEXT NOT NULL,
+  start_time TIMESTAMP NOT NULL,
+  end_time TIMESTAMP NOT NULL,
+  status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending','confirmed','canceled')),
+  notes TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_bookings_service_id
+  ON allset_bookings(service_id);
+CREATE INDEX IF NOT EXISTS idx_bookings_start_time
+  ON allset_bookings(start_time);
+
+-- Holidays (date exceptions)
+CREATE TABLE IF NOT EXISTS allset_holidays (
+  id BIGSERIAL PRIMARY KEY,
+  service_id BIGINT NOT NULL REFERENCES allset_services(id) ON DELETE CASCADE,
+  holiday_date DATE NOT NULL,
+  note TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_holidays_service_id
+  ON allset_holidays(service_id);
+CREATE INDEX IF NOT EXISTS idx_holidays_date
+  ON allset_holidays(holiday_date);

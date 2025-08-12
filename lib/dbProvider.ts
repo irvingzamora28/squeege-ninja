@@ -2,6 +2,10 @@
 import type { EmailTemplateDataInstance } from './models/emailTemplateData'
 import type { CTAConfigInstance } from './models/ctaConfig'
 import type { SiteSettings } from './models/siteSettings'
+import type { Service } from './models/service'
+import type { Booking } from './models/booking'
+import type { AvailabilityRule } from './models/availabilityRule'
+import type { Holiday } from './models/holiday'
 
 export interface IDatabaseProvider {
   getAllEmails(): Promise<{ id: number; email: string; created_at: string }[]>
@@ -45,4 +49,39 @@ export interface IDatabaseProvider {
   updateSiteSettings(
     patch: Partial<Omit<SiteSettings, 'id' | 'created_at' | 'updated_at'>>
   ): Promise<SiteSettings>
+
+  // Services (single-business)
+  getAllServices(): Promise<Service[]>
+  getServiceById(id: number): Promise<Service | null>
+  insertService(data: Omit<Service, 'id' | 'created_at'>): Promise<number>
+  updateService(id: number, updates: Partial<Omit<Service, 'id' | 'created_at'>>): Promise<void>
+  deleteService(id: number): Promise<void>
+
+  // Explicit availability removed in normalized design (use rules + holidays + bookings)
+
+  // Bookings
+  getAllBookings(): Promise<Booking[]>
+  getBookingsByService(service_id: number): Promise<Booking[]>
+  getBookingById(id: number): Promise<Booking | null>
+  insertBooking(data: Omit<Booking, 'id' | 'created_at' | 'updated_at'>): Promise<number>
+  updateBooking(
+    id: number,
+    updates: Partial<Omit<Booking, 'id' | 'created_at' | 'updated_at'>>
+  ): Promise<void>
+  deleteBooking(id: number): Promise<void>
+
+  // Availability Rules (recurring weekly)
+  getAvailabilityRulesByService(service_id: number): Promise<AvailabilityRule[]>
+  insertAvailabilityRule(data: Omit<AvailabilityRule, 'id' | 'created_at'>): Promise<number>
+  updateAvailabilityRule(
+    id: number,
+    updates: Partial<Omit<AvailabilityRule, 'id' | 'created_at'>>
+  ): Promise<void>
+  deleteAvailabilityRule(id: number): Promise<void>
+
+  // Holidays (date exceptions)
+  getHolidaysByService(service_id: number): Promise<Holiday[]>
+  insertHoliday(data: Omit<Holiday, 'id' | 'created_at'>): Promise<number>
+  updateHoliday(id: number, updates: Partial<Omit<Holiday, 'id' | 'created_at'>>): Promise<void>
+  deleteHoliday(id: number): Promise<void>
 }
