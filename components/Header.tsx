@@ -2,6 +2,7 @@
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import Logo from '@/data/logo2.png'
+import { SiteConfig } from '@/types/config'
 
 import Link from './Link'
 import MobileNav from './MobileNav'
@@ -12,15 +13,18 @@ import dataLandingContent from '@/data/landingContent.json'
 import { LandingContent } from 'app/allset/landing-content/types'
 
 const landingContent = dataLandingContent as unknown as LandingContent
+type HeaderProps = {
+  siteConfig?: SiteConfig
+}
 
-const Header = () => {
+const Header = ({ siteConfig }: HeaderProps) => {
   let headerClass =
     'flex items-center w-full bg-slate-100 dark:bg-slate-900 dark:text-slate-200 justify-between py-3 mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-10/12 xl:px-0'
   if (siteMetadata.stickyNav) {
     headerClass += ' sticky top-0 z-50'
   }
   // If the pricing section is NOT in the landing content, remove it from the header
-  const navLinks = headerNavLinks.filter((link) => {
+  const navLinksAfterLanding = headerNavLinks.filter((link) => {
     if (landingContent.pageType.type === 'product') {
       return !(
         (!('pricing' in landingContent && landingContent.pricing) && link.title === 'Pricing') ||
@@ -35,7 +39,28 @@ const Header = () => {
         (!landingContent.contact && link.title === 'Contact')
       )
     }
+    if (landingContent.pageType.type === 'services') {
+      return !(
+        (!('pricing' in landingContent && landingContent.pricing) && link.title === 'Pricing') ||
+        (!('features' in landingContent && landingContent.features) && link.title === 'Features') ||
+        (!landingContent.contact && link.title === 'Contact')
+      )
+    }
     // Default: don't filter anything out
+    return true
+  })
+  // Apply site-config-driven include/exclude filtering by title (if provided)
+  const includeTitles = siteConfig?.navigation?.header?.includeTitles || []
+  const excludeTitles = siteConfig?.navigation?.header?.excludeTitles || []
+  const navLinks = navLinksAfterLanding.filter((link) => {
+    // If include list provided, only allow those
+    if (includeTitles.length > 0) {
+      return includeTitles.includes(link.title)
+    }
+    // Otherwise, exclude any listed
+    if (excludeTitles.length > 0) {
+      return !excludeTitles.includes(link.title)
+    }
     return true
   })
   // Use logo from siteMetadata (always string)
