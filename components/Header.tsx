@@ -35,6 +35,13 @@ const Header = () => {
         (!landingContent.contact && link.title === 'Contact')
       )
     }
+    if (landingContent.pageType.type === 'services') {
+      return !(
+        (!('pricing' in landingContent && landingContent.pricing) && link.title === 'Pricing') ||
+        (!('features' in landingContent && landingContent.features) && link.title === 'Features') ||
+        (!landingContent.contact && link.title === 'Contact')
+      )
+    }
     // Default: don't filter anything out
     return true
   })
