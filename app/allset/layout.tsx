@@ -32,7 +32,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <div className="flex min-h-screen flex-col bg-gray-50 dark:bg-gray-900">
       {/* Admin Header */}
       <header className="bg-slate-100 shadow-sm dark:bg-gray-800">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
               <div className="flex-shrink-0">
@@ -72,7 +72,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Mobile Navigation */}
       <div className="border-b border-gray-200 bg-slate-100 py-2 md:hidden dark:border-gray-700 dark:bg-gray-800">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between space-x-2 overflow-x-auto">
             <NavLink href="/allset" exact className="whitespace-nowrap">
               Dashboard
@@ -109,13 +109,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </div>
 
       {/* Main Content */}
-      <main className="mx-auto w-full max-w-7xl flex-grow px-4 py-6 sm:px-6 lg:px-8">
+      <main className="mx-auto w-full max-w-[1480px] flex-grow px-4 py-6 sm:px-6 lg:px-8">
         {children}
       </main>
 
       {/* Admin Footer */}
       <footer className="mt-auto bg-slate-100 py-4 dark:bg-gray-800">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-8">
           <p className="text-center text-sm text-gray-500 dark:text-gray-400">
             &copy; {new Date().getFullYear()} AllSet Admin Panel
           </p>
