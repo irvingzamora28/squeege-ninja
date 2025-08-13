@@ -1,17 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { cache } from 'react'
-
-export interface Template {
-  id: string
-  name: string
-  description: string
-}
-
-export interface SiteConfig {
-  activeTemplate: string
-  availableTemplates: Template[]
-}
+import { SiteConfig, TemplateDescriptor } from '@/types/config'
 
 const CONFIG_PATH = path.join(process.cwd(), 'data/config/site.json')
 
@@ -32,8 +22,18 @@ export const getSiteConfig = cache(async (): Promise<SiteConfig> => {
           id: 'Main',
           name: 'Default Template',
           description: 'The default layout with standard spacing and container widths',
+          image: '/static/images/templates/template-main.jpg',
+          colors: 'Light/dark theme',
+          elements: [],
+          animations: [],
         },
       ],
+      navigation: {
+        header: {
+          includeTitles: [],
+          excludeTitles: [],
+        },
+      },
     }
   }
 })
@@ -80,7 +80,7 @@ export async function updateActiveTemplate(templateId: string): Promise<SiteConf
 /**
  * Add a new template to the available templates
  */
-export async function addTemplate(template: Template): Promise<SiteConfig> {
+export async function addTemplate(template: TemplateDescriptor): Promise<SiteConfig> {
   const config = await getSiteConfig()
 
   // Check if template with this ID already exists

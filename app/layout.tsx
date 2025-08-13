@@ -8,6 +8,7 @@ import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/next'
 import { SearchProvider, SearchConfig } from 'pliny/search'
 import Header from '@/components/Header'
+import { getSiteConfig } from '@/lib/config'
 import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata'
 import { DarkThemeProvider } from './theme-providers'
@@ -71,6 +72,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // Load theme settings during server rendering
   const themeSettings = await getThemeSettings()
   const initialColor = themeSettings.primaryColor
+  // Load site config on the server
+  const siteConfig = await getSiteConfig()
 
   return (
     <html
@@ -108,7 +111,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                     <VercelAnalytics />
                     <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
                     <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
-                      <Header />
+                      <Header siteConfig={siteConfig} />
                       <main className="mb-auto w-full max-w-full overflow-x-hidden">
                         {children}
                       </main>
