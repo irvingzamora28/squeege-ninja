@@ -135,7 +135,7 @@
   "navigation": {
     "header": {
       "includeTitles": [],
-      "excludeTitles": []
+      "excludeTitles": ["Projects", "Tags", "About"]
     }
   }
 }
