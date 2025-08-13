@@ -48,7 +48,9 @@ const Main8 = () => {
       <HeroSection hero={hero} />
 
       {/* Main features/benefits section */}
-      <MainFeaturesSection mainFeatures={mainFeatures} />
+      {mainFeatures && mainFeatures.items?.length ? (
+        <MainFeaturesSection mainFeatures={mainFeatures} />
+      ) : null}
 
       {/* Services grid */}
       {services && services.items?.length ? <ServicesSection services={services} /> : null}
