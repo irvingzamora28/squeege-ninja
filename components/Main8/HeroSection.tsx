@@ -36,7 +36,7 @@ const HeroSection: React.FC<Props> = ({ hero }) => {
         {/* Top chip */}
         <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-medium backdrop-blur-md">
           <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
-          Trusted by modern service businesses
+          Ofreciendo servicios de confianza y calidad
         </div>
 
         <div className="max-w-4xl">
