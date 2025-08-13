@@ -137,11 +137,8 @@ export default function BookingCtaSection({ cta }: Props) {
 
             {/* Glass morphism container */}
             <motion.div
-              className="group relative isolate overflow-hidden rounded-3xl bg-white/80 px-5 py-12 backdrop-blur-xl sm:px-8 sm:py-16 lg:flex lg:items-center lg:gap-10 dark:bg-slate-900/80"
-              whileHover={{
-                backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                transition: { duration: 0.3 },
-              }}
+              className="group relative isolate overflow-hidden rounded-3xl bg-white/80 px-5 py-12 backdrop-blur-xl hover:bg-white/90 sm:px-8 sm:py-16 lg:flex lg:items-center lg:gap-10 dark:bg-slate-900/80 dark:hover:bg-slate-800/80"
+              transition={{ duration: 0.3 }}
             >
               {/* Enhanced decorative gradients */}
               <motion.div
