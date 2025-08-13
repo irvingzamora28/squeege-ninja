@@ -12,13 +12,13 @@ import {
   PricingSection,
   GallerySection,
   FaqSection,
+  BookingCtaSection,
 } from '@/components/Main8'
 
 // Reuse existing polished sections
 import {
   MainFeaturesSection,
   FeaturesSection,
-  CtaSection,
   ContactSection,
   StatsSection,
 } from '@/components/Main5'
@@ -78,8 +78,8 @@ const Main8 = () => {
       {/* FAQs */}
       <FaqSection faqs={faqs} />
 
-      {/* CTA */}
-      <CtaSection cta={cta} />
+      {/* Booking CTA (Main8-specific) */}
+      <BookingCtaSection cta={cta} />
 
       {/* Contact */}
       {contact ? <ContactSection contact={contact} /> : null}

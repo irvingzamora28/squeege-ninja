@@ -118,16 +118,17 @@
     {
       "id": "Main8",
       "name": "Services Landing Template",
-      "description": "Modern services business template with full-bleed hero, services grid, features, gallery, stats, projects, testimonials, pricing, FAQs, CTA, and contact.",
+      "description": "Booking-focused services template designed for appointment-based businesses. Highlights real-time availability, clear service packages, staff selection, and a prominent multi-step booking call-to-action across the page.",
       "image": "/static/images/templates/template-main8.jpg",
       "elements": [
-        "Full-width hero with overlay CTA",
-        "Services grid with images and icons",
-        "Main features with icons",
-        "Optional gallery and stats",
-        "Projects/case studies",
-        "Testimonials and pricing",
-        "FAQ accordion, CTA, and contact form"
+        "Full-width hero with primary Book Now CTA",
+        "Real-time availability calendar widget (modal)",
+        "Service packages with duration, price, and quick-book buttons",
+        "Trust section: reviews/testimonials and social proof",
+        "Pricing table integrated with booking actions",
+        "Sticky booking widget / floating CTA",
+        "FAQ focused on scheduling, rescheduling, and cancellations",
+        "Contact and location with map and hours"
       ],
       "colors": "Light/dark theme with subtle gradients"
     }
