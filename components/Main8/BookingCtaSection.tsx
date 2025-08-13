@@ -176,11 +176,7 @@ export default function BookingCtaSection({ cta }: Props) {
                 {/* Animated description */}
                 <motion.p
                   variants={itemVariants}
-                  className="mt-4 text-base leading-relaxed text-slate-700 sm:text-lg dark:text-slate-300"
-                  whileHover={{
-                    color: 'rgb(51 65 85)',
-                    transition: { duration: 0.3 },
-                  }}
+                  className="mt-4 text-base leading-relaxed text-slate-900 sm:text-lg dark:text-slate-300"
                 >
                   {cta.description}
                 </motion.p>
