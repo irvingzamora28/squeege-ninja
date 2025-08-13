@@ -8,12 +8,12 @@
     "image": "/static/images/hero.png",
     "imagePrompt": "Una ventana limpia y brillante con el reflejo del cielo azul y nubes, con el logotipo de Squeegee Ninja sutilmente superpuesto.",
     "primaryCta": {
-      "text": "¡Cotiza Ahora!",
-      "link": "#contacto"
+      "text": "¡Agenda Ahora!",
+      "link": "#book"
     },
     "secondaryCta": {
       "text": "Ver Precios",
-      "link": "#precios"
+      "link": "#pricing"
     }
   },
   "services": {
@@ -22,7 +22,7 @@
     "items": [
       {
         "title": "Limpieza Residencial",
-        "description": "Para que tu hogar siempre luzca impecable en Ciudad Juárez.",
+        "description": "Para que tu hogar siempre luzca impecable.",
         "icon": "FaHome",
         "image": "/static/images/services/limpieza-residencial.png",
         "imagePrompt": "Una casa en Ciudad Juárez con ventanas brillantes y limpias."
@@ -36,7 +36,7 @@
       },
       {
         "title": "Limpieza de Mosquiteros",
-        "description": "¡Dile adiós al polvo y a los bichos con mosquiteros limpios en Ciudad Juárez!",
+        "description": "¡Adiós al polvo y a los bichos con mosquiteros limpios!",
         "icon": "FaWindowClose",
         "image": "/static/images/services/limpieza-mosquiteros.png",
         "imagePrompt": "Un mosquitero limpio y libre de polvo, con luz solar brillando a través de él en Ciudad Juárez."
@@ -49,7 +49,7 @@
     "items": [
       {
         "title": "Casa en Misiones",
-        "description": "Limpieza completa de todas las ventanas y mosquiteros en Ciudad Juárez.",
+        "description": "Limpieza completa de todas las ventanas y mosquiteros de una casa en Misiones.",
         "image": "/static/images/gallery/proyecto-misiones.png",
         "imagePrompt": "Una casa grande y lujosa en las Misiones, en Ciudad Juárez con ventanas impecables.",
         "category": "Residencial",
@@ -57,41 +57,11 @@
       },
       {
         "title": "Oficinas en Pronaf",
-        "description": "Mantenimiento regular de ventanas para una imagen profesional en Ciudad Juárez.",
+        "description": "Limpieza completa de todas las ventanas y mosquiteros de una oficina en zona Pronaf de Ciudad Juárez.",
         "image": "/static/images/gallery/proyecto-pronaf.png",
         "imagePrompt": "Un edificio de oficinas moderno en la zona de Pronaf de Ciudad Juárez con ventanas limpias y relucientes.",
         "category": "Comercial",
         "completionDate": "2025-07-01"
-      }
-    ]
-  },
-  "mainFeatures": {
-    "title": "¿Por qué elegir Squeegee Ninja?",
-    "description": "¡Te damos el mejor servicio y la mejor atención!",
-    "items": [
-      {
-        "id": 1,
-        "icon": "FaCheckCircle",
-        "title": "Atención Personalizada",
-        "description": "Nos adaptamos a tus necesidades y horarios.",
-        "image": "/static/images/hero.png",
-        "imagePrompt": "Un representante de Squeegee Ninja hablando con un cliente en su casa."
-      },
-      {
-        "id": 2,
-        "icon": "FaHandshake",
-        "title": "Precios Claros",
-        "description": "Sin sorpresas, ¡lo que ves es lo que pagas!",
-        "image": "/static/images/hero.png",
-        "imagePrompt": "Un recibo con precios claros y detallados, mostrando el logotipo de Squeegee Ninja."
-      },
-      {
-        "id": 3,
-        "icon": "FaWhatsapp",
-        "title": "Contacto Directo",
-        "description": "¡Siempre disponibles por WhatsApp, teléfono o correo!",
-        "image": "/static/images/hero.png",
-        "imagePrompt": "Un teléfono celular mostrando una conversación de WhatsApp con el logotipo de Squeegee Ninja."
       }
     ]
   },
@@ -103,15 +73,15 @@
     "testimonials": [
       {
         "name": "María Rodríguez",
-        "quote": "¡Mis ventanas nunca habían estado tan limpias! ¡Súper recomendado!",
-        "image": "/static/images/hero.png",
+        "quote": "Mis ventanas nunca habían estado tan limpias! Super recomendado!",
+        "image": "https://ui-avatars.com/api/?name=María+Rodríguez&background=random",
         "title": "Ama de Casa",
         "imagePrompt": "Una ama de casa sonriendo frente a una ventana limpia en su hogar."
       },
       {
-        "name": "Juan Pérez",
-        "quote": "Excelente servicio y muy profesionales. ¡Mi negocio luce impecable!",
-        "image": "/static/images/hero.png",
+        "name": "Ramón Quintana",
+        "quote": "Excelente servicio y muy profesionales.",
+        "image": "https://ui-avatars.com/api/?name=Ramón+Quintana&background=random",
         "title": "Dueño de Negocio",
         "imagePrompt": "Un dueño de negocio sonriendo frente a las ventanas limpias de su local."
       }
@@ -119,10 +89,10 @@
   },
   "cta": {
     "title": "¡Dale un respiro a tus ventanas!",
-    "description": "¡Contáctanos hoy mismo y obtén una cotización gratis!",
+    "description": "¡Agenda fecha para tu limpieza de ventanas!",
     "button": {
-      "text": "¡Contáctanos!",
-      "link": "#contacto"
+      "text": "¡Agenda fecha!",
+      "link": "#book"
     },
     "collectEmail": true
   },
