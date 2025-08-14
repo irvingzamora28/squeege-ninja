@@ -33,35 +33,6 @@
         "icon": "FaBuilding",
         "image": "/static/images/services/limpieza-comercial.png",
         "imagePrompt": "Un edificio de oficinas en Ciudad Juárez con ventanas limpias y relucientes."
-      },
-      {
-        "title": "Limpieza de Mosquiteros",
-        "description": "¡Adiós al polvo y a los bichos con mosquiteros limpios!",
-        "icon": "FaWindowClose",
-        "image": "/static/images/services/limpieza-mosquiteros.png",
-        "imagePrompt": "Un mosquitero limpio y libre de polvo, con luz solar brillando a través de él en Ciudad Juárez."
-      }
-    ]
-  },
-  "projects": {
-    "title": "Proyectos Recientes",
-    "description": "¡Échale un ojo a lo que hemos estado haciendo!",
-    "items": [
-      {
-        "title": "Casa en Misiones",
-        "description": "Limpieza completa de todas las ventanas y mosquiteros de una casa en Misiones.",
-        "image": "/static/images/gallery/proyecto-misiones.png",
-        "imagePrompt": "Una casa grande y lujosa en las Misiones, en Ciudad Juárez con ventanas impecables.",
-        "category": "Residencial",
-        "completionDate": "2025-07-10"
-      },
-      {
-        "title": "Oficinas en Pronaf",
-        "description": "Limpieza completa de todas las ventanas y mosquiteros de una oficina en zona Pronaf de Ciudad Juárez.",
-        "image": "/static/images/gallery/proyecto-pronaf.png",
-        "imagePrompt": "Un edificio de oficinas moderno en la zona de Pronaf de Ciudad Juárez con ventanas limpias y relucientes.",
-        "category": "Comercial",
-        "completionDate": "2025-07-01"
       }
     ]
   },
@@ -204,11 +175,11 @@
         "features": [
           { "text": "Cristal exterior" },
           { "text": "Mosquitero" },
-          { "text": "Marco" },
-          { "text": "Riel" }
+          { "text": "Marco (Solo exterior)" },
+          { "text": "Riel (Solo exterior)" }
         ],
         "cta": {
-          "text": "Cotizar por WhatsApp",
+          "text": "Agendar por WhatsApp",
           "link": "https://wa.me/526563174337?text=Hola%20Squeegee%20Ninja,%20quiero%20cotizar%20limpieza%20de%20ventanas%20(solo%20exterior)."
         },
         "highlighted": false
@@ -239,7 +210,7 @@
           { "text": "Facturación disponible (si aplica)" }
         ],
         "cta": {
-          "text": "Solicitar cotización",
+          "text": "Agendar por WhatsApp",
           "link": "https://wa.me/526563174337?text=Hola%20Squeegee%20Ninja,%20quisiera%20cotización%20para%20negocio."
         }
       }
